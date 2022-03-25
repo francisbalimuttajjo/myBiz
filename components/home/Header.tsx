@@ -1,41 +1,39 @@
 import React from "react";
-import { Button, StyleSheet, Text, View, Image } from "react-native";
-import Icon from "react-native-vector-icons/Entypo";
-import Icon2 from "react-native-vector-icons/FontAwesome";
+import { StyleSheet, Text, View, Image } from "react-native";
+import Ionicon from "react-native-vector-icons/Ionicons";
 
-export type Props = { name: string; imageSrc?: string };
+export type Props = { user: { name: string; imageSrc?: string } };
 
 const Header: React.FC<Props> = (props) => {
   return (
-    <View style={styles.mainContainer}>
+    <View>
       <View style={styles.container}>
-        <Icon name="shop" size={40} color="blue" />
+        <Ionicon name="cash-outline" size={40} color="skyblue" />
         <Text style={styles.text1}> My</Text>
         <Text style={styles.text2}>Bizz</Text>
       </View>
       <View style={styles.subContainer}>
-        {!props.imageSrc && (
-          <Icon2 name="user-circle" size={40} color="white" />
+        {!props.user.imageSrc && (
+          <Ionicon name="ios-person-circle-outline" size={40} color="white" />
         )}
-        {props.imageSrc && (
+        {props.user.imageSrc && (
           <Image
             style={styles.image}
             source={{
-              uri: props.imageSrc,
+              uri: props.user.imageSrc,
             }}
           />
         )}
 
-        <Text style={styles.text3}>Hello, {props.name}</Text>
+        <Text style={styles.text3}>Hi, {props.user.name}</Text>
       </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  mainContainer: { marginTop: 24 },
   subContainer: {
-    backgroundColor: "blue",
+    backgroundColor: "skyblue",
     paddingVertical: 8,
     display: "flex",
     flexDirection: "row",
@@ -46,12 +44,13 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     justifyContent: "flex-start",
-    paddingVertical: 10,
+    paddingTop: 40,
+    paddingBottom: 10,
     paddingLeft: 12,
     alignItems: "center",
   },
   text2: {
-    color: "blue",
+    color: "skyblue",
     fontWeight: "bold",
     fontSize: 24,
   },
@@ -67,7 +66,7 @@ const styles = StyleSheet.create({
   image: {
     width: 42,
     height: 42,
-    borderRadius:21
+    borderRadius: 21,
   },
 });
 

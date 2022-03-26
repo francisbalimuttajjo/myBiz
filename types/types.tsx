@@ -6,10 +6,10 @@ export enum MainRoutes {
 }
 
 
-export type MainStackParamList = {
-    [MainRoutes.HomePage]: undefined
-    [MainRoutes. ProfilePage]: undefined
-    [MainRoutes.TransactionsPage]:  undefined 
-    [MainRoutes.MorePage]: undefined
-}
+// export type MainStackParamList = {
+//     [MainRoutes.HomePage]: undefined
+//     [MainRoutes. ProfilePage]: undefined
+//     [MainRoutes.TransactionsPage]:  undefined 
+//     [MainRoutes.MorePage]: undefined
+// }
 

@@ -3,7 +3,7 @@ const MoreScreen = () => {
   return (
    
     <View>
-      <Text>Home Page</Text>
+      <Text>more page  shs snsnsn Page</Text>
     </View>
   );
 };

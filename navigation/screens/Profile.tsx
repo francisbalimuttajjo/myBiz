@@ -1,28 +1,29 @@
-import { StyleSheet, SafeAreaView, View, Button, Text } from "react-native";
-const ProfileScreen = () => {
+import { StyleSheet, View, Button, Text, TouchableOpacity } from "react-native";
+import { SafeAreaView, SafeAreaProvider } from "react-native-safe-area-context";
+import type { NativeStackScreenProps } from '@react-navigation/native-stack';
+
+
+type RootStackParamList = {
+  Home: undefined;
+  Profile: undefined;
+  More: undefined,
+  stock:undefined
+ 
+};
+
+type Props = NativeStackScreenProps<RootStackParamList, 'Profile'>;
+
+const ProfileScreen = ({ navigation }:Props) => {
   return (
-   
-    <View>
-      <Text>Profile Page</Text>
-      <Text>Profile Page</Text>
-      <Text>Profile Page</Text>
-      <Text>Profile Page</Text>
-      <Text>Profile Page</Text>
-      <Text>Profile Page</Text>
-      <Text>Profile Page</Text>
-      <Text>Profile Page</Text>
-      <Text>Profile Page</Text>
-      <Text>Profile Page</Text>
-      <Text>Profile Page</Text>
-      <Text>Profile Page</Text>
-      <Text>Profile Page</Text>
-      <Text>Profile Page</Text>
-      <Text>Profile Page</Text>
-      <Text>Profile Page</Text>
-      <Text>Profile Page</Text>
-      <Text>Profile Page</Text>
-    </View>
+    <SafeAreaProvider>
+      <SafeAreaView>
+        <TouchableOpacity>
+          <Text onPress={() => navigation.navigate("More")}>goto</Text>
+        </TouchableOpacity>
+        <Text>Profile Page</Text>
+      </SafeAreaView>
+    </SafeAreaProvider>
   );
 };
 
-export default ProfileScreen
+export default ProfileScreen;

@@ -12,11 +12,11 @@ export type Props = {
 const categoriesArray = [
   [
     { icon: "archive-outline", title: "Stock" },
-    { icon: "book-outline", title: "Credit book" },
+    { icon: "book-outline", title: "CreditBook" },
   ],
   [
     { icon: "cart-outline", title: "Purchases" },
-    { icon: "book-outline", title: "Cash book" },
+    { icon: "book-outline", title: "CashBook" },
   ],
   [
     { icon: "md-folder-open-outline", title: "Expenses" },

@@ -1,4 +1,4 @@
-import { SafeAreaView } from "react-native";
+import { SafeAreaView, SafeAreaProvider } from "react-native-safe-area-context";
 import Header from "../../components/home/Header";
 import Categories from "../../components/home/Categories";
 
@@ -10,10 +10,12 @@ const user = {
 };
 const HomeScreen = () => {
   return (
-    <SafeAreaView>
-      <Header user={user} />
-      <Categories />
-    </SafeAreaView>
+    <SafeAreaProvider>
+      <SafeAreaView>
+        <Header user={user} />
+        <Categories />
+      </SafeAreaView>
+    </SafeAreaProvider>
   );
 };
 

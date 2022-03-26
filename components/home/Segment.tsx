@@ -1,12 +1,7 @@
 import React from "react";
-import {
-  StyleSheet,
-  Text,
-  View,  
-  TouchableOpacity,
-} from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import Ionicon from "react-native-vector-icons/Ionicons";
-
+import { useNavigation } from "@react-navigation/native";
 
 export type Props = {
   icon1: string;
@@ -14,22 +9,31 @@ export type Props = {
   title1: string;
   title2: string;
 };
+
 const Segment: React.FC<Props> = (props) => {
+  const navigation = useNavigation();
+
   return (
     <View style={styles.segmentContainer}>
-      <TouchableOpacity activeOpacity={0.7}>
+      <TouchableOpacity
+        activeOpacity={0.7}
+        onPress={() => navigation.navigate(props.title1 as never)}
+      >
         <View style={styles.container}>
           <View style={styles.icon}>
-            <Ionicon  name={props.icon1} size={50} color="white" />
+            <Ionicon name={props.icon1} size={50} color="white" />
           </View>
           <View style={styles.borderLine}></View>
           <Text>{props.title1}</Text>
         </View>
       </TouchableOpacity>
-      <TouchableOpacity activeOpacity={0.7}>
+      <TouchableOpacity
+        activeOpacity={0.7}
+        onPress={() => navigation.navigate(props.title2 as never)}
+      >
         <View style={styles.container}>
           <View style={styles.icon}>
-            <Ionicon  name={props.icon2} size={50} color="white" />
+            <Ionicon name={props.icon2} size={50} color="white" />
           </View>
           <View style={styles.borderLine}></View>
           <Text>{props.title2}</Text>
@@ -38,7 +42,7 @@ const Segment: React.FC<Props> = (props) => {
     </View>
   );
 };
-  export default Segment
+export default Segment;
 const styles = StyleSheet.create({
   segmentContainer: {
     display: "flex",

@@ -1,62 +1,42 @@
 import { NavigationContainer } from "@react-navigation/native";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import HomeScreen from "./screens/Home";
-import ProfileScreen from "./screens/Profile";
-import TransactionsScreen from "./screens/Transactions";
-import MoreScreen from "./screens/More";
-import { MainRoutes } from "../types/types";
-import Ionicons from "react-native-vector-icons/Ionicons";
+import { createStackNavigator } from "@react-navigation/stack";
+import Stock from "./screens/Stock";
+import CreditBook from "./screens/CreditBook";
+import CashBook from "./screens/CashBook";
+import Purchases from "./screens/Purchases";
+import Sales from "./screens/Sales";
+import Expenses from "./screens/Expenses";
+import BottomTabs from "./BottomTabs";
 
-const TabsContainer = () => {
-  const Tab = createBottomTabNavigator();
+export type mainStackParams = {
+  Stock: undefined;
+  CreditBook: undefined;
+  CashBook: undefined;
+  Purchases: undefined;
+  home: undefined;
+  Sales: undefined
+  Expenses:undefined
+};
+
+const DetailsScreens = () => {
+  const Stack = createStackNavigator<mainStackParams>();
   return (
     <NavigationContainer>
-      <Tab.Navigator
-        screenOptions={({ route }) => ({
-          tabBarIcon: ({ focused, color, size }) => {
-            let iconName;
-
-            if (route.name === "Home") {
-              iconName = focused ? "home" : "home-outline";
-            } else if (route.name === "Profile") {
-              iconName = focused ? "person-sharp" : "person-outline";
-            } else if (route.name === "Transactions") {
-              iconName = focused ? "ios-flash-sharp" : "ios-flash-outline";
-            } else if (route.name === "More") {
-              iconName = focused ? "ios-list-sharp" : "ios-list-outline";
-            }
-
-            return <Ionicons name={iconName} size={size} color={color} />;
-          },
-
-          tabBarActiveTintColor: "skyblue",
-          tabBarInactiveTintColor: "gray",
-          tabBarLabelStyle: { paddingBottom: 2 },
-        })}
-      >
-        <Tab.Screen
+      <Stack.Navigator>
+        <Stack.Screen
+          name="home"
+          component={BottomTabs}
           options={{ headerShown: false }}
-          name={MainRoutes.HomePage}
-          component={HomeScreen}
         />
-        <Tab.Screen
-          options={{ headerShown: false }}
-          name={MainRoutes.ProfilePage}
-          component={ProfileScreen}
-        />
-        <Tab.Screen
-          options={{ headerShown: false }}
-          name={MainRoutes.TransactionsPage}
-          component={TransactionsScreen}
-        />
-        <Tab.Screen
-          options={{ headerShown: false }}
-          name={MainRoutes.MorePage}
-          component={MoreScreen}
-        />
-      </Tab.Navigator>
+        <Stack.Screen name="Stock" component={Stock} />
+        <Stack.Screen name="CreditBook" component={CreditBook} />
+        <Stack.Screen name="CashBook" component={CashBook} />
+        <Stack.Screen name="Expenses" component={Expenses} />
+        <Stack.Screen name="Sales" component={Sales} />
+        <Stack.Screen name="Purchases" component={Purchases} />
+      </Stack.Navigator>
     </NavigationContainer>
   );
 };
 
-export default TabsContainer;
+export default DetailsScreens;

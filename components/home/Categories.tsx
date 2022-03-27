@@ -2,12 +2,7 @@ import React from "react";
 import Segment from "./Segment";
 import { View, ScrollView } from "react-native";
 
-export type Props = {
-  icon1: string;
-  icon2: string;
-  title1: string;
-  title2: string;
-};
+
 
 const categoriesArray = [
   [
@@ -31,10 +26,10 @@ const Categories = () => {
         {categoriesArray.map((category, index) => (
           <Segment
             key={index}
-            icon1={category[0].icon}
-            icon2={category[1].icon}
-            title1={category[0].title}
-            title2={category[1].title}
+            first_icon={category[0].icon}
+            second_icon={category[1].icon}
+            first_title={category[0].title}
+            second_title={category[1].title}
           />
         ))}
       </View>

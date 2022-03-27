@@ -28,7 +28,7 @@ const DetailsScreens = () => {
           component={BottomTabs}
           options={{ headerShown: false }}
         />
-        <Stack.Screen name="Stock" component={Stock} />
+        <Stack.Screen name="Stock" component={Stock}  options={{ headerShown: false }} />
         <Stack.Screen name="CreditBook" component={CreditBook} />
         <Stack.Screen name="CashBook" component={CashBook} />
         <Stack.Screen name="Expenses" component={Expenses} />

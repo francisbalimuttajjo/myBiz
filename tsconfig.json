@@ -14,6 +14,9 @@
     "target": "esnext"
   },
   "skipLibCheck": true,
+  "types": [
+    "webrtc"
+  ],
   "exclude": [
     "node_modules",
     "babel.config.js",

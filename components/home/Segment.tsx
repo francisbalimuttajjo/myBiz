@@ -4,10 +4,10 @@ import Ionicon from "react-native-vector-icons/Ionicons";
 import { useNavigation } from "@react-navigation/native";
 
 export type Props = {
-  icon1: string;
-  icon2: string;
-  title1: string;
-  title2: string;
+  first_icon: string;
+  second_icon: string;
+  first_title: string;
+  second_title: string;
 };
 
 const Segment: React.FC<Props> = (props) => {
@@ -17,26 +17,26 @@ const Segment: React.FC<Props> = (props) => {
     <View style={styles.segmentContainer}>
       <TouchableOpacity
         activeOpacity={0.7}
-        onPress={() => navigation.navigate(props.title1 as never)}
+        onPress={() => navigation.navigate(props.first_title as never)}
       >
         <View style={styles.container}>
           <View style={styles.icon}>
-            <Ionicon name={props.icon1} size={50} color="white" />
+            <Ionicon name={props.first_icon} size={50} color="white" />
           </View>
           <View style={styles.borderLine}></View>
-          <Text>{props.title1}</Text>
+          <Text>{props.first_title}</Text>
         </View>
       </TouchableOpacity>
       <TouchableOpacity
         activeOpacity={0.7}
-        onPress={() => navigation.navigate(props.title2 as never)}
+        onPress={() => navigation.navigate(props.second_title as never)}
       >
         <View style={styles.container}>
           <View style={styles.icon}>
-            <Ionicon name={props.icon2} size={50} color="white" />
+            <Ionicon name={props.second_icon} size={50} color="white" />
           </View>
           <View style={styles.borderLine}></View>
-          <Text>{props.title2}</Text>
+          <Text>{props.second_title}</Text>
         </View>
       </TouchableOpacity>
     </View>

@@ -1,11 +1,14 @@
 import React from "react";
 import { Text, View } from "react-native";
+import { SafeAreaView, SafeAreaProvider } from "react-native-safe-area-context";
 
 const CreditBook = () => {
   return (
-    <View>
-      <Text>credit book</Text>
-    </View>
+    <SafeAreaProvider>
+      <SafeAreaView>
+        <Text>credit book</Text>
+      </SafeAreaView>
+    </SafeAreaProvider>
   );
 };
 

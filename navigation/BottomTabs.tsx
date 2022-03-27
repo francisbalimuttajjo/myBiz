@@ -21,7 +21,7 @@ const TabsContainer = () => {
       <Tab.Navigator
         screenOptions={({ route }) => ({
           tabBarIcon: ({ focused, color, size }) => {
-                let iconName;
+                let iconName='';
 
             if (route.name === "Home") {
               iconName = focused ? "home" : "home-outline";
@@ -33,7 +33,7 @@ const TabsContainer = () => {
               iconName = focused ? "ios-list-sharp" : "ios-list-outline";
             }
 
-            return <Ionicons name={iconName as never} size={size} color={color} />;
+            return <Ionicons name={iconName } size={size} color={color} />;
           },
 
           tabBarActiveTintColor: "skyblue",

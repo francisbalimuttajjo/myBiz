@@ -19,7 +19,7 @@ const Banner = () => {
       <Pressable onPress={()=> navigation.navigate('Home' as never)} >
         <Ionicon name="home-outline" size={30} color="white" />
       </Pressable>
-      <Text style={styles.greetings_text}>{user.name}</Text>
+      <Text style={styles.greetings_text}>{user.firstName}</Text>
     </View>
   );
 };

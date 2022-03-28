@@ -1,15 +1,16 @@
 import React from "react";
 import { StyleSheet, Text, View, Image } from "react-native";
 import Ionicon from "react-native-vector-icons/Ionicons";
-import Logo from '../components/Logo'
+import Logo from "../components/Logo";
 
-export type Props = { user: { name?: string; imageSrc?: string }};
+export type Props = {
+  user: { firstName: string; lastName: string; imageSrc?: string };
+};
 
 const Header: React.FC<Props> = (props) => {
-  
   return (
     <View>
-   <Logo />
+      <Logo />
       <View style={styles.container}>
         {!props.user.imageSrc && (
           <Ionicon name="ios-person-circle-outline" size={40} color="white" />
@@ -23,7 +24,7 @@ const Header: React.FC<Props> = (props) => {
           />
         )}
 
-        <Text style={styles.greetings_text}> Hi, {props.user.name}</Text>
+        <Text style={styles.greetings_text}> Hi, {props.user.firstName}</Text>
       </View>
     </View>
   );
@@ -39,8 +40,6 @@ const styles = StyleSheet.create({
     paddingLeft: 12,
   },
 
- 
-  
   greetings_text: {
     color: "white",
     fontWeight: "bold",

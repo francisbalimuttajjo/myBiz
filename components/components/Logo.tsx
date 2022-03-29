@@ -10,7 +10,7 @@ const Logo = () => {
       
       <Ionicon name="cash-outline" size={40} color="skyblue" />
       <Text style={styles.text1}> My</Text>
-      <Text style={styles.text2}>Bizz</Text>
+      <Text style={{ ...styles.text1,color:'skyblue' }}>Bizz</Text>
     </View>
   );
 };
@@ -21,16 +21,11 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     justifyContent: "flex-start",
-
     paddingBottom: 10,
     paddingLeft: 12,
     alignItems: "center",
   },
-  text2: {
-    color: "skyblue",
-    fontWeight: "bold",
-    fontSize: 24,
-  },
+  
   text1: {
     fontWeight: "bold",
     fontSize: 24,

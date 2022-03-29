@@ -14,7 +14,7 @@ const Segment: React.FC<Props> = (props) => {
   const navigation = useNavigation();
 
   return (
-    <View style={styles.segmentContainer}>
+    <View style={{ ...styles.container, marginTop: 24 }}>
       <TouchableOpacity
         activeOpacity={0.7}
         onPress={() => navigation.navigate(props.first_title as never)}
@@ -44,12 +44,7 @@ const Segment: React.FC<Props> = (props) => {
 };
 export default Segment;
 const styles = StyleSheet.create({
-  segmentContainer: {
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "space-evenly",
-    marginTop: 24,
-  },
+ 
   container: {
     display: "flex",
     justifyContent: "space-evenly",

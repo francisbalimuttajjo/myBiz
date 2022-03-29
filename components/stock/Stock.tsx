@@ -23,7 +23,7 @@ const Stock = () => {
         <Logo />
         <Banner />
         <View style={styles.container}>
-          <HeadingComponent title="Stock/Catolog" />
+          <HeadingComponent title="Stock/Catalog" />
           <Tooltip
             openToolTip={displayToolKit}
             closeToolTip={hideToolKit}

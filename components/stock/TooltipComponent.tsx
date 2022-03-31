@@ -26,7 +26,7 @@ const TooltipComponent: React.FC<Props> = (props) => {
       >
         <TouchableOpacity
           activeOpacity={0.7}
-          style={styles.text_container}
+          style={[styles.text_container, styles.container]}
           onPressIn={props.openToolTip}
         >
           <Ionicon name="md-add-circle-outline" color="skyblue" size={20} />
@@ -53,9 +53,6 @@ const styles = StyleSheet.create({
 
   text_container: {
     marginRight: 5,
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
     color: "skyblue",
     flexDirection: "row",
   },

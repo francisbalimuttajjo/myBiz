@@ -1,8 +1,14 @@
 import { useNavigation } from "@react-navigation/native";
 import React from "react";
-import { StyleSheet, Text, TouchableOpacity, View, Image } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+  Image,
+  Pressable,
+} from "react-native";
 import Ionicon from "react-native-vector-icons/Ionicons";
-
 
 export type Props = {
   item: {
@@ -32,18 +38,23 @@ const Item: React.FC<Props> = (props) => {
       >
         <View style={{ ...styles.icon, width: "30%" }}>
           {props.item.image && (
-            <Image
-              style={styles.image}
-              source={{
-                uri: props.item.image,
-              }}
-            />
+            <Pressable onPress={() => console.log("image clicked")}>
+              <Image
+                style={styles.image}
+                source={{
+                  uri: props.item.image,
+                }}
+              />
+            </Pressable>
           )}
           {!props.item.image && (
-            <View style={styles.icon}>
+            <Pressable
+              onPress={() => console.log("image clicked")}
+              style={styles.icon}
+            >
               <Ionicon name="camera-outline" size={80} />
               <Text style={{ marginTop: -10 }}>No Image </Text>
-            </View>
+            </Pressable>
           )}
         </View>
         <View style={styles.details_container}>
@@ -81,18 +92,17 @@ const Item: React.FC<Props> = (props) => {
 export default Item;
 
 const styles = StyleSheet.create({
+  align: { alignSelf: "center" },
+  price: { fontSize: 20, color: "skyblue", fontWeight: "bold" },
+  description: { marginTop: -4, fontSize: 12, textTransform: "capitalize" },
+  mainContainer: { display: "flex", justifyContent: "center", margin: 6 },
   icon_container: {
-    alignSelf: "flex-start",
     padding: 10,
     width: "20%",
-    display: "flex",
+    alignSelf: "flex-start",
     flexDirection: "row",
   },
-  align: { alignSelf: "center" },
-
-  price: { fontSize: 20, color: "skyblue", fontWeight: "bold" },
   details: {
-    display: "flex",
     flexDirection: "row",
     justifyContent: "flex-start",
     alignItems: "flex-start",
@@ -100,10 +110,9 @@ const styles = StyleSheet.create({
   details_container: {
     width: "50%",
     padding: 6,
-    marginLeft: 6,
-    display: "flex",
+    marginLeft: 12,
   },
-  description: { marginTop: -4, fontSize: 12, textTransform: "capitalize" },
+
   title: {
     fontWeight: "600",
     fontSize: 20,
@@ -111,12 +120,10 @@ const styles = StyleSheet.create({
     color: "skyblue",
   },
   icon: {
-    display: "flex",
     justifyContent: "center",
     alignItems: "center",
   },
 
-  mainContainer: { display: "flex", justifyContent: "center", margin: 6 },
   container: {
     shadowColor: "rgba(0,0,0, .4)", // IOS
     shadowOffset: { height: 1, width: 1 }, // IOS
@@ -138,5 +145,6 @@ const styles = StyleSheet.create({
     width: 100,
     height: 110,
     borderRadius: 10,
+    marginLeft: 6,
   },
 });

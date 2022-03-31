@@ -81,6 +81,7 @@ const stockSlice = createSlice({
   name: "stock",
   initialState: {
     stock,
+    loading: false ,
   },
   reducers: {
     setMessage(state, action: PayloadAction<string>) {

@@ -4,17 +4,21 @@ import { FlatList } from "react-native-gesture-handler";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/Store";
 import EmptyNotification from "../components/Empty";
+import LoadingComponent from "../components/LoadingComponent";
 import StockComponent from "./StockItem";
 
 const StockList = () => {
-  const { stock } = useSelector((state: RootState) => state.stock);
+  const { stock,loading } = useSelector((state: RootState) => state.stock);
+ 
   return (
     <View style={styles.container}>
-      {stock.length < 1 && (
-        <EmptyNotification title=" Start Adding stock by tapping the +Add Item" />
+      {stock.length < 1 && !loading && (
+        <View>
+          <EmptyNotification title=" Start Adding stock by tapping the +Add Item" />
+          </View>
       )}
-
-      {stock.length > 0 && (
+      {loading && <LoadingComponent />}
+      {stock.length > 0 && !loading && (
         <FlatList
           style={styles.flatList}
           data={stock}

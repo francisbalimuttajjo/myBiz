@@ -4,11 +4,11 @@ import StockComponent from '../../components/stock/Stock'
 
 const Stock = () => {
   return (
-    <SafeAreaProvider>
-      <SafeAreaView>
+   <SafeAreaProvider>
+       <SafeAreaView>
         <StockComponent />
       </SafeAreaView>
-    </SafeAreaProvider>
+     </SafeAreaProvider>
   );
 };
 

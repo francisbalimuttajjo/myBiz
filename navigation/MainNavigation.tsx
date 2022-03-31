@@ -5,6 +5,7 @@ import CreditBook from "./screens/CreditBook";
 import CashBook from "./screens/CashBook";
 import Purchases from "./screens/Purchases";
 import Sales from "./screens/Sales";
+import Details from "./screens/Details";
 import Expenses from "./screens/Expenses";
 import AddNew from "./screens/NewItem";
 import NewCategory from "./screens/NewCategory";
@@ -17,11 +18,14 @@ export type mainStackParams = {
   CashBook: undefined;
   Purchases: undefined;
   home: undefined;
-  Sales: undefined
-  Expenses: undefined
-  New: undefined
-  Expense: undefined
-  Category:undefined
+  Sales: undefined;
+  Expenses: undefined;
+  New: undefined;
+  Expense: undefined;
+  Category: undefined;
+  Details: {
+    id: undefined;
+  };
 };
 
 const DetailsScreens = () => {
@@ -29,12 +33,16 @@ const DetailsScreens = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen          
+        <Stack.Screen
           name="home"
           component={BottomTabs}
           options={{ headerShown: false }}
         />
-        <Stack.Screen  name="Stock" component={Stock}  options={{ headerShown: false }} />
+        <Stack.Screen
+          name="Stock"
+          component={Stock}
+          options={{ headerShown: false }}
+        />
         <Stack.Screen name="CreditBook" component={CreditBook} />
         <Stack.Screen name="CashBook" component={CashBook} />
         <Stack.Screen name="Expenses" component={Expenses} />
@@ -42,6 +50,7 @@ const DetailsScreens = () => {
         <Stack.Screen name="New" component={AddNew} />
         <Stack.Screen name="Category" component={NewCategory} />
         <Stack.Screen name="Expense" component={NewExpense} />
+        <Stack.Screen name="Details" component={Details} />
         <Stack.Screen name="Purchases" component={Purchases} />
       </Stack.Navigator>
     </NavigationContainer>

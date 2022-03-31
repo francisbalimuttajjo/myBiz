@@ -1,6 +1,8 @@
+import { useNavigation } from "@react-navigation/native";
 import React from "react";
 import { StyleSheet, Text, TouchableOpacity, View, Image } from "react-native";
 import Ionicon from "react-native-vector-icons/Ionicons";
+
 
 export type Props = {
   item: {
@@ -15,11 +17,20 @@ export type Props = {
     category: string;
   };
 };
+
+type NavigationProps = {
+  navigate: (route: string, params: { id: string }) => void;
+};
 const Item: React.FC<Props> = (props) => {
+  const { navigate } = useNavigation<NavigationProps>();
   return (
     <View style={styles.mainContainer}>
-      <TouchableOpacity activeOpacity={0.9} style={styles.container}>
-        <View style={styles.imageContainer}>
+      <TouchableOpacity
+        onPress={() => navigate("Details", { id: props.item._id })}
+        activeOpacity={0.9}
+        style={styles.container}
+      >
+        <View style={{ ...styles.icon, width: "30%" }}>
           {props.item.image && (
             <Image
               style={styles.image}
@@ -46,17 +57,19 @@ const Item: React.FC<Props> = (props) => {
               <Text style={styles.align}>{props.item.currency}</Text>
               <Text style={styles.price}>{props.item.sellingPrice}&nbsp;</Text>
               <Text style={styles.align}>&#64;</Text>
-              <Text style={styles.packaging}>{props.item.packaging}</Text>
+              <Text style={{ ...styles.align, textTransform: "capitalize" }}>
+                {props.item.packaging}
+              </Text>
             </View>
           </View>
         </View>
         <View style={styles.icon_container}>
           <View style={{ marginRight: 10 }}>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => console.log("editing")}>
               <Ionicon name="pencil" size={20} color="skyblue" />
             </TouchableOpacity>
           </View>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => console.log("deleting")}>
             <Ionicon name="trash-outline" size={20} color="skyblue" />
           </TouchableOpacity>
         </View>
@@ -76,7 +89,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   align: { alignSelf: "center" },
-  packaging: { alignSelf: "center", textTransform: "capitalize" },
+
   price: { fontSize: 20, color: "skyblue", fontWeight: "bold" },
   details: {
     display: "flex",
@@ -90,7 +103,7 @@ const styles = StyleSheet.create({
     marginLeft: 6,
     display: "flex",
   },
-  description: { marginTop: -4, fontSize: 12 },
+  description: { marginTop: -4, fontSize: 12, textTransform: "capitalize" },
   title: {
     fontWeight: "600",
     fontSize: 20,
@@ -102,13 +115,8 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  imageContainer: {
-    justifyContent: "center",
-    alignItems: "center",
-    display: "flex",
-    width: "30%",
-  },
-  mainContainer: { display: "flex", justifyContent: "center",margin:6 },
+
+  mainContainer: { display: "flex", justifyContent: "center", margin: 6 },
   container: {
     shadowColor: "rgba(0,0,0, .4)", // IOS
     shadowOffset: { height: 1, width: 1 }, // IOS
@@ -119,7 +127,6 @@ const styles = StyleSheet.create({
     height: 120,
     width: "90%",
     borderRadius: 10,
-    // justifyContent: "center",
     alignItems: "center",
     flexDirection: "row",
     alignSelf: "center",

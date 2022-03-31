@@ -10,14 +10,17 @@ export type Props = {
   second_title: string;
 };
 
+type NavigationProps = {
+  navigate: (route: string) => void;
+};
 const Segment: React.FC<Props> = (props) => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<NavigationProps>();
 
   return (
-    <View style={{ ...styles.container, marginTop: 24 }}>
+    <View style={styles.segmentContainer}>
       <TouchableOpacity
         activeOpacity={0.7}
-        onPress={() => navigation.navigate(props.first_title as never)}
+        onPress={() => navigation.navigate(props.first_title)}
       >
         <View style={styles.container}>
           <View style={styles.icon}>
@@ -29,7 +32,7 @@ const Segment: React.FC<Props> = (props) => {
       </TouchableOpacity>
       <TouchableOpacity
         activeOpacity={0.7}
-        onPress={() => navigation.navigate(props.second_title as never)}
+        onPress={() => navigation.navigate(props.second_title )}
       >
         <View style={styles.container}>
           <View style={styles.icon}>
@@ -44,7 +47,12 @@ const Segment: React.FC<Props> = (props) => {
 };
 export default Segment;
 const styles = StyleSheet.create({
- 
+  segmentContainer: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-evenly",
+    marginTop: 24,
+  },
   container: {
     display: "flex",
     justifyContent: "space-evenly",

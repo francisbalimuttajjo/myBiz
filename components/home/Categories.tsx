@@ -1,6 +1,6 @@
 import React from "react";
 import Segment from "./Segment";
-import { View, ScrollView } from "react-native";
+import { View } from "react-native";
 
 
 
@@ -17,11 +17,13 @@ const categoriesArray = [
     { icon: "md-folder-open-outline", title: "Expenses" },
     { icon: "wallet-outline", title: "Sales" },
   ],
+  
+ 
 ];
 
 const Categories = () => {
   return (
-    <ScrollView>
+  
       <View style={{ paddingVertical: 30 }}>
         {categoriesArray.map((category, index) => (
           <Segment
@@ -33,7 +35,7 @@ const Categories = () => {
           />
         ))}
       </View>
-    </ScrollView>
+   
   );
 };
 

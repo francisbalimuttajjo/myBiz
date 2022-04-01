@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
   align: { alignSelf: "center" },
   price: { fontSize: 20, color: "skyblue", fontWeight: "bold" },
   description: { marginTop: -4, fontSize: 12, textTransform: "capitalize" },
-  mainContainer: { display: "flex", justifyContent: "center", margin: 6 },
+  mainContainer: { display: "flex", justifyContent: "center", marginHorizontal: 6,marginBottom:12 },
   icon_container: {
     padding: 10,
     width: "20%",

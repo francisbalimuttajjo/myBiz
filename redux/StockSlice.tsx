@@ -4,7 +4,7 @@ const image =
 
 const stock = [
   {
-    _id: "52625",
+    _id: "1",
     image,
     name: "pencils",
     currency: "ugx",
@@ -12,10 +12,10 @@ const stock = [
     stock: 300,
     sellingPrice: 300,
     packaging: "one",
-    category: "stationery",
+    category: "item",
   },
   {
-    _id: "52625i",
+    _id: "2",
     name: "books",
     currency: "usd",
     description: "the latest chinese brabd",
@@ -25,7 +25,7 @@ const stock = [
     category: "sta",
   },
   {
-    _id: "52625tey",
+    _id: "3",
     name: "chalk",
     currency: "ksh",
     description: "new stock",
@@ -33,62 +33,76 @@ const stock = [
     image,
     sellingPrice: 12000,
     packaging: "box",
-    category: "bbhs",
+    category: "item",
   },
   {
-    _id: "5262sf5tey",
+    _id: "4",
     name: "chalk",
     currency: "ksh",
     description: "new stock",
     stock: 10000,
     sellingPrice: 12000,
     packaging: "box",
-    category: "bbhs",
+    category: "goods",
   },
   {
-    _id: "5262xvx5tey",
+    _id: "5",
     name: "chalk",
     currency: "ksh",
     description: "new stock",
     stock: 10000,
     sellingPrice: 12000,
     packaging: "box",
-    category: "bbhs",
+    category: "items",
   },
   {
-    _id: "52625tssfsbbey",
+    _id: "6",
     name: "chalk",
     currency: "ksh",
     description: "new stock",
     stock: 10000,
     sellingPrice: 12000,
     packaging: "box",
-    category: "bbhs",
+    category: "goods",
   },
   {
-    _id: "52625tsbbey",
+    _id: "7",
     name: "chalk",
     currency: "ksh",
     description: "new stock",
     stock: 10000,
     sellingPrice: 12000,
     packaging: "box",
-    category: "bbhs",
+    category: "sta",
   },
 ];
-
+const arr = stock;
 const stockSlice = createSlice({
   name: "stock",
   initialState: {
-    stock,
-    loading: false ,
+    stock: arr,
+    loading: false,
+    infoMsg: "",
   },
   reducers: {
-    setMessage(state, action: PayloadAction<string>) {
-      //   state.message = action.payload
+    //filterStock(state, action: PayloadAction<string>) {
+    filterStock(state, action: PayloadAction<string>) {
+      state.infoMsg = "";
+      if (action.payload === "") {
+        state.stock = arr;
+      } else {
+        state.stock = arr;
+        const searchResult = state.stock.filter((el) =>
+          el.category.includes(action.payload) ||   el.name.includes(action.payload)
+        );
+        if (!searchResult.length) {
+          state.infoMsg = `there is no result for the search ${action.payload}`;
+        }
+        state.stock = searchResult;
+      }
     },
   },
 });
 
-// export const { setMessage } = userSlice.actions
+export const { filterStock } = stockSlice.actions;
 export default stockSlice.reducer;

@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     height: 500,
-    paddingBottom: 16,
+    paddingBottom: 40,
   },
   flatList: {
     width: "100%",

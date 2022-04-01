@@ -8,10 +8,13 @@ import Banner from "../components/Banner";
 import HeadingComponent from "../components/Heading";
 import useFns from "./useFns";
 import StockList from "./StockList";
-
+import Search from "./Search";
+import { useSelector } from "react-redux";
+import { RootState } from "../../redux/Store";
 
 const Stock = () => {
   const { visibleState, navigation, displayToolKit, hideToolKit } = useFns();
+  const { loading } = useSelector((state: RootState) => state.stock);
   //
   React.useEffect(() => {
     const unsubscribe = navigation.addListener("focus", () => hideToolKit());
@@ -30,7 +33,8 @@ const Stock = () => {
             visible={visibleState}
           />
         </View>
-         <StockList />
+        {!loading && <Search />}
+        <StockList />
       </View>
     </View>
   );

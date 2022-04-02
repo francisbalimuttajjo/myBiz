@@ -3,12 +3,20 @@ import { StyleSheet, Text, TextInput, View } from "react-native";
 
 type Props = {
   title: string;
+  value: string;
+  onChangeText: (a: string, event: { nativeEvent: { text: string } }) => void;
 };
-const InputComponent: React.FC<Props> = (props) => {
+
+const InputComponent: React.FC<Props> = ({ title, value, onChangeText }) => {
   return (
     <View style={styles.container}>
-      <Text>{props.title}</Text>
-          <TextInput placeholder={`Enter Item ${ props.title}`} style={styles.input} />
+      <Text>{title}</Text>
+      <TextInput
+        value={value}
+        placeholder={`Enter Item ${title}`}
+        style={styles.input}
+        onChange={(value) => onChangeText(title, value)}
+      />
     </View>
   );
 };
@@ -21,6 +29,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     borderBottomWidth: 0.5,
     margin: 6,
+    // borderColor: "red",
   },
   input: { width: "90%", marginLeft: 20 },
 });

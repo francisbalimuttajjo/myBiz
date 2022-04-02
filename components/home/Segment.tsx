@@ -32,7 +32,7 @@ const Segment: React.FC<Props> = (props) => {
       </TouchableOpacity>
       <TouchableOpacity
         activeOpacity={0.7}
-        onPress={() => navigation.navigate(props.second_title )}
+        onPress={() => navigation.navigate(props.second_title)}
       >
         <View style={styles.container}>
           <View style={styles.icon}>

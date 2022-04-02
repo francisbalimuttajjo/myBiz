@@ -38,20 +38,37 @@ const DetailsScreens = () => {
           component={BottomTabs}
           options={{ headerShown: false }}
         />
-        <Stack.Screen
-          name="Stock"
-          component={Stock}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen name="CreditBook" component={CreditBook} />
-        <Stack.Screen name="CashBook" component={CashBook} />
-        <Stack.Screen name="Expenses" component={Expenses} />
-        <Stack.Screen name="Sales" component={Sales} />
-        <Stack.Screen name="New" component={AddNew} />
-        <Stack.Screen name="Category" component={NewCategory} />
-        <Stack.Screen name="Expense" component={NewExpense} />
-        <Stack.Screen name="Details" component={Details} />
-        <Stack.Screen name="Purchases" component={Purchases} />
+        <Stack.Group
+          screenOptions={{
+            headerStyle: { backgroundColor: "skyblue" },
+            headerTintColor: "#fff",
+            headerTitleStyle: {
+              fontWeight: "bold",
+            },
+          }}
+        >
+          <Stack.Screen
+            name="Stock"
+            component={Stock}
+            options={{ headerShown: false }}
+          />
+
+          <Stack.Screen name="CreditBook" component={CreditBook} />
+          <Stack.Screen name="CashBook" component={CashBook} />
+          <Stack.Screen name="Expenses" component={Expenses} />
+          <Stack.Screen name="Sales" component={Sales} />
+          <Stack.Screen
+            name="New"
+            component={AddNew}
+            options={{
+              title: "New Stock",
+            }}
+          />
+          <Stack.Screen name="Category" component={NewCategory} />
+          <Stack.Screen name="Expense" component={NewExpense} />
+          <Stack.Screen name="Details" component={Details} />
+          <Stack.Screen name="Purchases" component={Purchases} />
+        </Stack.Group>
       </Stack.Navigator>
     </NavigationContainer>
   );

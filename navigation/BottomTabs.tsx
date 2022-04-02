@@ -18,7 +18,8 @@ const TabsContainer = () => {
   const Tab = createBottomTabNavigator<TabStackParams>();
   return (
     
-      <Tab.Navigator
+    <Tab.Navigator
+      
         screenOptions={({ route }) => ({
           tabBarIcon: ({ focused, color, size }) => {
                 let iconName='';
@@ -43,12 +44,14 @@ const TabsContainer = () => {
       >
         <Tab.Screen
           options={{ headerShown: false }}
+          //name={MainRoutes.HomePage}
           name={MainRoutes.HomePage}
           component={HomeScreen}
         />
         <Tab.Screen
           options={{ headerShown: false }}
-          name={MainRoutes.ProfilePage}
+          //name={MainRoutes.ProfilePage}
+          name="Profile"
           component={ProfileScreen}
         />
         <Tab.Screen
@@ -60,7 +63,8 @@ const TabsContainer = () => {
           options={{ headerShown: false }}
           name={MainRoutes.MorePage}
           component={MoreScreen}
-        />
+      />
+      
       </Tab.Navigator>
     
   );

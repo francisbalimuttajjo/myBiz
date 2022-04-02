@@ -35,8 +35,11 @@ const styles = StyleSheet.create({
   container: {
     display: "flex",
     flexDirection: "row",
+    // paddingTop:-20,
     height: 500,
-    paddingBottom: 40,
+    paddingBottom: 60,
+   
+    
   },
   flatList: {
     width: "100%",

@@ -75,13 +75,34 @@ const stock = [
     packaging: "box",
     category: "sta",
   },
+   {
+    _id: "8",
+    name: "tv",
+    currency: "ksh",
+    description: "new stock",
+    stock: 10000,
+    sellingPrice: 12000,
+    packaging: "box",
+    category: "sta",
+  },
+    {
+    _id: "9",
+    name: "face",
+    currency: "ksh",
+    description: "new stock",
+    stock: 10000,
+    sellingPrice: 12000,
+    packaging: "box",
+    category: "sta",
+  },
 ];
-const arr = stock;
+const store = stock;
 const stockSlice = createSlice({
   name: "stock",
   initialState: {
-    stock: arr,
+    stock: store,
     loading: false,
+    displaySearchBar:store.length===0 ? false : true ,
     infoMsg: "",
   },
   reducers: {
@@ -89,9 +110,9 @@ const stockSlice = createSlice({
     filterStock(state, action: PayloadAction<string>) {
       state.infoMsg = "";
       if (action.payload === "") {
-        state.stock = arr;
+        state.stock = store;
       } else {
-        state.stock = arr;
+        state.stock = store;
         const searchResult = state.stock.filter((el) =>
           el.category.includes(action.payload) ||   el.name.includes(action.payload)
         );

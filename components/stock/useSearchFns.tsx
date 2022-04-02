@@ -8,7 +8,7 @@ const useSearchFns = () => {
   const dispatch = useDispatch();
   const [clicked, setClicked] = React.useState(false);
   const [searchPhrase, setSearchPhrase] = React.useState("");
-  const { infoMsg } = useSelector((state: RootState) => state.stock);
+  const { infoMsg,displaySearchBar } = useSelector((state: RootState) => state.stock);
   const handleClicked = () => setClicked(true);
 
   const handleChange = (val: string) => {
@@ -22,7 +22,7 @@ const useSearchFns = () => {
     setClicked(false);
     dispatch(filterStock(""));
     };
-    return {clicked,searchPhrase,handleClicked,infoMsg,handleChange,clearSearchField}
+    return {clicked,searchPhrase,handleClicked,infoMsg,handleChange,clearSearchField,displaySearchBar}
 };
 
 export default useSearchFns;

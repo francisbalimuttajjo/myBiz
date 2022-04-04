@@ -1,38 +1,59 @@
 import { Picker } from "@react-native-picker/picker";
+import { useFormikContext } from "formik";
+import { StringIterator } from "lodash";
 import React from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 
+const categories = [
+  { label: "Choose Category", value: "" },
+  { label: "food", value: "food" },
+  { label: "books", value: "books" },
+  { label: "books", value: "books" },
+];
 type Props = {
-  value: string;
-  onChange: (val: string) => void;
-  values: Array<{ label: string; value: string }>;
+  error?: string;
 };
-const SelectComponent: React.FC<Props> = (props) => {
+
+const SelectComponent = (props: Props) => {
+  const { setFieldValue } = useFormikContext();
+  const [category, setCategory] = React.useState<string>();
+
   return (
-    <View style={styles.container}>
-      <Picker
-        style={styles.picker}
-        selectedValue={props.value}
-        onValueChange={props.onChange}
+    <View style={{ paddingHorizontal: 10,marginBottom:10 }}>
+      <View
+        style={{
+          borderBottomWidth: 0.5,
+          borderColor: props.error ? "tomato" : "black",
+        }}
       >
-        {props.values.map((el, index) => (
-          <Picker.Item label={el.label} key={index} value={el.value} />
-        ))}
-      </Picker>
+        <Picker
+          onValueChange={(itemValue) => {
+            setFieldValue("categories", itemValue);
+            setCategory(itemValue);
+          }}
+          mode={"dropdown"}
+          selectedValue={category}
+        >
+          {categories.map((el, index) => (
+            <Picker.Item label={el.label} value={el.value} key={index} />
+          ))}
+        </Picker>
+      </View>
+      {props.error && <Text style={styles.error_msg}>{props.error}</Text>}
     </View>
   );
 };
-
 export default SelectComponent;
 
 const styles = StyleSheet.create({
   container: {
-    borderBottomWidth: 0.5,
-    marginTop: -10,
-    paddingBottom: -20,
-    marginBottom: 10,
+    alignItems: "center",
+    paddingHorizontal: 10,
   },
-  picker: {
-    color: "skyblue",
+
+  error_msg: {
+    color: "tomato",
+    alignSelf: "center",
+    textTransform: "capitalize",
   },
 });

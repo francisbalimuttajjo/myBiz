@@ -1,14 +1,25 @@
 import React from "react";
-import { Pressable, StyleSheet, Text } from "react-native";
+import { ActivityIndicator, Pressable, StyleSheet, Text, TouchableOpacity } from "react-native";
 
 type Props = {
   title: string;
+  submit: () => void;
+  loading: boolean;
 };
 const Supplier: React.FC<Props> = (props) => {
   return (
-    <Pressable style={styles.button} onPress={() => console.log("clicked")}>
-      <Text style={styles.text}>{props.title}</Text>
-    </Pressable>
+    <TouchableOpacity
+      activeOpacity={0.7}
+      disabled={props.loading}
+      style={{
+        ...styles.button,
+        backgroundColor: props.loading ? "#b7eaeb" : "skyblue",
+      }}
+      onPress={props.submit}
+    >
+      {!props.loading && <Text style={styles.text}>{props.title}</Text>}
+      {props.loading && <ActivityIndicator size="small" color="skyblue" />}
+    </TouchableOpacity>
   );
 };
 
@@ -23,7 +34,6 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     elevation: 3,
     width: "95%",
-    backgroundColor: "skyblue",
     alignSelf: "center",
     marginVertical: 10,
   },

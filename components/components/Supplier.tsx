@@ -5,19 +5,20 @@ type Props = {
   onChange: (a: string, event: { nativeEvent: { text: string } }) => void;
   name: string;
   supplier: string;
+  error?: string;
 };
 const Supplier: React.FC<Props> = (props) => {
   return (
     <View style={styles.container}>
       <View style={styles.container1}>
-        <Text>Supplier</Text>
+        <Text>Supplier *</Text>
       </View>
-      <View style={styles.container2}>
+      <View
+        style={{ ...styles.container2, borderColor: props.error ? "red" : "" }}
+      >
         <TextInput
-       
           value={props.supplier}
           onChange={(value) => props.onChange(props.name, value)}
-          style={styles.text}
         />
       </View>
     </View>
@@ -28,10 +29,7 @@ export default Supplier;
 
 const styles = StyleSheet.create({
   container: { flexDirection: "row", marginLeft: 10, paddingLeft: 10 },
-  text: {
-    borderBottomWidth: 0.5,
-    marginTop: 0,
-  },
+
   container1: {
     width: "35%",
     marginTop: 10,
@@ -39,5 +37,6 @@ const styles = StyleSheet.create({
   container2: {
     width: "50%",
     marginLeft: 20,
+    borderBottomWidth: 0.5,
   },
 });

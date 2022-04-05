@@ -29,7 +29,7 @@ const AddItems = () => {
       </TouchableOpacity>
       <TouchableOpacity
         activeOpacity={0.7}
-        style={styles.container}
+        style={{ ...styles.container }}
         onPress={() => handleNavigation("Expense")}
       >
         <Ionicon name="add-outline" size={20} color="skyblue" />
@@ -44,13 +44,14 @@ export default AddItems;
 const styles = StyleSheet.create({
   mainContainer: {
     padding: 10,
+    // paddingBottom:20
   },
   container: {
     display: "flex",
     flexDirection: "row",
     justifyContent: "flex-start",
     alignItems: "center",
-    marginBottom: 10,
+    marginBottom: 20,
   },
   text: {
     color: "skyblue",

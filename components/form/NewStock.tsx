@@ -2,21 +2,21 @@ import React from "react";
 import { ScrollView } from "react-native";
 import Button from "../components/Button";
 import { Formik, Field } from "formik";
-import PriceComponent from "../components/PriceComponent";
+import PriceComponent from "./PriceComponent";
 import AddImageComponent from "./ImageComponent";
-import AppFormField from "../components/InputComponent";
-import SwitchComponent from "../components/Switch";
+import AppFormField from "./InputComponent";
+import SwitchComponent from "./Switch";
 import * as Yup from "yup";
 import Wrapper from "../components/Wrapper";
-import SelectComponent from "../components/SelectComponent";
+import SelectComponent from "./SelectComponent";
 
 const validationSchema = Yup.object().shape({
   name: Yup.string().trim().required("name is required").label("name"),
-  buyingPrice: Yup.string()
-    .trim()
-    .required("enter buying price")
+  buyingPrice: Yup.number()
+    .required()
+    .min(1, "add buying price")
     .label("buyingPrice"),
-  stock: Yup.string().trim().required("enter stock bought").label("stock"),
+  stock: Yup.number().required().min(1, "add stock").label("stock"),
   categories: Yup.string()
     .trim()
     .required("choose category")
@@ -34,10 +34,10 @@ export const MyReactNativeForm = () => {
         description: "",
         categories: "",
         isReturnable: false,
-        stock: '90',
+        stock: 0,
         buyingPrice: 0,
         sellingPrice: 0,
-        supplier:"",
+        supplier: "",
         buyingCurrency: "ugx",
         sellingCurrency: "ugx",
       }}
@@ -55,17 +55,22 @@ export const MyReactNativeForm = () => {
         <ScrollView style={{ paddingBottom: 20 }}>
           <AddImageComponent />
           <Wrapper>
-            <Field component={AppFormField} name="name" title="name" />
+            <Field component={AppFormField} name="name" title="name"  required/>
             <SelectComponent error={errors.categories} />
             <Field
               component={AppFormField}
               name="description"
               title="description"
+              required
             />
             <SwitchComponent />
           </Wrapper>
           <Wrapper>
-            <PriceComponent title="buying" error={errors.buyingPrice} />
+            <PriceComponent
+              title="buying"
+              error={errors.buyingPrice}
+              required
+            />
             <PriceComponent title="selling" />
             <Field
               component={AppFormField}
@@ -73,14 +78,14 @@ export const MyReactNativeForm = () => {
               title="stock Bought"
               numeric
               error={errors.stock}
+              required
             />
           </Wrapper>
           <Wrapper>
-             <Field
+            <Field
               component={AppFormField}
               name="supplier"
               title="supplier"
-              
               error={errors.supplier}
             />
           </Wrapper>
@@ -92,4 +97,3 @@ export const MyReactNativeForm = () => {
   );
 };
 export default MyReactNativeForm;
-

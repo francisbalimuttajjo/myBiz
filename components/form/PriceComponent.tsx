@@ -1,10 +1,8 @@
 import React from "react";
 import { StyleSheet, Text, TextInput, View } from "react-native";
 import { Picker } from "@react-native-picker/picker";
-import { Field, FieldProps, useFormikContext } from "formik";
-import SelectComponent from "./SelectComponent";
-import AppFormField from "./InputComponent";
-import { toString } from "lodash";
+import {  useFormikContext } from "formik";
+
 
 const currencies = [
   {
@@ -22,7 +20,7 @@ const currencies = [
 ];
 
 type Props = {
-  // name: string;
+required?:boolean
   title: string;
   error?: string;
 };
@@ -34,14 +32,7 @@ const PriceComponent: React.FC<Props> = (props) => {
 
   return (
     <View style={styles.container}>
-      <View
-        style={{
-          width: "35%",
-          borderBottomWidth: 0.5,
-          height: 60,
-          paddingBottom: -20,
-        }}
-      >
+      <View style={styles.currency_container}>
         <Text style={{ marginBottom: -15 }}>Currency</Text>
         <Picker
           onValueChange={(itemValue) => {
@@ -57,7 +48,7 @@ const PriceComponent: React.FC<Props> = (props) => {
         </Picker>
       </View>
       <View style={styles.title_container}>
-        <Text>Enter {props.title} Price</Text>
+        <Text>Enter {props.title} Price {props.required ? '*' : "" }</Text>
         <View
           style={{
             ...styles.input_container,
@@ -74,19 +65,20 @@ const PriceComponent: React.FC<Props> = (props) => {
             style={{ marginBottom: 0 }}
           />
         </View>
-        {props.error && (
-          <Text style={styles.error_msg}>
-           
-            {props.error}
-          </Text>
-        )}
+        {props.error && <Text style={styles.error_msg}>{props.error}</Text>}
       </View>
     </View>
   );
 };
 export default PriceComponent;
 const styles = StyleSheet.create({
-  container: { flexDirection: "row", marginLeft: 10, paddingLeft: 10 },
+  currency_container: {
+    width: "35%",
+    borderBottomWidth: 0.5,
+    height: 60,
+    paddingBottom: -20,
+  },
+  container: { flexDirection: "row", paddingLeft: 10 },
   title_container: {
     width: "50%",
     marginLeft: 20,

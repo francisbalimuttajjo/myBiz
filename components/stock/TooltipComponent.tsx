@@ -16,9 +16,9 @@ const TooltipComponent: React.FC<Props> = (props) => {
     <View style={styles.container}>
       <Tooltip
         tooltipStyle={{ marginTop: -30 }}
-        contentStyle={{ width: 150, minHeight: 100 }}
+        contentStyle={{ width: 200, minHeight: 100 }}
         showChildInTooltip={false}
-        arrowSize={{ width: 16, height: 12 }}
+        arrowSize={{ width: 16, height: 24 }}
         isVisible={props.visible}
         content={<AddItemsComponent />}
         placement="bottom"

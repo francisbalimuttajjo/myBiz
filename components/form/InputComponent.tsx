@@ -6,10 +6,12 @@ type Props = {
   placeholder?: string;
   title: string;
   numeric?: boolean;
+  required?: boolean;
 };
 const AppFormField: React.FC<Props & FieldProps> = (props) => {
   const {
     placeholder,
+    required,
     numeric,
     title,
     field: { name, onBlur, onChange, value },
@@ -27,7 +29,10 @@ const AppFormField: React.FC<Props & FieldProps> = (props) => {
           borderColor: hasError ? "tomato" : "black",
         }}
       >
-        <Text style={styles.title}>{title} *</Text>
+        <Text style={styles.title}>
+          {title}
+          {required ? " *" : ""}
+        </Text>
         <TextInput
           keyboardType={numeric ? "numeric" : "default"}
           placeholder={placeholder}
@@ -53,7 +58,7 @@ const styles = StyleSheet.create({
   container: {
     alignItems: "center",
     paddingHorizontal: 10,
-    marginVertical:6
+    marginVertical: 6,
   },
   title: {
     textTransform: "capitalize",
@@ -69,7 +74,7 @@ const styles = StyleSheet.create({
     width: "100%",
     alignSelf: "center",
     marginTop: 10,
-    marginLeft: 12,
+    marginLeft: 32,
   },
   error_msg: {
     color: "tomato",

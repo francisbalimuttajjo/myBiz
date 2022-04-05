@@ -1,11 +1,10 @@
 import { Picker } from "@react-native-picker/picker";
 import { useFormikContext } from "formik";
-import { StringIterator } from "lodash";
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 
 const categories = [
-  { label: "Choose Category", value: "" },
+  { label: "Choose Category  *", value: "" },
   { label: "food", value: "food" },
   { label: "books", value: "books" },
   { label: "books", value: "books" },
@@ -19,7 +18,7 @@ const SelectComponent = (props: Props) => {
   const [category, setCategory] = React.useState<string>();
 
   return (
-    <View style={{ paddingHorizontal: 10,marginBottom:10 }}>
+    <View style={styles.mainContainer}>
       <View
         style={{
           borderBottomWidth: 0.5,
@@ -46,6 +45,7 @@ const SelectComponent = (props: Props) => {
 export default SelectComponent;
 
 const styles = StyleSheet.create({
+  mainContainer: { paddingHorizontal: 10, marginBottom: 10 },
   container: {
     alignItems: "center",
     paddingHorizontal: 10,

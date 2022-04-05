@@ -6,56 +6,25 @@ import PriceComponent from "./PriceComponent";
 import AddImageComponent from "./ImageComponent";
 import AppFormField from "./InputComponent";
 import SwitchComponent from "./Switch";
-import * as Yup from "yup";
+import validationSchema from "./ValidationSchema";
 import Wrapper from "../components/Wrapper";
 import SelectComponent from "./SelectComponent";
+import { useSelector } from "react-redux";
+import { RootState } from "../../redux/Store";
 
-const validationSchema = Yup.object().shape({
-  name: Yup.string().trim().required("name is required").label("name"),
-  buyingPrice: Yup.number()
-    .required()
-    .min(1, "add buying price")
-    .label("buyingPrice"),
-  stock: Yup.number().required().min(1, "add stock").label("stock"),
-  categories: Yup.string()
-    .trim()
-    .required("choose category")
-    .label("categories"),
-  description: Yup.string()
-    .trim()
-    .required("description is required")
-    .label("description"),
-});
-export const MyReactNativeForm = () => {
+export const Form = () => {
+  const { initialValues } = useSelector((state: RootState) => state.stock);
   return (
     <Formik
-      initialValues={{
-        name: "",
-        description: "",
-        categories: "",
-        isReturnable: false,
-        stock: 0,
-        buyingPrice: 0,
-        sellingPrice: 0,
-        supplier: "",
-        buyingCurrency: "ugx",
-        sellingCurrency: "ugx",
-      }}
+      initialValues={initialValues}
       validationSchema={validationSchema}
       onSubmit={(values) => console.log(values)}
     >
-      {({
-        handleChange,
-        handleBlur,
-        handleSubmit,
-        values,
-        errors,
-        touched,
-      }) => (
+      {({ handleSubmit, errors }) => (
         <ScrollView style={{ paddingBottom: 20 }}>
           <AddImageComponent />
           <Wrapper>
-            <Field component={AppFormField} name="name" title="name"  required/>
+            <Field component={AppFormField} name="name" title="name" required />
             <SelectComponent error={errors.categories} />
             <Field
               component={AppFormField}
@@ -96,4 +65,4 @@ export const MyReactNativeForm = () => {
     </Formik>
   );
 };
-export default MyReactNativeForm;
+export default Form;

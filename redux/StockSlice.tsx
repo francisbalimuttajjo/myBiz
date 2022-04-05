@@ -75,7 +75,7 @@ const stock = [
     packaging: "box",
     category: "sta",
   },
-   {
+  {
     _id: "8",
     name: "tv",
     currency: "ksh",
@@ -85,7 +85,7 @@ const stock = [
     packaging: "box",
     category: "sta",
   },
-    {
+  {
     _id: "9",
     name: "face",
     currency: "ksh",
@@ -96,13 +96,26 @@ const stock = [
     category: "sta",
   },
 ];
+const initialValues = {
+  name: "",
+  description: "",
+  categories: "",
+  isReturnable: false,
+  stock: 0,
+  buyingPrice: 0,
+  sellingPrice: 0,
+  supplier: "",
+  buyingCurrency: "ugx",
+  sellingCurrency: "ugx",
+};
 const store = stock;
 const stockSlice = createSlice({
   name: "stock",
   initialState: {
     stock: store,
     loading: false,
-    displaySearchBar:store.length===0 ? false : true ,
+    initialValues,
+    displaySearchBar: store.length === 0 ? false : true,
     infoMsg: "",
   },
   reducers: {
@@ -113,8 +126,10 @@ const stockSlice = createSlice({
         state.stock = store;
       } else {
         state.stock = store;
-        const searchResult = state.stock.filter((el) =>
-          el.category.includes(action.payload) ||   el.name.includes(action.payload)
+        const searchResult = state.stock.filter(
+          (el) =>
+            el.category.includes(action.payload) ||
+            el.name.includes(action.payload)
         );
         if (!searchResult.length) {
           state.infoMsg = `there is no result for the search ${action.payload}`;

@@ -1,8 +1,7 @@
 import React from "react";
 import { StyleSheet, Text, TextInput, View } from "react-native";
 import { Picker } from "@react-native-picker/picker";
-import {  useFormikContext } from "formik";
-
+import { useFormikContext } from "formik";
 
 const currencies = [
   {
@@ -20,7 +19,7 @@ const currencies = [
 ];
 
 type Props = {
-required?:boolean
+  required?: boolean;
   title: string;
   error?: string;
 };
@@ -48,7 +47,9 @@ const PriceComponent: React.FC<Props> = (props) => {
         </Picker>
       </View>
       <View style={styles.title_container}>
-        <Text>Enter {props.title} Price {props.required ? '*' : "" }</Text>
+        <Text>
+          Enter {props.title} Price {props.required ? "*" : ""}
+        </Text>
         <View
           style={{
             ...styles.input_container,
@@ -62,7 +63,7 @@ const PriceComponent: React.FC<Props> = (props) => {
               setPrice(+text);
             }}
             value={String(price)}
-            style={{ marginBottom: 0 }}
+          
           />
         </View>
         {props.error && <Text style={styles.error_msg}>{props.error}</Text>}

@@ -9,7 +9,7 @@ import Details from "./screens/Details";
 import Expenses from "./screens/Expenses";
 import AddNew from "./screens/NewItem";
 import NewCategory from "./screens/NewCategory";
-import Camera from "./screens/Camera";
+import Camera from "./screens/Image";
 import NewExpense from "./screens/NewExpense";
 import BottomTabs from "./BottomTabs";
 

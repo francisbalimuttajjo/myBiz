@@ -1,23 +1,29 @@
 import React, { useState, useEffect } from "react";
-import { Pressable, StyleSheet, Text, View } from "react-native";
-
+import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 import Ionicon from "react-native-vector-icons/Ionicons";
 import { useNavigation } from "@react-navigation/native";
 
 type NavigationProps = {
   navigate: (route: string) => void;
 };
-const ImageComponent = () => {
+const ImageComponent: React.FC<{ image?: string }> = ({ image }) => {
   const navigation = useNavigation<NavigationProps>();
-
   return (
     <View>
       <View style={styles.container}>
         <Pressable onPress={() => navigation.navigate("camera")}>
-          <Ionicon name="camera" size={100} color="#6b6767" />
+          {!image && <Ionicon name="camera" size={100} color="#6b6767" />}
+          {image !="" && (
+            <Image
+              style={styles.image}
+              source={{
+                uri: image,
+              }}
+            />
+          )}
         </Pressable>
 
-        <Text style={styles.text}>Add Image</Text>
+        {!image && <Text style={styles.text}>Add Image</Text>}
       </View>
     </View>
   );
@@ -32,5 +38,12 @@ const styles = StyleSheet.create({
     color: "skyblue",
     fontWeight: "bold",
     fontSize: 20,
+  },
+  image: {
+    width: 150,
+    height: 110,
+    borderRadius: 10,
+    marginLeft: 6,
+    marginTop: 10,
   },
 });

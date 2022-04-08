@@ -14,6 +14,7 @@ import { RootState } from "../../redux/Store";
 
 export const Form = () => {
   const { initialValues } = useSelector((state: RootState) => state.stock);
+  
   return (
     <Formik
       initialValues={initialValues}
@@ -22,7 +23,7 @@ export const Form = () => {
     >
       {({ handleSubmit, errors }) => (
         <ScrollView style={{ paddingBottom: 20 }}>
-          <AddImageComponent />
+          <AddImageComponent image={initialValues.image} />
           <Wrapper>
             <Field component={AppFormField} name="name" title="name" required />
             <SelectComponent error={errors.categories} />

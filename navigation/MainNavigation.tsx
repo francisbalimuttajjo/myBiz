@@ -21,13 +21,13 @@ export type mainStackParams = {
   home: undefined;
   Sales: undefined;
   Expenses: undefined;
-  New: undefined;
   Expense: undefined;
   Category: undefined;
   camera: undefined;
   Details: {
     id: undefined;
   };
+  New: undefined;
 };
 
 const DetailsScreens = () => {

@@ -96,6 +96,7 @@ const stock = [
     category: "sta",
   },
 ];
+
 const initialValues = {
   name: "",
   description: "",
@@ -104,6 +105,7 @@ const initialValues = {
   stock: "0",
   buyingPrice: "0",
   sellingPrice: "90",
+  image: "",
   supplier: "",
   buyingCurrency: "ugx",
   sellingCurrency: "ugx",
@@ -120,6 +122,9 @@ const stockSlice = createSlice({
   },
   reducers: {
     //filterStock(state, action: PayloadAction<string>) {
+    addImage(state, action: PayloadAction<string>) {
+      state.initialValues.image = action.payload;
+    },
     filterStock(state, action: PayloadAction<string>) {
       state.infoMsg = "";
       if (action.payload === "") {
@@ -140,5 +145,5 @@ const stockSlice = createSlice({
   },
 });
 
-export const { filterStock } = stockSlice.actions;
+export const { filterStock, addImage } = stockSlice.actions;
 export default stockSlice.reducer;

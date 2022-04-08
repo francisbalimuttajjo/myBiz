@@ -1,11 +1,5 @@
-import React from "react"
-import { Text, View } from "react-native"
-import Form from '../../components/form/NewStock'
+import Form from "../../components/form/NewStock";
 
-const NewItem = () => {
-    return (
-        <View><Form /></View>
-    )
-}
+const NewItem = () => <Form />;
 
-export default NewItem
+export default NewItem;

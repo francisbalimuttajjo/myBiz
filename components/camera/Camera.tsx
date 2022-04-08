@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, {  useEffect } from "react";
 import {
   StyleSheet,
   Text,
@@ -6,14 +6,12 @@ import {
   TouchableOpacity,
   Image,
   ImageBackground,
+  ActivityIndicator,
 } from "react-native";
 import { Camera } from "expo-camera";
-
 import { Ionicons, MaterialIcons } from "@expo/vector-icons";
-import { firebaseConfig } from "../../firebase/firebase";
-import { initializeApp } from "firebase/app";
-import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import useCamera from "./useCamera";
+
 export default function CameraComponent() {
   const {
     flipCamera,
@@ -24,8 +22,9 @@ export default function CameraComponent() {
     image,
     setCamera,
     type,
+    loading,
+    uploadImage,
   } = useCamera();
-
 
   //seeking device permision
   useEffect(() => {
@@ -41,19 +40,6 @@ export default function CameraComponent() {
   if (hasPermission === false) {
     return <Text>No access to camera</Text>;
   }
-  //initializeing
-  initializeApp(firebaseConfig);
-  const uploadImage = async () => {
-    const storage = getStorage();
-    const reference = ref(storage, "bafra2.jpg");
-    //convertingimage to array of bytes
-    const img = await fetch(image);
-    const convertedImage = await img.blob();
-    uploadBytes(reference, convertedImage);
-    const refere = ref(storage, "/bafra2.jpg");
-    const url = await getDownloadURL(refere);
-    console.log(url);
-  };
 
   return (
     <View style={styles.main_container}>
@@ -90,8 +76,10 @@ export default function CameraComponent() {
               activeOpacity={0.8}
               onPress={uploadImage}
               style={styles.save_container}
+              disabled={loading}
             >
-              <Text style={styles.save_text}> Save </Text>
+              {!loading && <Text style={styles.save_text}> Save </Text>}
+              {loading && <ActivityIndicator size="small" color="skyblue" />}
             </TouchableOpacity>
           </ImageBackground>
         </View>
@@ -108,8 +96,8 @@ const styles = StyleSheet.create({
   save_container: {
     borderRadius: 20,
     backgroundColor: "#fff",
-    width: 60,
-    height: 35,
+    width: 80,
+    height: 40,
     justifyContent: "center",
     alignItems: "center",
   },
@@ -137,5 +125,6 @@ const styles = StyleSheet.create({
   save_text: {
     color: "black",
     fontWeight: "bold",
+    fontSize: 20,
   },
 });

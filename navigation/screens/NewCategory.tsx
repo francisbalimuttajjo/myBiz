@@ -1,10 +1,5 @@
-import React from "react"
-import { Text, View } from "react-native"
+import React from "react";
+import Add from "../../components/category/Add";
 
-const NewCategory = () => {
-    return (
-        <View><Text>new Category</Text></View>
-    )
-}
-
-export default NewCategory
+const NewCategory = () => <Add />;
+export default NewCategory;

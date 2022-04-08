@@ -6,13 +6,14 @@ import { filterStock } from "../../redux/StockSlice";
 import { RootState } from "../../redux/Store";
 
 const UseFns = () => {
-
   const navigation = useNavigation();
-   const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const [clicked, setClicked] = React.useState(false);
   const [searchPhrase, setSearchPhrase] = React.useState("");
-    const [visibleState, setVisibleState] = React.useState(false);
-  const { infoMsg,displaySearchBar } = useSelector((state: RootState) => state.stock);
+  const [visibleState, setVisibleState] = React.useState(false);
+  const { infoMsg, displaySearchBar, loading } = useSelector(
+    (state: RootState) => state.stock
+  );
   const handleClicked = () => setClicked(true);
   const displayToolKit = () => {
     setVisibleState(true);
@@ -20,7 +21,7 @@ const UseFns = () => {
   const hideToolKit = () => {
     setVisibleState(false);
   };
-   const handleChange = (val: string) => {
+  const handleChange = (val: string) => {
     setSearchPhrase(val);
     dispatch(filterStock(val));
   };
@@ -30,15 +31,22 @@ const UseFns = () => {
     Keyboard.dismiss();
     setClicked(false);
     dispatch(filterStock(""));
-    };
+  };
 
-  return { visibleState, navigation, displayToolKit, hideToolKit,clicked,searchPhrase,handleClicked,infoMsg,handleChange,clearSearchField,displaySearchBar };
+  return {
+    visibleState,
+    navigation,
+    displayToolKit,
+    hideToolKit,
+    clicked,
+    searchPhrase,
+    loading,
+    handleClicked,
+    infoMsg,
+    handleChange,
+    clearSearchField,
+    displaySearchBar,
+  };
 };
 
 export default UseFns;
-
-
- 
-
- 
-   

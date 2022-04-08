@@ -7,8 +7,9 @@ type Props = {
   handleChange: (a: string) => void;
   handleClicked: () => void;
   searchPhrase: string;
+  placeholder: string;
   clearSearchField: () => void;
-  infoMsg: string;
+  infoMsg?: string;
 };
 
 const SearchBar: React.FC<Props> = (props) => {
@@ -33,7 +34,7 @@ const SearchBar: React.FC<Props> = (props) => {
             {/* Input field */}
             <TextInput
               style={styles.input}
-              placeholder="Search by Category or Name"
+              placeholder={props.placeholder}
               value={props.searchPhrase}
               onChangeText={props.handleChange}
               onFocus={props.handleClicked}

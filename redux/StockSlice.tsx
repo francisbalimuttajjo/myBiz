@@ -1,7 +1,20 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 const image =
   "https://storage.googleapis.com/download/storage/v1/b/task-tracker-336811.appspot.com/o/%2Fusers%2Fimgs%2Fuser-61d5e487b45306781f0cea46-1642267623054.jpeg?generation=1642267623313359&alt=media";
-
+const categories = [
+  { title: "bafra", id: "0" },
+  { title: "bafra", id: "1" },
+  { title: "bafra", id: "21" },
+  { title: "bafra", id: "01" },
+  { title: "bafra", id: "11" },
+  { title: "bafra", id: "202" },
+  { title: "bafra", id: "20" },
+  { title: "bafra soogss", id: "12" },
+  { title: "bafra", id: "22" },
+  { title: "bafra", id: "00" },
+  { title: "bafra", id: "100" },
+  { title: "bafra", id: "200" },
+];
 const stock = [
   {
     _id: "1",
@@ -111,6 +124,7 @@ const initialValues = {
   sellingCurrency: "ugx",
 };
 const store = stock;
+const categoriesStore = categories;
 const stockSlice = createSlice({
   name: "stock",
   initialState: {
@@ -119,6 +133,7 @@ const stockSlice = createSlice({
     initialValues,
     displaySearchBar: store.length === 0 ? false : true,
     infoMsg: "",
+    categories: categoriesStore,
   },
   reducers: {
     //filterStock(state, action: PayloadAction<string>) {
@@ -138,14 +153,26 @@ const stockSlice = createSlice({
         );
         if (searchResult.length > 0) {
           state.infoMsg = `Search Results : ${searchResult.length}`;
-          state.stock = searchResult;
         } else {
           state.infoMsg = `There is no result for the search ${action.payload}`;
         }
+        state.stock = searchResult;
+      }
+    },
+    filterCategories(state, action: PayloadAction<string>) {
+      if (action.payload === "") {
+        state.categories = categoriesStore;
+      } else {
+        state.categories = categoriesStore;
+        const searchResult = state.categories.filter((el) =>
+          el.title.includes(action.payload)
+        );
+
+        state.categories = searchResult;
       }
     },
   },
 });
 
-export const { filterStock, addImage } = stockSlice.actions;
+export const { filterStock, addImage, filterCategories } = stockSlice.actions;
 export default stockSlice.reducer;

@@ -71,7 +71,13 @@ const DetailsScreens = () => {
               title: "New Item",
             }}
           />
-          <Stack.Screen name="Category" component={NewCategory} />
+          <Stack.Screen
+            name="Category"
+            component={NewCategory}
+            options={{
+              title: " Add New Category",
+            }}
+          />
           <Stack.Screen name="Expense" component={NewExpense} />
           <Stack.Screen name="Details" component={Details} />
           <Stack.Screen name="Purchases" component={Purchases} />

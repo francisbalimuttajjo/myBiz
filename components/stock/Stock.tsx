@@ -1,7 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
-// import { useIsFocused, useNavigation } from "@react-navigation/native";
-// import { Picker } from "@react-native-picker/picker";
+import { StyleSheet,  View } from "react-native";
 import Tooltip from "./TooltipComponent";
 import Logo from "../components/Logo";
 import Banner from "../components/Banner";
@@ -9,8 +7,7 @@ import HeadingComponent from "../components/Heading";
 import useFns from "./useFns";
 import StockList from "./StockList";
 import Search from "../components/Search";
-import { useSelector } from "react-redux";
-import { RootState } from "../../redux/Store";
+
 
 const Stock = () => {
   const {
@@ -25,8 +22,9 @@ const Stock = () => {
     handleChange,
     clearSearchField,
     displaySearchBar,
+    loading
   } = useFns();
-  const { loading } = useSelector((state: RootState) => state.stock);
+ 
   //
   React.useEffect(() => {
     const unsubscribe = navigation.addListener("focus", () => hideToolKit());
@@ -45,13 +43,13 @@ const Stock = () => {
             visible={visibleState}
           />
         </View>
-        {!loading && displaySearchBar &&(
+        {!loading && displaySearchBar && (
           <Search
             infoMsg={infoMsg}
             clearSearchField={clearSearchField}
             searchPhrase={searchPhrase}
             handleChange={handleChange}
-            // displaySearchBar={displaySearchBar}
+            placeholder="Search by Category or Name"
             clicked={clicked}
             handleClicked={handleClicked}
           />

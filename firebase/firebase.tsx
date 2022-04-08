@@ -11,14 +11,6 @@ const firebaseConfig = {
 };
  export {firebaseConfig}
 
-// console.log(firebaseConfig);
 
-// let firebaseapp;
-// if (!firebase.apps.length) {
-//   firebaseapp = firebase.initializeApp(firebaseConfig);
-// }
-// const storage = firebase.storage();
-
-// export { storage };
 
 

@@ -1,16 +1,17 @@
-import React, {  useEffect } from "react";
+import React, { useEffect } from "react";
 import {
   StyleSheet,
   Text,
   View,
   TouchableOpacity,
-  Image,
   ImageBackground,
   ActivityIndicator,
 } from "react-native";
 import { Camera } from "expo-camera";
 import { Ionicons, MaterialIcons } from "@expo/vector-icons";
 import useCamera from "./useCamera";
+
+import Error from "../components/Error";
 
 export default function CameraComponent() {
   const {
@@ -38,7 +39,7 @@ export default function CameraComponent() {
     return <View />;
   }
   if (hasPermission === false) {
-    return <Text>No access to camera</Text>;
+    return <Error info=" No access to camera" />;
   }
 
   return (

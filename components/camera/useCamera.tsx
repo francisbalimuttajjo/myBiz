@@ -65,7 +65,7 @@ const UseCamera = () => {
     const convertedImage = await img.blob();
     uploadBytes(reference, convertedImage).then(() =>
       getDownloadURL(reference).then((url) => {
-        dispatch(addImage(url));
+        dispatch(addImage(image));
         setLoading(false);
         navigation.navigate("New");
       })

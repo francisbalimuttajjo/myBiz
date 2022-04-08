@@ -136,10 +136,12 @@ const stockSlice = createSlice({
             el.category.includes(action.payload) ||
             el.name.includes(action.payload)
         );
-        if (!searchResult.length) {
-          state.infoMsg = `there is no result for the search ${action.payload}`;
+        if (searchResult.length > 0) {
+          state.infoMsg = `Search Results : ${searchResult.length}`;
+          state.stock = searchResult;
+        } else {
+          state.infoMsg = `There is no result for the search ${action.payload}`;
         }
-        state.stock = searchResult;
       }
     },
   },

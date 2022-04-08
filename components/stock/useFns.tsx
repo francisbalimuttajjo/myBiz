@@ -1,17 +1,44 @@
 import { useNavigation } from "@react-navigation/native";
 import React from "react";
+import { Keyboard } from "react-native";
+import { useDispatch, useSelector } from "react-redux";
+import { filterStock } from "../../redux/StockSlice";
+import { RootState } from "../../redux/Store";
 
 const UseFns = () => {
-  const [visibleState, setVisibleState] = React.useState(false);
+
   const navigation = useNavigation();
+   const dispatch = useDispatch();
+  const [clicked, setClicked] = React.useState(false);
+  const [searchPhrase, setSearchPhrase] = React.useState("");
+    const [visibleState, setVisibleState] = React.useState(false);
+  const { infoMsg,displaySearchBar } = useSelector((state: RootState) => state.stock);
+  const handleClicked = () => setClicked(true);
   const displayToolKit = () => {
     setVisibleState(true);
   };
   const hideToolKit = () => {
     setVisibleState(false);
   };
+   const handleChange = (val: string) => {
+    setSearchPhrase(val);
+    dispatch(filterStock(val));
+  };
 
-  return { visibleState, navigation, displayToolKit, hideToolKit };
+  const clearSearchField = () => {
+    setSearchPhrase("");
+    Keyboard.dismiss();
+    setClicked(false);
+    dispatch(filterStock(""));
+    };
+
+  return { visibleState, navigation, displayToolKit, hideToolKit,clicked,searchPhrase,handleClicked,infoMsg,handleChange,clearSearchField,displaySearchBar };
 };
 
 export default UseFns;
+
+
+ 
+
+ 
+   

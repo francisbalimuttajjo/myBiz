@@ -8,12 +8,24 @@ import Banner from "../components/Banner";
 import HeadingComponent from "../components/Heading";
 import useFns from "./useFns";
 import StockList from "./StockList";
-import Search from "./Search";
+import Search from "../components/Search";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/Store";
 
 const Stock = () => {
-  const { visibleState, navigation, displayToolKit, hideToolKit } = useFns();
+  const {
+    visibleState,
+    navigation,
+    displayToolKit,
+    hideToolKit,
+    clicked,
+    searchPhrase,
+    handleClicked,
+    infoMsg,
+    handleChange,
+    clearSearchField,
+    displaySearchBar,
+  } = useFns();
   const { loading } = useSelector((state: RootState) => state.stock);
   //
   React.useEffect(() => {
@@ -33,7 +45,17 @@ const Stock = () => {
             visible={visibleState}
           />
         </View>
-        {!loading && <Search />}
+        {!loading && displaySearchBar &&(
+          <Search
+            infoMsg={infoMsg}
+            clearSearchField={clearSearchField}
+            searchPhrase={searchPhrase}
+            handleChange={handleChange}
+            // displaySearchBar={displaySearchBar}
+            clicked={clicked}
+            handleClicked={handleClicked}
+          />
+        )}
         <StockList />
       </View>
     </View>

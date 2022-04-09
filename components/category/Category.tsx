@@ -17,6 +17,7 @@ const Category = (props: Props) => {
     <View style={styles.list_item}>
       <Text style={styles.title}>{props.item.title}</Text>
       <TouchableOpacity
+        activeOpacity={0.7}
         onPress={() => navigate("categoriesEdit", { item: props.item })}
         style={styles.icon}
       >

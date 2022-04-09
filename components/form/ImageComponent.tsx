@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 import Ionicon from "react-native-vector-icons/Ionicons";
 import { useNavigation } from "@react-navigation/native";
@@ -6,20 +6,21 @@ import { useNavigation } from "@react-navigation/native";
 type NavigationProps = {
   navigate: (route: string) => void;
 };
-const ImageComponent: React.FC<{ image?: string }> = ({ image }) => {
+const ImageComponent: React.FC<{ image: string | undefined }> = ({ image }) => {
   const navigation = useNavigation<NavigationProps>();
   return (
     <View>
       <View style={styles.container}>
         <Pressable onPress={() => navigation.navigate("camera")}>
-          {!image && <Ionicon name="camera" size={100} color="#6b6767" />}
-          {image !="" && (
+          {image ? (
             <Image
               style={styles.image}
               source={{
                 uri: image,
               }}
             />
+          ) : (
+            <Ionicon name="camera" size={100} color="#6b6767" />
           )}
         </Pressable>
 

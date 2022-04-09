@@ -13,9 +13,9 @@ import Ionicon from "react-native-vector-icons/Ionicons";
 export type Props = {
   item: {
     _id: string;
-    image?: string;
+    image: string;
     name: string;
-    currency: string;
+    sellingCurrency: string;
     description: string;
     stock: number;
     sellingPrice: number;
@@ -25,7 +25,7 @@ export type Props = {
 };
 
 type NavigationProps = {
-  navigate: (route: string, params: { id: string }) => void;
+  navigate: (route: string, params?: { id: string }) => void;
 };
 const Item: React.FC<Props> = (props) => {
   const { navigate } = useNavigation<NavigationProps>();
@@ -37,17 +37,14 @@ const Item: React.FC<Props> = (props) => {
         style={styles.container}
       >
         <View style={{ ...styles.icon, width: "30%" }}>
-          {props.item.image && (
-            <Pressable onPress={() => console.log("image clicked")}>
-              <Image
-                style={styles.image}
-                source={{
-                  uri: props.item.image,
-                }}
-              />
-            </Pressable>
-          )}
-          {!props.item.image && (
+          {props.item.image ? (
+            <Image
+              style={styles.image}
+              source={{
+                uri: props.item.image,
+              }}
+            />
+          ) : (
             <Pressable
               onPress={() => console.log("image clicked")}
               style={styles.icon}
@@ -57,6 +54,7 @@ const Item: React.FC<Props> = (props) => {
             </Pressable>
           )}
         </View>
+
         <View style={styles.details_container}>
           <View style={{ flexGrow: 1 }}>
             <Text style={styles.title}>{props.item.name}</Text>
@@ -65,7 +63,7 @@ const Item: React.FC<Props> = (props) => {
           <View>
             <Text>Available:{props.item.stock}</Text>
             <View style={styles.details}>
-              <Text style={styles.align}>{props.item.currency}</Text>
+              <Text style={styles.align}>{props.item.sellingCurrency}</Text>
               <Text style={styles.price}>{props.item.sellingPrice}&nbsp;</Text>
               <Text style={styles.align}>&#64;</Text>
               <Text style={{ ...styles.align, textTransform: "capitalize" }}>
@@ -74,13 +72,20 @@ const Item: React.FC<Props> = (props) => {
             </View>
           </View>
         </View>
+
         <View style={styles.icon_container}>
           <View style={{ marginRight: 10 }}>
-            <TouchableOpacity onPress={() => console.log("editing")}>
+            <TouchableOpacity
+              activeOpacity={0.7}
+              onPress={() => navigate("editStock", { id: props.item._id })}
+            >
               <Ionicon name="pencil" size={20} color="skyblue" />
             </TouchableOpacity>
           </View>
-          <TouchableOpacity onPress={() => console.log("deleting")}>
+          <TouchableOpacity
+            activeOpacity={0.7}
+            onPress={() => console.log("deleting")}
+          >
             <Ionicon name="trash-outline" size={20} color="skyblue" />
           </TouchableOpacity>
         </View>
@@ -95,7 +100,12 @@ const styles = StyleSheet.create({
   align: { alignSelf: "center" },
   price: { fontSize: 20, color: "skyblue", fontWeight: "bold" },
   description: { marginTop: -4, fontSize: 12, textTransform: "capitalize" },
-  mainContainer: { display: "flex", justifyContent: "center", marginHorizontal: 6,marginBottom:12 },
+  mainContainer: {
+    display: "flex",
+    justifyContent: "center",
+    marginHorizontal: 6,
+    marginBottom: 12,
+  },
   icon_container: {
     padding: 10,
     width: "20%",

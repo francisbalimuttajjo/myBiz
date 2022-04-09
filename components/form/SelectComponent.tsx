@@ -2,20 +2,18 @@ import { Picker } from "@react-native-picker/picker";
 import { useFormikContext } from "formik";
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
+import { useSelector } from "react-redux";
+import { RootState } from "../../redux/Store";
 
-const categories = [
-  { label: "Choose Category  *", value: "" },
-  { label: "food", value: "food" },
-  { label: "books", value: "books" },
-  { label: "books", value: "books" },
-];
 type Props = {
   error?: string;
+  categoryValue: string;
 };
 
 const SelectComponent = (props: Props) => {
   const { setFieldValue } = useFormikContext();
-  const [category, setCategory] = React.useState<string>();
+  const { categories } = useSelector((state: RootState) => state.stock);
+  const [category, setCategory] = React.useState(categories[0].value);
 
   return (
     <View style={styles.mainContainer}>
@@ -31,10 +29,10 @@ const SelectComponent = (props: Props) => {
             setCategory(itemValue);
           }}
           mode={"dropdown"}
-          selectedValue={category}
+          selectedValue={props.categoryValue}
         >
           {categories.map((el, index) => (
-            <Picker.Item label={el.label} value={el.value} key={index} />
+            <Picker.Item label={el.title} value={el.value} key={index} />
           ))}
         </Picker>
       </View>

@@ -16,4 +16,4 @@ const validationSchema = Yup.object().shape({
     .label("description"),
 });
 
-export default validationSchema
+export default validationSchema;

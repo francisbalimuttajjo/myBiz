@@ -9,39 +9,78 @@ import SwitchComponent from "./Switch";
 import validationSchema from "./ValidationSchema";
 import Wrapper from "../components/Wrapper";
 import SelectComponent from "./SelectComponent";
-import { useSelector } from "react-redux";
-import { RootState } from "../../redux/Store";
 
-export const Form = () => {
-  const { initialValues } = useSelector((state: RootState) => state.stock);
-  
+type Props = {
+  initialValues: {
+    sellingCurrency: string;
+    buyingCurrency: string;
+    categories: string;
+    supplier: string;
+    image?: string;
+    sellingPrice: number;
+    buyingPrice: number;
+    stock: number;
+    name: string;
+    description: string;
+    isReturnable: boolean;
+  };
+  btn_title: string;
+  categoryValue: string;
+};
+export const Form = (props: Props) => {
+  const [price, setPrice] = React.useState(props.initialValues.buyingPrice);
+  const [sellingPrice, setSellingPrice] = React.useState(
+    props.initialValues.sellingPrice
+  );
+  const [isEnabled, setIsEnabled] = React.useState(
+    props.initialValues.isReturnable
+  );
+ 
+  const toggleSwitch = () => {
+    setIsEnabled((previousState) => !previousState);
+  };
+
   return (
     <Formik
-      initialValues={initialValues}
+      initialValues={props.initialValues}
       validationSchema={validationSchema}
       onSubmit={(values) => console.log(values)}
     >
       {({ handleSubmit, errors }) => (
         <ScrollView style={{ paddingBottom: 20 }}>
-          <AddImageComponent image={initialValues.image} />
+          <AddImageComponent image={props.initialValues.image} />
           <Wrapper>
             <Field component={AppFormField} name="name" title="name" required />
-            <SelectComponent error={errors.categories} />
+            <SelectComponent
+              error={errors.categories}
+              categoryValue={props.categoryValue}
+            />
             <Field
               component={AppFormField}
               name="description"
               title="description"
               required
             />
-            <SwitchComponent />
+            <SwitchComponent
+              isEnabled={isEnabled}
+              toggleSwitch={toggleSwitch}
+            />
           </Wrapper>
           <Wrapper>
             <PriceComponent
+              currency={props.initialValues.buyingCurrency}
+              price={price}
               title="buying"
               error={errors.buyingPrice}
               required
+              setPrice={(val) => setPrice(val)}
             />
-            <PriceComponent title="selling" />
+            <PriceComponent
+              title="selling"
+              currency={props.initialValues.sellingCurrency}
+              price={sellingPrice}
+              setPrice={(val) => setSellingPrice(val)}
+            />
             <Field
               component={AppFormField}
               name="stock"
@@ -60,7 +99,11 @@ export const Form = () => {
             />
           </Wrapper>
 
-          <Button title="save Item" submit={handleSubmit} loading={false} />
+          <Button
+            title={props.btn_title}
+            submit={handleSubmit}
+            loading={false}
+          />
         </ScrollView>
       )}
     </Formik>

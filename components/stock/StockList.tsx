@@ -8,20 +8,22 @@ import LoadingComponent from "../components/LoadingComponent";
 import StockComponent from "./StockItem";
 
 const StockList = () => {
-  const { stock,loading } = useSelector((state: RootState) => state.stock);
- 
+  const { availableStock, loading } = useSelector(
+    (state: RootState) => state.stock
+  );
+
   return (
     <View style={styles.container}>
-      {stock.length < 1 && !loading && (
+      {availableStock.length < 1 && !loading && (
         <View>
           <EmptyNotification title=" Start Adding stock by tapping the +Add Item" />
-          </View>
+        </View>
       )}
       {loading && <LoadingComponent />}
-      {stock.length > 0 && !loading && (
+      {availableStock.length > 0 && !loading && (
         <FlatList
           style={styles.flatList}
-          data={stock}
+          data={availableStock}
           renderItem={(item) => <StockComponent item={item.item} />}
           keyExtractor={(item) => item._id}
         />
@@ -38,8 +40,6 @@ const styles = StyleSheet.create({
     // paddingTop:-20,
     height: 500,
     paddingBottom: 60,
-   
-    
   },
   flatList: {
     width: "100%",

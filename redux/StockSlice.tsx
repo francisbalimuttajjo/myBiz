@@ -1,112 +1,151 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 const image =
   "https://storage.googleapis.com/download/storage/v1/b/task-tracker-336811.appspot.com/o/%2Fusers%2Fimgs%2Fuser-61d5e487b45306781f0cea46-1642267623054.jpeg?generation=1642267623313359&alt=media";
-const categories = [
-  { title: "bafra", id: "0" },
-  { title: "bafra", id: "1" },
-  { title: "bafra", id: "21" },
-  { title: "bafra", id: "01" },
-  { title: "bafra", id: "11" },
-  { title: "bafra", id: "202" },
-  { title: "bafra", id: "20" },
-  { title: "bafra soogss", id: "12" },
-  { title: "bafra", id: "22" },
-  { title: "bafra", id: "00" },
-  { title: "bafra", id: "100" },
-  { title: "bafra", id: "200" },
-];
+
 const stock = [
   {
     _id: "1",
     image,
     name: "pencils",
-    currency: "ugx",
+    buyingCurrency: "usd",
+    sellingCurrency: "ksh",
+    buyingPrice: 900,
+    sellingPrice: 300,
+    buyingprice: 200,
     description: "the latest chinese brabd",
     stock: 300,
-    sellingPrice: 300,
+    supplier: "mayadnja",
+    isReturnable: true,
     packaging: "one",
-    category: "item",
+    category: "stationery",
   },
   {
     _id: "2",
     name: "books",
-    currency: "usd",
+    buyingCurrency: "ugx",
+    sellingCurrency: "ugx",
+    sellingPrice: 300,
+    image: undefined,
+    buyingprice: 200,
     description: "the latest chinese brabd",
     stock: 100,
-    sellingPrice: 12000,
+    buyingPrice: 9200,
+    isReturnable: false,
     packaging: "dozens",
-    category: "sta",
+    supplier: "mayansssja",
+    category: "books",
   },
   {
     _id: "3",
     name: "chalk",
-    currency: "ksh",
+    supplier: "mayssanja",
+    buyingCurrency: "ugx",
+    sellingCurrency: "usd",
+    sellingPrice: 30090,
+    buyingprice: 200,
+    buyingPrice: 90,
     description: "new stock",
     stock: 10000,
+    isReturnable: false,
     image,
-    sellingPrice: 12000,
     packaging: "box",
-    category: "item",
+    category: "food",
   },
   {
     _id: "4",
     name: "chalk",
-    currency: "ksh",
+    buyingCurrency: "ksh",
+    sellingCurrency: "ugx",
+    buyingprice: 200,
     description: "new stock",
     stock: 10000,
+    buyingPrice: 2900,
+    isReturnable: false,
     sellingPrice: 12000,
     packaging: "box",
-    category: "goods",
+    category: "groceries",
+    supplier: "mayanjadjk",
+    image: undefined,
   },
   {
     _id: "5",
-    name: "chalk",
-    currency: "ksh",
+    name: "chalked",
+    buyingCurrency: "ugx",
+    sellingCurrency: "ksh",
+    sellingPrice: 300,
+    buyingprice: 200,
+    buyingPrice: 9002,
     description: "new stock",
     stock: 10000,
-    sellingPrice: 12000,
+    supplier: "mayanjall",
+    isReturnable: true,
     packaging: "box",
-    category: "items",
+    category: "stationery",
+    image: undefined,
   },
   {
     _id: "6",
     name: "chalk",
-    currency: "ksh",
+    buyingCurrency: "ugx",
+    sellingCurrency: "usd",
+    buyingprice: 200,
+    supplier: "mayaeenja",
     description: "new stock",
     stock: 10000,
+    buyingPrice: 3900,
     sellingPrice: 12000,
+    isReturnable: true,
     packaging: "box",
-    category: "goods",
+    category: "food",
+    image: undefined,
   },
   {
     _id: "7",
     name: "chalk",
-    currency: "ksh",
+    buyingCurrency: "ugx",
+    sellingCurrency: "ugx",
+    buyingprice: 200,
     description: "new stock",
     stock: 10000,
     sellingPrice: 12000,
+    isReturnable: false,
     packaging: "box",
-    category: "sta",
+    buyingPrice: 9400,
+    category: "stationery",
+    supplier: "mayanja",
+    image: undefined,
   },
   {
     _id: "8",
     name: "tv",
-    currency: "ksh",
+    buyingCurrency: "ugx",
+    sellingCurrency: "ugx",
+    buyingPrice: 3900,
+    buyingprice: 200,
     description: "new stock",
     stock: 10000,
     sellingPrice: 12000,
+    isReturnable: true,
     packaging: "box",
-    category: "sta",
+    category: "groceries",
+    supplier: "bafra",
+    image: undefined,
   },
   {
     _id: "9",
     name: "face",
-    currency: "ksh",
+    buyingCurrency: "ugx",
+    sellingCurrency: "ugx",
+    sellingPrice: 300,
+    buyingprice: 200,
+    buyingPrice: 900,
     description: "new stock",
     stock: 10000,
-    sellingPrice: 12000,
+    isReturnable: false,
     packaging: "box",
-    category: "sta",
+    category: "food",
+    supplier: "mayanja",
+    //  image:"",
   },
 ];
 
@@ -115,20 +154,27 @@ const initialValues = {
   description: "",
   categories: "",
   isReturnable: false,
-  stock: "0",
-  buyingPrice: "0",
-  sellingPrice: "90",
+  stock: 890,
+  buyingPrice: 0,
+  sellingPrice: 0,
   image: "",
   supplier: "",
   buyingCurrency: "ugx",
   sellingCurrency: "ugx",
 };
+
+const categories = [
+  { title: "Choose Category  *", value: "", id: "0" },
+  { title: "food", value: "food", id: "09" },
+  { title: "groceries", value: "groceries", id: "80" },
+  { title: "stationery", value: "stationery", id: "090" },
+];
 const store = stock;
 const categoriesStore = categories;
 const stockSlice = createSlice({
   name: "stock",
   initialState: {
-    stock: store,
+    availableStock: store,
     loading: false,
     initialValues,
     displaySearchBar: store.length === 0 ? false : true,
@@ -144,10 +190,10 @@ const stockSlice = createSlice({
     filterStock(state, action: PayloadAction<string>) {
       state.infoMsg = "";
       if (action.payload === "") {
-        state.stock = store;
+        state.availableStock = store;
       } else {
-        state.stock = store;
-        const searchResult = state.stock.filter(
+        state.availableStock = store;
+        const searchResult = state.availableStock.filter(
           (el) =>
             el.category.includes(action.payload) ||
             el.name.includes(action.payload)
@@ -157,7 +203,7 @@ const stockSlice = createSlice({
         } else {
           state.infoMsg = `There is no result for the search ${action.payload}`;
         }
-        state.stock = searchResult;
+        state.availableStock = searchResult;
       }
     },
     filterCategories(state, action: PayloadAction<string>) {

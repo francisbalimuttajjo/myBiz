@@ -12,6 +12,7 @@ import NewCategory from "./screens/NewCategory";
 import Camera from "./screens/Image";
 import NewExpense from "./screens/NewExpense";
 import CategoriesEdit from "./screens/EditCategories";
+import EditStock from "./screens/EditStock";
 import BottomTabs from "./BottomTabs";
 
 export type mainStackParams = {
@@ -24,6 +25,7 @@ export type mainStackParams = {
   Expenses: undefined;
   Expense: undefined;
   Category: undefined;
+  editStock: undefined;
   camera: undefined;
   categoriesEdit: { item: { title: undefined; id: undefined } };
   Details: {
@@ -51,6 +53,11 @@ const DetailsScreens = () => {
             },
           }}
         >
+          <Stack.Screen
+            name="editStock"
+            component={EditStock}
+            options={{ headerShown: false }}
+          />
           <Stack.Screen
             name="Stock"
             component={Stock}

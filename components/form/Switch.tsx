@@ -1,14 +1,15 @@
 import { useFormikContext } from "formik";
 import React from "react";
 import { StyleSheet, Switch, Text, View } from "react-native";
-
-const SwitchComponent = () => {
+type Props = {
+  isEnabled: boolean;
+  toggleSwitch: () => void;
+};
+const SwitchComponent: React.FC<Props> = ({ isEnabled, toggleSwitch }) => {
   const { setFieldValue } = useFormikContext();
-  const [isEnabled, setIsEnabled] = React.useState(false);
-
-  const toggleSwitch = () => {
-    setIsEnabled((previousState) => !previousState);
+  const change = () => {
     setFieldValue("isReturnable", !isEnabled);
+    toggleSwitch();
   };
   return (
     <View style={styles.container}>
@@ -17,7 +18,7 @@ const SwitchComponent = () => {
         trackColor={{ false: "#767577", true: "#81b0ff" }}
         thumbColor={isEnabled ? "skyblue" : "#f4f3f4"}
         ios_backgroundColor="#3e3e3e"
-        onValueChange={toggleSwitch}
+        onValueChange={change}
         value={isEnabled}
       />
       <Text>{isEnabled ? "Yes" : "No"} </Text>

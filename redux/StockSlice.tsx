@@ -132,6 +132,7 @@ const stockSlice = createSlice({
     loading: false,
     initialValues,
     displaySearchBar: store.length === 0 ? false : true,
+    displayCategoriesSearchBar: categoriesStore.length === 0 ? false : true,
     infoMsg: "",
     categories: categoriesStore,
   },

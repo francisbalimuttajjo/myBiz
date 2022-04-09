@@ -1,54 +1,29 @@
 import React from "react";
-import {
-  Text,
-  View,
-  ScrollView,
-  Keyboard,
-  StyleSheet,
-  TouchableOpacity,
-} from "react-native";
+import { View, StyleSheet } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import { Formik, Field } from "formik";
 import Button from "../components/Button";
 import Search from "../components/Search";
 import AppFormField from "../form/InputComponent";
 import CategoryItem from "./Category";
-import * as Yup from "yup";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../redux/Store";
-import { filterCategories } from "../../redux/StockSlice";
-
-const validationSchema = Yup.object().shape({
-  category: Yup.string().trim().required("field is required").label("category"),
-});
+import useFns from "./useFns";
 
 const initialValues = {
   category: "",
 };
 
 const Add = () => {
-    const dispatch= useDispatch();
-  const [clicked, setClicked] = React.useState(false);
-  const [searchPhrase, setSearchPhrase] = React.useState("");
-  console.log({ searchPhrase });
+  const {
+    validationSchema,
+    categories,
+    displayCategoriesSearchBar,
+    clearSearchField,
+    handleClicked,
+    handleChange,
+    clicked,
+    searchPhrase,
+  } = useFns();
 
-  const handleChange = (val: string) => {
-    setSearchPhrase(val);
-     dispatch(filterCategories(val));
-  };
-  const handleClicked = () => setClicked(true);
-
-  const clearSearchField = () => {
-    setSearchPhrase("");
-    Keyboard.dismiss();
-    setClicked(false);
-     dispatch(filterCategories(""));
-  };
-
-
-   const { categories} = useSelector(
-    (state: RootState) => state.stock
-  );
   return (
     <Formik
       initialValues={initialValues}
@@ -67,7 +42,7 @@ const Add = () => {
                 required
               />
             </View>
-            {/* {data.length > 0 && ( */}
+            {displayCategoriesSearchBar && (
               <Search
                 searchPhrase={searchPhrase}
                 clearSearchField={clearSearchField}
@@ -76,7 +51,7 @@ const Add = () => {
                 handleClicked={handleClicked}
                 placeholder="Search Categories"
               />
-            {/* )} */}
+            )}
             <FlatList
               style={styles.flatList}
               data={categories}

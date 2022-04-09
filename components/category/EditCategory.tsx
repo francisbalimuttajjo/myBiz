@@ -1,27 +1,13 @@
-import { useNavigation } from "@react-navigation/native";
 import { Text, View, StyleSheet, TouchableOpacity } from "react-native";
 import Ionicon from "react-native-vector-icons/Ionicons";
-type Item = {
-  title: string;
-  id: string;
-};
 type Props = {
-  item: Item;
+  item: { title?: string; id?: string };
 };
-type NavigationProps = {
-  navigate: (route: string, params: { item: Item }) => void;
-};
+
 const Category = (props: Props) => {
-  const { navigate } = useNavigation<NavigationProps>();
   return (
     <View style={styles.list_item}>
-      <Text style={styles.title}>{props.item.title}</Text>
-      <TouchableOpacity
-        onPress={() => navigate("categoriesEdit", { item: props.item })}
-        style={styles.icon}
-      >
-        <Ionicon name="pencil" size={25} color="skyblue" />
-      </TouchableOpacity>
+      <Text style={styles.title}>Edit {props.item.title}</Text>
     </View>
   );
 };

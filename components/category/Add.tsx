@@ -22,6 +22,7 @@ const Add = () => {
     handleChange,
     clicked,
     searchPhrase,
+    infoMsg,
   } = useFns();
 
   return (
@@ -44,6 +45,7 @@ const Add = () => {
             </View>
             {displayCategoriesSearchBar && (
               <Search
+                infoMsg={infoMsg}
                 searchPhrase={searchPhrase}
                 clearSearchField={clearSearchField}
                 clicked={clicked}

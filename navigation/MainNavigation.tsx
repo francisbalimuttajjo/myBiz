@@ -64,15 +64,11 @@ const DetailsScreens = () => {
           <Stack.Screen
             name="categoriesEdit"
             component={CategoriesEdit}
-            options={{
-              title: "Edit Category",
-            }}
+            options={({ route }) => ({
+              title: ` Edit ${route.params.item.title} `,
+            })}
           />
 
-          <Stack.Screen name="CreditBook" component={CreditBook} />
-          <Stack.Screen name="CashBook" component={CashBook} />
-          <Stack.Screen name="Expenses" component={Expenses} />
-          <Stack.Screen name="Sales" component={Sales} />
           <Stack.Screen
             name="New"
             component={AddNew}
@@ -90,6 +86,10 @@ const DetailsScreens = () => {
           <Stack.Screen name="Expense" component={NewExpense} />
           <Stack.Screen name="Details" component={Details} />
           <Stack.Screen name="Purchases" component={Purchases} />
+          <Stack.Screen name="CreditBook" component={CreditBook} />
+          <Stack.Screen name="CashBook" component={CashBook} />
+          <Stack.Screen name="Expenses" component={Expenses} />
+          <Stack.Screen name="Sales" component={Sales} />
         </Stack.Group>
       </Stack.Navigator>
     </NavigationContainer>

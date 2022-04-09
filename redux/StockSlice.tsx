@@ -161,6 +161,7 @@ const stockSlice = createSlice({
       }
     },
     filterCategories(state, action: PayloadAction<string>) {
+      state.infoMsg = "";
       if (action.payload === "") {
         state.categories = categoriesStore;
       } else {
@@ -168,7 +169,9 @@ const stockSlice = createSlice({
         const searchResult = state.categories.filter((el) =>
           el.title.includes(action.payload)
         );
-
+        if (searchResult.length < 1) {
+          state.infoMsg = `Category ${action.payload} is not available`;
+        }
         state.categories = searchResult;
       }
     },

@@ -9,7 +9,7 @@ type Props = {
   searchPhrase: string;
   placeholder: string;
   clearSearchField: () => void;
-  infoMsg?: string;
+  infoMsg: string;
 };
 
 const SearchBar: React.FC<Props> = (props) => {

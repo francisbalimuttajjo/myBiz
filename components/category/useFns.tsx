@@ -23,7 +23,7 @@ const UseFns = () => {
     dispatch(filterCategories(""));
   };
 
-  const { categories, displayCategoriesSearchBar } = useSelector(
+  const { categories, displayCategoriesSearchBar,infoMsg } = useSelector(
     (state: RootState) => state.stock
   );
 
@@ -42,6 +42,7 @@ const UseFns = () => {
     handleChange,
     clicked,
     searchPhrase,
+    infoMsg
   };
 };
 

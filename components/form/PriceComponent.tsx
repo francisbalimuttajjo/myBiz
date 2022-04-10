@@ -23,7 +23,7 @@ type Props = {
   title: string;
   error?: string;
   currency: string;
-  price: number;
+  price: number | string;
   setPrice: (val: number) => void;
 };
 const PriceComponent: React.FC<Props> = (props) => {

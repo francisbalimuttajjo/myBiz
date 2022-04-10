@@ -1,4 +1,3 @@
-import { useNavigation } from "@react-navigation/native";
 import React from "react";
 import {
   StyleSheet,
@@ -9,7 +8,7 @@ import {
   Pressable,
 } from "react-native";
 import Ionicon from "react-native-vector-icons/Ionicons";
-
+import useFns from "./useDeleteFns";
 export type Props = {
   item: {
     _id: string;
@@ -24,11 +23,11 @@ export type Props = {
   };
 };
 
-type NavigationProps = {
-  navigate: (route: string, params?: { id: string }) => void;
-};
 const Item: React.FC<Props> = (props) => {
-  const { navigate } = useNavigation<NavigationProps>();
+  const { navigate, createAlert, confirmDelete } = useFns();
+  if (confirmDelete) {
+    console.log("deleted");
+  }
   return (
     <View style={styles.mainContainer}>
       <TouchableOpacity
@@ -82,10 +81,7 @@ const Item: React.FC<Props> = (props) => {
               <Ionicon name="pencil" size={20} color="skyblue" />
             </TouchableOpacity>
           </View>
-          <TouchableOpacity
-            activeOpacity={0.7}
-            onPress={() => console.log("deleting")}
-          >
+          <TouchableOpacity activeOpacity={0.7} onPress={createAlert}>
             <Ionicon name="trash-outline" size={20} color="skyblue" />
           </TouchableOpacity>
         </View>

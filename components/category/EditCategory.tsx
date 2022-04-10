@@ -27,8 +27,8 @@ const Category = (props: Props) => {
                 component={AppFormField}
                 name="category"
                 placeholder="Edit Category Name"
-                title="New Category"
-                required
+                title="Edit Name"
+                
               />
             </View>
             <TouchableOpacity

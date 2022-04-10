@@ -17,9 +17,9 @@ type Props = {
     categories: string;
     supplier: string;
     image?: string;
-    sellingPrice: number;
-    buyingPrice: number;
-    stock: number;
+    sellingPrice: number |string;
+    buyingPrice: number | string;
+    stock: number|string;
     name: string;
     description: string;
     isReturnable: boolean;

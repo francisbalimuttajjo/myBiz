@@ -6,7 +6,7 @@ import StockComponent from '../../components/stock/Stock'
 const Stock = () => {
   return (
    <SafeAreaProvider>
-      <SafeAreaView>   
+      <SafeAreaView style={{flex:1}}>   
         <StockComponent />
       </SafeAreaView>
      </SafeAreaProvider>

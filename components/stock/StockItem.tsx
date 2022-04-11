@@ -12,14 +12,17 @@ import useFns from "./useDeleteFns";
 export type Props = {
   item: {
     _id: string;
-    image: string;
+    image?: string;
     name: string;
     sellingCurrency: string;
+    buyingCurrency: string;
     description: string;
-    stock: number;
-    sellingPrice: number;
+    stock: number | string;
+    sellingPrice: number | string;
+    buyingPrice: number | string;
     packaging: string;
     category: string;
+    supplier: string;
   };
 };
 
@@ -31,7 +34,7 @@ const Item: React.FC<Props> = (props) => {
   return (
     <View style={styles.mainContainer}>
       <TouchableOpacity
-        onPress={() => navigate("Details", { id: props.item._id })}
+        onPress={() => navigate("editStock", { id: props.item._id })}
         activeOpacity={0.9}
         style={styles.container}
       >

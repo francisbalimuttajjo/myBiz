@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { View } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/Store";
@@ -13,7 +13,7 @@ const StockList = () => {
   );
 
   return (
-    <View style={styles.container}>
+    <View>
       {availableStock.length < 1 && !loading && (
         <View>
           <EmptyNotification title=" Start Adding stock by tapping the +Add Item" />
@@ -22,7 +22,7 @@ const StockList = () => {
       {loading && <LoadingComponent />}
       {availableStock.length > 0 && !loading && (
         <FlatList
-          style={styles.flatList}
+          contentContainerStyle={{ paddingBottom: "80%", marginTop: "5%" }}
           data={availableStock}
           renderItem={(item) => <StockComponent item={item.item} />}
           keyExtractor={(item) => item._id}
@@ -33,18 +33,3 @@ const StockList = () => {
 };
 
 export default StockList;
-const styles = StyleSheet.create({
-  container: {
-    display: "flex",
-    flexDirection: "row",
-    // paddingTop:-20,
-    height: 500,
-    paddingBottom: 60,
-  },
-  flatList: {
-    width: "100%",
-    borderWidth: 1,
-    borderColor: "#e0e1e2",
-    flex: 1,
-  },
-});

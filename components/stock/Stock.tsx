@@ -31,7 +31,7 @@ const Stock = () => {
     return unsubscribe;
   }, [navigation]);
   return (
-    <View>
+    <View style={{flex:1}}>
       <View>
         <Logo />
         <Banner />
@@ -54,8 +54,8 @@ const Stock = () => {
             handleClicked={handleClicked}
           />
         )}
-        <StockList />
       </View>
+      <StockList />
     </View>
   );
 };

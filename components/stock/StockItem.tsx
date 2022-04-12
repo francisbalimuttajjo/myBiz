@@ -8,6 +8,8 @@ import {
   Pressable,
 } from "react-native";
 import Ionicon from "react-native-vector-icons/Ionicons";
+import { useDispatch } from "react-redux";
+import { changeToEditing } from "../../redux/StockSlice";
 import useFns from "./useDeleteFns";
 export type Props = {
   item: {
@@ -28,13 +30,18 @@ export type Props = {
 
 const Item: React.FC<Props> = (props) => {
   const { navigate, createAlert, confirmDelete } = useFns();
+  const dispatch = useDispatch();
   if (confirmDelete) {
     console.log("deleted");
   }
+  const handleEditing = () => {
+    dispatch(changeToEditing({ id: props.item._id }));
+    navigate("editStock", { id: props.item._id });
+  };
   return (
     <View style={styles.mainContainer}>
       <TouchableOpacity
-        onPress={() => navigate("editStock", { id: props.item._id })}
+        onPress={handleEditing}
         activeOpacity={0.9}
         style={styles.container}
       >
@@ -77,10 +84,7 @@ const Item: React.FC<Props> = (props) => {
 
         <View style={styles.icon_container}>
           <View style={{ marginRight: 10 }}>
-            <TouchableOpacity
-              activeOpacity={0.7}
-              onPress={() => navigate("editStock", { id: props.item._id })}
-            >
+            <TouchableOpacity activeOpacity={0.7} onPress={handleEditing}>
               <Ionicon name="pencil" size={20} color="skyblue" />
             </TouchableOpacity>
           </View>

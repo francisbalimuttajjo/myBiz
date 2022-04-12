@@ -6,7 +6,10 @@ import { useNavigation } from "@react-navigation/native";
 type NavigationProps = {
   navigate: (route: string) => void;
 };
-const ImageComponent: React.FC<{ image: string | undefined }> = ({ image }) => {
+const ImageComponent: React.FC<{ image: string | undefined}> = ({
+  image,
+
+}) => {
   const navigation = useNavigation<NavigationProps>();
   return (
     <View>

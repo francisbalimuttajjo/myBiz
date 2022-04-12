@@ -1,4 +1,5 @@
-import Camera from "../../components/camera/Camera";
-export default function CameraComponent() {
-  return <Camera />;
+import CameraComponent from "../../components/camera/Camera";
+
+export default function CameraScreen() {
+  return <CameraComponent />;
 }

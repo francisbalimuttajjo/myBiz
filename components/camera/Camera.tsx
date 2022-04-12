@@ -10,10 +10,12 @@ import {
 import { Camera } from "expo-camera";
 import { Ionicons, MaterialIcons } from "@expo/vector-icons";
 import useCamera from "./useCamera";
-
 import Error from "../components/Error";
 
-export default function CameraComponent() {
+const CameraComponent = () => {
+ 
+  
+
   const {
     flipCamera,
     pickImage,
@@ -25,6 +27,7 @@ export default function CameraComponent() {
     type,
     loading,
     uploadImage,
+    setImage,
   } = useCamera();
 
   //seeking device permision
@@ -44,50 +47,61 @@ export default function CameraComponent() {
 
   return (
     <View style={styles.main_container}>
-      <View style={styles.container}>
-        <Camera
-          style={styles.camera}
-          type={type}
-          ratio={"1:1"}
-          ref={(ref) => setCamera(ref)}
-        >
-          <View style={styles.icon_container}>
-            <TouchableOpacity onPress={flipCamera}>
-              <MaterialIcons name="flip-camera-ios" size={30} color="white" />
-            </TouchableOpacity>
-          </View>
-          <View style={styles.bottom_container}>
-            <TouchableOpacity onPress={takePicture}>
-              <Ionicons name="camera" size={40} color="white" />
-            </TouchableOpacity>
-            <TouchableOpacity onPress={pickImage} style={styles.gallery}>
-              <Text style={{ color: "white" }}> Choose from Gallery </Text>
-            </TouchableOpacity>
-          </View>
-        </Camera>
-      </View>
-      {image && (
-        <View style={{ flex: 1 }}>
-          <ImageBackground
-            source={{ uri: image }}
-            resizeMode="cover"
-            style={styles.backrground_image}
+      {!image && (
+        <View style={styles.container}>
+          <Camera
+            style={styles.camera}
+            type={type}
+            ratio={"1:1"}
+            ref={(ref) => setCamera(ref)}
           >
-            <TouchableOpacity
-              activeOpacity={0.8}
-              onPress={uploadImage}
-              style={styles.save_container}
-              disabled={loading}
-            >
-              {!loading && <Text style={styles.save_text}> Save </Text>}
-              {loading && <ActivityIndicator size="small" color="skyblue" />}
-            </TouchableOpacity>
-          </ImageBackground>
+            <View style={styles.icon_container}>
+              <TouchableOpacity onPress={flipCamera}>
+                <MaterialIcons name="flip-camera-ios" size={30} color="white" />
+              </TouchableOpacity>
+            </View>
+            <View style={styles.bottom_container}>
+              <TouchableOpacity onPress={takePicture}>
+                <Ionicons name="camera" size={40} color="white" />
+              </TouchableOpacity>
+              <TouchableOpacity onPress={pickImage} style={styles.gallery}>
+                <Text style={{ color: "white" }}> Choose from Gallery </Text>
+              </TouchableOpacity>
+            </View>
+          </Camera>
         </View>
+      )}
+      {image && (
+        <ImageBackground
+          source={{ uri: image }}
+          style={styles.background_image}
+          imageStyle={{
+            resizeMode: "contain",
+          }}
+        >
+          <TouchableOpacity
+            activeOpacity={0.8}
+            onPress={uploadImage}
+            style={styles.save_container}
+            disabled={loading}
+          >
+            {!loading && <Text style={styles.save_text}> Save </Text>}
+            {loading && <ActivityIndicator size="small" color="white" />}
+          </TouchableOpacity>
+          <TouchableOpacity
+            activeOpacity={0.8}
+            disabled={loading}
+            style={styles.save_container}
+            onPress={() => setImage(null)}
+          >
+            <Text style={styles.save_text}>Retake</Text>
+          </TouchableOpacity>
+        </ImageBackground>
       )}
     </View>
   );
-}
+};
+export default CameraComponent;
 
 const styles = StyleSheet.create({
   container: {
@@ -96,7 +110,7 @@ const styles = StyleSheet.create({
   },
   save_container: {
     borderRadius: 20,
-    backgroundColor: "#fff",
+    backgroundColor: "skyblue",
     width: 80,
     height: 40,
     justifyContent: "center",
@@ -110,10 +124,14 @@ const styles = StyleSheet.create({
   main_container: {
     flex: 1,
   },
-  backrground_image: {
+  background_image: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+    paddingBottom: "10%",
+    width: "100%",
+    height: "100%",
+    flexDirection: "row",
+    justifyContent: "space-around",
+    alignItems: "flex-end",
   },
   gallery: { alignSelf: "center", marginHorizontal: 60 },
   bottom_container: {
@@ -124,7 +142,7 @@ const styles = StyleSheet.create({
   },
   camera: { aspectRatio: 1 },
   save_text: {
-    color: "black",
+    color: "white",
     fontWeight: "bold",
     fontSize: 20,
   },

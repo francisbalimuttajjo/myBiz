@@ -26,7 +26,7 @@ export type mainStackParams = {
   Expense: undefined;
   Category: undefined;
   editStock: undefined;
-  camera: undefined;
+  camera:  undefined ;
   categoriesEdit: { item: { title: undefined; id: undefined } };
   Details: {
     id: undefined;

@@ -9,10 +9,10 @@ const stock = [
     name: "pencils",
     buyingCurrency: "usd",
     sellingCurrency: "ksh",
-    buyingPrice: '900',
-    sellingPrice: '300',   
+    buyingPrice: "900",
+    sellingPrice: "300",
     description: "the latest chinese brabd",
-    stock: '300',
+    stock: "300",
     supplier: "mayadnja",
     isReturnable: true,
     packaging: "one",
@@ -23,11 +23,11 @@ const stock = [
     name: "books",
     buyingCurrency: "ugx",
     sellingCurrency: "ugx",
-    sellingPrice: '300',
-    image: undefined,  
+    sellingPrice: "300",
+    image: undefined,
     description: "the latest chinese brabd",
-    stock: '100',
-    buyingPrice: '9200',
+    stock: "100",
+    buyingPrice: "9200",
     isReturnable: false,
     packaging: "dozens",
     supplier: "mayansssja",
@@ -39,10 +39,10 @@ const stock = [
     supplier: "mayssanja",
     buyingCurrency: "ugx",
     sellingCurrency: "usd",
-    sellingPrice: '30090',
-    buyingPrice: '90',
+    sellingPrice: "30090",
+    buyingPrice: "90",
     description: "new stock",
-    stock: '10000',
+    stock: "10000",
     isReturnable: false,
     image,
     packaging: "box",
@@ -52,12 +52,12 @@ const stock = [
     _id: "4",
     name: "chalkie",
     buyingCurrency: "ksh",
-    sellingCurrency: "ugx",   
+    sellingCurrency: "ugx",
     description: "new stock",
-    stock: '10000',
-    buyingPrice: '2900',
+    stock: "10000",
+    buyingPrice: "2900",
     isReturnable: false,
-    sellingPrice: '12000',
+    sellingPrice: "12000",
     packaging: "box",
     category: "groceries",
     supplier: "mayanjadjk",
@@ -68,11 +68,11 @@ const stock = [
     name: "chalked",
     buyingCurrency: "ugx",
     sellingCurrency: "ksh",
-    sellingPrice: '300',
+    sellingPrice: "300",
 
-    buyingPrice: '9002',
+    buyingPrice: "9002",
     description: "new stock",
-    stock: '10000',
+    stock: "10000",
     supplier: "mayanjall",
     isReturnable: true,
     packaging: "box",
@@ -84,12 +84,12 @@ const stock = [
     name: "chalk",
     buyingCurrency: "ugx",
     sellingCurrency: "usd",
-   
+
     supplier: "mayaeenja",
     description: "new stock",
-    stock: '10000',
-    buyingPrice:' 3900',
-    sellingPrice: '12000',
+    stock: "10000",
+    buyingPrice: " 3900",
+    sellingPrice: "12000",
     isReturnable: true,
     packaging: "box",
     category: "food",
@@ -101,11 +101,11 @@ const stock = [
     buyingCurrency: "ugx",
     sellingCurrency: "ugx",
     description: "new stock",
-    stock: '10000',
-    sellingPrice: '12000',
+    stock: "10000",
+    sellingPrice: "12000",
     isReturnable: false,
     packaging: "box",
-    buyingPrice: '9400',
+    buyingPrice: "9400",
     category: "stationery",
     supplier: "mayanja",
     image: undefined,
@@ -115,11 +115,11 @@ const stock = [
     name: "tv",
     buyingCurrency: "ugx",
     sellingCurrency: "ugx",
-    buyingPrice: '3900',
-    
+    buyingPrice: "3900",
+
     description: "new stock",
-    stock: '190000',
-    sellingPrice: '12000',
+    stock: "190000",
+    sellingPrice: "12000",
     isReturnable: true,
     packaging: "box",
     category: "groceries",
@@ -131,11 +131,11 @@ const stock = [
     name: "face",
     buyingCurrency: "ugx",
     sellingCurrency: "ugx",
-    sellingPrice: '300',
-   
-    buyingPrice: '900',
+    sellingPrice: "300",
+
+    buyingPrice: "900",
     description: "new stock",
-    stock: '1300',
+    stock: "1300",
     isReturnable: false,
     packaging: "box",
     category: "food",
@@ -149,9 +149,9 @@ const initialValues = {
   description: "",
   categories: "",
   isReturnable: false,
-  stock: '0',
-  buyingPrice: '0',
-  sellingPrice: '0',
+  stock: "0",
+  buyingPrice: "0",
+  sellingPrice: "0",
   image: "",
   supplier: "",
   buyingCurrency: "ugx",
@@ -176,12 +176,30 @@ const stockSlice = createSlice({
     displayCategoriesSearchBar: categoriesStore.length === 0 ? false : true,
     infoMsg: "",
     categories: categoriesStore,
+    isEditing: false,
+    editable: "",
   },
   reducers: {
     //filterStock(state, action: PayloadAction<string>) {
-    addImage(state, action: PayloadAction<string>) {
-      state.initialValues.image = action.payload;
+    addImage(state, action: PayloadAction<{ image: string }>) {
+      state.initialValues.image = action.payload.image;
     },
+    editImage(state, action: PayloadAction<{ id: string; url: string }>) {
+      const index = state.availableStock.findIndex(
+        (el) => el._id === action.payload.id
+      );
+      state.availableStock[index].image = action.payload.url;
+    },
+
+    changeToEditing(state, action: PayloadAction<{ id: string }>) {
+      state.isEditing = true;
+      state.editable = action.payload.id;
+    },
+    disableEditing(state) {
+      state.isEditing = false;
+      state.editable = "";
+    },
+
     filterStock(state, action: PayloadAction<string>) {
       state.infoMsg = "";
       if (action.payload === "") {
@@ -219,5 +237,12 @@ const stockSlice = createSlice({
   },
 });
 
-export const { filterStock, addImage, filterCategories } = stockSlice.actions;
+export const {
+  filterStock,
+  addImage,
+  filterCategories,
+  changeToEditing,
+  disableEditing,
+  editImage,
+} = stockSlice.actions;
 export default stockSlice.reducer;

@@ -54,10 +54,7 @@ const Item: React.FC<Props> = (props) => {
               }}
             />
           ) : (
-            <Pressable
-              onPress={() => console.log("image clicked")}
-              style={styles.icon}
-            >
+            <Pressable onPress={handleEditing} style={styles.icon}>
               <Ionicon name="camera-outline" size={80} />
               <Text style={{ marginTop: -10 }}>No Image </Text>
             </Pressable>

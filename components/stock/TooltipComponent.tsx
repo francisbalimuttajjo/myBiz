@@ -20,7 +20,7 @@ const TooltipComponent: React.FC<Props> = (props) => {
         showChildInTooltip={false}
         arrowSize={{ width: 16, height: 24 }}
         isVisible={props.visible}
-        content={<AddItemsComponent />}
+        content={<AddItemsComponent hideToolKit={props.closeToolTip} />}
         placement="bottom"
         onClose={props.closeToolTip}
       >

@@ -13,9 +13,6 @@ import useCamera from "./useCamera";
 import Error from "../components/Error";
 
 const CameraComponent = () => {
- 
-  
-
   const {
     flipCamera,
     pickImage,
@@ -28,6 +25,7 @@ const CameraComponent = () => {
     loading,
     uploadImage,
     setImage,
+    isFocused,
   } = useCamera();
 
   //seeking device permision
@@ -47,7 +45,7 @@ const CameraComponent = () => {
 
   return (
     <View style={styles.main_container}>
-      {!image && (
+      {!image && isFocused && (
         <View style={styles.container}>
           <Camera
             style={styles.camera}

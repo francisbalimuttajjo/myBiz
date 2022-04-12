@@ -1,13 +1,21 @@
 import { useNavigation } from "@react-navigation/native";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import React from "react";
 import { StyleSheet } from "react-native";
 import { Text, View, TouchableOpacity } from "react-native";
 import Ionicon from "react-native-vector-icons/Ionicons";
 
-const AddItems = () => {
-  const navigation = useNavigation<NativeStackNavigationProp<any>>();
-  const handleNavigation = (url: string) => navigation.navigate(url);
+type NavigationProps = {
+  navigate: (a: string) => void;
+};
+type Props = {
+  hideToolKit: () => void;
+};
+const AddItems = (props: Props) => {
+  const navigation = useNavigation<NavigationProps>();
+  const handleNavigation = (url: string) => {
+    props.hideToolKit();
+    navigation.navigate(url);
+  };
 
   return (
     <View style={styles.mainContainer}>

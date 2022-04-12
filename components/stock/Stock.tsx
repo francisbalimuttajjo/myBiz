@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet,  View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import Tooltip from "./TooltipComponent";
 import Logo from "../components/Logo";
 import Banner from "../components/Banner";
@@ -7,7 +7,6 @@ import HeadingComponent from "../components/Heading";
 import useFns from "./useFns";
 import StockList from "./StockList";
 import Search from "../components/Search";
-
 
 const Stock = () => {
   const {
@@ -22,16 +21,16 @@ const Stock = () => {
     handleChange,
     clearSearchField,
     displaySearchBar,
-    loading
+    loading,
   } = useFns();
- 
+
   //
   React.useEffect(() => {
     const unsubscribe = navigation.addListener("focus", () => hideToolKit());
     return unsubscribe;
   }, [navigation]);
   return (
-    <View style={{flex:1}}>
+    <View style={{ flex: 1 }}>
       <View>
         <Logo />
         <Banner />

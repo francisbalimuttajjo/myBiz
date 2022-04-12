@@ -24,6 +24,7 @@ const UseCamera = () => {
   const navigation = useNavigation<NavigationProps>();
   const { user } = useSelector((state: RootState) => state.user);
   const { editable } = useSelector((state: RootState) => state.stock);
+  const [isFocused, setIsFocused] = useState(true);
 
   const takePicture = async () => {
     if (camera) {
@@ -33,6 +34,7 @@ const UseCamera = () => {
   };
 
   const pickImage = async () => {
+    setIsFocused(false);
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
       allowsEditing: true,
@@ -52,6 +54,7 @@ const UseCamera = () => {
         : Camera.Constants.Type.back
     );
   };
+  //initializing firebase
 
   initializeApp(firebaseConfig);
 
@@ -66,7 +69,6 @@ const UseCamera = () => {
     const img = await fetch(image);
 
     const convertedImage = await img.blob();
-    console.log({ isEditing });
 
     uploadBytes(reference, convertedImage).then(() =>
       getDownloadURL(reference).then((url) => {
@@ -93,6 +95,7 @@ const UseCamera = () => {
     type,
     loading,
     uploadImage,
+    isFocused,
     setImage,
   };
 };

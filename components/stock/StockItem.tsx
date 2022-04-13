@@ -39,13 +39,13 @@ const Item: React.FC<Props> = (props) => {
     <View style={styles.mainContainer}>
       <TouchableOpacity
         onPress={() => props.handlePress(props.item._id)}
-        activeOpacity={0.9}
+        activeOpacity={0.6}
         style={styles.container}
       >
-        <View style={{ ...styles.icon, width: "30%" }}>
+        <View style={{ ...styles.icon, width: "30%"}}>
           {props.item.image ? (
             <Image
-              style={styles.image}
+              style={{ ...styles.image,marginLeft:props.cartItem ? -20:10  }}
               source={{
                 uri: props.item.image,
               }}
@@ -159,6 +159,6 @@ const styles = StyleSheet.create({
     width: 100,
     height: 110,
     borderRadius: 10,
-    marginLeft: 6,
+  
   },
 });

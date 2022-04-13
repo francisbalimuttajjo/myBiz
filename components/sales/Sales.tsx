@@ -1,5 +1,6 @@
 import React from "react";
 import { FlatList, View } from "react-native";
+import { SafeAreaView, SafeAreaProvider } from "react-native-safe-area-context";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../redux/Store";
 import { addToCart } from "../../redux/StockSlice";
@@ -13,24 +14,30 @@ const Sales = () => {
   const { availableStock, loading } = useSelector(
     (state: RootState) => state.stock
   );
-    const handlePress = (val: string) => {
-      console.log('clicked')
+  const handlePress = (val: string) => {
+    console.log("clicked");
     dispatch(addToCart({ id: val }));
   };
   return (
-    <View style={{ flex: 1 }}>
-      <Logo />
-      <Banner />
-      <BadgeComponent />
-      <FlatList
-        contentContainerStyle={{ paddingBottom: "80%", marginTop: "5%" }}
-        data={availableStock}
-        renderItem={(item) => (
-          <StockComponent item={item.item} handlePress={handlePress} cartItem />
-        )}
-        keyExtractor={(item) => item._id}
-      />
-    </View>
+    <SafeAreaProvider>
+      <SafeAreaView>
+        <Logo />
+        <Banner />
+        <BadgeComponent />
+        <FlatList
+          contentContainerStyle={{ paddingBottom: "80%", marginTop: "5%" }}
+          data={availableStock}
+          renderItem={(item) => (
+            <StockComponent
+              item={item.item}
+              handlePress={handlePress}
+              cartItem
+            />
+          )}
+          keyExtractor={(item) => item._id}
+        />
+      </SafeAreaView>
+    </SafeAreaProvider>
   );
 };
 export default Sales;

@@ -26,7 +26,7 @@ export type mainStackParams = {
   Expense: undefined;
   Category: undefined;
   editStock: undefined;
-  camera:  undefined ;
+  camera: undefined;
   categoriesEdit: { item: { title: undefined; id: undefined } };
   Details: {
     id: undefined;
@@ -90,13 +90,17 @@ const DetailsScreens = () => {
               title: " Add New Category",
             }}
           />
+          <Stack.Screen
+            name="Sales"
+            component={Sales}
+            options={{ headerShown: false }}
+          />
           <Stack.Screen name="Expense" component={NewExpense} />
           <Stack.Screen name="Details" component={Details} />
           <Stack.Screen name="Purchases" component={Purchases} />
           <Stack.Screen name="CreditBook" component={CreditBook} />
           <Stack.Screen name="CashBook" component={CashBook} />
           <Stack.Screen name="Expenses" component={Expenses} />
-          <Stack.Screen name="Sales" component={Sales} />
         </Stack.Group>
       </Stack.Navigator>
     </NavigationContainer>

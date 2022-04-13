@@ -145,9 +145,10 @@ const stock = [
 ];
 
 const initialValues = {
+  _id: "",
   name: "",
   description: "",
-  categories: "",
+  category: "",
   isReturnable: false,
   stock: "0",
   buyingPrice: "0",
@@ -156,6 +157,7 @@ const initialValues = {
   supplier: "",
   buyingCurrency: "ugx",
   sellingCurrency: "ugx",
+  packaging: "",
 };
 
 const categories = [
@@ -169,8 +171,8 @@ const categoriesStore = categories;
 const stockSlice = createSlice({
   name: "stock",
   initialState: {
-    availableStock: store,
-    loading: false,
+    availableStock:store,
+    loading:false,
     cart: [],
     initialValues,
     displaySearchBar: store.length === 0 ? false : true,

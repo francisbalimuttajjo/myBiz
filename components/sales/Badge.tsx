@@ -35,7 +35,7 @@ const Badge = () => {
         >
           <Ionicon name="cart-outline" size={35} color="skyblue" />
           <View style={styles.badge}>
-            <Text style={styles.badge_text}>{cart.length}</Text>
+            <Text style={styles.badge_text}>{cart.length} </Text>
           </View>
         </TouchableOpacity>
       </View>

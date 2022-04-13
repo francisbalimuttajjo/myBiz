@@ -2,10 +2,7 @@ import React from "react";
 import { StyleSheet, Text, View, Image } from "react-native";
 import Ionicon from "react-native-vector-icons/Ionicons";
 import Logo from "../components/Logo";
-
-export type Props = {
-  user: { firstName: string; lastName: string; imageSrc?: string };
-};
+import { HeaderProps as Props } from "../../types/types";
 
 const Header: React.FC<Props> = (props) => {
   return (

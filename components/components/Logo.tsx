@@ -1,16 +1,12 @@
 import Ionicon from "react-native-vector-icons/Ionicons";
 import { StyleSheet, Text, View } from "react-native";
 
-
 const Logo = () => {
   return (
-    <View
-     
-      style={styles.container}>
-      
+    <View style={styles.container}>
       <Ionicon name="cash-outline" size={40} color="skyblue" />
       <Text style={styles.text1}> My</Text>
-      <Text style={{ ...styles.text1,color:'skyblue' }}>Bizz</Text>
+      <Text style={{ ...styles.text1, color: "skyblue" }}>Bizz</Text>
     </View>
   );
 };
@@ -25,7 +21,7 @@ const styles = StyleSheet.create({
     paddingLeft: 12,
     alignItems: "center",
   },
-  
+
   text1: {
     fontWeight: "bold",
     fontSize: 24,

@@ -6,10 +6,10 @@ const validationSchema = Yup.object().shape({
     .min(1, "add buying price")
     .label("buyingPrice"),
   stock: Yup.number().required().min(1, "add stock").label("stock"),
-  categories: Yup.string()
+  category: Yup.string()
     .trim()
     .required("choose category")
-    .label("categories"),
+    .label("category"),
   description: Yup.string()
     .trim()
     .required("description is required")

@@ -1,10 +1,9 @@
 import { useFormikContext } from "formik";
 import React from "react";
 import { StyleSheet, Switch, Text, View } from "react-native";
-type Props = {
-  isEnabled: boolean;
-  toggleSwitch: () => void;
-};
+import { SwitchProps as Props } from "../../types/types";
+
+
 const SwitchComponent: React.FC<Props> = ({ isEnabled, toggleSwitch }) => {
   const { setFieldValue } = useFormikContext();
   const change = () => {

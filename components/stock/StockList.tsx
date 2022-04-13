@@ -1,5 +1,5 @@
 import React from "react";
-import { View } from "react-native";
+import { Text, View } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/Store";
@@ -11,7 +11,7 @@ import { changeToEditing } from "../../redux/StockSlice";
 import useFns from "./useDeleteFns";
 
 const StockList = () => {
-  const { availableStock, loading } = useSelector(
+  const { availableStock, loading,infoMsg } = useSelector(
     (state: RootState) => state.stock
   );
   const { navigate } = useFns();
@@ -21,11 +21,14 @@ const StockList = () => {
     navigate("editStock", { id: val });
   };
   return (
-    <View>
-      {availableStock.length < 1 && !loading && (
+    <View
+      //style={{ flex: 1 }}
+    >
+       {availableStock.length < 1 && !loading && !infoMsg && (
         <View>
-          <EmptyNotification title=" Start Adding stock by tapping the +Add Item" />
-        </View>
+      <EmptyNotification title=" Start Adding stock by tapping the +Add Item" />
+      
+       </View>
       )}
       {loading && <LoadingComponent />}
       {availableStock.length > 0 && !loading && (
@@ -37,7 +40,7 @@ const StockList = () => {
           )}
           keyExtractor={(item) => item._id}
         />
-      )}
+      )} 
     </View>
   );
 };

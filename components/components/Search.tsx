@@ -1,16 +1,7 @@
 import React from "react";
 import { StyleSheet, TextInput, View, Text } from "react-native";
 import { Feather, Entypo } from "@expo/vector-icons";
-
-type Props = {
-  clicked: boolean;
-  handleChange: (a: string) => void;
-  handleClicked: () => void;
-  searchPhrase: string;
-  placeholder: string;
-  clearSearchField: () => void;
-  infoMsg: string;
-};
+import { SearchProps as Props } from "../../types/types";
 
 const SearchBar: React.FC<Props> = (props) => {
   return (
@@ -73,7 +64,7 @@ const styles = StyleSheet.create({
     padding: 10,
     flexDirection: "row",
     width: "95%",
-   
+
     borderRadius: 40,
     alignItems: "center",
     borderWidth: 0.5,
@@ -83,7 +74,7 @@ const styles = StyleSheet.create({
     padding: 10,
     flexDirection: "row",
     width: "95%",
-    
+
     borderRadius: 40,
     alignItems: "center",
     justifyContent: "space-evenly",

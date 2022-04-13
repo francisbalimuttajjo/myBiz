@@ -14,25 +14,7 @@ import NewExpense from "./screens/NewExpense";
 import CategoriesEdit from "./screens/EditCategories";
 import EditStock from "./screens/EditStock";
 import BottomTabs from "./BottomTabs";
-
-export type mainStackParams = {
-  Stock: undefined;
-  CreditBook: undefined;
-  CashBook: undefined;
-  Purchases: undefined;
-  home: undefined;
-  Sales: undefined;
-  Expenses: undefined;
-  Expense: undefined;
-  Category: undefined;
-  editStock: undefined;
-  camera: undefined;
-  categoriesEdit: { item: { title: undefined; id: undefined } };
-  Details: {
-    id: undefined;
-  };
-  New: undefined;
-};
+import { mainStackParams } from "../types/types";
 
 const DetailsScreens = () => {
   const Stack = createStackNavigator<mainStackParams>();

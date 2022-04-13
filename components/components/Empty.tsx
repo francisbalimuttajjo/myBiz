@@ -4,7 +4,7 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 
 const EmptyList: React.FC<{ title: string }> = (props) => {
   return (
-    <View style={[styles.container, styles.horizontal]}>
+    <View style={styles.container}>
       <View style={styles.icon_container}>
         <View style={styles.icon}>
           <Ionicons name="information-circle-sharp" size={60} color="skyblue" />
@@ -18,15 +18,14 @@ const EmptyList: React.FC<{ title: string }> = (props) => {
 export default EmptyList;
 
 const styles = StyleSheet.create({
-  icon_container: { display: "flex", justifyContent: "center", marginLeft: 40 },
-  container: {
-    flex: 1,
+  icon_container: {
+    display: "flex",
     justifyContent: "center",
   },
-  icon: { justifyContent: "center", alignSelf: "center" },
-  horizontal: {
+  container: {
+    justifyContent: "center",
     flexDirection: "row",
-    justifyContent: "space-around",
-    padding: 10,
+    padding: "5%",
   },
+  icon: { justifyContent: "center", alignSelf: "center" },
 });

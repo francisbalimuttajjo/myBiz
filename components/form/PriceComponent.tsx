@@ -2,6 +2,7 @@ import React from "react";
 import { StyleSheet, Text, TextInput, View } from "react-native";
 import { Picker } from "@react-native-picker/picker";
 import { useFormikContext } from "formik";
+import { PriceComponentProps as Props } from "../../types/types";
 
 const currencies = [
   {
@@ -18,14 +19,6 @@ const currencies = [
   },
 ];
 
-type Props = {
-  required?: boolean;
-  title: string;
-  error?: string;
-  currency: string;
-  price: number | string;
-  setPrice: (val: number) => void;
-};
 const PriceComponent: React.FC<Props> = (props) => {
   const { setFieldValue } = useFormikContext();
   const [currency, setCurrency] = React.useState<string>();

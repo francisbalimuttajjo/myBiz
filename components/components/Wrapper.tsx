@@ -1,9 +1,8 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
+import {WrapperProps as Props} from '../../types/types'
 
-type Props = {
-  children: React.ReactNode;
-};
+
 const Wrapper: React.FC<Props> = (props) => {
   return <View style={styles.container}>{props.children}</View>;
 };

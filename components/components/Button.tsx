@@ -1,11 +1,8 @@
 import React from "react";
 import { ActivityIndicator, Pressable, StyleSheet, Text, TouchableOpacity } from "react-native";
+import {ButtonProps as Props} from '../../types/types'
 
-type Props = {
-  title: string;
-  submit: () => void;
-  loading: boolean;
-};
+
 const Supplier: React.FC<Props> = (props) => {
   return (
     <TouchableOpacity

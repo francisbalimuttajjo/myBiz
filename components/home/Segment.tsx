@@ -2,17 +2,8 @@ import React from "react";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import Ionicon from "react-native-vector-icons/Ionicons";
 import { useNavigation } from "@react-navigation/native";
+import { SegmentProps as Props, NavigationProps } from "../../types/types";
 
-export type Props = {
-  first_icon: string;
-  second_icon: string;
-  first_title: string;
-  second_title: string;
-};
-
-type NavigationProps = {
-  navigate: (route: string) => void;
-};
 const Segment: React.FC<Props> = (props) => {
   const navigation = useNavigation<NavigationProps>();
 

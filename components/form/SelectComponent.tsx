@@ -4,11 +4,7 @@ import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/Store";
-
-type Props = {
-  error?: string;
-  categoryValue: string;
-};
+import { SelectProps as Props } from "../../types/types";
 
 const SelectComponent = (props: Props) => {
   const { setFieldValue } = useFormikContext();
@@ -25,7 +21,7 @@ const SelectComponent = (props: Props) => {
       >
         <Picker
           onValueChange={(itemValue) => {
-            setFieldValue("categories", itemValue);
+            setFieldValue("category", itemValue);
             setCategory(itemValue);
           }}
           mode={"dropdown"}

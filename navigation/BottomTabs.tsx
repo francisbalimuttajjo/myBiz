@@ -1,4 +1,3 @@
-
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import HomeScreen from "./screens/Home";
 import ProfileScreen from "./screens/Profile";
@@ -6,13 +5,9 @@ import TransactionsScreen from "./screens/Transactions";
 import MoreScreen from "./screens/More";
 import { MainRoutes } from "../types/types";
 import Ionicons from "react-native-vector-icons/Ionicons";
+import {TabStackParams} from '../types/types'
 
-export type TabStackParams = { 
-    Home:undefined,
-    Profile:undefined,
-    Transactions:undefined,
-    More:undefined
- }
+
 
 const TabsContainer = () => {
   const Tab = createBottomTabNavigator<TabStackParams>();

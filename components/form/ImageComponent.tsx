@@ -2,14 +2,9 @@ import React from "react";
 import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 import Ionicon from "react-native-vector-icons/Ionicons";
 import { useNavigation } from "@react-navigation/native";
+import { NavigationProps } from "../../types/types";
 
-type NavigationProps = {
-  navigate: (route: string) => void;
-};
-const ImageComponent: React.FC<{ image: string | undefined}> = ({
-  image,
-
-}) => {
+const ImageComponent: React.FC<{ image: string | undefined }> = ({ image }) => {
   const navigation = useNavigation<NavigationProps>();
   return (
     <View>

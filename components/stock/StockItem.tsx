@@ -9,24 +9,8 @@ import {
 } from "react-native";
 import Ionicon from "react-native-vector-icons/Ionicons";
 import useFns from "./useDeleteFns";
-export type Props = {
-  item: {
-    _id: string;
-    image?: string;
-    name: string;
-    sellingCurrency: string;
-    buyingCurrency: string;
-    description: string;
-    stock: number | string;
-    sellingPrice: number | string;
-    buyingPrice: number | string;
-    packaging: string;
-    category: string;
-    supplier: string;
-  };
-  handlePress: (a: string) => void;
-  cartItem?: boolean;
-};
+import { StockItemProps as Props } from "../../types/types";
+
 
 const Item: React.FC<Props> = (props) => {
   const { createAlert, confirmDelete } = useFns();
@@ -42,10 +26,10 @@ const Item: React.FC<Props> = (props) => {
         activeOpacity={0.6}
         style={styles.container}
       >
-        <View style={{ ...styles.icon, width: "30%"}}>
+        <View style={{ ...styles.icon, width: "30%" }}>
           {props.item.image ? (
             <Image
-              style={{ ...styles.image,marginLeft:props.cartItem ? -20:10  }}
+              style={{ ...styles.image, marginLeft: props.cartItem ? -20 : 10 }}
               source={{
                 uri: props.item.image,
               }}
@@ -159,6 +143,5 @@ const styles = StyleSheet.create({
     width: 100,
     height: 110,
     borderRadius: 10,
-  
   },
 });

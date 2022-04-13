@@ -1,10 +1,8 @@
 import { useNavigation } from "@react-navigation/native";
 import React from "react";
 import { Alert } from "react-native";
+import { NavigationProps } from "../../types/types";
 
-type NavigationProps = {
-  navigate: (route: string, params?: { id: string }) => void;
-};
 const UseFns = () => {
   const { navigate } = useNavigation<NavigationProps>();
   const [confirmDelete, setConfirmDelete] = React.useState(false);

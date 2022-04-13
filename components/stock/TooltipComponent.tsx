@@ -4,12 +4,7 @@ import Tooltip from "react-native-walkthrough-tooltip";
 import Ionicon from "react-native-vector-icons/Ionicons";
 import AddItemsComponent from "./AddItems";
 import { TouchableOpacity } from "react-native-gesture-handler";
-
-interface Props {
-  openToolTip: () => void;
-  visible: boolean;
-  closeToolTip: () => void;
-}
+import { ToolTipProps as Props } from "../../types/types";
 
 const TooltipComponent: React.FC<Props> = (props) => {
   return (

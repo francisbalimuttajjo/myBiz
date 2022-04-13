@@ -1,13 +1,8 @@
 import { FieldProps } from "formik";
 import React from "react";
 import { StyleSheet, Text, TextInput, View } from "react-native";
+import {InputProps as Props} from '../../types/types'
 
-type Props = {
-  placeholder?: string;
-  title: string;
-  numeric?: boolean;
-  required?: boolean;
-};
 const AppFormField: React.FC<Props & FieldProps> = (props) => {
   const {
     placeholder,

@@ -3,7 +3,7 @@ import { SafeAreaView, SafeAreaProvider } from "react-native-safe-area-context";
 import Form from "../../components/form/NewStock";
 import { RootState } from "../../redux/Store";
 import type { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { mainStackParams } from "../MainNavigation";
+import { mainStackParams } from "../../types/types";
 
 type Props = NativeStackScreenProps<mainStackParams, "Details">;
 
@@ -22,12 +22,12 @@ const EditStock = ({ route, navigation }: Props) => {
     category,
     description,
     isReturnable,
+    _id,
   } = item;
-
 
   const initialValues = {
     sellingCurrency,
-    categories: category,
+    category,
     description,
     isReturnable,
     buyingCurrency,
@@ -37,6 +37,7 @@ const EditStock = ({ route, navigation }: Props) => {
     name,
     supplier,
     image,
+    _id,
   };
   return (
     <SafeAreaProvider>
@@ -44,7 +45,7 @@ const EditStock = ({ route, navigation }: Props) => {
         <Form
           initialValues={initialValues}
           btn_title="Edit"
-          categoryValue={initialValues.categories}
+          categoryValue={initialValues.category}
         />
       </SafeAreaView>
     </SafeAreaProvider>

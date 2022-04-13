@@ -3,15 +3,11 @@ import React from "react";
 import { StyleSheet } from "react-native";
 import { Text, View, TouchableOpacity } from "react-native";
 import Ionicon from "react-native-vector-icons/Ionicons";
+import { NavigationProps, ToolTipProps } from "../../types/types";
 
-type NavigationProps = {
-  navigate: (a: string) => void;
-};
-type Props = {
-  hideToolKit: () => void;
-};
-const AddItems = (props: Props) => {
+const AddItems = (props: { hideToolKit: ToolTipProps["closeToolTip"] }) => {
   const navigation = useNavigation<NavigationProps>();
+
   const handleNavigation = (url: string) => {
     props.hideToolKit();
     navigation.navigate(url);

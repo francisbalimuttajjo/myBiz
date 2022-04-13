@@ -9,24 +9,8 @@ import SwitchComponent from "./Switch";
 import validationSchema from "./ValidationSchema";
 import Wrapper from "../components/Wrapper";
 import SelectComponent from "./SelectComponent";
+import { FormProps as Props } from "../../types/types";
 
-type Props = {
-  initialValues: {
-    sellingCurrency: string;
-    buyingCurrency: string;
-    categories: string;
-    supplier: string;
-    image?: string;
-    sellingPrice: number |string;
-    buyingPrice: number | string;
-    stock: number|string;
-    name: string;
-    description: string;
-    isReturnable: boolean;
-  };
-  btn_title: string;
-  categoryValue: string;
-};
 export const Form = (props: Props) => {
   const [price, setPrice] = React.useState(props.initialValues.buyingPrice);
   const [sellingPrice, setSellingPrice] = React.useState(
@@ -35,7 +19,7 @@ export const Form = (props: Props) => {
   const [isEnabled, setIsEnabled] = React.useState(
     props.initialValues.isReturnable
   );
- 
+
   const toggleSwitch = () => {
     setIsEnabled((previousState) => !previousState);
   };
@@ -52,7 +36,7 @@ export const Form = (props: Props) => {
           <Wrapper>
             <Field component={AppFormField} name="name" title="name" required />
             <SelectComponent
-              error={errors.categories}
+              error={errors.category}
               categoryValue={props.categoryValue}
             />
             <Field

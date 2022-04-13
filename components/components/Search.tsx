@@ -28,7 +28,7 @@ const SearchBar: React.FC<Props> = (props) => {
             <Feather
               name="search"
               size={20}
-              color="black"
+              color="skyblue"
               style={{ marginLeft: 1 }}
             />
             {/* Input field */}
@@ -44,7 +44,7 @@ const SearchBar: React.FC<Props> = (props) => {
               <Entypo
                 name="cross"
                 size={20}
-                color="black"
+                color="skyblue"
                 style={{ padding: 1 }}
                 onPress={props.clearSearchField}
               />
@@ -64,7 +64,6 @@ const styles = StyleSheet.create({
   infoMsg_text: { alignSelf: "center", color: "skyblue" },
   container: {
     marginHorizontal: 15,
-
     justifyContent: "center",
     alignItems: "center",
     flexDirection: "row",
@@ -74,18 +73,22 @@ const styles = StyleSheet.create({
     padding: 10,
     flexDirection: "row",
     width: "95%",
-    backgroundColor: "#d9dbda",
+   
     borderRadius: 40,
     alignItems: "center",
+    borderWidth: 0.5,
+    borderColor: "skyblue",
   },
   searchBar__clicked: {
     padding: 10,
     flexDirection: "row",
     width: "95%",
-    backgroundColor: "#d9dbda",
+    
     borderRadius: 40,
     alignItems: "center",
     justifyContent: "space-evenly",
+    borderWidth: 0.5,
+    borderColor: "skyblue",
   },
   input: {
     fontSize: 20,

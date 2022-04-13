@@ -5,15 +5,15 @@ import { FlatList, View } from "react-native";
 const categoriesArray = [
   [
     { icon: "archive-outline", title: "Stock" },
+    { icon: "wallet-outline", title: "Sales" },
+  ],
+  [
+    { icon: "book-outline", title: "CashBook" },
     { icon: "book-outline", title: "CreditBook" },
   ],
   [
-    { icon: "cart-outline", title: "Purchases" },
-    { icon: "book-outline", title: "CashBook" },
-  ],
-  [
     { icon: "md-folder-open-outline", title: "Expenses" },
-    { icon: "wallet-outline", title: "Sales" },
+    { icon: "cart-outline", title: "Purchases" },
   ],
 ];
 

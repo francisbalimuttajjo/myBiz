@@ -8,8 +8,6 @@ import {
   Pressable,
 } from "react-native";
 import Ionicon from "react-native-vector-icons/Ionicons";
-import { useDispatch } from "react-redux";
-import { changeToEditing } from "../../redux/StockSlice";
 import useFns from "./useDeleteFns";
 export type Props = {
   item: {
@@ -26,22 +24,21 @@ export type Props = {
     category: string;
     supplier: string;
   };
+  handlePress: (a: string) => void;
+  cartItem?: boolean;
 };
 
 const Item: React.FC<Props> = (props) => {
-  const { navigate, createAlert, confirmDelete } = useFns();
-  const dispatch = useDispatch();
+  const { createAlert, confirmDelete } = useFns();
+
   if (confirmDelete) {
     console.log("deleted");
   }
-  const handleEditing = () => {
-    dispatch(changeToEditing({ id: props.item._id }));
-    navigate("editStock", { id: props.item._id });
-  };
+
   return (
     <View style={styles.mainContainer}>
       <TouchableOpacity
-        onPress={handleEditing}
+        onPress={() => props.handlePress(props.item._id)}
         activeOpacity={0.9}
         style={styles.container}
       >
@@ -54,7 +51,10 @@ const Item: React.FC<Props> = (props) => {
               }}
             />
           ) : (
-            <Pressable onPress={handleEditing} style={styles.icon}>
+            <Pressable
+              onPress={() => props.handlePress(props.item._id)}
+              style={styles.icon}
+            >
               <Ionicon name="camera-outline" size={80} />
               <Text style={{ marginTop: -10 }}>No Image </Text>
             </Pressable>
@@ -78,17 +78,21 @@ const Item: React.FC<Props> = (props) => {
             </View>
           </View>
         </View>
-
-        <View style={styles.icon_container}>
-          <View style={{ marginRight: 10 }}>
-            <TouchableOpacity activeOpacity={0.7} onPress={handleEditing}>
-              <Ionicon name="pencil" size={20} color="skyblue" />
+        {!props.cartItem && (
+          <View style={styles.icon_container}>
+            <View style={{ marginRight: 10 }}>
+              <TouchableOpacity
+                activeOpacity={0.7}
+                onPress={() => props.handlePress(props.item._id)}
+              >
+                <Ionicon name="pencil" size={20} color="skyblue" />
+              </TouchableOpacity>
+            </View>
+            <TouchableOpacity activeOpacity={0.7} onPress={createAlert}>
+              <Ionicon name="trash-outline" size={20} color="skyblue" />
             </TouchableOpacity>
           </View>
-          <TouchableOpacity activeOpacity={0.7} onPress={createAlert}>
-            <Ionicon name="trash-outline" size={20} color="skyblue" />
-          </TouchableOpacity>
-        </View>
+        )}
       </TouchableOpacity>
     </View>
   );

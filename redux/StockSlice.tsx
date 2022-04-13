@@ -171,6 +171,7 @@ const stockSlice = createSlice({
   initialState: {
     availableStock: store,
     loading: false,
+    cart: [],
     initialValues,
     displaySearchBar: store.length === 0 ? false : true,
     displayCategoriesSearchBar: categoriesStore.length === 0 ? false : true,
@@ -199,6 +200,7 @@ const stockSlice = createSlice({
       state.isEditing = false;
       state.editable = "";
     },
+    addToCart(state, action: PayloadAction<{ id: string }>) {},
 
     filterStock(state, action: PayloadAction<string>) {
       state.infoMsg = "";
@@ -243,6 +245,7 @@ export const {
   filterCategories,
   changeToEditing,
   disableEditing,
+  addToCart,
   editImage,
 } = stockSlice.actions;
 export default stockSlice.reducer;

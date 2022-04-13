@@ -6,12 +6,20 @@ import { RootState } from "../../redux/Store";
 import EmptyNotification from "../components/Empty";
 import LoadingComponent from "../components/LoadingComponent";
 import StockComponent from "./StockItem";
+import { useDispatch } from "react-redux";
+import { changeToEditing } from "../../redux/StockSlice";
+import useFns from "./useDeleteFns";
 
 const StockList = () => {
   const { availableStock, loading } = useSelector(
     (state: RootState) => state.stock
   );
-
+  const { navigate } = useFns();
+  const dispatch = useDispatch();
+  const handleEditing = (val: string) => {
+    dispatch(changeToEditing({ id: val }));
+    navigate("editStock", { id: val });
+  };
   return (
     <View>
       {availableStock.length < 1 && !loading && (
@@ -24,7 +32,9 @@ const StockList = () => {
         <FlatList
           contentContainerStyle={{ paddingBottom: "80%", marginTop: "5%" }}
           data={availableStock}
-          renderItem={(item) => <StockComponent item={item.item} />}
+          renderItem={(item) => (
+            <StockComponent handlePress={handleEditing} item={item.item} />
+          )}
           keyExtractor={(item) => item._id}
         />
       )}

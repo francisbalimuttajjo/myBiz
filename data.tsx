@@ -160,10 +160,10 @@ const initialValues: Item = {
 };
 
 const categories: InitialState["categories"] = [
-  { title: "Choose Category  *", value: "", id: "0" },
-  { title: "food", value: "food", id: "09" },
-  { title: "groceries", value: "groceries", id: "80" },
-  { title: "stationery", value: "stationery", id: "090" },
+  { title: "Choose Category  *", value: "", _id: "0" },
+  { title: "food", value: "food", _id: "09" },
+  { title: "groceries", value: "groceries", _id: "80" },
+  { title: "stationery", value: "stationery", _id: "090" },
 ];
 const store: Array<Item> = stock;
 const categoriesStore = categories;

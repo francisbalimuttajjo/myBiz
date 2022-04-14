@@ -1,12 +1,43 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { store, initialValues, categoriesStore, initialState } from "../data";
-
+import { store, categoriesStore, initialState } from "../data";
 
 const stockSlice = createSlice({
   name: "stock",
   initialState,
   reducers: {
-    //filterStock(state, action: PayloadAction<string>) {
+    addToCart(state, action: PayloadAction<{ id: string }>) {
+      //getting the item from stockSlice
+      let index = state.availableStock.findIndex(
+        (el) => el._id === action.payload.id
+      );
+      //checking if cart is empty
+      if (state.cart.length === 0) {
+        //if empty push that item in
+        state.cart.push({ item: state.availableStock[index], qty: 1 });
+      } else {
+        //if not empty
+        let existing_item_index = state.cart.findIndex(
+          (el) => el.item._id === action.payload.id
+        );
+        console.log({ existing_item_index });
+        //check if it exists in cartItem
+        if (existing_item_index >= 0) {
+          //if there add one to its qty
+          const existingItems = [...state.cart];
+          existingItems[existing_item_index].qty++;
+          state.cart = existingItems;
+        } else {
+          //if not add it there
+          const new_cart = [
+            ...state.cart,
+            { item: state.availableStock[index], qty: 1 },
+          ];
+          state.cart = new_cart;
+        }
+      }
+
+   
+    },
     addImage(state, action: PayloadAction<{ image: string }>) {
       state.initialValues.image = action.payload.image;
     },
@@ -25,7 +56,6 @@ const stockSlice = createSlice({
       state.isEditing = false;
       state.editable = "";
     },
-    addToCart(state, action: PayloadAction<{ id: string }>) {},
 
     filterStock(state, action: PayloadAction<string>) {
       state.infoMsg = "";

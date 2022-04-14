@@ -150,8 +150,8 @@ export type InitialState = {
   isEditing: boolean;
   initialValues: Item;
   availableStock: Array<Item>;
-  categories: Array<{ title: string; value: string; id: string }>;
-  cart: Array<Item>;
+  categories: Array<{ title: string; value: string; _id: string }>;
+  cart: Array<{ item: Item; qty: number }>;
   displaySearchBar: boolean;
   displayCategoriesSearchBar: boolean;
 };

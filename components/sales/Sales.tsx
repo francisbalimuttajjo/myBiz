@@ -15,7 +15,6 @@ const Sales = () => {
     (state: RootState) => state.stock
   );
   const handlePress = (val: string) => {
-    console.log("clicked");
     dispatch(addToCart({ id: val }));
   };
   return (

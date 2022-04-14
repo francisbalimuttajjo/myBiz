@@ -4,8 +4,14 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../redux/Store";
 import Search from "../components/Search";
 import useFns from "../stock/useFns";
+import { getTotal } from "../../utils";
+
+
 const Badge = () => {
   const { cart } = useSelector((state: RootState) => state.stock);
+  console.log({ cart });
+  const total = getTotal(cart);
+  
   const {
     clicked,
     searchPhrase,
@@ -35,7 +41,7 @@ const Badge = () => {
         >
           <Ionicon name="cart-outline" size={35} color="skyblue" />
           <View style={styles.badge}>
-            <Text style={styles.badge_text}>{cart.length} </Text>
+            <Text style={styles.badge_text}>{total} </Text>
           </View>
         </TouchableOpacity>
       </View>

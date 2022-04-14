@@ -142,5 +142,16 @@ export type mainStackParams = {
   };
   New: undefined;
 };
-
-
+//stock stockSlice
+export type InitialState = {
+  loading: boolean;
+  infoMsg: string;
+  editable: string;
+  isEditing: boolean;
+  initialValues: Item;
+  availableStock: Array<Item>;
+  categories: Array<{ title: string; value: string; id: string }>;
+  cart: Array<Item>;
+  displaySearchBar: boolean;
+  displayCategoriesSearchBar: boolean;
+};

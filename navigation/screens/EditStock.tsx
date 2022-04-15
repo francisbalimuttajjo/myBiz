@@ -33,7 +33,7 @@ const EditStock = ({ route, navigation }: Props) => {
     buyingCurrency,
     sellingPrice,
     buyingPrice,
-    stock,
+    stock: stock.toString(),
     name,
     supplier,
     image,

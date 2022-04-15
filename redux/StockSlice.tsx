@@ -6,37 +6,52 @@ const stockSlice = createSlice({
   initialState,
   reducers: {
     addToCart(state, action: PayloadAction<{ id: string }>) {
-      //getting the item from stockSlice
+      //getting the item from stock
       let index = state.availableStock.findIndex(
         (el) => el._id === action.payload.id
       );
-      //checking if cart is empty
-      if (state.cart.length === 0) {
-        //if empty push that item in
-        state.cart.push({ item: state.availableStock[index], qty: 1 });
-      } else {
-        //if not empty
-        let existing_item_index = state.cart.findIndex(
-          (el) => el.item._id === action.payload.id
-        );
-        console.log({ existing_item_index });
-        //check if it exists in cartItem
-        if (existing_item_index >= 0) {
-          //if there add one to its qty
-          const existingItems = [...state.cart];
-          existingItems[existing_item_index].qty++;
-          state.cart = existingItems;
-        } else {
-          //if not add it there
-          const new_cart = [
+
+      //checking if stock is available
+      if (state.availableStock[index].stock > 0) {
+        //reducing available stock by one
+        const new_stock: any = [...state.availableStock];
+       
+        new_stock[index].stock--;
+        state.availableStock = new_stock;
+        console.log("stock", state.availableStock[index]);
+
+        //checking if cart is empty
+        if (state.cart.length === 0) {
+          //if empty push that item in
+          state.cart = [
             ...state.cart,
             { item: state.availableStock[index], qty: 1 },
           ];
-          state.cart = new_cart;
+        } else {
+          //if not empty
+          let existing_item_index = state.cart.findIndex(
+            (el) => el.item._id === action.payload.id
+          );
+          console.log({ existing_item_index });
+          //check if it exists in cartItem
+          if (existing_item_index >= 0) {
+            //if there add one to its qty
+            const existingItems = [...state.cart];
+            existingItems[existing_item_index].qty++;
+            state.cart = existingItems;
+          } else {
+            //if not add it there
+            const new_cart = [
+              ...state.cart,
+              { item: state.availableStock[index], qty: 1 },
+            ];
+            state.cart = new_cart;
+          }
         }
+      } else {
+        console.log("stock is empty");
+        return;
       }
-
-   
     },
     addImage(state, action: PayloadAction<{ image: string }>) {
       state.initialValues.image = action.payload.image;

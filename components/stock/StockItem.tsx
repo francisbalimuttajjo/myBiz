@@ -9,8 +9,7 @@ import {
 } from "react-native";
 import Ionicon from "react-native-vector-icons/Ionicons";
 import useFns from "./useDeleteFns";
-import {StockItemProps as Props} from '../../types/types'
-
+import { StockItemProps as Props } from "../../types/types";
 
 const Item: React.FC<Props> = (props) => {
   const { createAlert, confirmDelete } = useFns();
@@ -26,10 +25,10 @@ const Item: React.FC<Props> = (props) => {
         activeOpacity={0.6}
         style={styles.container}
       >
-        <View style={{ ...styles.icon, width: "30%"}}>
+        <View style={{ ...styles.icon, width: "30%" }}>
           {props.item.image ? (
             <Image
-              style={{ ...styles.image,marginLeft:props.cartItem ? -20:10  }}
+              style={{ ...styles.image, marginLeft: props.cartItem ? -20 : 10 }}
               source={{
                 uri: props.item.image,
               }}
@@ -51,7 +50,11 @@ const Item: React.FC<Props> = (props) => {
             <Text style={styles.description}>{props.item.description}</Text>
           </View>
           <View>
-            <Text>Available:{props.item.stock}</Text>
+            {props.item.stock > 0 ? (
+              <Text>Available:{props.item.stock}</Text>
+            ) : (
+              <Text style={{ color: "red" }}>Out Of Stock</Text>
+            )}
             <View style={styles.details}>
               <Text style={styles.align}>{props.item.sellingCurrency}</Text>
               <Text style={styles.price}>{props.item.sellingPrice}&nbsp;</Text>
@@ -143,6 +146,5 @@ const styles = StyleSheet.create({
     width: 100,
     height: 110,
     borderRadius: 10,
-  
   },
 });

@@ -50,12 +50,14 @@ const Item: React.FC<Props> = (props) => {
             <Text style={styles.description}>{props.item.description}</Text>
           </View>
           <View>
-             <Text>Available:{props.item.stock}</Text>
-            {/* {props.item.stock > 0 ? (
-              <Text>Available:{props.item.stock}</Text>
-            ) : ( */}
-              {/* <Text style={{ color: "red" }}>Out Of Stock</Text> */}
-            {/* // )} */}
+            <Text
+              style={{ color: props.item.stock === 0 ? "tomato" : "black" }}
+            >
+              {props.item.stock === 0
+                ? `out of stock`
+                : `Available:${props.item.stock}`}
+            </Text>
+
             <View style={styles.details}>
               <Text style={styles.align}>{props.item.sellingCurrency}</Text>
               <Text style={styles.price}>{props.item.sellingPrice}&nbsp;</Text>
@@ -76,7 +78,11 @@ const Item: React.FC<Props> = (props) => {
                 <Ionicon name="pencil" size={20} color="skyblue" />
               </TouchableOpacity>
             </View>
-            <TouchableOpacity activeOpacity={0.7} onPress={createAlert}>
+            <TouchableOpacity
+             
+              activeOpacity={0.7}
+              onPress={createAlert}
+            >
               <Ionicon name="trash-outline" size={20} color="skyblue" />
             </TouchableOpacity>
           </View>

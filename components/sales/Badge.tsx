@@ -13,7 +13,10 @@ const Badge = () => {
   console.log({ cart });
   const total = getTotal(cart);
   const { navigate } = useNavigation<NavigationProps>();
-  const handlePress = () => navigate("Cart");
+  const handlePress = () => {
+    if (total < 1) return;
+    navigate("Cart");
+  };
 
   const {
     clicked,

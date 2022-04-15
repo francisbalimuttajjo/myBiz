@@ -11,7 +11,7 @@ import StockComponent from "../stock/StockItem";
 
 const Sales = () => {
   const dispatch = useDispatch();
-  const { availableStock, loading } = useSelector(
+  const { availableStock} = useSelector(
     (state: RootState) => state.stock
   );
   const handlePress = (val: string) => {

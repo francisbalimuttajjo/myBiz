@@ -23,9 +23,9 @@ const CartItem = (props: { item: Item; qty: number }) => {
             <TouchableOpacity
               onPress={() => dispatch(addItem({ id: props.item._id }))}
               activeOpacity={0.8}
-              style={styles.btn}
+              style={{ ...styles.btn, backgroundColor: "skyblue" }}
             >
-              <Text style={styles.btn_text}>+</Text>
+              <Text style={{ ...styles.btn_text, color: "white" }}>+</Text>
             </TouchableOpacity>
             <View style={styles.qty}>
               <Text>{props.qty}</Text>
@@ -34,9 +34,19 @@ const CartItem = (props: { item: Item; qty: number }) => {
             <TouchableOpacity
               onPress={() => dispatch(reduceItem({ id: props.item._id }))}
               activeOpacity={0.8}
-              style={styles.btn}
+              style={{
+                ...styles.btn,
+                backgroundColor: props.qty === 0 ? "#e0e1e2" : "skyblue",
+              }}
             >
-              <Text style={styles.btn_text}>-</Text>
+              <Text
+                style={{
+                  ...styles.btn_text,
+                  color: props.qty === 0 ? "black" : "white",
+                }}
+              >
+                -
+              </Text>
             </TouchableOpacity>
           </View>
 
@@ -94,12 +104,11 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
   },
   btn: {
-    backgroundColor: "skyblue",
     width: "33%",
     height: 25,
     borderRadius: 7,
     alignItems: "center",
     justifyContent: "center",
   },
-  btn_text: { color: "white", fontWeight: "bold", fontSize: 20 },
+  btn_text: { fontWeight: "bold", fontSize: 20 },
 });

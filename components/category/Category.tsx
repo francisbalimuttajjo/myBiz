@@ -1,18 +1,10 @@
 import { useNavigation } from "@react-navigation/native";
 import { Text, View, StyleSheet, TouchableOpacity } from "react-native";
 import Ionicon from "react-native-vector-icons/Ionicons";
-type Item = {
-  title: string;
-  id: string;
-};
-type Props = {
-  item: Item;
-};
-type NavigationProps = {
-  navigate: (route: string, params: { item: Item }) => void;
-};
-const Category = (props: Props) => {
-  const { navigate } = useNavigation<NavigationProps>();
+ import {CategoryProps } from '../../types/types'
+
+const Category = (props: {item: CategoryProps["item"]}) => {
+  const { navigate } = useNavigation<CategoryProps["NavigationProps"]>();
   return (
     <View style={styles.list_item}>
       <Text style={styles.title}>{props.item.title}</Text>

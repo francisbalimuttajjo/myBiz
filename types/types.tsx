@@ -6,7 +6,24 @@ export enum MainRoutes {
   TransactionsPage = "Transactions",
   MorePage = "More",
 }
+//cart /buttonProps
+export type BtnProps = {
+  btn: string;
+  changeToCash: () => void;
+  changeToCredit: () => void;
+};
+//categories
+type ItemProps = {
+  title: string;
+  _id: string;
+};
 
+export type CategoryProps = {
+  item: ItemProps;
+  NavigationProps: {
+    navigate: (route: string, params: { item: ItemProps }) => void;
+  };
+};
 //components
 //wrapper
 export type WrapperProps = {
@@ -122,6 +139,7 @@ export type StockItemProps = {
 };
 export type NavigationProps = {
   navigate: (route: string, params?: { id: string }) => void;
+  goBack: () => void;
 };
 
 export type mainStackParams = {
@@ -129,6 +147,7 @@ export type mainStackParams = {
   CreditBook: undefined;
   CashBook: undefined;
   Purchases: undefined;
+  Cart: undefined;
   home: undefined;
   Sales: undefined;
   Expenses: undefined;

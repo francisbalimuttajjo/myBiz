@@ -11,6 +11,7 @@ import AddNew from "./screens/NewItem";
 import NewCategory from "./screens/NewCategory";
 import Camera from "./screens/Image";
 import NewExpense from "./screens/NewExpense";
+import Cart from "./screens/Cart";
 import CategoriesEdit from "./screens/EditCategories";
 import EditStock from "./screens/EditStock";
 import BottomTabs from "./BottomTabs";
@@ -28,8 +29,8 @@ const DetailsScreens = () => {
         />
         <Stack.Group
           screenOptions={{
-            headerStyle: { backgroundColor: "skyblue" },
-            headerTintColor: "#fff",
+             headerStyle: { backgroundColor: "transparent" },
+            // headerTintColor: "#fff",
             headerTitleStyle: {
               fontWeight: "bold",
             },
@@ -63,6 +64,13 @@ const DetailsScreens = () => {
             component={AddNew}
             options={{
               title: "New Item",
+            }}
+          />
+           <Stack.Screen
+            name="Cart"
+            component={Cart}
+            options={{
+              title: "Check Out",
             }}
           />
           <Stack.Screen

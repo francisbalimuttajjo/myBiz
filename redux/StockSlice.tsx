@@ -5,6 +5,55 @@ const stockSlice = createSlice({
   name: "stock",
   initialState,
   reducers: {
+    addItem(state, action: PayloadAction<{ id: string }>) {
+      //update available state
+      const stock_index = state.availableStock.findIndex(
+        (el) => el._id === action.payload.id
+      );
+      let new_cart = [...state.cart];
+      const cart_index = new_cart.findIndex(
+        (val) => val.item._id === action.payload.id
+      );
+      //making sure u dont add stock beyond what is available in store
+      if (store[stock_index].stock === new_cart[cart_index].qty) {
+        return;
+      } else {
+        //reduce from cart
+
+        new_cart[cart_index].qty++;
+        state.cart = new_cart;
+
+        let new_stock: any = [...state.availableStock];
+        new_stock[stock_index].stock--;
+        state.availableStock = new_stock;
+      }
+    },
+    reduceItem(state, action: PayloadAction<{ id: string }>) {
+      let new_cart = [...state.cart];
+      const cart_index = new_cart.findIndex(
+        (val) => val.item._id === action.payload.id
+      );
+      let new_stock: any = [...state.availableStock];
+      const stock_index = state.availableStock.findIndex(
+        (el) => el._id === action.payload.id
+      );
+      //dont reduce beyond 0
+      if (new_cart[cart_index].qty === 0) {
+        new_stock[stock_index].qty = 0;
+        state.availableStock = new_stock;
+        // return;
+      } else {
+        //reduce from cart
+
+        new_cart[cart_index].qty--;
+        state.cart = new_cart;
+
+        //update available state
+
+        new_stock[stock_index].stock++;
+        state.availableStock = new_stock;
+      }
+    },
     addToCart(state, action: PayloadAction<{ id: string }>) {
       //getting the item from stock
       let index = state.availableStock.findIndex(
@@ -15,7 +64,7 @@ const stockSlice = createSlice({
       if (state.availableStock[index].stock > 0) {
         //reducing available stock by one
         const new_stock: any = [...state.availableStock];
-       
+
         new_stock[index].stock--;
         state.availableStock = new_stock;
         console.log("stock", state.availableStock[index]);
@@ -116,6 +165,8 @@ export const {
   changeToEditing,
   disableEditing,
   addToCart,
+  reduceItem,
+  addItem,
   editImage,
 } = stockSlice.actions;
 export default stockSlice.reducer;

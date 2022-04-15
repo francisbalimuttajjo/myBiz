@@ -58,7 +58,7 @@ const Add = () => {
               style={styles.flatList}
               data={categories.slice(1)}
               renderItem={(item) => <CategoryItem item={item.item} />}
-              keyExtractor={(item) => item.id}
+              keyExtractor={(item) => item._id}
             />
           </View>
           <View style={styles.btn}>

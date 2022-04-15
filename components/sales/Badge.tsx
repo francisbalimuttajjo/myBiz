@@ -5,13 +5,16 @@ import { RootState } from "../../redux/Store";
 import Search from "../components/Search";
 import useFns from "../stock/useFns";
 import { getTotal } from "../../utils";
-
+import { NavigationProps } from "../../types/types";
+import { useNavigation } from "@react-navigation/native";
 
 const Badge = () => {
   const { cart } = useSelector((state: RootState) => state.stock);
   console.log({ cart });
   const total = getTotal(cart);
-  
+  const { navigate } = useNavigation<NavigationProps>();
+  const handlePress = () => navigate("Cart");
+
   const {
     clicked,
     searchPhrase,
@@ -37,7 +40,7 @@ const Badge = () => {
         <TouchableOpacity
           activeOpacity={0.7}
           style={{ flexDirection: "row" }}
-          onPress={() => console.log("cart pressed")}
+          onPress={handlePress}
         >
           <Ionicon name="cart-outline" size={35} color="skyblue" />
           <View style={styles.badge}>

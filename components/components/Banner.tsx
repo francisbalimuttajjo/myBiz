@@ -4,10 +4,11 @@ import { useNavigation } from '@react-navigation/native';
 import { StyleSheet, Text, View, Pressable } from "react-native";
 import Ionicon from "react-native-vector-icons/Ionicons";
 import { RootState } from "../../redux/Store";
+import {NavigationProps}from '../../types/types'
 
 
 const Banner = () => {
-  const navigation =useNavigation()
+  const navigation =useNavigation<NavigationProps>()
     const { user } = useSelector((state:RootState) => state.user);
     
   return (
@@ -16,7 +17,7 @@ const Banner = () => {
         onPress={() => navigation.goBack()} style={{ marginRight: 12 }}>
         <Ionicon name="chevron-back-outline" size={20} color="white" />
       </Pressable>
-      <Pressable onPress={()=> navigation.navigate('Home' as never)} >
+      <Pressable onPress={()=> navigation.navigate('Home' )} >
         <Ionicon name="home-outline" size={30} color="white" />
       </Pressable>
       <Text style={styles.greetings_text}>{user.firstName}</Text>

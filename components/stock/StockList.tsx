@@ -22,7 +22,7 @@ const StockList = () => {
   };
   return (
     <View
-      //style={{ flex: 1 }}
+     
     >
        {availableStock.length < 1 && !loading && !infoMsg && (
         <View>

@@ -5,6 +5,22 @@ const stockSlice = createSlice({
   name: "stock",
   initialState,
   reducers: {
+    removeFromCart(state, action: PayloadAction<{ id: string }>) {
+      const stock_index = state.availableStock.findIndex(
+        (el) => el._id === action.payload.id
+      );
+      const cart_index = state.cart.findIndex(
+        (val) => val.item._id === action.payload.id
+      );
+      //update stock with that
+      let new_stock = [...state.availableStock];
+      new_stock[stock_index].stock =
+        +new_stock[stock_index].stock + state.cart[cart_index].qty;
+      state.availableStock = new_stock;
+      //remove from cart
+      state.cart = state.cart.filter((el) => el.item._id !== action.payload.id);
+    },
+
     addItem(state, action: PayloadAction<{ id: string }>) {
       //update available state
       const stock_index = state.availableStock.findIndex(
@@ -166,6 +182,7 @@ export const {
   disableEditing,
   addToCart,
   reduceItem,
+  removeFromCart,
   addItem,
   editImage,
 } = stockSlice.actions;

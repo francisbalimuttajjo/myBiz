@@ -2,7 +2,8 @@ import React from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { useDispatch } from "react-redux";
 import { Item } from "../../types/types";
-import { addItem, reduceItem } from "../../redux/StockSlice";
+import { addItem, reduceItem, removeFromCart } from "../../redux/StockSlice";
+import Ionicon from "react-native-vector-icons/Ionicons";
 
 const CartItem = (props: { item: Item; qty: number }) => {
   const dispatch = useDispatch();
@@ -62,6 +63,15 @@ const CartItem = (props: { item: Item; qty: number }) => {
             </View>
           </View>
         </View>
+        <View style={{ justifyContent: "flex-end" }}>
+          <TouchableOpacity
+            activeOpacity={0.7}
+            style={{ marginLeft: 10 }}
+            onPress={() => dispatch(removeFromCart({ id: props.item._id }))}
+          >
+            <Ionicon name="trash-outline" size={20} color="skyblue" />
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   );
@@ -94,7 +104,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  btn_container: { alignItems: "flex-end", width: "30%" },
+  btn_container: { alignItems: "flex-end", width: "25%" },
   title: { fontWeight: "bold", fontSize: 16, color: "skyblue" },
   sub_container: { width: "90%", alignSelf: "center", flexDirection: "row" },
   input: {

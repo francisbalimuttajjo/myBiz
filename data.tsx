@@ -162,6 +162,7 @@ const categories: InitialState["categories"] = [
   { title: "food", value: "food", _id: "09" },
   { title: "groceries", value: "groceries", _id: "80" },
   { title: "stationery", value: "stationery", _id: "090" },
+  
 ];
 const store: Array<Item> = stock;
 const categoriesStore = categories;

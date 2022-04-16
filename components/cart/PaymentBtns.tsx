@@ -5,7 +5,7 @@ import { BtnProps as Props } from "../../types/types";
 const Btns = (props: Props) => {
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Select Type Of Payment</Text>
+      <Text style={styles.text}>Select Payment Type</Text>
       <View style={styles.btn_container}>
         <Pressable
           onPress={props.changeToCash}

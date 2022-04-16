@@ -12,10 +12,29 @@ export type BtnProps = {
   changeToCash: () => void;
   changeToCredit: () => void;
 };
+
+//cash
+export type CashProps = {
+  handleCash: (val: string) => void;
+  change: number;
+};
+
+export type CartSummaryProps = {
+  discount: number;
+  itemsPrice: number;
+  grandTotal: number;
+};
 //categories
 type ItemProps = {
   title: string;
   _id: string;
+};
+//date picker props
+export type DatePickerProps = {
+  isDatePickerVisible: boolean;
+  showDatePicker: () => void;
+  hideDatePicker: () => void;
+  handleConfirm: (date: Date) => void;
 };
 
 export type CategoryProps = {

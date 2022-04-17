@@ -1,4 +1,5 @@
 import React from "react";
+import { CashItemProps } from "../components/CashBook/CashItem";
 //bottom tabs
 export enum MainRoutes {
   HomePage = "Home",
@@ -157,7 +158,7 @@ export type StockItemProps = {
   handlePress: (a: string) => void;
 };
 export type NavigationProps = {
-  navigate: (route: string, params?: { id: string }) => void;
+  navigate: (route: string, params?: { id?: string }) => void;
   goBack: () => void;
 };
 
@@ -166,6 +167,7 @@ export type mainStackParams = {
   CreditBook: undefined;
   CashBook: undefined;
   Purchases: undefined;
+  cash: { item: CashItemProps };
   Cart: undefined;
   home: undefined;
   Sales: undefined;

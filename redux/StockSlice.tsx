@@ -1,17 +1,20 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { store, categoriesStore, initialState } from "../data";
+import { get_cart_index, get_stock_Index } from '../utils'
+
+
 
 const stockSlice = createSlice({
   name: "stock",
   initialState,
   reducers: {
     removeFromCart(state, action: PayloadAction<{ id: string }>) {
-      const stock_index = state.availableStock.findIndex(
-        (el) => el._id === action.payload.id
+      const stock_index = get_stock_Index(
+        state.availableStock,
+        action.payload.id
       );
-      const cart_index = state.cart.findIndex(
-        (val) => val.item._id === action.payload.id
-      );
+      const cart_index = get_cart_index(state.cart, action.payload.id);
+
       //update stock with that
       let new_stock = [...state.availableStock];
       new_stock[stock_index].stock =
@@ -23,36 +26,32 @@ const stockSlice = createSlice({
 
     addItem(state, action: PayloadAction<{ id: string }>) {
       //update available state
-      const stock_index = state.availableStock.findIndex(
-        (el) => el._id === action.payload.id
+      const stock_index = get_stock_Index(
+        state.availableStock,
+        action.payload.id
       );
       let new_cart = [...state.cart];
-      const cart_index = new_cart.findIndex(
-        (val) => val.item._id === action.payload.id
-      );
+      const cart_index = get_cart_index(new_cart, action.payload.id);
+
       //making sure u dont add stock beyond what is available in store
       if (store[stock_index].stock === new_cart[cart_index].qty) {
         return;
       } else {
         //reduce from cart
-
         new_cart[cart_index].qty++;
         state.cart = new_cart;
-
         let new_stock: any = [...state.availableStock];
         new_stock[stock_index].stock--;
         state.availableStock = new_stock;
       }
     },
+
     reduceItem(state, action: PayloadAction<{ id: string }>) {
       let new_cart = [...state.cart];
-      const cart_index = new_cart.findIndex(
-        (val) => val.item._id === action.payload.id
-      );
+      const cart_index = get_cart_index(new_cart, action.payload.id);
+
       let new_stock: any = [...state.availableStock];
-      const stock_index = state.availableStock.findIndex(
-        (el) => el._id === action.payload.id
-      );
+      const stock_index = get_stock_Index(new_stock, action.payload.id);
       //dont reduce beyond 0
       if (new_cart[cart_index].qty === 0) {
         new_stock[stock_index].qty = 0;
@@ -70,12 +69,10 @@ const stockSlice = createSlice({
         state.availableStock = new_stock;
       }
     },
+
     addToCart(state, action: PayloadAction<{ id: string }>) {
       //getting the item from stock
-      let index = state.availableStock.findIndex(
-        (el) => el._id === action.payload.id
-      );
-
+      const index = get_stock_Index(state.availableStock, action.payload.id);
       //checking if stock is available
       if (state.availableStock[index].stock > 0) {
         //reducing available stock by one
@@ -83,7 +80,6 @@ const stockSlice = createSlice({
 
         new_stock[index].stock--;
         state.availableStock = new_stock;
-        console.log("stock", state.availableStock[index]);
 
         //checking if cart is empty
         if (state.cart.length === 0) {
@@ -94,10 +90,11 @@ const stockSlice = createSlice({
           ];
         } else {
           //if not empty
-          let existing_item_index = state.cart.findIndex(
-            (el) => el.item._id === action.payload.id
+          const existing_item_index = get_cart_index(
+            state.cart,
+            action.payload.id
           );
-          console.log({ existing_item_index });
+
           //check if it exists in cartItem
           if (existing_item_index >= 0) {
             //if there add one to its qty
@@ -122,9 +119,7 @@ const stockSlice = createSlice({
       state.initialValues.image = action.payload.image;
     },
     editImage(state, action: PayloadAction<{ id: string; url: string }>) {
-      const index = state.availableStock.findIndex(
-        (el) => el._id === action.payload.id
-      );
+      const index = get_stock_Index(state.availableStock, action.payload.id);
       state.availableStock[index].image = action.payload.url;
     },
 
@@ -156,6 +151,7 @@ const stockSlice = createSlice({
         state.availableStock = searchResult;
       }
     },
+
     filterCategories(state, action: PayloadAction<string>) {
       state.infoMsg = "";
       if (action.payload === "") {

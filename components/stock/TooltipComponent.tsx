@@ -11,7 +11,7 @@ const TooltipComponent: React.FC<Props> = (props) => {
     <View style={styles.container}>
       <Tooltip
         tooltipStyle={{ marginTop: -30 }}
-        contentStyle={{ width: 200, minHeight: 100 }}
+        contentStyle={{ width: 200, minHeight: 80 }}
         showChildInTooltip={false}
         arrowSize={{ width: 16, height: 24 }}
         isVisible={props.visible}
@@ -25,7 +25,7 @@ const TooltipComponent: React.FC<Props> = (props) => {
           onPressIn={props.openToolTip}
         >
           <Ionicon name="md-add-circle-outline" color="skyblue" size={20} />
-          <Text style={styles.text}> Add Item</Text>
+          <Text style={styles.text}> Add Item/Category</Text>
         </TouchableOpacity>
       </Tooltip>
     </View>
@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
   text: {
     color: "skyblue",
     marginRight: 10,
-    fontSize: 24,
+    fontSize: 18,
   },
 
   text_container: {

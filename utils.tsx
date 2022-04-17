@@ -16,4 +16,10 @@ const getTotalSum = (arr: InitialState["cart"]) => {
   return arrayOfPrices.reduce((a, b) => a + b, 0);
 };
 
-export { getTotal, getTotalSum };
+const get_stock_Index = (arr: InitialState["availableStock"], k: string) =>
+  arr.findIndex((el) => el._id === k);
+
+const get_cart_index = (arr: InitialState["cart"], k: string) =>
+  arr.findIndex((val) => val.item._id === k);
+
+export { getTotal, getTotalSum,get_cart_index , get_stock_Index};

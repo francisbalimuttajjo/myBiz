@@ -5,15 +5,16 @@ import CreditBook from "./screens/CreditBook";
 import CashBook from "./screens/CashBook";
 import Purchases from "./screens/Purchases";
 import Sales from "./screens/Sales";
-import Details from "./screens/Details";
 import Expenses from "./screens/Expenses";
 import AddNew from "./screens/NewItem";
 import NewCategory from "./screens/NewCategory";
 import Camera from "./screens/Image";
 import NewExpense from "./screens/NewExpense";
 import Cart from "./screens/Cart";
+import Home from "./screens/Home";
 import CategoriesEdit from "./screens/EditCategories";
 import EditStock from "./screens/EditStock";
+import Cash from "./screens/Cash";
 import BottomTabs from "./BottomTabs";
 import { mainStackParams } from "../types/types";
 
@@ -22,20 +23,22 @@ const DetailsScreens = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen
-          name="home"
-          component={BottomTabs}
-          options={{ headerShown: false }}
-        />
         <Stack.Group
           screenOptions={{
-             headerStyle: { backgroundColor: "transparent" },
+            headerStyle: { backgroundColor: "transparent" },
             // headerTintColor: "#fff",
+
             headerTitleStyle: {
               fontWeight: "bold",
             },
           }}
         >
+          <Stack.Screen
+            name="home"
+            //component={Home}
+            component={BottomTabs}
+            options={{ headerShown: false }}
+          />
           <Stack.Screen
             name="editStock"
             component={EditStock}
@@ -46,6 +49,7 @@ const DetailsScreens = () => {
             component={Stock}
             options={{ headerShown: false }}
           />
+          <Stack.Screen name="cash" component={Cash} />
           <Stack.Screen
             name="camera"
             component={Camera}
@@ -66,7 +70,7 @@ const DetailsScreens = () => {
               title: "New Item",
             }}
           />
-           <Stack.Screen
+          <Stack.Screen
             name="Cart"
             component={Cart}
             options={{
@@ -86,7 +90,7 @@ const DetailsScreens = () => {
             options={{ headerShown: false }}
           />
           <Stack.Screen name="Expense" component={NewExpense} />
-          <Stack.Screen name="Details" component={Details} />
+
           <Stack.Screen name="Purchases" component={Purchases} />
           <Stack.Screen name="CreditBook" component={CreditBook} />
           <Stack.Screen name="CashBook" component={CashBook} />

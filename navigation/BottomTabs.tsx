@@ -5,47 +5,46 @@ import TransactionsScreen from "./screens/Transactions";
 import MoreScreen from "./screens/More";
 import { MainRoutes } from "../types/types";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import {TabStackParams} from '../types/types'
-
-
+import { TabStackParams } from "../types/types";
+import React from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import StackNavigator from "./MainNavigation";
 
 const TabsContainer = () => {
   const Tab = createBottomTabNavigator<TabStackParams>();
   return (
-    
+    // <NavigationContainer>
     <Tab.Navigator
-      
-        screenOptions={({ route }) => ({
-          tabBarIcon: ({ focused, color, size }) => {
-                let iconName='';
+      screenOptions={({ route }) => ({
+        tabBarIcon: ({ focused, color, size }) => {
+          let iconName = "";
 
-            if (route.name === "Home") {
-              iconName = focused ? "home" : "home-outline";
-            } else if (route.name === "Profile") {
-              iconName = focused ? "person-sharp" : "person-outline";
-            } else if (route.name === "Transactions") {
-              iconName = focused ? "ios-flash-sharp" : "ios-flash-outline";
-            } else if (route.name === "More") {
-              iconName = focused ? "ios-list-sharp" : "ios-list-outline";
-            }
+          if (route.name === "Home") {
+            iconName = focused ? "home" : "home-outline";
+          } else if (route.name === "Profile") {
+            iconName = focused ? "person-sharp" : "person-outline";
+          } else if (route.name === "Transactions") {
+            iconName = focused ? "ios-flash-sharp" : "ios-flash-outline";
+          } else if (route.name === "More") {
+            iconName = focused ? "ios-list-sharp" : "ios-list-outline";
+          }
 
-            return <Ionicons name={iconName } size={size} color={color} />;
-          },
+          return <Ionicons name={iconName} size={size} color={color} />;
+        },
 
-          tabBarActiveTintColor: "skyblue",
-          tabBarInactiveTintColor: "gray",
-          tabBarLabelStyle: { paddingBottom: 2 },
-        })}
-      >
+        tabBarActiveTintColor: "skyblue",
+        tabBarInactiveTintColor: "gray",
+        tabBarLabelStyle: { paddingBottom: 2 },
+      })}
+    >
+      <Tab.Group>
         <Tab.Screen
           options={{ headerShown: false }}
-          //name={MainRoutes.HomePage}
           name={MainRoutes.HomePage}
           component={HomeScreen}
         />
         <Tab.Screen
           options={{ headerShown: false }}
-          //name={MainRoutes.ProfilePage}
           name="Profile"
           component={ProfileScreen}
         />
@@ -58,10 +57,10 @@ const TabsContainer = () => {
           options={{ headerShown: false }}
           name={MainRoutes.MorePage}
           component={MoreScreen}
-      />
-      
-      </Tab.Navigator>
-    
+        />
+      </Tab.Group>
+    </Tab.Navigator>
+    /* </NavigationContainer> */
   );
 };
 

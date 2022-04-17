@@ -31,14 +31,7 @@ const AddItems = (props: { hideToolKit: ToolTipProps["closeToolTip"] }) => {
         <Ionicon name="add-outline" size={20} color="skyblue" />
         <Text style={styles.text}>Add Category</Text>
       </TouchableOpacity>
-      <TouchableOpacity
-        activeOpacity={0.7}
-        style={{ ...styles.container }}
-        onPress={() => handleNavigation("Expense")}
-      >
-        <Ionicon name="add-outline" size={20} color="skyblue" />
-        <Text style={styles.text}>Add Expense</Text>
-      </TouchableOpacity>
+     
     </View>
   );
 };
@@ -48,7 +41,7 @@ export default AddItems;
 const styles = StyleSheet.create({
   mainContainer: {
     padding: 10,
-    // paddingBottom:20
+
   },
   container: {
     display: "flex",

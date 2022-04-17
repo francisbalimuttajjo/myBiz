@@ -2,6 +2,7 @@ import { useSelector } from "react-redux";
 import React from "react";
 import { RootState } from "../../redux/Store";
 import { getTotalSum } from "../../utils";
+
 const UseCart = () => {
   const { cart } = useSelector((state: RootState) => state.stock);
   const [btn, setBtn] = React.useState<string>("cash");
@@ -12,47 +13,50 @@ const UseCart = () => {
   const [cashReceived, setCashReceived] = React.useState<number>(0);
   const [error, setError] = React.useState<boolean>(false);
   const [visible, setVisible] = React.useState<boolean>(true);
-  const changeToCash = () => setBtn("cash");
+
+  const changeToCash = () => {
+
+    setBtn("cash");
+  };
   const changeToCredit = () => setBtn("credit");
 
   const [isDatePickerVisible, setDatePickerVisibility] = React.useState(false);
 
-  const showDatePicker = () => {
-    setDatePickerVisibility(true);
-  };
+  const showDatePicker = () => setDatePickerVisibility(true);
 
-  const hideDatePicker = () => {
-    setDatePickerVisibility(false);
-  };
+  const hideDatePicker = () => setDatePickerVisibility(false);
 
   const handleConfirm = (date: Date) => {
     setPaymentDate(date);
     hideDatePicker();
   };
-  const handleDiscount = (val: string) => setDiscount(+val);
+
   const handleClient = (val: string) => {
     setMessage("");
     setError(false);
     setClient(val);
   };
-  const handleCash = (val: string) => {
-    setMessage("");
-    setCashReceived(+val);
-  };
+  const handleCash = (val: string) => setCashReceived(+val);
 
+  const clearMsg = () => setMessage("");
   let sum = getTotalSum(cart);
+  const handleDiscount = (val: string) => setDiscount(+val);
 
   let toBePaid = sum - discount;
   const change = cashReceived - toBePaid < 0 ? 0 : cashReceived - toBePaid;
+
   const handleSubmit = () => {
     setMessage("");
     if (!client) {
       setMessage("Customer is missing");
       return setError(true);
     }
-
+    if (discount > sum) {
+      setMessage("discount cant be more than the price");
+      return;
+    }
     if (toBePaid > cashReceived && btn === "cash") {
-      setMessage("Cash received is less");
+      setMessage("Cash received is less than expected");
       return;
     }
 
@@ -80,6 +84,7 @@ const UseCart = () => {
     showDatePicker,
     changeToCredit,
     changeToCash,
+    clearMsg,
   };
 };
 

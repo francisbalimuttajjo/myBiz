@@ -6,44 +6,42 @@ import { SearchProps as Props } from "../../types/types";
 const SearchBar: React.FC<Props> = (props) => {
   return (
     <View>
-      <View>
-        <View style={styles.container}>
-          <View
-            style={
-              props.clicked
-                ? styles.searchBar__clicked
-                : styles.searchBar__unclicked
-            }
-          >
-            {/* search Icon */}
-            <Feather
-              name="search"
+      <View style={styles.container}>
+        <View
+          style={
+            props.clicked
+              ? styles.searchBar__clicked
+              : styles.searchBar__unclicked
+          }
+        >
+          {/* search Icon */}
+          <Feather
+            name="search"
+            size={20}
+            color="skyblue"
+            style={{ marginLeft: 1 }}
+          />
+          {/* Input field */}
+          <TextInput
+            style={styles.input}
+            placeholder={props.placeholder}
+            value={props.searchPhrase}
+            onChangeText={props.handleChange}
+            onFocus={props.handleClicked}
+          />
+          {/* cross Icon, depending on whether the search bar is clicked or not */}
+          {props.clicked && (
+            <Entypo
+              name="cross"
               size={20}
               color="skyblue"
-              style={{ marginLeft: 1 }}
+              style={{ padding: 1 }}
+              onPress={props.clearSearchField}
             />
-            {/* Input field */}
-            <TextInput
-              style={styles.input}
-              placeholder={props.placeholder}
-              value={props.searchPhrase}
-              onChangeText={props.handleChange}
-              onFocus={props.handleClicked}
-            />
-            {/* cross Icon, depending on whether the search bar is clicked or not */}
-            {props.clicked && (
-              <Entypo
-                name="cross"
-                size={20}
-                color="skyblue"
-                style={{ padding: 1 }}
-                onPress={props.clearSearchField}
-              />
-            )}
-          </View>
+          )}
         </View>
-        <Text style={styles.infoMsg_text}>{props.infoMsg}</Text>
       </View>
+      <Text style={styles.infoMsg_text}>{props.infoMsg}</Text>
     </View>
   );
 };
@@ -54,7 +52,7 @@ export default SearchBar;
 const styles = StyleSheet.create({
   infoMsg_text: { alignSelf: "center", color: "skyblue" },
   container: {
-    marginHorizontal: 15,
+    marginHorizontal: "5%",
     justifyContent: "center",
     alignItems: "center",
     flexDirection: "row",

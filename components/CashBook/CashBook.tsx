@@ -6,42 +6,15 @@ import Search from "../components/Search";
 import Balance from "./Balance";
 import CashItem from "./CashItem";
 import Btns from "./Btns";
+import { useSelector } from "react-redux";
+import { RootState } from "../../redux/Store";
+import { getDifference } from "../../utils";
 
-const array = [
-  {
-    amount: 1200,
-    category: "supplies",
-    _id: "fdty90yjd",
-    date: new Date(),
-    title: "book keeping",
-    type: "cash-in",
-  },
-  {
-    amount: 1200,
-    category: "supplies",
-    _id: "78hui",
-    date: new Date(),
-    title: "book keeping",
-    type: "cash-out",
-  },
-  {
-    amount: 1200,
-    category: "supplies",
-    _id: "78klnh",
-    date: new Date(),
-    title: "book keeping",
-    type: "cash-out",
-  },
-  {
-    amount: 1200,
-    category: "supplies",
-    _id: "fdjd",
-    date: new Date(),
-    title: "book keeping",
-    type: "cash-in",
-  },
-];
 const CashBook = () => {
+  const { cashTransactions } = useSelector(
+    (state: RootState) => state.cashBook
+  );
+  const [income, expenses] = getDifference(cashTransactions);
   return (
     <SafeAreaProvider>
       <SafeAreaView>
@@ -71,10 +44,10 @@ const CashBook = () => {
           />
         </View>
         <ScrollView style={{ paddingTop: "20%" }}>
-          <Balance amount_in={90000} amount_out={45090} />
-          <Horizontal length={array.length} />
+          <Balance amount_in={income} amount_out={expenses} />
+          <Horizontal length={cashTransactions.length} />
           <View style={{ paddingBottom: "50%" }}>
-            {array.map((el) => (
+            {cashTransactions.map((el) => (
               <CashItem item={el} key={el._id} />
             ))}
           </View>

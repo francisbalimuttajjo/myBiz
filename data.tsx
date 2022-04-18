@@ -1,4 +1,4 @@
-import { InitialState, Item } from "./types/types";
+import { CashItemProps, InitialState, Item } from "./types/types";
 const image =
   "https://storage.googleapis.com/download/storage/v1/b/task-tracker-336811.appspot.com/o/%2Fusers%2Fimgs%2Fuser-61d5e487b45306781f0cea46-1642267623054.jpeg?generation=1642267623313359&alt=media";
 
@@ -147,7 +147,7 @@ const initialValues: Item = {
   description: "",
   category: "",
   isReturnable: false,
-  stock: '0',
+  stock: "0",
   buyingPrice: "0",
   sellingPrice: "0",
   image: "",
@@ -162,7 +162,40 @@ const categories: InitialState["categories"] = [
   { title: "food", value: "food", _id: "09" },
   { title: "groceries", value: "groceries", _id: "80" },
   { title: "stationery", value: "stationery", _id: "090" },
-  
+];
+const cashTransactions: Array<CashItemProps["item"]> = [
+  {
+    amount: 1200,
+    category: "labour",
+    _id: "fdty90yjd",
+    date: new Date(),
+    title: "book keeping",
+    type: "cash-in",
+  },
+  {
+    amount: 1200,
+    category: "supplies",
+    _id: "78hui",
+    date: new Date(),
+    title: "book keeping",
+    type: "cash-out",
+  },
+  {
+    amount: 120,
+    category: "supplies",
+    _id: "78klnh",
+    date: new Date(),
+    title: "book keeping",
+    type: "cash-out",
+  },
+  {
+    amount: 1200,
+    category: "salary",
+    _id: "fdjd",
+    date: new Date(),
+    title: "book keeping",
+    type: "cash-in",
+  },
 ];
 const store: Array<Item> = stock;
 const categoriesStore = categories;
@@ -179,4 +212,4 @@ const initialState: InitialState = {
   editable: "",
 };
 
-export { store, initialValues, categoriesStore, initialState };
+export { store, initialValues, categoriesStore, initialState, cashTransactions };

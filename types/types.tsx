@@ -1,5 +1,5 @@
 import React from "react";
-import { CashItemProps } from "../components/CashBook/CashItem";
+
 //bottom tabs
 export enum MainRoutes {
   HomePage = "Home",
@@ -162,12 +162,25 @@ export type NavigationProps = {
   goBack: () => void;
 };
 
+//
+export type CashItemProps = {
+  item: {
+    amount: number;
+    category: string;
+    date: Date;
+    title: string;
+    type: string;
+    _id: string;
+  };
+};
+
 export type mainStackParams = {
   Stock: undefined;
   CreditBook: undefined;
   CashBook: undefined;
   Purchases: undefined;
   cash: { item: CashItemProps };
+  entryDetails: { id: undefined };
   Cart: undefined;
   home: undefined;
   Sales: undefined;

@@ -15,6 +15,7 @@ import Home from "./screens/Home";
 import CategoriesEdit from "./screens/EditCategories";
 import EditStock from "./screens/EditStock";
 import Cash from "./screens/Cash";
+import EntryDetails from "./screens/EntryDetails";
 import BottomTabs from "./BottomTabs";
 import { mainStackParams } from "../types/types";
 
@@ -38,6 +39,14 @@ const DetailsScreens = () => {
             //component={Home}
             component={BottomTabs}
             options={{ headerShown: false }}
+          />
+
+          <Stack.Screen
+            name="entryDetails"
+            component={EntryDetails}
+            options={({ route }) => ({
+              title: "Entry Details",
+            })}
           />
           <Stack.Screen
             name="editStock"

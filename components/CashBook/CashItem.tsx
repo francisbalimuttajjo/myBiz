@@ -1,24 +1,13 @@
 import { useNavigation } from "@react-navigation/native";
 import React from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import { NavigationProps } from "../../types/types";
-
-export type CashItemProps = {
-  item: {
-    amount: number;
-    category: string;
-    date: Date;
-    title: string;
-    type: string;
-    _id: string;
-  };
-};
+import { NavigationProps, CashItemProps } from "../../types/types";
 
 const Item: React.FC<CashItemProps> = ({ item }) => {
   const { navigate } = useNavigation<NavigationProps>();
   return (
     <TouchableOpacity
-      onPress={() => navigate("cash", { id: item._id })}
+      onPress={() => navigate("entryDetails", { id: item._id })}
       activeOpacity={0.8}
       style={styles.container}
     >

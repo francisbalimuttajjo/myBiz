@@ -4,9 +4,9 @@ import { View, Text } from "react-native";
 import { mainStackParams } from "../../types/types";
 type Props = NativeStackScreenProps<mainStackParams, "cash">;
 
-const Edit = ({ route, navigation }: Props) => {
+const Edit = () => {
   // const { item } = route.params;
-  console.log(route);
+//   console.log(route);
   return (
     <View>
       <Text>Editing</Text>

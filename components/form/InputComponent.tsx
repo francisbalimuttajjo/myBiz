@@ -15,7 +15,6 @@ const AppFormField: React.FC<Props & FieldProps> = (props) => {
   } = props;
 
   const hasError = errors[name] && touched[name];
-  
 
   return (
     <View style={styles.container}>
@@ -30,12 +29,9 @@ const AppFormField: React.FC<Props & FieldProps> = (props) => {
           {required ? " *" : ""}
         </Text>
         <TextInput
-          
           keyboardType={numeric ? "numeric" : "default"}
           placeholder={placeholder}
           onChangeText={(text) => {
-            // let val: any = numeric ? +text : text;
-            // console.log(typeof val);
             onChange(name)(text);
           }}
           onBlur={() => {

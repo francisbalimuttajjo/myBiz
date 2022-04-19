@@ -5,7 +5,7 @@ import Ionicon from "react-native-vector-icons/EvilIcons";
 import { DatePickerProps as Props } from "../../types/types";
 
 const Date = (props: Props) => {
-  console.log("dat", props.date);
+ 
   return (
     <View>
       <View style={styles.container}>

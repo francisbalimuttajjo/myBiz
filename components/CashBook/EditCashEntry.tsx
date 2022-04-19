@@ -12,6 +12,7 @@ import { CashItemProps } from "../../types/types";
 
 import { getDate } from "../../utils";
 import Btns from "./EntryType";
+import Input from "./FloatingInput";
 import DateComponent from "./DateComponent";
 
 const Edit = (props: CashItemProps) => {
@@ -38,6 +39,10 @@ const Edit = (props: CashItemProps) => {
     setItemTime(date);
     hideTimePicker();
   };
+  const [amount, setAmount] = React.useState(props.item.amount.toString());
+  const [remark, setRemark] = React.useState(props.item.title);
+  const onChange = (el: string) => setAmount(el);
+  const onChangeRemark = (el: string) => setRemark(el);
   return (
     <View style={{ backgroundColor: "#fff", height: "100%" }}>
       <Btns
@@ -57,6 +62,21 @@ const Edit = (props: CashItemProps) => {
         handleConfirm={handleConfirm}
         showTimePicker={showTimePicker}
       />
+      <View style={{ paddingTop: "5%" }}>
+        <Input
+          label="Amount"
+          onChange={onChange}
+          value={amount}
+          keyboard="numeric"
+          item={props.item}
+        />
+        <Input
+          label="Remark"
+          onChange={onChangeRemark}
+          value={remark}
+          item={props.item}
+        />
+      </View>
     </View>
   );
 };

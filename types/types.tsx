@@ -176,6 +176,15 @@ export type CashItemProps = {
   };
 };
 
+//floating label
+export type FloatingLabelProps = {
+  label: string;
+  value: string;
+  onChange: (a: string) => void;
+  keyboard?: string;
+  item: CashItemProps["item"];
+};
+
 export type mainStackParams = {
   Stock: undefined;
   CreditBook: undefined;

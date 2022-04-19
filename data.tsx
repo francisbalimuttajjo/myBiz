@@ -176,7 +176,7 @@ const cashTransactions: Array<CashItemProps["item"]> = [
   },
   {
     amount: 120,
-    category: "labour",
+    category: "salaries",
     _id: "fdty9008yjd",
     date: new Date(),
     title: "book ",
@@ -185,7 +185,7 @@ const cashTransactions: Array<CashItemProps["item"]> = [
   },
   {
     amount: 120,
-    category: "supplies",
+    category: "others",
     _id: "78hui",
     date: new Date(),
     title: "book keeping",
@@ -194,7 +194,7 @@ const cashTransactions: Array<CashItemProps["item"]> = [
   },
   {
     amount: 1200,
-    category: "supplies",
+    category: "salaries",
     _id: "78klnh",
     date: new Date(),
     title: "book keeping",
@@ -203,7 +203,7 @@ const cashTransactions: Array<CashItemProps["item"]> = [
   },
   {
     amount: 1200,
-    category: "salary",
+    category: "labour",
     _id: "fdjd",
     date: new Date(),
     title: "book keeping",

@@ -1,6 +1,6 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { useSelector } from "react-redux";
-import EditComponent from "../../components/CashBook/EditCashEntry";
+import EditComponent from "../../components/CashBook/Form";
 import { RootState } from "../../redux/Store";
 import { mainStackParams } from "../../types/types";
 type Props = NativeStackScreenProps<mainStackParams, "editEntry">;

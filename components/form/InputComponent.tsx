@@ -1,5 +1,5 @@
 import { FieldProps } from "formik";
-import React, { ChangeEvent } from "react";
+import React from "react";
 import { StyleSheet, Text, TextInput, View } from "react-native";
 import { InputProps as Props } from "../../types/types";
 
@@ -15,6 +15,7 @@ const AppFormField: React.FC<Props & FieldProps> = (props) => {
   } = props;
 
   const hasError = errors[name] && touched[name];
+  
 
   return (
     <View style={styles.container}>
@@ -29,9 +30,11 @@ const AppFormField: React.FC<Props & FieldProps> = (props) => {
           {required ? " *" : ""}
         </Text>
         <TextInput
+          
           keyboardType={numeric ? "numeric" : "default"}
           placeholder={placeholder}
           onChangeText={(text) => {
+           
             onChange(name)(text);
           }}
           onBlur={() => {

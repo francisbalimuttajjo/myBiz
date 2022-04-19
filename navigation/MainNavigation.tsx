@@ -55,6 +55,7 @@ const DetailsScreens = () => {
           <Stack.Screen
             name="editEntry"
             component={EditEntry}
+            
             options={{
               title: "Edit Entry",
               headerRight: () => (
@@ -68,6 +69,7 @@ const DetailsScreens = () => {
                   <Ionicon name="trash-outline" size={20} color="red" />
                 </TouchableOpacity>
               ),
+           
             }}
           />
           <Stack.Screen

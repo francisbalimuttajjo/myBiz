@@ -180,6 +180,7 @@ export type CashItemProps = {
 export type FloatingLabelProps = {
   label: string;
   value: string;
+  error?: string;
   onChange: (a: string) => void;
   keyboard?: string;
   item: CashItemProps["item"];

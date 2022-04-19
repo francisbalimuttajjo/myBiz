@@ -63,7 +63,7 @@ const FloatingLabel = (props: Props) => {
     return "black";
   };
   return (
-    <View style={styles.container}>
+      <View style={{ ...styles.container,borderColor:props.error ? 'red':'#bdbdbd' }}>
       <Animated.View style={[styles.animatedStyle, animStyle]}>
         <Text style={styles.label}>{props.label} </Text>
       </Animated.View>
@@ -93,7 +93,7 @@ const styles = StyleSheet.create({
     paddingTop: 5,
     paddingHorizontal: 10,
     borderWidth: 1,
-    borderColor: "#bdbdbd",
+    // borderColor: "#bdbdbd",
     // #bdbdbd
     borderRadius: 7,
     width: "90%",

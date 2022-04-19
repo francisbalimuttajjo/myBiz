@@ -1,15 +1,21 @@
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import React from "react";
+import { Pressable, StyleSheet, Text, TextInput, View } from "react-native";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import Ionicon from "react-native-vector-icons/EvilIcons";
 import { DatePickerProps as Props } from "../../types/types";
 
 const Date = (props: Props) => {
+  console.log("dat", props.date);
   return (
     <View>
       <View style={styles.container}>
         <Text style={{ marginBottom: 10 }}>Due Date</Text>
         <Pressable onPress={props.showDatePicker} style={styles.btn}>
-          <Text style={{ opacity: 0.3 }}>Choose Date</Text>
+          <TextInput
+            style={{ opacity: 0.8 }}
+            placeholder="Choose Date"
+            value={props.date}
+          />
           <View style={styles.icon}>
             <Ionicon name="calendar" size={32} color="skyblue" />
           </View>

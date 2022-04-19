@@ -2,17 +2,23 @@ import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 
 const Balance = (props: { amount_in: number; amount_out: number }) => {
+  let dif = props.amount_in - props.amount_out;
   return (
     <View style={styles.main_container}>
       <View style={styles.net_balance_container}>
-        <View style={styles.view}>
+        <View
+          style={{ ...styles.view, flexDirection: "row", alignItems: "center" }}
+        >
           <Text style={styles.net_balance_text}>Net Balance</Text>
+          {dif < 1 && (
+            <Text style={{ fontSize: 12, marginLeft: 5 }}>(No Cash )</Text>
+          )}
         </View>
 
-        <Text style={styles.net_balance}>
-          {isNaN(props.amount_in - props.amount_out)
-            ? 0
-            : props.amount_in - props.amount_out}
+        <Text
+          style={{ ...styles.net_balance, color: dif < 1 ? "red" : "black" }}
+        >
+          {dif < 1 ? -1 * dif : dif}
         </Text>
       </View>
       <View style={styles.container}>

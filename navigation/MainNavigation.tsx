@@ -15,9 +15,13 @@ import Home from "./screens/Home";
 import CategoriesEdit from "./screens/EditCategories";
 import EditStock from "./screens/EditStock";
 import Cash from "./screens/Cash";
-import EntryDetails from "./screens/EntryDetails";
 import BottomTabs from "./BottomTabs";
+import EntryDetails from "./screens/EntryDetails";
+import EditEntry from "./screens/EditEntry";
 import { mainStackParams } from "../types/types";
+import React from "react";
+import { TouchableOpacity } from "react-native";
+import Ionicon from "react-native-vector-icons/Ionicons";
 
 const DetailsScreens = () => {
   const Stack = createStackNavigator<mainStackParams>();
@@ -44,9 +48,27 @@ const DetailsScreens = () => {
           <Stack.Screen
             name="entryDetails"
             component={EntryDetails}
-            options={({ route }) => ({
+            options={{
               title: "Entry Details",
-            })}
+            }}
+          />
+          <Stack.Screen
+            name="editEntry"
+            component={EditEntry}
+            options={{
+              title: "Edit Entry",
+              headerRight: () => (
+                <TouchableOpacity
+                  onPress={() => console.log("pressed")}
+                  activeOpacity={0.6}
+                  style={{
+                    paddingHorizontal: "10%",
+                  }}
+                >
+                  <Ionicon name="trash-outline" size={20} color="red" />
+                </TouchableOpacity>
+              ),
+            }}
           />
           <Stack.Screen
             name="editStock"

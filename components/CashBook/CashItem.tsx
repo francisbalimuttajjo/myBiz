@@ -2,9 +2,12 @@ import { useNavigation } from "@react-navigation/native";
 import React from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { NavigationProps, CashItemProps } from "../../types/types";
+import { getDate } from "../../utils";
 
 const Item: React.FC<CashItemProps> = ({ item }) => {
   const { navigate } = useNavigation<NavigationProps>();
+  const { time } = getDate(item.date);
+
   return (
     <TouchableOpacity
       onPress={() => navigate("entryDetails", { id: item._id })}
@@ -15,21 +18,13 @@ const Item: React.FC<CashItemProps> = ({ item }) => {
         <Text style={styles.title}>{item.title}</Text>
         <View style={styles.sub_container}>
           <View style={styles.category}>
-            <Text style={{ color: "skyblue" }}>{item.category}</Text>
+            <Text style={styles.category_text}>{item.category}</Text>
           </View>
           <View style={styles.cash_container}>
-            <Text style={{ color: "#3d7de3" }}>Cash</Text>
+            <Text style={styles.mode}>{item.paymentMode}</Text>
           </View>
         </View>
-        <Text style={styles.time}>
-          {new Date().toLocaleString(undefined, {
-            // day: "numeric",
-            // month: "numeric",
-            // year: "numeric",
-            hour: "2-digit",
-            minute: "2-digit",
-          })}
-        </Text>
+        <Text style={styles.time}>{time}</Text>
       </View>
       <View style={styles.amount_container}>
         <Text
@@ -47,6 +42,8 @@ const Item: React.FC<CashItemProps> = ({ item }) => {
 
 export default Item;
 const styles = StyleSheet.create({
+  category_text: { color: "skyblue", textTransform: "capitalize" },
+  mode: { color: "#3d7de3", textTransform: "capitalize" },
   amount: { textTransform: "capitalize", fontWeight: "bold" },
   amount_container: { width: "20%", alignItems: "center" },
   container: {
@@ -64,7 +61,7 @@ const styles = StyleSheet.create({
     paddingVertical: 7,
     borderRadius: 5,
   },
-  time: { bottom: 0, position: "absolute" },
+  time: { bottom: 0, position: "absolute", marginLeft: 10 },
   cash_container: {
     backgroundColor: "#e1e5eb",
     marginHorizontal: 10,

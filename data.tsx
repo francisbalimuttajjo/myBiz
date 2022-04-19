@@ -168,25 +168,38 @@ const cashTransactions: Array<CashItemProps["item"]> = [
     amount: 1200,
     category: "labour",
     _id: "fdty90yjd",
+
     date: new Date(),
     title: "book keeping",
     type: "cash-in",
+    paymentMode: "cash",
   },
   {
-    amount: 1200,
+    amount: 120,
+    category: "labour",
+    _id: "fdty9008yjd",
+    date: new Date(),
+    title: "book ",
+    type: "cash-out",
+    paymentMode: "online",
+  },
+  {
+    amount: 120,
     category: "supplies",
     _id: "78hui",
     date: new Date(),
     title: "book keeping",
     type: "cash-out",
+    paymentMode: "online",
   },
   {
-    amount: 120,
+    amount: 1200,
     category: "supplies",
     _id: "78klnh",
     date: new Date(),
     title: "book keeping",
     type: "cash-out",
+    paymentMode: "cash",
   },
   {
     amount: 1200,
@@ -195,6 +208,7 @@ const cashTransactions: Array<CashItemProps["item"]> = [
     date: new Date(),
     title: "book keeping",
     type: "cash-in",
+    paymentMode: "online",
   },
 ];
 const store: Array<Item> = stock;
@@ -212,4 +226,10 @@ const initialState: InitialState = {
   editable: "",
 };
 
-export { store, initialValues, categoriesStore, initialState, cashTransactions };
+export {
+  store,
+  initialValues,
+  categoriesStore,
+  initialState,
+  cashTransactions,
+};

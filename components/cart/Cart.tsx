@@ -23,6 +23,7 @@ const Cart = () => {
     error,
     handleClient,
     change,
+    date,
     handleSubmit,
     handleCash,
     handleDiscount,
@@ -67,6 +68,7 @@ const Cart = () => {
             handleConfirm={handleConfirm}
             isDatePickerVisible={isDatePickerVisible}
             showDatePicker={showDatePicker}
+            date={date}
           />
         )}
 

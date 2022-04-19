@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 import React from "react";
 import { RootState } from "../../redux/Store";
-import { getTotalSum } from "../../utils";
+import { getTotalSum, getDate } from "../../utils";
 
 const UseCart = () => {
   const { cart } = useSelector((state: RootState) => state.stock);
@@ -14,8 +14,9 @@ const UseCart = () => {
   const [error, setError] = React.useState<boolean>(false);
   const [visible, setVisible] = React.useState<boolean>(true);
 
-  const changeToCash = () => {
+  const { date } = getDate(paymentDate);
 
+  const changeToCash = () => {
     setBtn("cash");
   };
   const changeToCredit = () => setBtn("credit");
@@ -65,6 +66,7 @@ const UseCart = () => {
     console.log("submitted");
   };
   return {
+    date,
     sum,
     discount,
     isDatePickerVisible,

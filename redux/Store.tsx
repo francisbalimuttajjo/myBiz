@@ -9,6 +9,10 @@ export const store = configureStore({
     stock: stockReducer,
     cashBook: cashBookReducer,
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }),
 });
 
 export type RootState = ReturnType<typeof store.getState>;

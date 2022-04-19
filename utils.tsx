@@ -28,9 +28,12 @@ const getDifference = (arr: Array<CashItemProps["item"]>) => {
   for (let i = 0; i < arr.length; i++) {
     if (arr[i].type === "cash-in") {
       income.push(arr[i]);
+    } else {
+      expense.push(arr[i]);
     }
-    expense.push(arr[i]);
   }
+
+  console.log({ income, expense });
   const incomes_array = income.map((el) => el.amount);
   const expenses_array = expense.map((el) => el.amount);
   const income_totals = incomes_array.reduce((a, b) => a + b, 0);
@@ -38,10 +41,52 @@ const getDifference = (arr: Array<CashItemProps["item"]>) => {
   return [income_totals, expenses_totals];
 };
 
+const getDate = (date: Date) => {
+  let months = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sept",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
+
+  // const currentDate = new Date(date);
+
+  // const day = currentDate.getDate();
+  // const month = currentDate.getMonth(); // Be careful! January is 0, not 1
+  // const year = currentDate.getFullYear();
+  // const mins= currentDate.getMinutes()
+  // const hours = currentDate.getHours()
+  // const time=`${hours}: ${mins}`
+
+  let day = date.toLocaleString(undefined, {
+    day: "numeric",
+  });
+  let month: string = date.toLocaleString(undefined, {
+    month: "numeric",
+  });
+  let year = date.toLocaleString(undefined, {
+    year: "numeric",
+  });
+  let time = date.toLocaleString(undefined, {
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+
+  return { date: `${day} ${months[+month - 1]}, ${year}`, time };
+};
 export {
   getTotal,
   getTotalSum,
   get_cart_index,
   get_stock_Index,
   getDifference,
+  getDate,
 };

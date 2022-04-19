@@ -36,6 +36,7 @@ export type DatePickerProps = {
   showDatePicker: () => void;
   hideDatePicker: () => void;
   handleConfirm: (date: Date) => void;
+  date: string;
 };
 
 export type CategoryProps = {
@@ -171,6 +172,7 @@ export type CashItemProps = {
     title: string;
     type: string;
     _id: string;
+    paymentMode: string;
   };
 };
 
@@ -181,6 +183,7 @@ export type mainStackParams = {
   Purchases: undefined;
   cash: { item: CashItemProps };
   entryDetails: { id: undefined };
+  editEntry: { id: undefined };
   Cart: undefined;
   home: undefined;
   Sales: undefined;

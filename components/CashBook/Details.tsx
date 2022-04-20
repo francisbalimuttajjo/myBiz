@@ -8,7 +8,8 @@ import { getDate } from "../../utils";
 const Details = (props: Props) => {
   const { navigate } = useNavigation<NavigationProps>();
   let item_name = props.item.type.split("-");
-  const { date, time } = getDate(props.item.date);
+  const { date } = getDate(props.item.entryDate);
+  const { time } = getDate(props.item.itemTime);
   return (
     <View style={{ paddingTop: "10%" }}>
       <View

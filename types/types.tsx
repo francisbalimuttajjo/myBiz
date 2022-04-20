@@ -168,7 +168,8 @@ export type CashItemProps = {
   item: {
     amount: number;
     category: string;
-    date: Date;
+    entryDate: string | Date;
+    itemTime: string | Date;
     title: string;
     type: string;
     _id: string;

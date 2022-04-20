@@ -6,7 +6,7 @@ import { getDate } from "../../utils";
 
 const Item: React.FC<CashItemProps> = ({ item }) => {
   const { navigate } = useNavigation<NavigationProps>();
-  const { time } = getDate(item.date);
+  const { time } = getDate(item.itemTime);
 
   return (
     <TouchableOpacity

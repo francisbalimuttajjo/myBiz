@@ -55,21 +55,21 @@ const DetailsScreens = () => {
           <Stack.Screen
             name="editEntry"
             component={EditEntry}
-            
-            options={{
-              title: "Edit Entry",
-              headerRight: () => (
-                <TouchableOpacity
-                  onPress={() => console.log("pressed")}
-                  activeOpacity={0.6}
-                  style={{
-                    paddingHorizontal: "10%",
-                  }}
-                >
-                  <Ionicon name="trash-outline" size={20} color="red" />
-                </TouchableOpacity>
-              ),
-           
+            options={({ route }) => {
+              return {
+                title: " Edit Entry",
+                headerRight: () => (
+                  <TouchableOpacity
+                    onPress={() => console.log(route.params.id)}
+                    activeOpacity={0.6}
+                    style={{
+                      paddingHorizontal: "10%",
+                    }}
+                  >
+                    <Ionicon name="trash-outline" size={20} color="red" />
+                  </TouchableOpacity>
+                ),
+              };
             }}
           />
           <Stack.Screen

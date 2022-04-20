@@ -41,7 +41,8 @@ const getDifference = (arr: Array<CashItemProps["item"]>) => {
   return [income_totals, expenses_totals];
 };
 
-const getDate = (date: Date) => {
+const getDate = (date1: Date | string) => {
+  let date = new Date(date1);
   let months = [
     "Jan",
     "Feb",

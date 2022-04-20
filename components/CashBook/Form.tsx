@@ -8,80 +8,61 @@ import DateComponent from "./DateComponent";
 import PaymentMode from "./Mode";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { Picker } from "@react-native-picker/picker";
+import { categoriesArray as categories } from "../../data";
+import useForm from "./useForm";
 
-const Edit = (props: CashItemProps) => {
-  const [type, setType] = React.useState(props.item.type);
-  const [entryDate, setEntryDate] = React.useState(props.item.date);
-  const { date } = getDate(entryDate);
-  const [itemTime, setItemTime] = React.useState(props.item.date);
-  const { time } = getDate(itemTime);
-  const changeToCashIn = () => setType("cash-in");
-  const changeToCashOut = () => setType("cash-out");
-  const [isDatePickerVisible, setDatePickerVisibility] = React.useState(false);
-  const [isTimePickerVisible, setTimePickerVisibility] = React.useState(false);
-  const showDatePicker = () => setDatePickerVisibility(true);
-  const showTimePicker = () => setTimePickerVisibility(true);
-  const hideDatePicker = () => setDatePickerVisibility(false);
-  const hideTimePicker = () => setTimePickerVisibility(false);
+const Form = (props: { item: CashItemProps["item"]; editing: boolean }) => {
+  const {
+    changeToOnline,
+    changeToCash,
+    paymentMode,
+    handleSubmit,
+    onChange,
+    handleTimePickerConfirm,
+    showDatePicker,
+    showTimePicker,
+    onChangeRemark,
+    isTimePickerVisible,
+    isDatePickerVisible,
+    changeToCashOut,
+    changeToCashIn,
+    handleConfirm,
+    type,
+    date,
+    time,
+    errors,
+    remark,
+    hideDatePicker,
+    hideTimePicker,
+    amount,
+    category,
+    entryDate,
+    itemTime,
+    handlePickerChange,
+  } = useForm({ item: props.item });
 
-  const handleConfirm = (date: Date) => {
-    setEntryDate(date);
-    hideDatePicker();
-  };
-
-  const handleTimePickerConfirm = (date: Date) => {
-    setItemTime(date);
-    hideTimePicker();
-  };
-  const [amount, setAmount] = React.useState(props.item.amount.toString());
-  const [remark, setRemark] = React.useState(props.item.title);
-  const onChange = (el: string) => {
-    setErrors({ ...errors, amount: "" });
-    setAmount(el);
-  };
-  const onChangeRemark = (el: string) => {
-    setErrors({ ...errors, remark: "" });
-    setRemark(el);
-  };
-  const [errors, setErrors] = React.useState({
-    amount: "",
-    remark: "",
-    category: "",
+  console.log({
+    type,
+    time,
+    date,
+    amount,
+    remark,
+    category,
+    paymentMode,
+    entryDate,
+    itemTime,
   });
-  const handleSubmit = () => {
-    if (!remark) {
-      setErrors({ ...errors, remark: "field is required" });
-    }
-    if (!amount) {
-      setErrors({ ...errors, amount: "field is required" });
-    }
-    if (!category) {
-      setErrors({ ...errors, category: "field is required" });
-    }
-  };
 
-  const [paymentMode, setPaymentMode] = React.useState<string>(
-    props.item.paymentMode
-  );
-  const [category, setCategory] = React.useState<string>(props.item.category);
-
-  const changeToCash = () => setPaymentMode("cash");
-  const changeToOnline = () => setPaymentMode("online");
-  const categories = [
-    { title: "choose", value: "" },
-    { title: "rent", value: "rent" },
-    { title: "labour", value: "labour" },
-    { title: "salaries", value: "salaries" },
-    { title: "others", value: "others" },
-  ];
   return (
     <View style={styles.main_container}>
       <ScrollView>
-        <Btns
-          type={type}
-          changeToCashIn={changeToCashIn}
-          changeToCashOut={changeToCashOut}
-        />
+        {props.editing && (
+          <Btns
+            type={type}
+            changeToCashIn={changeToCashIn}
+            changeToCashOut={changeToCashOut}
+          />
+        )}
         <DateComponent
           handleTimePickerConfirm={handleTimePickerConfirm}
           hideDatePicker={hideDatePicker}
@@ -121,10 +102,7 @@ const Edit = (props: CashItemProps) => {
           }}
         >
           <Picker
-            onValueChange={(itemValue) => {
-              setErrors({ ...errors, category: "" });
-              setCategory(itemValue);
-            }}
+            onValueChange={handlePickerChange}
             mode={"dropdown"}
             selectedValue={category}
           >
@@ -150,7 +128,7 @@ const Edit = (props: CashItemProps) => {
   );
 };
 
-export default Edit;
+export default Form;
 
 const styles = StyleSheet.create({
   main_container: { backgroundColor: "#fff", height: "100%" },

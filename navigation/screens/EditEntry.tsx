@@ -4,13 +4,15 @@ import EditComponent from "../../components/CashBook/Form";
 import { RootState } from "../../redux/Store";
 import { mainStackParams } from "../../types/types";
 type Props = NativeStackScreenProps<mainStackParams, "editEntry">;
-const Edit = ({ route, navigation }: Props) => {
-  console.log(route.params.id);
+
+
+const Edit = ({ route }: Props) => {
+
   const { cashTransactions } = useSelector(
     (state: RootState) => state.cashBook
   );
   const item = cashTransactions.filter((el) => el._id === route.params.id)[0];
-  return <EditComponent item={item} />;
+  return <EditComponent item={item} editing />;
 };
 
 export default Edit;

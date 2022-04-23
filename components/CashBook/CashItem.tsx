@@ -7,6 +7,7 @@ import { getDate } from "../../utils";
 const Item: React.FC<CashItemProps> = ({ item }) => {
   const { navigate } = useNavigation<NavigationProps>();
   const { time } = getDate(item.itemTime);
+  const { date } = getDate(item.entryDate);
 
   return (
     <TouchableOpacity
@@ -24,7 +25,10 @@ const Item: React.FC<CashItemProps> = ({ item }) => {
             <Text style={styles.mode}>{item.paymentMode}</Text>
           </View>
         </View>
-        <Text style={styles.time}>{time}</Text>
+        <View style={styles.time_container}>
+          <Text>{time}</Text>
+          <Text style={{ marginLeft: 10 }}>{date}</Text>
+        </View>
       </View>
       <View style={styles.amount_container}>
         <Text
@@ -61,7 +65,12 @@ const styles = StyleSheet.create({
     paddingVertical: 7,
     borderRadius: 5,
   },
-  time: { bottom: 0, position: "absolute", marginLeft: 10 },
+  time_container: {
+    bottom: 0,
+    position: "absolute",
+    marginLeft: 10,
+    flexDirection: "row",
+  },
   cash_container: {
     backgroundColor: "#e1e5eb",
     marginHorizontal: 10,

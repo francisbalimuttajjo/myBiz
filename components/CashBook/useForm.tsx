@@ -51,6 +51,17 @@ const UseForm = (props: { item: Props["item"] }) => {
     if (!category) {
       setErrors({ ...errors, category: "field is required" });
     }
+    console.log({
+    type,
+    time,
+    date,
+    amount,
+    remark,
+    category,
+    paymentMode,
+    entryDate,
+    itemTime,
+  });
   };
 
   const [paymentMode, setPaymentMode] = React.useState<string>(

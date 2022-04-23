@@ -230,7 +230,7 @@ const initialState: InitialState = {
   editable: "",
 };
 const categoriesArray: Array<{ title: string; value: string }> = [
-  { title: "choose", value: "" },
+  { title: "choose", value:"" },
   { title: "rent", value: "rent" },
   { title: "labour", value: "labour" },
   { title: "salaries", value: "salaries" },

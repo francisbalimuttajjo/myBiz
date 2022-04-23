@@ -1,10 +1,14 @@
+import { useNavigation } from "@react-navigation/native";
 import React from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { NavigationProps } from "../../types/types";
 
 const Btns = () => {
+  const { navigate } = useNavigation<NavigationProps>();
   return (
     <View style={styles.container}>
       <TouchableOpacity
+        onPress={() => navigate("CashInEntry")}
         activeOpacity={0.8}
         style={{
           backgroundColor: "#038238",
@@ -14,6 +18,7 @@ const Btns = () => {
         <Text style={styles.text}>+ CASH IN</Text>
       </TouchableOpacity>
       <TouchableOpacity
+        onPress={() => navigate("CashOutEntry")}
         activeOpacity={0.7}
         style={{
           backgroundColor: "red",

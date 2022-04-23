@@ -15,6 +15,8 @@ import Home from "./screens/Home";
 import CategoriesEdit from "./screens/EditCategories";
 import EditStock from "./screens/EditStock";
 import Cash from "./screens/Cash";
+import CashIn from "./screens/CashIn";
+import CashOut from "./screens/CashOut";
 import BottomTabs from "./BottomTabs";
 import EntryDetails from "./screens/EntryDetails";
 import EditEntry from "./screens/EditEntry";
@@ -44,7 +46,20 @@ const DetailsScreens = () => {
             component={BottomTabs}
             options={{ headerShown: false }}
           />
-
+          <Stack.Screen
+            name="CashInEntry"
+            component={CashIn}
+            options={{
+              title: "New Cash In Entry",
+            }}
+          />
+          <Stack.Screen
+            name="CashOutEntry"
+            component={CashOut}
+            options={{
+              title: "New Cash Out Entry",
+            }}
+          />
           <Stack.Screen
             name="entryDetails"
             component={EntryDetails}

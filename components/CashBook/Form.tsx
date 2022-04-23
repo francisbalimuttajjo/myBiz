@@ -41,21 +41,9 @@ const Form = (props: { item: CashItemProps["item"]; editing: boolean }) => {
     handlePickerChange,
   } = useForm({ item: props.item });
 
-  console.log({
-    type,
-    time,
-    date,
-    amount,
-    remark,
-    category,
-    paymentMode,
-    entryDate,
-    itemTime,
-  });
-
   return (
     <View style={styles.main_container}>
-      <ScrollView>
+      <ScrollView style={{ paddingTop: props.editing ? "2%" : "10%" }}>
         {props.editing && (
           <Btns
             type={type}
@@ -122,7 +110,9 @@ const Form = (props: { item: CashItemProps["item"]; editing: boolean }) => {
         activeOpacity={0.8}
         style={styles.btn_container}
       >
-        <Text style={styles.btn_text}>UPDATE</Text>
+        <Text style={styles.btn_text}>
+          {!props.editing ? "SAVE" : "UPDATE"}
+        </Text>
       </TouchableOpacity>
     </View>
   );

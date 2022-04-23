@@ -2,7 +2,24 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { store, categoriesStore, initialState } from "../data";
 import { get_cart_index, get_stock_Index } from '../utils'
 
+// export const getFinishedTasks = createAsyncThunk(
+//   "items/getFinishedTasks",
 
+//   async (thunkAPI) => {
+    
+//       try{
+//         const response = await axios.get("https://taask-traacker.herokuapp.com/api/v1/complete");
+        
+//          return response.data
+    
+    
+   
+//     } catch (err) {
+      
+//       return err.response.data;
+//     }
+//   }
+// );
 
 const stockSlice = createSlice({
   name: "stock",
@@ -125,6 +142,7 @@ const stockSlice = createSlice({
 
     changeToEditing(state, action: PayloadAction<{ id: string }>) {
       state.isEditing = true;
+      
       state.editable = action.payload.id;
     },
     disableEditing(state) {

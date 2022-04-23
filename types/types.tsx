@@ -58,7 +58,7 @@ export type SearchProps = {
   searchPhrase: string;
   placeholder: string;
   clearSearchField: () => void;
-  infoMsg: string;
+  infoMsg?: string;
 };
 //button
 export type ButtonProps = {
@@ -166,7 +166,7 @@ export type NavigationProps = {
 //
 export type CashItemProps = {
   item: {
-    amount: number;
+    amount: number | string;
     category: string;
     entryDate: string | Date;
     itemTime: string | Date;
@@ -195,6 +195,8 @@ export type mainStackParams = {
   cash: { item: CashItemProps };
   entryDetails: { id: undefined };
   editEntry: { id: undefined };
+  CashInEntry: undefined;
+  CashOutEntry: undefined;
   Cart: undefined;
   home: undefined;
   Sales: undefined;

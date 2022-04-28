@@ -1,44 +1,45 @@
 'use strict';
 module.exports = {
-  async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Stock', {
-   
+  async up(queryInterface, DataTypes) {
+    await queryInterface.createTable("stocks", {
       id: {
-        type: Sequelize.INTEGER,
-        primaryKey: true,
+        allowNull: false,
         autoIncrement: true,
+        primaryKey: true,
+        type: DataTypes.INTEGER,
       },
+      
       name: {
-        type: Sequelize.STRING,
-        allowNull: false,       
-         unique: true
+        type: DataTypes.STRING,
+        allowNull: false,
+        unique: true,
       },
-      buyingPrice: { type: Sequelize.INTEGER, allowNull: false },
-      sellingPrice: { type: Sequelize.INTEGER },
-      buyingCurrency: {
-        type: Sequelize.STRING,
+      buying_price: { type: DataTypes.INTEGER, allowNull: false },
+      selling_price: { type: DataTypes.INTEGER },
+      buying_currency: {
+        type: DataTypes.STRING,
         allowNull: false,
         defaultValue: "ugx",
       },
-      packaging: { type: Sequelize.STRING, allowNull: false },
-      category: { type: Sequelize.STRING, allowNull: false },
-      image: { type: Sequelize.STRING },
-      description: { type: Sequelize.STRING, allowNull: false },
-      sellingCurrency: { type: Sequelize.STRING, default: "ugx" },
-      stock: { type: Sequelize.INTEGER, allowNull: false },
-      supplier: { type: Sequelize.STRING },
-      isReturnable: { type: Sequelize.BOOLEAN },
-      // createdAt: {
-      //   allowNull: false,
-      //   type: Sequelize.DATE
-      // },
-      // updatedAt: {
-      //   allowNull: false,
-      //   type: Sequelize.DATE
-      // }
+      packaging: { type: DataTypes.STRING, allowNull: false },
+      category: { type: DataTypes.STRING, allowNull: false },
+      image: { type: DataTypes.STRING },
+      description: { type: DataTypes.STRING, allowNull: false },
+      selling_currency: { type: DataTypes.STRING, defaultValue: "ugx" },
+      stock: { type: DataTypes.INTEGER, allowNull: false },
+      supplier: { type: DataTypes.STRING },
+      is_returnable: { type: DataTypes.BOOLEAN },
+      created_at: {
+        allowNull: false,
+        type: DataTypes.DATE,
+      },
+      updated_at: {
+        allowNull: false,
+        type: DataTypes.DATE,
+      },
     });
   },
-  async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Stock');
+  async down(queryInterface, DataTypes) {
+    await queryInterface.dropTable('stocks');
   }
 };

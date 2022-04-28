@@ -4,7 +4,9 @@
     "password": "franckie@1A",
     "database": "stock_database",
     "host": "127.0.0.1",
-    "dialect": "postgres"
+    "dialect": "postgres",
+    "createdAt": "created_at",
+    "updatedAt": "updated_at"
   },
   "test": {
     "username": "postgres",

@@ -1,8 +1,10 @@
-const { Stock } = require("../models/stock");
+const { stock ,client,sequelize}= require("../models");
 const { sendResponse } = require("../utils/fns");
-
+  
 exports.getAllStock = (req, res) => {
-  Stock.findAll()
+  console.log(sequelize.models)
+
+  client.findAll()
     .then((stock) => sendResponse(req, res, 200, stock))
     .catch((err) => sendResponse(req, res, 400, err.message, "fail"));
 };

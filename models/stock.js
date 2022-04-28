@@ -14,18 +14,24 @@ module.exports = (sequelize, DataTypes) => {
   Stock.init(
     {
       id: {
-        type: DataTypes.INTEGER,
-        primaryKey: true,
+        allowNull: false,
         autoIncrement: true,
+        primaryKey: true,
+        type: DataTypes.INTEGER,
       },
+      // uuid: {
+      //   type: DataTypes.UUID,
+      //   primaryKey: true,
+      //   defaultValue: DataTypes.UUIDV4,
+      // },
       name: {
         type: DataTypes.STRING,
         allowNull: false,
         unique: true,
       },
-      buyingPrice: { type: DataTypes.INTEGER, allowNull: false },
-      sellingPrice: { type: DataTypes.INTEGER },
-      buyingCurrency: {
+      buying_price: { type: DataTypes.INTEGER, allowNull: false },
+      selling_price: { type: DataTypes.INTEGER },
+      buying_currency: {
         type: DataTypes.STRING,
         allowNull: false,
         defaultValue: "ugx",
@@ -34,14 +40,26 @@ module.exports = (sequelize, DataTypes) => {
       category: { type: DataTypes.STRING, allowNull: false },
       image: { type: DataTypes.STRING },
       description: { type: DataTypes.STRING, allowNull: false },
-      sellingCurrency: { type: DataTypes.STRING, defaultValue: "ugx" },
+      selling_currency: { type: DataTypes.STRING, defaultValue: "ugx" },
       stock: { type: DataTypes.INTEGER, allowNull: false },
       supplier: { type: DataTypes.STRING },
-      isReturnable: { type: DataTypes.BOOLEAN },
+      is_returnable: { type: DataTypes.BOOLEAN },
+      created_at: {
+        allowNull: false,
+        type: DataTypes.DATE,
+      },
+      updated_at: {
+        allowNull: false,
+        type: DataTypes.DATE,
+      },
     },
     {
       sequelize,
-      modelName: "Stock",
+      modelName: "stock",
+      tableName: "stocks",
+      underscored: true,
+      // timestamps: true,
+      underscored: true,
     }
   );
   return Stock;

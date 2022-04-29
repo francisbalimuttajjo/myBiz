@@ -1,18 +1,12 @@
 "use strict";
-
 const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class Client extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
     static associate(models) {
-      // define association here
-    }
-    toJSON() {
-      return { ...this.get(), createdAt: undefined, updatedAt: undefined };
+      this.hasMany(models.Sale, {
+        foreignKey: "client_id",
+        as: "purchases",
+      });
     }
   }
   Client.init(
@@ -24,34 +18,43 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.INTEGER,
       },
 
-      first_name: { type: DataTypes.STRING, allowNull: false, notEmpty: true },
-      last_name: { type: DataTypes.STRING, allowNull: false, notEmpty: true },
+      firstName: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          notEmpty: { args: true, msg: "Please provide a firstName" },
+        },
+      },
+      lastName: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          notEmpty: { args: true, msg: "Please provide a lastName" },
+        },
+      },
       email: {
         type: DataTypes.STRING,
-        isEmail: true,
+        validate: {
+          isEmail: { args: true, msg: "Please provide a valid email" },
+          notEmpty: true,
+          // isUnique: (email, next) => {
+          //   Client.findAll({ where: { email }, attributes: ["id"] })
+          //     .then((list) => {
+          //       if (list.length != 0) next(new Error("Client already exists"));
+          //       next();
+          //     })
+          //     .catch((err) => {
+          //       throw new Error(err.message);
+          //     });
+          //},
+        },
+
         allowNull: false,
-        unique: true,
-      },
-      created_at: {
-        allowNull: false,
-        type: DataTypes.DATE,
-      },
-      updated_at: {
-        allowNull: false,
-        type: DataTypes.DATE,
       },
     },
-    // {
-    //   timestamps: true,
-    //   underscored: true,
-    // },
     {
-      tableName: "clients",
-      modelName: "client",
       sequelize,
-      underscored: true,
-      // timestamps: true,
-      underscored: true,
+      modelName: "Client",
     }
   );
   return Client;

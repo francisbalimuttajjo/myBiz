@@ -102,3 +102,24 @@ exports.deleteOneSale = (req, res) => {
       );
     });
 };
+
+//reversing / cancelling sale
+exports.reverseSale = async (req, res) => {
+  try {
+    const sale = await db.Sale.findOne({
+      where: { id: req.params.id },
+    });
+    //updating stock before deleting
+    await db.Item.update(
+      { stock: db.sequelize.literal(`stock + ${sale.quantity}`) },
+      { where: { id: sale.item_id } }
+    );
+    //deleting sale from table
+    await db.Sale.destroy({
+      where: { id: req.params.id },
+    });
+    sendResponse(req, res, 200, "operation successfull");
+  } catch (err) {
+    sendResponse(req, res, 400, err.message, "fail");
+  }
+};

@@ -13,4 +13,6 @@ router
   .put(salesController.updateOneSale)
   .delete(salesController.deleteOneSale);
 
+router.route("/sales/reverse/:id")
+  .delete(salesController.reverseSale);
 module.exports = router;

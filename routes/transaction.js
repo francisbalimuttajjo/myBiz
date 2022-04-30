@@ -7,9 +7,9 @@ router
   .get(transactionsController.getAllTransactions)
   .post(transactionsController.addOneTransaction);
 
-// router
-//   .route("/clients/:id")
-//   .get(clientController.findOneClient)
+router
+  .route("/transactions/:id")
+  .get(transactionsController.findOneTransaction)
 //   .put(clientController.updateOneClient)
 //   .delete(clientController.deleteOneClient);
 

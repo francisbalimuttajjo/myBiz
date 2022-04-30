@@ -67,30 +67,29 @@ exports.getAllTransactions = (req, res) => {
     .catch((err) => sendResponse(req, res, 400, err.message, "fail"));
 };
 
-// //getting one sale
-// exports.findOneSale = (req, res) => {
-//   const id = req.params.id;
-//   db.Sale.findOne({
-//     where: { id },
-//     include: [db.Client, db.Item],
-//   })
-//     .then((sale) => {
-//       if (sale) {
-//         sendResponse(req, res, 200, sale);
-//       } else {
-//         sendResponse(req, res, 404, `Cannot find sale with id ${id}.`, "fail");
-//       }
-//     })
-//     .catch((err) => {
-//       sendResponse(
-//         req,
-//         res,
-//         500,
-//         `Error retrieving sale with id  ${id}`,
-//         "fail"
-//       );
-//     });
-// };
+//getting one transaction
+exports.findOneTransaction = (req, res) => {
+  const id = req.params.id;
+  db.Transaction.findOne({
+    where: { id },
+  })
+    .then((transaction) => {
+      if (transaction) {
+        sendResponse(req, res, 200, transaction);
+      } else {
+        sendResponse(req, res, 404, `Cannot find transaction with id ${id}.`, "fail");
+      }
+    })
+    .catch((err) => {
+      sendResponse(
+        req,
+        res,
+        500,
+        `Error retrieving transaction with id  ${id}`,
+        "fail"
+      );
+    });
+};
 
 // //editing one sale
 // exports.updateOneSale = (req, res) => {

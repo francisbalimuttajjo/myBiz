@@ -6,7 +6,7 @@ exports.addOneItem = (req, res) => {
   db.Item.create(req.body)
     .then((item) => sendResponse(req, res, 201, item))
     .catch((err) => {
-      sendResponse(req, res, 400, err.message, "fail");
+      sendResponse(req, res, 400, err.message.split(":")[1], "fail");
     });
 };
 
@@ -14,7 +14,9 @@ exports.addOneItem = (req, res) => {
 exports.getAllItems = (req, res) => {
   db.Item.findAll()
     .then((items) => sendResponse(req, res, 200, items))
-    .catch((err) => sendResponse(req, res, 400, err.message, "fail"));
+    .catch((err) =>
+      sendResponse(req, res, 400, err.message.split(":")[1], "fail")
+    );
 };
 
 //getting one item
@@ -61,7 +63,15 @@ exports.updateOneItem = (req, res) => {
         "fail"
       );
     })
-    .catch((err) => sendResponse(req, res, 500, err.message, "fail"));
+    .catch((err) =>
+      sendResponse(
+        req,
+        res,
+        500,
+        `error occured while updating item with id ${id}`,
+        "fail"
+      )
+    );
 };
 
 //deleting one item

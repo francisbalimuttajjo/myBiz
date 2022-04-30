@@ -8,9 +8,9 @@ exports.addOneClient = (req, res) => {
   db.Client.findAll({ where: { email } })
     .then((list) => {
       if (list.length != 0)
-            return sendResponse(req, res, 400, "Client already exists",'fail');
-        
-        //if new client then create one
+        return sendResponse(req, res, 400, "Client already exists", "fail");
+
+      //if new client then create one
       db.Client.create({ firstName, lastName, email })
         .then((client) => sendResponse(req, res, 201, client))
         .catch((err) =>
@@ -25,7 +25,7 @@ exports.addOneClient = (req, res) => {
 exports.getAllClients = (req, res) => {
   db.Item.findAll()
     .then((clients) => sendResponse(req, res, 200, clients))
-    .catch((err) => sendResponse(req, res, 400, err.message, "fail"));
+    .catch((err) => sendResponse(req, res, 400, "error occured", "fail"));
 };
 
 //getting one client
@@ -77,7 +77,9 @@ exports.updateOneClient = (req, res) => {
         "fail"
       );
     })
-    .catch((err) => sendResponse(req, res, 500, err.message, "fail"));
+    .catch((err) =>
+      sendResponse(req, res, 500, "error occured while updating ", "fail")
+    );
 };
 
 //deleting one client

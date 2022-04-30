@@ -3,11 +3,13 @@ const app = express();
 const db = require("./models");
 const itemRouter = require("./routes/item");
 const clientRouter = require("./routes/client");
+const salesRouter = require("./routes/sale");
 
 app.use(express.json());
 
 app.use("/api/v1", itemRouter);
 app.use("/api/v1", clientRouter);
+app.use("/api/v1", salesRouter);
 // app.get("/users", async (req, res) => {
 //   try {
 //     const user = await db.Item.findAll({

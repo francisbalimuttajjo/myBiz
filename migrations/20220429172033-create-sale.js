@@ -12,6 +12,13 @@ module.exports = {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
+      total_price: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        validate: {
+          notEmpty: { args: true, msg: "sale must have a price" },
+        },
+      },
       item_id: {
         type: DataTypes.INTEGER,
         allowNull: false,

@@ -3,7 +3,15 @@ module.exports = {
     return queryInterface.bulkInsert("Sales", [
       {
         item_id: 1,
-         client_id: 1,
+        client_id: 1,
+        total_price: 700,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        item_id: 1,
+        client_id: 1,
+        total_price: 7900,
         createdAt: new Date(),
         updatedAt: new Date(),
       },

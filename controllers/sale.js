@@ -34,18 +34,33 @@ exports.findOneSale = (req, res) => {
 
 //adding one sale
 exports.addOneSale = (req, res) => {
-  const { client_id, item_id, total_price } = req.body;
-  db.Sale.create({ client_id, item_id, total_price })
+  const { client_id, item_id, quantity, price } = req.body;
+  db.Sale.create({
+    client_id,
+    item_id,
+    quantity,
+    price,
+    total_price: quantity * price,
+  })
     .then((sale) => sendResponse(req, res, 201, sale))
     .catch((err) => {
-      
       sendResponse(req, res, 400, err.message.split(":")[1], "fail");
     });
 };
 //editing one sale
 exports.updateOneSale = (req, res) => {
   const id = req.params.id;
-  db.Sale.update(req.body, { where: { id } })
+  const { client_id, item_id, quantity, price } = req.body;
+  db.Sale.update(
+    {
+      client_id,
+      item_id,
+      quantity,
+      price,
+      total_price: quantity * price,
+    },
+    { where: { id } }
+  )
     .then((num) => {
       if (num > 0) return sendResponse(req, res, 200, "update successfull");
       sendResponse(

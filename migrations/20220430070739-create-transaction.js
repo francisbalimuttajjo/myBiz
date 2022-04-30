@@ -1,43 +1,53 @@
-'use strict';
+"use strict";
 module.exports = {
   async up(queryInterface, DataTypes) {
-    await queryInterface.createTable("Sales", {
+    await queryInterface.createTable("Transactions", {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: DataTypes.INTEGER,
       },
+
       client_id: {
         type: DataTypes.INTEGER,
         allowNull: false,
+        validate: {
+          notEmpty: { args: true, msg: " client is a required field" },
+        },
       },
-      quantity: {
+      discount: {
         type: DataTypes.INTEGER,
         allowNull: false,
         validate: {
-          notEmpty: { args: true, msg: "qty must be included" },
+          notEmpty: { args: true, msg: "Please add cash discount" },
         },
       },
-      price: {
+      type: {
+        type: DataTypes.STRING,
+        validate: {
+          notEmpty: true,
+        },
+      },
+      cashReceived: {
         type: DataTypes.INTEGER,
         allowNull: false,
         validate: {
-          notEmpty: { args: true, msg: "qty must be included" },
+          notEmpty: { args: true, msg: "Please add cash received" },
         },
       },
-      total_price: {
+      items: {
+        type: DataTypes.ARRAY(DataTypes.JSON),
+        allowNull: true,
+        defaultValue: [],
+      },
+
+      cashPending: {
         type: DataTypes.INTEGER,
         allowNull: false,
         validate: {
-          notEmpty: { args: true, msg: "total price must be included" },
+          notEmpty: { args: true, msg: "Please add cash pending" },
         },
-      },
-   
-    
-      item_id: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
       },
       createdAt: {
         allowNull: false,
@@ -50,6 +60,6 @@ module.exports = {
     });
   },
   async down(queryInterface, DataTypes) {
-    await queryInterface.dropTable('Sales');
-  }
+    await queryInterface.dropTable("Transactions");
+  },
 };

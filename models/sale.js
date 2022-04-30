@@ -27,11 +27,25 @@ module.exports = (sequelize, DataTypes) => {
           notEmpty: { args: true, msg: "sale must belong to a client" },
         },
       },
+      quantity: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        validate: {
+          notEmpty: { args: true, msg: "qty must be included" },
+        },
+      },
+      price: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        validate: {
+          notEmpty: { args: true, msg: "qty must be included" },
+        },
+      },
       total_price: {
         type: DataTypes.INTEGER,
         allowNull: false,
         validate: {
-          notEmpty: { args: true, msg: "sale must have a price" },
+          notEmpty: { args: true, msg: "total price must be included" },
         },
       },
       item_id: {

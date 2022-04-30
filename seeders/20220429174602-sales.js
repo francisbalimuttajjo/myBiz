@@ -4,6 +4,8 @@ module.exports = {
       {
         item_id: 1,
         client_id: 1,
+        quantity: 2,
+        price: 200,
         total_price: 700,
         createdAt: new Date(),
         updatedAt: new Date(),
@@ -11,6 +13,8 @@ module.exports = {
       {
         item_id: 1,
         client_id: 1,
+        quantity: 2,
+        price: 200,
         total_price: 7900,
         createdAt: new Date(),
         updatedAt: new Date(),

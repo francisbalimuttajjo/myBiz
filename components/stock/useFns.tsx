@@ -11,7 +11,7 @@ const UseFns = () => {
   const [clicked, setClicked] = React.useState(false);
   const [searchPhrase, setSearchPhrase] = React.useState("");
   const [visibleState, setVisibleState] = React.useState(false);
-  const { infoMsg, displaySearchBar, loading } = useSelector(
+  const { infoMsg, store, loading } = useSelector(
     (state: RootState) => state.stock
   );
   const handleClicked = () => setClicked(true);
@@ -32,7 +32,7 @@ const UseFns = () => {
     setClicked(false);
     dispatch(filterStock(""));
   };
-
+  const displaySearchBar = store.length > 0 ? true : false;
   return {
     visibleState,
     navigation,

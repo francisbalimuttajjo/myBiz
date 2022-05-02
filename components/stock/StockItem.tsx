@@ -23,7 +23,7 @@ const Item: React.FC<Props> = (props) => {
       .delete(`http://192.168.43.96:5000/api/v1/items/${props.item.id}`)
       .then((res) => dispatch(getItems()))
       .catch((err) => {
-        console.log(err);
+       
       });
   }
 

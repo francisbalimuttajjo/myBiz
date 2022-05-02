@@ -22,7 +22,18 @@ const CartItem = (props: { item: Item; qty: number }) => {
         <View style={styles.btn_container}>
           <View style={{ flexDirection: "row" }}>
             <TouchableOpacity
-              onPress={() => dispatch(reduceItem({ id: props.item.id }))}
+              onPress={() => dispatch(addItem({ id: props.item._id }))}
+              activeOpacity={0.8}
+              style={{ ...styles.btn, backgroundColor: "skyblue" }}
+            >
+              <Text style={{ ...styles.btn_text, color: "white" }}>+</Text>
+            </TouchableOpacity>
+            <View style={styles.qty}>
+              <Text>{props.qty}</Text>
+            </View>
+
+            <TouchableOpacity
+              onPress={() => dispatch(reduceItem({ id: props.item._id }))}
               activeOpacity={0.8}
               style={{
                 ...styles.btn,
@@ -37,17 +48,6 @@ const CartItem = (props: { item: Item; qty: number }) => {
               >
                 -
               </Text>
-            </TouchableOpacity>
-
-            <View style={styles.qty}>
-              <Text>{props.qty}</Text>
-            </View>
-            <TouchableOpacity
-              onPress={() => dispatch(addItem({ id: props.item.id }))}
-              activeOpacity={0.8}
-              style={{ ...styles.btn, backgroundColor: "skyblue" }}
-            >
-              <Text style={{ ...styles.btn_text, color: "white" }}>+</Text>
             </TouchableOpacity>
           </View>
 
@@ -67,7 +67,7 @@ const CartItem = (props: { item: Item; qty: number }) => {
           <TouchableOpacity
             activeOpacity={0.7}
             style={{ marginLeft: 10 }}
-            onPress={() => dispatch(removeFromCart({ id: props.item.id }))}
+            onPress={() => dispatch(removeFromCart({ id: props.item._id }))}
           >
             <Ionicon name="trash-outline" size={20} color="skyblue" />
           </TouchableOpacity>

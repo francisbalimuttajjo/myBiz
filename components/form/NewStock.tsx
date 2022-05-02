@@ -12,7 +12,9 @@ import SelectComponent from "./SelectComponent";
 import { FormProps as Props } from "../../types/types";
 
 export const Form = (props: Props) => {
-  const [price, setPrice] = React.useState(props.initialValues.buyingPrice);
+  const [buyingPrice, setBuyingPrice] = React.useState(
+    props.initialValues.buyingPrice
+  );
   const [sellingPrice, setSellingPrice] = React.useState(
     props.initialValues.sellingPrice
   );
@@ -53,11 +55,11 @@ export const Form = (props: Props) => {
           <Wrapper>
             <PriceComponent
               currency={props.initialValues.buyingCurrency}
-              price={price}
+              price={buyingPrice}
               title="buying"
               error={errors.buyingPrice}
               required
-              setPrice={(val) => setPrice(val)}
+              setPrice={(val) => setBuyingPrice(val)}
             />
             <PriceComponent
               title="selling"

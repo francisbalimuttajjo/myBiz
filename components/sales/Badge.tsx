@@ -10,7 +10,7 @@ import { useNavigation } from "@react-navigation/native";
 
 const Badge = () => {
   const { cart } = useSelector((state: RootState) => state.stock);
-  console.log({ cart });
+
   const total = getTotal(cart);
   const { navigate } = useNavigation<NavigationProps>();
   const handlePress = () => {

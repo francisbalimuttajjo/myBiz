@@ -9,7 +9,7 @@ import { mainStackParams, FormProps } from "../../types/types";
 import { getItems } from "../../redux/StockSlice";
 type Props = NativeStackScreenProps<mainStackParams, "Details">;
 
-const EditStock = ({ route, navigation }: Props) => {
+const EditStock = ({ route }: Props) => {
   const { availableStock } = useSelector((state: RootState) => state.stock);
   const item = availableStock.filter((el) => el.id === route.params.id)[0];
   const [loading, setLoading] = React.useState(false);
@@ -46,7 +46,8 @@ const EditStock = ({ route, navigation }: Props) => {
   };
 
   const handleSubmit = (values: FormProps["initialValues"]) => {
-    console.log(values);
+    console.log(values.category)
+    setLoading(true);
     const {
       buyingCurrency,
       buyingPrice,
@@ -58,7 +59,7 @@ const EditStock = ({ route, navigation }: Props) => {
       sellingPrice,
       supplier,
     } = values;
-    setLoading(true);
+
     axios
       .put(`http://192.168.43.96:5000/api/v1/items/${id}`, {
         buyingCurrency,
@@ -73,13 +74,12 @@ const EditStock = ({ route, navigation }: Props) => {
         stock: +values.stock,
         image: item.image,
       })
-      .then((res) => {
+      .then(() => {
         setLoading(false);
         dispatch(getItems());
       })
       .catch((err) => {
         setLoading(false);
-        console.log(err);
       });
   };
   return (

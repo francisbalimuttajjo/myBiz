@@ -67,8 +67,7 @@ const stockSlice = createSlice({
       })
       .addCase(getItems.fulfilled, (state, action) => {
         state.loading = false;
-        if (action.payload.status === "success") {
-         
+        if (action.payload.status === "success") {         
           state.error = "";
           state.store = action.payload.data;
           state.availableStock = state.store;

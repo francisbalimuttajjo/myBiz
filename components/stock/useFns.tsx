@@ -11,11 +11,9 @@ const UseFns = () => {
   const [clicked, setClicked] = React.useState(false);
   const [searchPhrase, setSearchPhrase] = React.useState("");
   const [visibleState, setVisibleState] = React.useState(false);
-  const { infoMsg, store, loading } = useSelector(
+  const { infoMsg, displaySearchBar, loading } = useSelector(
     (state: RootState) => state.stock
   );
-
-  const displaySearchBar = store.length === 0 ? false : true;
   const handleClicked = () => setClicked(true);
   const displayToolKit = () => {
     setVisibleState(true);

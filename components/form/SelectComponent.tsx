@@ -10,6 +10,12 @@ const SelectComponent = (props: Props) => {
   const { setFieldValue } = useFormikContext();
   const { categories } = useSelector((state: RootState) => state.stock);
   const [category, setCategory] = React.useState(categories[0].value);
+  console.log({category})
+  const handleChange = (val: string) => {
+    console.log(val);
+    setFieldValue("category", val);
+    setCategory(val);
+  };
 
   return (
     <View style={styles.mainContainer}>
@@ -20,10 +26,7 @@ const SelectComponent = (props: Props) => {
         }}
       >
         <Picker
-          onValueChange={(itemValue) => {
-            setFieldValue("category", itemValue);
-            setCategory(itemValue);
-          }}
+          onValueChange={handleChange}
           mode={"dropdown"}
           selectedValue={props.categoryValue}
         >

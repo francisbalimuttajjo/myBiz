@@ -99,7 +99,7 @@ export type Item = {
 export type FormProps = {
   initialValues: Item;
   btn_title: string;
-  categoryValue: string;
+  
   loading:boolean
   handleSubmit: (a: FormProps["initialValues"]) => void;
 };

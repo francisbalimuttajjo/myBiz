@@ -37,7 +37,7 @@ export const getItems = createAsyncThunk(
     }
   }
 );
-// const store: Array<Item> = getItems();
+
 const categoriesStore = categories;
 const initialState: InitialState = {
   availableStock: [],

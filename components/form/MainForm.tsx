@@ -25,7 +25,7 @@ export const Form = (props: Props) => {
   const toggleSwitch = () => {
     setIsEnabled((previousState) => !previousState);
   };
-
+  
   return (
     <Formik
       initialValues={props.initialValues}
@@ -39,7 +39,7 @@ export const Form = (props: Props) => {
             <Field component={AppFormField} name="name" title="name" required />
             <SelectComponent
               error={errors.category}
-              categoryValue={props.categoryValue}
+              categoryValue={props.initialValues.category}
             />
             <Field
               component={AppFormField}

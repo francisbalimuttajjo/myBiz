@@ -7,12 +7,14 @@ import { RootState } from "../../redux/Store";
 import { SelectProps as Props } from "../../types/types";
 
 const SelectComponent = (props: Props) => {
+
+  //registering in formik
   const { setFieldValue } = useFormikContext();
+  
   const { categories } = useSelector((state: RootState) => state.stock);
-  const [category, setCategory] = React.useState(categories[0].value);
-  console.log({category})
+  const [category, setCategory] = React.useState(props.categoryValue);
+
   const handleChange = (val: string) => {
-    console.log(val);
     setFieldValue("category", val);
     setCategory(val);
   };
@@ -28,7 +30,7 @@ const SelectComponent = (props: Props) => {
         <Picker
           onValueChange={handleChange}
           mode={"dropdown"}
-          selectedValue={props.categoryValue}
+          selectedValue={category}
         >
           {categories.map((el, index) => (
             <Picker.Item label={el.title} value={el.value} key={index} />

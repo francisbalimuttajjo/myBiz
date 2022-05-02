@@ -18,7 +18,7 @@ const UseCamera = () => {
   const [hasPermission, setHasPermission] = useState<any>(null);
   const [type, setType] = useState(Camera.Constants.Type.back);
   const [camera, setCamera] = useState<any>(null);
-  const [image, setImage] = useState<any>(null);
+  const [image, setImage] = useState<string>('');
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const navigation = useNavigation<NavigationProps>();
@@ -72,11 +72,13 @@ const UseCamera = () => {
 
     uploadBytes(reference, convertedImage).then(() =>
       getDownloadURL(reference).then((url) => {
+        
         if (!isEditing) {
           dispatch(addImage({ image: url }));
           setLoading(false);
           navigation.navigate("New");
-        } else {
+
+        } else {       
           dispatch(editImage({ id: editable, url }));
           navigation.navigate("editStock", { id: editable });
           dispatch(disableEditing());

@@ -1,29 +1,82 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { store, categoriesStore, initialState } from "../data";
-import { get_cart_index, get_stock_Index } from '../utils'
+import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { get_cart_index, get_stock_Index } from "../utils";
+import axios from "axios";
+import { InitialState, Item } from "../types/types";
+const initialValues: Item = {
+  id: "",
+  name: "",
+  description: "",
+  category: "",
+  isReturnable: false,
+  stock: "0",
+  buyingPrice: "0",
+  sellingPrice: "0",
+  image: "",
+  supplier: "",
+  buyingCurrency: "ugx",
+  sellingCurrency: "ugx",
+  packaging: "",
+};
+const categories: InitialState["categories"] = [
+  { title: "Choose Category  *", value: "", _id: "0" },
+  { title: "food", value: "food", _id: "09" },
+  { title: "groceries", value: "groceries", _id: "80" },
+  { title: "stationery", value: "stationery", _id: "090" },
+];
 
-// export const getFinishedTasks = createAsyncThunk(
-//   "items/getFinishedTasks",
-
-//   async (thunkAPI) => {
-    
-//       try{
-//         const response = await axios.get("https://taask-traacker.herokuapp.com/api/v1/complete");
-        
-//          return response.data
-    
-    
-   
-//     } catch (err) {
-      
-//       return err.response.data;
-//     }
-//   }
-// );
+export const getItems = createAsyncThunk(
+  "items/getItems",
+  async (thunkAPI) => {
+    try {
+      const response = await axios.get(
+        "http://192.168.43.96:5000/api/v1/items"
+      );
+      return response.data;
+    } catch (err: any) {
+      return err.response.data;
+    }
+  }
+);
+// const store: Array<Item> = getItems();
+const categoriesStore = categories;
+const initialState: InitialState = {
+  availableStock: [],
+  loading: false,
+  cart: [],
+  store: [],
+  initialValues,  
+  displayCategoriesSearchBar: categoriesStore.length === 0 ? false : true,
+  infoMsg: "",
+  categories: categoriesStore,
+  isEditing: false,
+  editable: "",
+  error: "",
+};
 
 const stockSlice = createSlice({
   name: "stock",
   initialState,
+  extraReducers(builder) {
+    builder
+      .addCase(getItems.pending, (state, action) => {
+        state.loading = true;
+      })
+      .addCase(getItems.rejected, (state, action) => {
+        state.loading = false;
+        state.error = "something went wrong";
+      })
+      .addCase(getItems.fulfilled, (state, action) => {
+        state.loading = false;
+        if (action.payload.status === "success") {
+         
+          state.error = "";
+          state.store = action.payload.data;
+          state.availableStock = state.store;
+        } else {
+          state.error = "";
+        }
+      });
+  },
   reducers: {
     removeFromCart(state, action: PayloadAction<{ id: string }>) {
       const stock_index = get_stock_Index(
@@ -38,7 +91,7 @@ const stockSlice = createSlice({
         +new_stock[stock_index].stock + state.cart[cart_index].qty;
       state.availableStock = new_stock;
       //remove from cart
-      state.cart = state.cart.filter((el) => el.item._id !== action.payload.id);
+      state.cart = state.cart.filter((el) => el.item.id !== action.payload.id);
     },
 
     addItem(state, action: PayloadAction<{ id: string }>) {
@@ -51,7 +104,7 @@ const stockSlice = createSlice({
       const cart_index = get_cart_index(new_cart, action.payload.id);
 
       //making sure u dont add stock beyond what is available in store
-      if (store[stock_index].stock === new_cart[cart_index].qty) {
+      if (state.store[stock_index].stock === new_cart[cart_index].qty) {
         return;
       } else {
         //reduce from cart
@@ -142,7 +195,7 @@ const stockSlice = createSlice({
 
     changeToEditing(state, action: PayloadAction<{ id: string }>) {
       state.isEditing = true;
-      
+
       state.editable = action.payload.id;
     },
     disableEditing(state) {
@@ -153,9 +206,9 @@ const stockSlice = createSlice({
     filterStock(state, action: PayloadAction<string>) {
       state.infoMsg = "";
       if (action.payload === "") {
-        state.availableStock = store;
+        state.availableStock = state.store;
       } else {
-        state.availableStock = store;
+        state.availableStock = state.store;
         const searchResult = state.availableStock.filter(
           (el) =>
             el.category.includes(action.payload) ||

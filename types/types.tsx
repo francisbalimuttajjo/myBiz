@@ -80,7 +80,7 @@ export type InputProps = {
 
 //item
 export type Item = {
-  _id: string;
+  id: string;
   image?: string;
   name: string;
   sellingCurrency: string;
@@ -100,6 +100,8 @@ export type FormProps = {
   initialValues: Item;
   btn_title: string;
   categoryValue: string;
+  loading:boolean
+  handleSubmit: (a: FormProps["initialValues"]) => void;
 };
 
 ////priceComponent.tsx/components/form
@@ -219,8 +221,9 @@ export type InitialState = {
   isEditing: boolean;
   initialValues: Item;
   availableStock: Array<Item>;
+  store: Array<Item>;
   categories: Array<{ title: string; value: string; _id: string }>;
   cart: Array<{ item: Item; qty: number }>;
-  displaySearchBar: boolean;
   displayCategoriesSearchBar: boolean;
+  error: string;
 };

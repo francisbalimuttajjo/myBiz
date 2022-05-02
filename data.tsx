@@ -142,7 +142,7 @@ const stock = [
   },
 ];
 const initialValues: Item = {
-  _id: "",
+  id: "",
   name: "",
   description: "",
   category: "",
@@ -215,20 +215,20 @@ const cashTransactions: Array<CashItemProps["item"]> = [
     paymentMode: "online",
   },
 ];
-const store: Array<Item> = stock;
+// const store: Array<Item> = stock;
 const categoriesStore = categories;
-const initialState: InitialState = {
-  availableStock: store,
-  loading: false,
-  cart: [],
-  initialValues,
-  displaySearchBar: store.length === 0 ? false : true,
-  displayCategoriesSearchBar: categoriesStore.length === 0 ? false : true,
-  infoMsg: "",
-  categories: categoriesStore,
-  isEditing: false,
-  editable: "",
-};
+// const initialState: InitialState = {
+//   availableStock: store,
+//   loading: false,
+//   cart: [],
+//   initialValues,
+//   displaySearchBar: store.length === 0 ? false : true,
+//   displayCategoriesSearchBar: categoriesStore.length === 0 ? false : true,
+//   infoMsg: "",
+//   categories: categoriesStore,
+//   isEditing: false,
+//   editable: "",
+// };
 const categoriesArray: Array<{ title: string; value: string }> = [
   { title: "choose", value:"" },
   { title: "rent", value: "rent" },
@@ -237,10 +237,8 @@ const categoriesArray: Array<{ title: string; value: string }> = [
   { title: "others", value: "others" },
 ];
 export {
-  store,
   initialValues,
   categoriesStore,
-  initialState,
   cashTransactions,
   categoriesArray,
 };

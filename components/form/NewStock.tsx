@@ -28,7 +28,7 @@ export const Form = (props: Props) => {
     <Formik
       initialValues={props.initialValues}
       validationSchema={validationSchema}
-      onSubmit={(values) => console.log(values)}
+      onSubmit={props.handleSubmit}
     >
       {({ handleSubmit, errors }) => (
         <ScrollView style={{ paddingBottom: 20 }}>
@@ -86,7 +86,7 @@ export const Form = (props: Props) => {
           <Button
             title={props.btn_title}
             submit={handleSubmit}
-            loading={false}
+            loading={props.loading}
           />
         </ScrollView>
       )}

@@ -7,21 +7,30 @@ import {
   Image,
   Pressable,
 } from "react-native";
+import axios from "axios";
 import Ionicon from "react-native-vector-icons/Ionicons";
 import useFns from "./useDeleteFns";
 import { StockItemProps as Props } from "../../types/types";
+import { getItems } from "../../redux/StockSlice";
+import { useDispatch } from "react-redux";
 
 const Item: React.FC<Props> = (props) => {
   const { createAlert, confirmDelete } = useFns();
+  const dispatch = useDispatch();
 
   if (confirmDelete) {
-    console.log("deleted");
+    axios
+      .delete(`http://192.168.43.96:5000/api/v1/items/${props.item.id}`)
+      .then((res) => dispatch(getItems()))
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   return (
     <View style={styles.mainContainer}>
       <TouchableOpacity
-        onPress={() => props.handlePress(props.item._id)}
+        onPress={() => props.handlePress(props.item.id)}
         activeOpacity={0.6}
         style={styles.container}
       >
@@ -35,7 +44,7 @@ const Item: React.FC<Props> = (props) => {
             />
           ) : (
             <Pressable
-              onPress={() => props.handlePress(props.item._id)}
+              onPress={() => props.handlePress(props.item.id)}
               style={styles.icon}
             >
               <Ionicon name="camera-outline" size={80} />
@@ -73,16 +82,12 @@ const Item: React.FC<Props> = (props) => {
             <View style={{ marginRight: 10 }}>
               <TouchableOpacity
                 activeOpacity={0.7}
-                onPress={() => props.handlePress(props.item._id)}
+                onPress={() => props.handlePress(props.item.id)}
               >
                 <Ionicon name="pencil" size={20} color="skyblue" />
               </TouchableOpacity>
             </View>
-            <TouchableOpacity
-             
-              activeOpacity={0.7}
-              onPress={createAlert}
-            >
+            <TouchableOpacity activeOpacity={0.7} onPress={createAlert}>
               <Ionicon name="trash-outline" size={20} color="skyblue" />
             </TouchableOpacity>
           </View>

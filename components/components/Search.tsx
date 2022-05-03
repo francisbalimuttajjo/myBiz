@@ -1,45 +1,18 @@
 import React from "react";
-import { StyleSheet, TextInput, View, Text } from "react-native";
-import { Feather, Entypo } from "@expo/vector-icons";
+import { StyleSheet,  View, Text } from "react-native";
 import { SearchProps as Props } from "../../types/types";
-
+import { Searchbar } from "react-native-paper";
 const SearchBar: React.FC<Props> = (props) => {
+  
   return (
+    
     <View>
       <View style={styles.container}>
-        <View
-          style={
-            props.clicked
-              ? styles.searchBar__clicked
-              : styles.searchBar__unclicked
-          }
-        >
-          {/* search Icon */}
-          <Feather
-            name="search"
-            size={20}
-            color="skyblue"
-            style={{ marginLeft: 1 }}
-          />
-          {/* Input field */}
-          <TextInput
-            style={styles.input}
-            placeholder={props.placeholder}
-            value={props.searchPhrase}
-            onChangeText={props.handleChange}
-            onFocus={props.handleClicked}
-          />
-          {/* cross Icon, depending on whether the search bar is clicked or not */}
-          {props.clicked && (
-            <Entypo
-              name="cross"
-              size={20}
-              color="skyblue"
-              style={{ padding: 1 }}
-              onPress={props.clearSearchField}
-            />
-          )}
-        </View>
+        <Searchbar
+          placeholder={props.placeholder}
+          onChangeText={props.onChangeSearch}
+          value={props.searchQuery}
+        />
       </View>
       <Text style={styles.infoMsg_text}>{props.infoMsg}</Text>
     </View>
@@ -48,7 +21,7 @@ const SearchBar: React.FC<Props> = (props) => {
 
 export default SearchBar;
 
-// styles
+// // styles
 const styles = StyleSheet.create({
   infoMsg_text: { alignSelf: "center", color: "skyblue" },
   container: {
@@ -85,3 +58,21 @@ const styles = StyleSheet.create({
     width: "90%",
   },
 });
+// import * as React from "react";
+// import { Searchbar } from "react-native-paper";
+
+// const MyComponent = () => {
+//   const [searchQuery, setSearchQuery] = React.useState("");
+//   console.log(searchQuery);
+//   const onChangeSearch = (query) => setSearchQuery(query);
+
+//   return (
+//     <Searchbar
+//       placeholder="Search"
+//       onChangeText={onChangeSearch}
+//       value={searchQuery}
+//     />
+//   );
+// };
+
+// export default MyComponent;

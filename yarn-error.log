@@ -1,5 +1,5 @@
 Arguments: 
-  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js add bunyan
+  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js add react-native-paper
 
 PATH: 
   C:\Windows\System32;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files (x86)\Yarn\bin\;C:\Program Files\MongoDB\Server\5.0\bin;C:\Program Files\Git\cmd;C:\Program Files\nodejs\;C:\Program Files\PostgreSQL\14\pgAdmin 4\bin;C:\Users\PRO GADGETS\AppData\Roaming\npm;C:\Users\PRO GADGETS\AppData\Roaming\npm\node_modules\expo-cli;C:\Users\PRO GADGETS\AppData\Roaming\npm;C:\Windows\System32;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files (x86)\Yarn\bin\;C:\Program Files\MongoDB\Server\5.0\bin;C:\Program Files\Git\cmd;C:\Program Files\nodejs\;C:\Program Files\PostgreSQL\14\pgAdmin 4\bin;C:\Windows\system32;C:\Program Files\PostgreSQL\14\pgAdmin 4\bin;;C:\Users\PRO GADGETS\AppData\Roaming\npm
@@ -14,7 +14,7 @@ Platform:
   win32 x64
 
 Trace: 
-  Error: EPERM: operation not permitted, unlink 'C:\Users\PRO GADGETS\Desktop\biz\node_modules\@babel\helper-compilation-targets\node_modules\.bin'
+  Error: EPERM: operation not permitted, unlink 'D:\biz_app\node_modules\@babel\generator\node_modules\.bin'
 
 npm manifest: 
   {

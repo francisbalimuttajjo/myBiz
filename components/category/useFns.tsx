@@ -2,28 +2,18 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux/Store";
 import { filterCategories } from "../../redux/StockSlice";
-import { Keyboard } from "react-native";
 import * as Yup from "yup";
 
 const UseFns = () => {
   const dispatch = useDispatch();
-  const [clicked, setClicked] = React.useState(false);
-  const [searchPhrase, setSearchPhrase] = React.useState("");
+  const [searchQuery, setSearchQuery] = React.useState("");
 
-  const handleChange = (val: string) => {
-    setSearchPhrase(val);
-    dispatch(filterCategories(val));
-  };
-  const handleClicked = () => setClicked(true);
-
-  const clearSearchField = () => {
-    setSearchPhrase("");
-    Keyboard.dismiss();
-    setClicked(false);
-    dispatch(filterCategories(""));
+  const onChangeSearch = (query: string) => {
+    dispatch(filterCategories(query));
+    setSearchQuery(query);
   };
 
-  const { categories, displayCategoriesSearchBar,infoMsg } = useSelector(
+  const { categories, displayCategoriesSearchBar, infoMsg } = useSelector(
     (state: RootState) => state.stock
   );
 
@@ -37,12 +27,9 @@ const UseFns = () => {
     validationSchema,
     categories,
     displayCategoriesSearchBar,
-    clearSearchField,
-    handleClicked,
-    handleChange,
-    clicked,
-    searchPhrase,
-    infoMsg
+    searchQuery,
+    onChangeSearch,
+    infoMsg,
   };
 };
 

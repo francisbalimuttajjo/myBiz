@@ -52,12 +52,14 @@ export type WrapperProps = {
 };
 //search
 export type SearchProps = {
-  clicked: boolean;
-  handleChange: (a: string) => void;
-  handleClicked: () => void;
-  searchPhrase: string;
-  placeholder: string;
-  clearSearchField: () => void;
+  searchQuery: string,
+  onChangeSearch:(a:string)=>void
+  // clicked: boolean;
+  // handleChange: (a: string) => void;
+  // handleClicked: () => void;
+  // searchPhrase: string;
+   placeholder: string;
+  // clearSearchField: () => void;
   infoMsg?: string;
 };
 //button

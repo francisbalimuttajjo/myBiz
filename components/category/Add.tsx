@@ -17,11 +17,8 @@ const Add = () => {
     validationSchema,
     categories,
     displayCategoriesSearchBar,
-    clearSearchField,
-    handleClicked,
-    handleChange,
-    clicked,
-    searchPhrase,
+    searchQuery,
+    onChangeSearch,
     infoMsg,
   } = useFns();
 
@@ -46,11 +43,8 @@ const Add = () => {
             {displayCategoriesSearchBar && (
               <Search
                 infoMsg={infoMsg}
-                searchPhrase={searchPhrase}
-                clearSearchField={clearSearchField}
-                clicked={clicked}
-                handleChange={handleChange}
-                handleClicked={handleClicked}
+                searchQuery={searchQuery}
+                onChangeSearch={onChangeSearch}
                 placeholder="Search Categories"
               />
             )}

@@ -21,6 +21,7 @@ const EditScreenFns = (_id: string | undefined) => {
     stock,
     name,
     supplier,
+    packaging,
     image,
     category,
     description,
@@ -36,6 +37,7 @@ const EditScreenFns = (_id: string | undefined) => {
     buyingCurrency,
     sellingPrice,
     buyingPrice,
+    packaging,
     stock: stock.toString(),
     name,
     supplier,
@@ -55,6 +57,7 @@ const EditScreenFns = (_id: string | undefined) => {
       sellingCurrency,
       sellingPrice,
       supplier,
+      packaging,
     } = values;
 
     axios
@@ -70,6 +73,7 @@ const EditScreenFns = (_id: string | undefined) => {
         supplier,
         stock: +values.stock,
         image: item.image,
+        packaging,
       })
       .then(() => {
         setLoading(false);

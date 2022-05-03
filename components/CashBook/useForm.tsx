@@ -4,7 +4,10 @@ import { getDate } from "../../utils";
 
 const UseForm = (props: { item: Props["item"] }) => {
   const [type, setType] = React.useState<string>(props.item.type);
-  const [entryDate, setEntryDate] = React.useState<Date |string>(props.item.entryDate);
+
+  const [entryDate, setEntryDate] = React.useState<Date | string>(
+    props.item.entryDate
+  );
   const { date } = getDate(entryDate);
   const [itemTime, setItemTime] = React.useState(props.item.itemTime);
   const { time } = getDate(itemTime);
@@ -22,46 +25,46 @@ const UseForm = (props: { item: Props["item"] }) => {
     hideDatePicker();
   };
 
-  const handleTimePickerConfirm = (date:Date) => {
+  const handleTimePickerConfirm = (date: Date) => {
     setItemTime(date);
     hideTimePicker();
   };
   const [amount, setAmount] = React.useState(props.item.amount.toString());
   const [remark, setRemark] = React.useState(props.item.title);
-  const onChange = (el: string) => {
-    setErrors({ ...errors, amount: "" });
+  const onAmountChange = (el: string) => {
+    setErrors({ ...errors, amount: false });
     setAmount(el);
   };
   const onChangeRemark = (el: string) => {
-    setErrors({ ...errors, remark: "" });
+    setErrors({ ...errors, remark: false });
     setRemark(el);
   };
   const [errors, setErrors] = React.useState({
-    amount: "",
-    remark: "",
-    category: "",
+    amount: false,
+    remark: false,
+    category: false,
   });
   const handleSubmit = () => {
     if (!remark) {
-      setErrors({ ...errors, remark: "field is required" });
+      setErrors({ ...errors, remark: true });
     }
     if (!amount) {
-      setErrors({ ...errors, amount: "field is required" });
+      setErrors({ ...errors, amount: true });
     }
     if (!category) {
-      setErrors({ ...errors, category: "field is required" });
+      setErrors({ ...errors, category: true });
     }
     console.log({
-    type,
-    time,
-    date,
-    amount,
-    remark,
-    category,
-    paymentMode,
-    entryDate,
-    itemTime,
-  });
+      type,
+      time,
+      date,
+      amount,
+      remark,
+      category,
+      paymentMode,
+      entryDate,
+      itemTime,
+    });
   };
 
   const [paymentMode, setPaymentMode] = React.useState<string>(
@@ -72,7 +75,7 @@ const UseForm = (props: { item: Props["item"] }) => {
   const changeToCash = () => setPaymentMode("cash");
   const changeToOnline = () => setPaymentMode("online");
   const handlePickerChange = (itemValue: string) => {
-    setErrors({ ...errors, category: "" });
+    setErrors({ ...errors, category: false });
     setCategory(itemValue);
   };
   return {
@@ -80,7 +83,7 @@ const UseForm = (props: { item: Props["item"] }) => {
     changeToCash,
     paymentMode,
     handleSubmit,
-    onChange,
+    onAmountChange,
     handleTimePickerConfirm,
     showDatePicker,
     showTimePicker,
@@ -100,8 +103,6 @@ const UseForm = (props: { item: Props["item"] }) => {
     hideTimePicker,
     amount,
     category,
-    entryDate,
-    itemTime,
   };
 };
 

@@ -52,14 +52,9 @@ export type WrapperProps = {
 };
 //search
 export type SearchProps = {
-  searchQuery: string,
-  onChangeSearch:(a:string)=>void
-  // clicked: boolean;
-  // handleChange: (a: string) => void;
-  // handleClicked: () => void;
-  // searchPhrase: string;
-   placeholder: string;
-  // clearSearchField: () => void;
+  searchQuery: string;
+  onChangeSearch: (a: string) => void;
+  placeholder: string;
   infoMsg?: string;
 };
 //button
@@ -93,7 +88,7 @@ export type Item = {
   stock: number | string;
   category: string;
   supplier: string;
-  packaging?: string;
+  packaging: string;
   isReturnable: boolean;
 };
 
@@ -101,8 +96,8 @@ export type Item = {
 export type FormProps = {
   initialValues: Item;
   btn_title: string;
-  
-  loading:boolean
+
+  loading: boolean;
   handleSubmit: (a: FormProps["initialValues"]) => void;
 };
 
@@ -185,9 +180,9 @@ export type CashItemProps = {
 export type FloatingLabelProps = {
   label: string;
   value: string;
-  error?: string;
-  onChange: (a: string) => void;
-  keyboard?: string;
+  error?: boolean;
+  onChangeText: (a: string) => void;
+  keyboard?:boolean;
   item: CashItemProps["item"];
 };
 

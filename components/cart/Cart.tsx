@@ -51,7 +51,7 @@ const Cart = () => {
             Add Customer
           </Text>
           <TextInput
-            style={{ ...styles.input, borderColor: error ? "red" : "#e0e1e2" }}
+            style={{ ...styles.input, borderColor: error ? "skyblue" : "#e0e1e2" }}
             placeholder="Add Customer"
             keyboardType="default"
             onChangeText={handleClient}
@@ -74,11 +74,11 @@ const Cart = () => {
         )}
 
         <View style={{ ...styles.container, marginTop: 20 }}>
-          <Text style={styles.discount}>Apply Discount (Optional)</Text>
+          <Text style={styles.discount}>Apply Discount (Optional) </Text>
           <TextInput
             keyboardType="numeric"
             style={{ ...styles.input, borderColor: "#e0e1e2" }}
-            placeholder="Enter Discount"
+            placeholder="Enter  Discount "
             onChangeText={handleDiscount}
           />
         </View>

@@ -1,4 +1,5 @@
 import React from "react";
+import { TextInput } from "react-native-paper";
 import { View, StyleSheet, Button, Text, ScrollView } from "react-native";
 import { CashItemProps } from "../../types/types";
 import { getDate } from "../../utils";
@@ -17,7 +18,7 @@ const Form = (props: { item: CashItemProps["item"]; editing: boolean }) => {
     changeToCash,
     paymentMode,
     handleSubmit,
-    onChange,
+    onAmountChange,
     handleTimePickerConfirm,
     showDatePicker,
     showTimePicker,
@@ -36,8 +37,6 @@ const Form = (props: { item: CashItemProps["item"]; editing: boolean }) => {
     hideTimePicker,
     amount,
     category,
-    entryDate,
-    itemTime,
     handlePickerChange,
   } = useForm({ item: props.item });
 
@@ -63,18 +62,19 @@ const Form = (props: { item: CashItemProps["item"]; editing: boolean }) => {
           handleConfirm={handleConfirm}
           showTimePicker={showTimePicker}
         />
-        <View style={{ paddingTop: "5%" }}>
+        <View style={styles.input_container}>
           <Input
             label="Amount"
-            onChange={onChange}
             value={amount}
-            keyboard="numeric"
+            onChangeText={onAmountChange}
             item={props.item}
             error={errors.amount}
+            keyboard
           />
+
           <Input
             label="Remark"
-            onChange={onChangeRemark}
+            onChangeText={onChangeRemark}
             value={remark}
             item={props.item}
             error={errors.remark}
@@ -122,13 +122,19 @@ export default Form;
 
 const styles = StyleSheet.create({
   main_container: { backgroundColor: "#fff", height: "100%" },
-  category_container: { width: "90%", alignSelf: "center", marginVertical: 10 },
+  category_container: { width: "90%", alignSelf: "center", marginBottom: 10 },
   btn_text: { fontWeight: "bold", color: "#fff", fontSize: 16 },
   picker_container: {
     width: "90%",
     alignSelf: "center",
     borderWidth: 1,
     borderRadius: 7,
+  },
+  input_container: {
+    paddingVertical: "5%",
+    width: "90%",
+    alignSelf: "center",
+    marginBottom: "5%",
   },
   btn_container: {
     width: "90%",

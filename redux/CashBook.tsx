@@ -7,12 +7,11 @@ const stockSlice = createSlice({
   name: "cashbook",
   initialState: {
     cashTransactions,
-    
+    store:cashTransactions
   },
 
   reducers: {
-    filter(state, action: PayloadAction<string>) {
-    
+    filterCashItems(state, action: PayloadAction<string>) {
       if (action.payload === "") {
         state.cashTransactions = store;
       } else {
@@ -23,11 +22,11 @@ const stockSlice = createSlice({
             el.title.includes(action.payload) ||
             el.paymentMode.includes(action.payload)
         );
-        state.cashTransactions = searchResult
+        state.cashTransactions = searchResult;
       }
-    }
-  }
+    },
+  },
 });
 
-export const { filter } = stockSlice.actions;
+export const { filterCashItems } = stockSlice.actions;
 export default stockSlice.reducer;

@@ -31,48 +31,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     width: "90%",
   },
-  searchBar__unclicked: {
-    padding: 10,
-    flexDirection: "row",
-    width: "95%",
-
-    borderRadius: 40,
-    alignItems: "center",
-    borderWidth: 0.5,
-    borderColor: "skyblue",
-  },
-  searchBar__clicked: {
-    padding: 10,
-    flexDirection: "row",
-    width: "95%",
-
-    borderRadius: 40,
-    alignItems: "center",
-    justifyContent: "space-evenly",
-    borderWidth: 0.5,
-    borderColor: "skyblue",
-  },
-  input: {
-    fontSize: 20,
-    marginLeft: 10,
-    width: "90%",
-  },
+  
+  
 });
-// import * as React from "react";
-// import { Searchbar } from "react-native-paper";
-
-// const MyComponent = () => {
-//   const [searchQuery, setSearchQuery] = React.useState("");
-//   console.log(searchQuery);
-//   const onChangeSearch = (query) => setSearchQuery(query);
-
-//   return (
-//     <Searchbar
-//       placeholder="Search"
-//       onChangeText={onChangeSearch}
-//       value={searchQuery}
-//     />
-//   );
-// };
-
-// export default MyComponent;

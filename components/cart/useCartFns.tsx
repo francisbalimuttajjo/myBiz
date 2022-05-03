@@ -26,7 +26,7 @@ const UseCart = () => {
   const { date } = getDate(paymentDate);
 
   const changeToCash = () => setBtn("cash");
-  const changeToCredit = () => setBtn("credit"); 
+  const changeToCredit = () => setBtn("credit");
   const showDatePicker = () => setDatePickerVisibility(true);
   const hideDatePicker = () => setDatePickerVisibility(false);
   const handleCash = (val: string) => setCashReceived(+val);
@@ -42,7 +42,6 @@ const UseCart = () => {
     setError(false);
     setClient(val);
   };
-  
 
   //checking out
   let sum = getTotalSum(cart);
@@ -56,12 +55,12 @@ const UseCart = () => {
     //clearing state
     setMessage("");
     if (!client) {
-      setMessage("Customer is missing");
+      setMessage("Customer Name is missing");
       return setError(true);
     }
 
     //ensuring not too much discount is given
-    if (discount > sum/4) {
+    if (discount > sum / 4) {
       setMessage("The discount is more than 25% of total price");
       return;
     }
@@ -86,7 +85,7 @@ const UseCart = () => {
         setLoading(false);
         dispatch(resetCart());
         dispatch(getItems());
-        navigate("Stock");
+        navigate("Sales");
       })
       .catch((err) => {
         setLoading(false);

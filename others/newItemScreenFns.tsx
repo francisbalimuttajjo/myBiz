@@ -20,7 +20,7 @@ const UseFns = () => {
         buyingPrice: values.buyingPrice,
         sellingPrice: +values.sellingPrice,
         buyingCurrency: values.buyingCurrency,
-        packaging: "each",
+        packaging: values.packaging,
         category: values.category,
         image: initialValues.image,
         description: values.description,

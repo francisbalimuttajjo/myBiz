@@ -13,7 +13,7 @@ import EmptyNotification from "../components/Empty";
 
 const Sales = () => {
   const dispatch = useDispatch();
-  const { availableStock, loading } = useSelector(
+  const { availableStock, loading ,store} = useSelector(
     (state: RootState) => state.stock
   );
   const handlePress = (val: string) => {
@@ -32,7 +32,7 @@ const Sales = () => {
         <BadgeComponent />
         {loading ? (
           <LoadingComponent />
-        ) : availableStock.length > 0 ? (
+        ) : store.length > 0 ? (
           <FlatList
             contentContainerStyle={{ paddingBottom: "80%", marginTop: "5%" }}
             data={availableStock}

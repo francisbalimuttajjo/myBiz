@@ -23,6 +23,7 @@ const Cart = () => {
     error,
     handleClient,
     change,
+    loading,
     date,
     handleSubmit,
     handleCash,
@@ -85,7 +86,7 @@ const Cart = () => {
           <Text style={{ ...styles.label, marginTop: 20 }}>Item List</Text>
 
           {cart.map((item) => (
-            <CartItem item={item.item} qty={item.qty} key={item.item._id} />
+            <CartItem item={item.item} qty={item.qty} key={item.item.id} />
           ))}
         </View>
         <CartSummary
@@ -98,7 +99,7 @@ const Cart = () => {
 
       <View style={styles.btn_container}>
         <Button
-          loading={false}
+          loading={loading}
           title={`checkout ${toBePaid} `}
           submit={handleSubmit}
         />

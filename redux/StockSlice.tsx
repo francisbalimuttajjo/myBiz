@@ -187,6 +187,9 @@ const stockSlice = createSlice({
     addImage(state, action: PayloadAction<{ image: string }>) {
       state.initialValues.image = action.payload.image;
     },
+    resetCart(state) {
+      state.cart = [];
+    },
     editImage(state, action: PayloadAction<{ id: string; url: string }>) {
       const index = get_stock_Index(state.availableStock, action.payload.id);
       state.availableStock[index].image = action.payload.url;
@@ -242,6 +245,7 @@ const stockSlice = createSlice({
 
 export const {
   filterStock,
+  resetCart,
   addImage,
   filterCategories,
   changeToEditing,

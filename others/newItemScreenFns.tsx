@@ -7,7 +7,7 @@ import { RootState } from "../redux/Store";
 import { FormProps, NavigationProps } from "../types/types";
 
 const UseFns = () => {
-    const { initialValues } = useSelector((state: RootState) => state.stock);
+  const { initialValues } = useSelector((state: RootState) => state.stock);
   const [loading, setLoading] = React.useState(false);
   const { navigate } = useNavigation<NavigationProps>();
   const dispatch = useDispatch();
@@ -38,8 +38,8 @@ const UseFns = () => {
         setLoading(false);
         console.log(err);
       });
-    };
-    return{loading,handleSubmit,initialValues}
-}
+  };
+  return { loading, handleSubmit, initialValues };
+};
 
-export default UseFns
+export default UseFns;

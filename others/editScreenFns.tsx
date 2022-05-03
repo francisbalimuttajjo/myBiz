@@ -2,7 +2,7 @@ import { useNavigation } from "@react-navigation/native";
 import axios from "axios";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getItems } from "../redux/StockSlice";
+import { getItems, resetCart } from "../redux/StockSlice";
 import { RootState } from "../redux/Store";
 import { FormProps, NavigationProps } from "../types/types";
 
@@ -75,6 +75,7 @@ const EditScreenFns = (_id: string | undefined) => {
         setLoading(false);
         dispatch(getItems());
         navigate("Stock");
+        dispatch(resetCart());
       })
       .catch((err) => {
         setLoading(false);

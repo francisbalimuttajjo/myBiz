@@ -33,58 +33,46 @@ const getDifference = (arr: Array<CashItemProps["item"]>) => {
     }
   }
 
-  console.log({ income, expense });
   const incomes_array = income.map((el) => el.amount);
   const expenses_array = expense.map((el) => el.amount);
-  const income_totals = incomes_array.reduce((a, b) => a + b, 0);
-  const expenses_totals = expenses_array.reduce((a, b) => a + b, 0);
+  const income_totals = incomes_array.reduce((a, b) => +a + +b, 0);
+  const expenses_totals = expenses_array.reduce((a, b) => +a + +b, 0);
   return [income_totals, expenses_totals];
 };
 
-const getDate = (date1: Date | string) => {
-  let date = new Date(date1);
-  let months = [
-    "Jan",
-    "Feb",
-    "Mar",
-    "Apr",
-    "May",
-    "Jun",
-    "Jul",
-    "Aug",
-    "Sept",
-    "Oct",
-    "Nov",
-    "Dec",
-  ];
+const getDate = (val: Date | string) => {
+  let date = new Date(val);
 
-  // const currentDate = new Date(date);
-
-  // const day = currentDate.getDate();
-  // const month = currentDate.getMonth(); // Be careful! January is 0, not 1
-  // const year = currentDate.getFullYear();
-  // const mins= currentDate.getMinutes()
-  // const hours = currentDate.getHours()
-  // const time=`${hours}: ${mins}`
-
-  let day = date.toLocaleString(undefined, {
-    day: "numeric",
-  });
-  let month: string = date.toLocaleString(undefined, {
-    month: "numeric",
-  });
-  let year = date.toLocaleString(undefined, {
-    year: "numeric",
-  });
-  let time = date.toLocaleString(undefined, {
+  //getting time from string
+  const time = date.toLocaleTimeString("en-US", {
     hour: "2-digit",
     minute: "2-digit",
   });
 
-  return { date: `${day} ${months[+month - 1]}, ${year}`, time };
+  //removing seconds from time
+  const splittedTime = time.split(":");
+  const timeWithoutSeconds = `${splittedTime[0]}:${splittedTime[1]}`;
+
+  return {
+    date: date.toDateString(),
+    time: timeWithoutSeconds,
+  };
+};
+
+const getCartItems = (arr: InitialState["cart"]) => {
+  let items: { item_id: number; quantity: number; price: number }[] = [];
+  arr.map((item) =>
+    items.push({
+      item_id: +item.item.id,
+      quantity: item.qty,
+      price: +item.item.sellingPrice,
+    })
+  );
+  return items;
 };
 export {
   getTotal,
+  getCartItems,
   getTotalSum,
   get_cart_index,
   get_stock_Index,

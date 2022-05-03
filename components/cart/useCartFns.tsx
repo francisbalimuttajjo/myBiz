@@ -1,31 +1,36 @@
-import { useSelector } from "react-redux";
 import React from "react";
+import axios from "axios";
 import { RootState } from "../../redux/Store";
-import { getTotalSum, getDate } from "../../utils";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigation } from "@react-navigation/native";
+import { getTotalSum, getDate, getCartItems } from "../../utils";
+import { getItems, resetCart } from "../../redux/StockSlice";
+import { NavigationProps } from "../../types/types";
 
 const UseCart = () => {
   const { cart } = useSelector((state: RootState) => state.stock);
+
   const [btn, setBtn] = React.useState<string>("cash");
   const [message, setMessage] = React.useState<string>("");
   const [client, setClient] = React.useState<string>("");
   const [paymentDate, setPaymentDate] = React.useState<Date>(new Date());
+  const [isDatePickerVisible, setDatePickerVisibility] = React.useState(false);
   const [discount, setDiscount] = React.useState<number>(0);
   const [cashReceived, setCashReceived] = React.useState<number>(0);
   const [error, setError] = React.useState<boolean>(false);
-  const [visible, setVisible] = React.useState<boolean>(true);
+  const [loading, setLoading] = React.useState<boolean>(false);
+  const [visible] = React.useState<boolean>(true);
 
+  const { navigate } = useNavigation<NavigationProps>();
+  const dispatch = useDispatch();
   const { date } = getDate(paymentDate);
 
-  const changeToCash = () => {
-    setBtn("cash");
-  };
-  const changeToCredit = () => setBtn("credit");
-
-  const [isDatePickerVisible, setDatePickerVisibility] = React.useState(false);
-
+  const changeToCash = () => setBtn("cash");
+  const changeToCredit = () => setBtn("credit"); 
   const showDatePicker = () => setDatePickerVisibility(true);
-
   const hideDatePicker = () => setDatePickerVisibility(false);
+  const handleCash = (val: string) => setCashReceived(+val);
+  const clearMsg = () => setMessage("");
 
   const handleConfirm = (date: Date) => {
     setPaymentDate(date);
@@ -37,33 +42,56 @@ const UseCart = () => {
     setError(false);
     setClient(val);
   };
-  const handleCash = (val: string) => setCashReceived(+val);
+  
 
-  const clearMsg = () => setMessage("");
+  //checking out
   let sum = getTotalSum(cart);
   const handleDiscount = (val: string) => setDiscount(+val);
 
   let toBePaid = sum - discount;
   const change = cashReceived - toBePaid < 0 ? 0 : cashReceived - toBePaid;
 
+  //submiting sale
   const handleSubmit = () => {
+    //clearing state
     setMessage("");
     if (!client) {
       setMessage("Customer is missing");
       return setError(true);
     }
-    if (discount > sum) {
-      setMessage("discount cant be more than the price");
+
+    //ensuring not too much discount is given
+    if (discount > sum/4) {
+      setMessage("The discount is more than 25% of total price");
       return;
     }
+    //ensuring the amount received is enough if it is a cash sale
     if (toBePaid > cashReceived && btn === "cash") {
       setMessage("Cash received is less than expected");
       return;
     }
+    setLoading(true);
 
-    //store the data in database
-    //credit sale, and client pays somethin,record that client as a debtor with the balance
-    console.log("submitted");
+    //making api call if all is well
+    axios
+      .post(`http://192.168.43.96:5000/api/v1/transactions`, {
+        client_id: 1,
+        cashReceived,
+        type: "sales",
+        discount,
+        paymentDate,
+        items: getCartItems(cart),
+      })
+      .then((res) => {
+        setLoading(false);
+        dispatch(resetCart());
+        dispatch(getItems());
+        navigate("Stock");
+      })
+      .catch((err) => {
+        setLoading(false);
+        console.log(err);
+      });
   };
   return {
     date,
@@ -74,6 +102,7 @@ const UseCart = () => {
     toBePaid,
     btn,
     hideDatePicker,
+    loading,
     message,
     visible,
     error,

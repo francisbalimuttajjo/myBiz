@@ -64,8 +64,10 @@ const stockSlice = createSlice({
       .addCase(getItems.rejected, (state, action) => {
         state.loading = false;
         state.error = "something went wrong";
+      
       })
       .addCase(getItems.fulfilled, (state, action) => {
+        
         state.loading = false;
         if (action.payload.status === "success") {         
           state.error = "";

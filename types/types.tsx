@@ -158,20 +158,20 @@ export type StockItemProps = {
   handlePress: (a: string) => void;
 };
 export type NavigationProps = {
-  navigate: (route: string, params?: { id?: string }) => void;
+  navigate: (route: string, params?: { id?: string | number }) => void;
   goBack: () => void;
 };
 
 //
 export type CashItemProps = {
   item: {
-    amount: number | string;
-    category: string;
+    Amount: number | string;
+    Category: string;
     entryDate: string | Date;
     itemTime: string | Date;
-    title: string;
+    Remark: string;
     type: string;
-    _id: string;
+    id: number;
     paymentMode: string;
   };
 };
@@ -182,8 +182,9 @@ export type FloatingLabelProps = {
   value: string;
   error?: boolean;
   onChangeText: (a: string) => void;
-  keyboard?:boolean;
-  item: CashItemProps["item"];
+  keyboard?: boolean;
+  isAmount?: boolean;
+  type: string;
 };
 
 export type mainStackParams = {
@@ -223,4 +224,25 @@ export type InitialState = {
   cart: Array<{ item: Item; qty: number }>;
   displayCategoriesSearchBar: boolean;
   error: string;
+};
+//
+export type CashBookFormProps = {
+  initialValues: {
+    Amount: string;
+    Remark: string;
+    Category: string;
+    type: string;
+    itemTime: Date | string;
+    itemDate: Date | string;
+    paymentMode:string
+  };
+  categories: Array<{ title: string; value: string; id: number }>;
+  editing?: boolean;
+  type: string;
+};
+
+export type PickerComponentProps = {
+  error?: string;
+  categories: CashBookFormProps["categories"];
+  initialValues: CashBookFormProps["initialValues"];
 };

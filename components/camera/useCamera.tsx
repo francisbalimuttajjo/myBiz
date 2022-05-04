@@ -70,7 +70,8 @@ const UseCamera = () => {
 
     const convertedImage = await img.blob();
 
-    uploadBytes(reference, convertedImage).then(() =>
+    uploadBytes(reference, convertedImage).then(() =>{
+      setLoading(false)
       getDownloadURL(reference).then((url) => {
         if (!isEditing) {
           dispatch(addImage({ image: url }));
@@ -81,7 +82,8 @@ const UseCamera = () => {
           navigation.navigate("editStock", { id: editable });
           dispatch(disableEditing());
         }
-      })
+      }
+  )}
     );
   };
   return {

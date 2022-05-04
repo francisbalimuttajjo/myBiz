@@ -33,8 +33,8 @@ const getDifference = (arr: Array<CashItemProps["item"]>) => {
     }
   }
 
-  const incomes_array = income.map((el) => el.amount);
-  const expenses_array = expense.map((el) => el.amount);
+  const incomes_array = income.map((el) => el.Amount);
+  const expenses_array = expense.map((el) => el.Amount);
   const income_totals = incomes_array.reduce((a, b) => +a + +b, 0);
   const expenses_totals = expenses_array.reduce((a, b) => +a + +b, 0);
   return [income_totals, expenses_totals];

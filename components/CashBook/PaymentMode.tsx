@@ -1,13 +1,24 @@
+import { useFormikContext } from "formik";
 import React from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 type Props = {
   paymentMode: string;
-  changeToCash: () => void;
-  changeToOnline: () => void;
 };
 
-const Mode = (props: Props) => {
+const PaymentMode = (props: Props) => {
+  const { setFieldValue } = useFormikContext();
+  const [paymentMode, setPaymentMode] = React.useState<string>(
+    props.paymentMode
+  );
+  const changeToCash = () => {
+    setFieldValue("paymentMode", "cash");
+    setPaymentMode("cash");
+  };
+  const changeToOnline = () => {
+    setFieldValue("paymentMode", "online");
+    setPaymentMode("online");
+  };
   return (
     <View style={styles.container}>
       <Text style={styles.main_text}>Payment Mode</Text>
@@ -15,35 +26,34 @@ const Mode = (props: Props) => {
       <View style={{ flexDirection: "row" }}>
         <TouchableOpacity
           activeOpacity={0.7}
-          onPress={props.changeToCash}
+          onPress={changeToCash}
           style={{
             ...styles.btn_container,
-            backgroundColor: props.paymentMode === "cash" ? "green" : "#e1e5eb",
+            backgroundColor: paymentMode === "cash" ? "green" : "#e1e5eb",
           }}
         >
           <Text
             style={{
               fontWeight: "bold",
-              color: props.paymentMode === "cash" ? "#fff" : "black",
+              color: paymentMode === "cash" ? "#fff" : "black",
             }}
           >
             Cash
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={props.changeToOnline}
+          onPress={changeToOnline}
           activeOpacity={0.7}
           style={{
             ...styles.btn_container,
             marginLeft: 15,
-            backgroundColor:
-              props.paymentMode === "online" ? "green" : "#e1e5eb",
+            backgroundColor: paymentMode === "online" ? "green" : "#e1e5eb",
           }}
         >
           <Text
             style={{
               fontWeight: "bold",
-              color: props.paymentMode === "online" ? "#fff" : "black",
+              color: paymentMode === "online" ? "#fff" : "black",
             }}
           >
             Online
@@ -54,7 +64,7 @@ const Mode = (props: Props) => {
   );
 };
 
-export default Mode;
+export default PaymentMode;
 
 const styles = StyleSheet.create({
   main_text: { opacity: 0.7, marginVertical: "5%" },

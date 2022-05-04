@@ -45,13 +45,16 @@ const Cart = () => {
   return (
     <View>
       <ScrollView>
-        {message != "" && <Toast message={message} visible={visible} />}
+        {/* {message != "" && <Toast message={message} visible={visible} />} */}
         <View style={styles.container}>
           <Text style={{ ...styles.label, marginBottom: 10 }}>
             Add Customer
           </Text>
           <TextInput
-            style={{ ...styles.input, borderColor: error ? "skyblue" : "#e0e1e2" }}
+            style={{
+              ...styles.input,
+              borderColor: error ? "skyblue" : "#e0e1e2",
+            }}
             placeholder="Add Customer"
             keyboardType="default"
             onChangeText={handleClient}
@@ -98,6 +101,7 @@ const Cart = () => {
       </ScrollView>
 
       <View style={styles.btn_container}>
+        {message != "" && <Toast message={message}  />}
         <Button
           loading={loading}
           title={`checkout ${toBePaid} `}

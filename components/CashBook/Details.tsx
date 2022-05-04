@@ -51,18 +51,18 @@ const Details = (props: Props) => {
                 ...styles.amount_text,
               }}
             >
-              {props.item.amount}
+              {props.item.Amount}
             </Text>
           </View>
         </View>
         <View style={styles.title}>
           <Text style={[styles.capitalize, styles.font]}>
-            {props.item.title}
+            {props.item.Remark}
           </Text>
           <View style={styles.sub_container}>
             <View style={styles.category}>
               <Text style={{ color: "skyblue", ...styles.capitalize }}>
-                {props.item.category}
+                {props.item.Category}
               </Text>
             </View>
             <View style={styles.cash_container}>
@@ -74,7 +74,7 @@ const Details = (props: Props) => {
         </View>
         <View style={styles.edit_container}>
           <TouchableOpacity
-            onPress={() => navigate("editEntry", { id: props.item._id })}
+            onPress={() => navigate("editEntry", { id: props.item.id })}
             activeOpacity={0.6}
             style={styles.icon_container}
           >

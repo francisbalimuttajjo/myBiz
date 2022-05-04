@@ -1,20 +1,27 @@
+import { useFormikContext } from "formik";
 import React from "react";
 import { View, TouchableOpacity, Text, StyleSheet } from "react-native";
 
-type Props = {
-  changeToCashIn: () => void;
-  changeToCashOut: () => void;
-  type: string;
-};
+const Type = () => {
+  const [type, setType] = React.useState("cash-in");
+  const { setFieldValue } = useFormikContext();
 
-const Type = (props: Props) => {
+  const changeToCashIn = () => {
+    setType("cash-in");
+    setFieldValue("type", "cash-in");
+  };
+
+  const changeToCashOut = () => {
+    setType("cash-out");
+    setFieldValue("type", "cash-out");
+  };
   return (
     <View style={styles.btns_container}>
       <TouchableOpacity
-        onPress={props.changeToCashIn}
+        onPress={changeToCashIn}
         activeOpacity={0.8}
         style={{
-          backgroundColor: props.type === "cash-in" ? "green" : "#e1e5eb",
+          backgroundColor: type === "cash-in" ? "green" : "#e1e5eb",
           marginHorizontal: 15,
           ...styles.btn,
         }}
@@ -22,7 +29,7 @@ const Type = (props: Props) => {
         <Text
           style={{
             fontWeight: "bold",
-            color: props.type === "cash-in" ? "#fff" : "black",
+            color: type === "cash-in" ? "#fff" : "black",
           }}
         >
           Cash-In
@@ -30,16 +37,16 @@ const Type = (props: Props) => {
       </TouchableOpacity>
       <TouchableOpacity
         activeOpacity={0.8}
-        onPress={props.changeToCashOut}
+        onPress={changeToCashOut}
         style={{
           ...styles.btn,
-          backgroundColor: props.type === "cash-out" ? "red" : "#e1e5eb",
+          backgroundColor: type === "cash-out" ? "red" : "#e1e5eb",
         }}
       >
         <Text
           style={{
             fontWeight: "bold",
-            color: props.type === "cash-out" ? "#fff" : "black",
+            color: type === "cash-out" ? "#fff" : "black",
           }}
         >
           Cash-Out

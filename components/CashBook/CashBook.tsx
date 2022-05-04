@@ -45,7 +45,7 @@ const CashBook = () => {
           <Horizontal length={cashTransactions.length} />
           <View style={{ paddingBottom: "50%" }}>
             {cashTransactions.map((el) => (
-              <CashItem item={el} key={el._id} />
+              <CashItem item={el} key={el.id} />
             ))}
           </View>
         </ScrollView>

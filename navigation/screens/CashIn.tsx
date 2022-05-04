@@ -17,7 +17,7 @@ const CashIn = () => {
   const { categories } = useSelector((state: RootState) => state.cashBook);
   return (
     <Form
-      type="cash-in"
+     
       editing={false}
       categories={categories}
       initialValues={{

@@ -13,12 +13,14 @@ const Badge = () => {
 
   const total = getTotal(cart);
   const { navigate } = useNavigation<NavigationProps>();
+  const { searchQuery, onChangeSearch, infoMsg } = useFns();
+
+  //if cart is not empty navigate to cart page
   const handlePress = () => {
     if (total < 1) return;
     navigate("Cart");
   };
 
-  const { searchQuery, onChangeSearch, infoMsg } = useFns();
   return (
     <View style={styles.container}>
       <View style={styles.search_container}>

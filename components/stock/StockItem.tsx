@@ -9,10 +9,11 @@ import {
 } from "react-native";
 import axios from "axios";
 import Ionicon from "react-native-vector-icons/Ionicons";
+import { useDispatch } from "react-redux";
 import useFns from "./useDeleteFns";
 import { StockItemProps as Props } from "../../types/types";
 import { getItems } from "../../redux/StockSlice";
-import { useDispatch } from "react-redux";
+
 
 const Item: React.FC<Props> = (props) => {
   const { createAlert, confirmDelete } = useFns();

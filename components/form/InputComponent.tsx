@@ -22,7 +22,7 @@ const AppFormField: React.FC<Props & FieldProps> = (props) => {
       <View
         style={{
           ...styles.sub_contsiner,
-          borderColor: hasError ? "tomato" : "black",
+          borderColor: hasError ? "red" : "black",
         }}
       >
         <Text style={styles.title}>
@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
     marginLeft: 32,
   },
   error_msg: {
-    color: "tomato",
+    color: "red",
     alignSelf: "center",
     textTransform: "capitalize",
   },

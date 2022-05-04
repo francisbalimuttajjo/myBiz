@@ -16,10 +16,10 @@ const getTotalSum = (arr: InitialState["cart"]) => {
   return arrayOfPrices.reduce((a, b) => a + b, 0);
 };
 
-const get_stock_Index = (arr: InitialState["availableStock"], k: string) =>
+const get_stock_Index = (arr: InitialState["availableStock"], k: number) =>
   arr.findIndex((el) => el.id === k);
 
-const get_cart_index = (arr: InitialState["cart"], k: string) =>
+const get_cart_index = (arr: InitialState["cart"], k: number) =>
   arr.findIndex((val) => val.item.id === k);
 
 const getDifference = (arr: Array<CashItemProps["item"]>) => {

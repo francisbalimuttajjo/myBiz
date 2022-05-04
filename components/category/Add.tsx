@@ -1,6 +1,6 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
-import { FlatList } from "react-native-gesture-handler";
+import {  ScrollView } from "react-native-gesture-handler";
 import { Formik, Field } from "formik";
 import Button from "../components/Button";
 import Search from "../components/Search";
@@ -48,12 +48,11 @@ const Add = () => {
                 placeholder="Search Categories"
               />
             )}
-            <FlatList
-              style={styles.flatList}
-              data={categories.slice(1)}
-              renderItem={(item) => <CategoryItem item={item.item} />}
-              keyExtractor={(item) => item._id}
-            />
+            <ScrollView style={styles.list}>
+              {categories.slice(1).map((item) => (
+                <CategoryItem item={item} key={item.id} />
+              ))}
+            </ScrollView>
           </View>
           <View style={styles.btn}>
             <Button title="save " submit={handleSubmit} loading={false} />
@@ -72,7 +71,7 @@ const styles = StyleSheet.create({
     paddingBottom: 60,
   },
   input_container: { margin: 20 },
-  flatList: {
+  list: {
     alignSelf: "center",
     width: "90%",
   },

@@ -14,7 +14,6 @@ import Cart from "./screens/Cart";
 import Home from "./screens/Home";
 import CategoriesEdit from "./screens/EditCategories";
 import EditStock from "./screens/EditStock";
-import Cash from "./screens/Cash";
 import CashIn from "./screens/CashIn";
 import CashOut from "./screens/CashOut";
 import BottomTabs from "./BottomTabs";
@@ -97,7 +96,7 @@ const DetailsScreens = () => {
             component={Stock}
             options={{ headerShown: false }}
           />
-          <Stack.Screen name="cash" component={Cash} />
+        
           <Stack.Screen
             name="camera"
             component={Camera}

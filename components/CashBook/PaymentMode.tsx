@@ -2,19 +2,19 @@ import { useFormikContext } from "formik";
 import React from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
-type Props = {
-  paymentMode: string;
-};
 
-const PaymentMode = (props: Props) => {
+
+const PaymentMode = (props: { paymentMode: string }) => {
   const { setFieldValue } = useFormikContext();
   const [paymentMode, setPaymentMode] = React.useState<string>(
     props.paymentMode
   );
+
   const changeToCash = () => {
     setFieldValue("paymentMode", "cash");
     setPaymentMode("cash");
   };
+
   const changeToOnline = () => {
     setFieldValue("paymentMode", "online");
     setPaymentMode("online");

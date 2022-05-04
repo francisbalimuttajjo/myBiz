@@ -2,8 +2,8 @@ import { useFormikContext } from "formik";
 import React from "react";
 import { View, TouchableOpacity, Text, StyleSheet } from "react-native";
 
-const Type = () => {
-  const [type, setType] = React.useState("cash-in");
+const Type = (props: { type: string }) => {
+  const [type, setType] = React.useState(props.type);
   const { setFieldValue } = useFormikContext();
 
   const changeToCashIn = () => {

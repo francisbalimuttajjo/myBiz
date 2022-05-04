@@ -5,10 +5,12 @@ import { filterStock } from "../../redux/StockSlice";
 import { RootState } from "../../redux/Store";
 
 const UseFns = () => {
-  const [searchQuery, setSearchQuery] = React.useState("");
   const navigation = useNavigation();
   const dispatch = useDispatch();
+
+  const [searchQuery, setSearchQuery] = React.useState("");  
   const [visibleState, setVisibleState] = React.useState(false);
+  
   const { infoMsg, store, loading } = useSelector(
     (state: RootState) => state.stock
   );

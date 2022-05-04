@@ -3,38 +3,22 @@ import { View, Pressable, Text, StyleSheet } from "react-native";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import Ionicon from "react-native-vector-icons/EvilIcons";
 import Icon from "react-native-vector-icons/AntDesign";
-import { getDate } from "../../utils";
-import { useFormikContext } from "formik";
-type Props = {
-  date: Date | string;
-  time: string |Date;
-};
+import useFns from "../../others/useDateComponentFns";
 
-const DateComponent = (props: Props) => {
-  const { setFieldValue } = useFormikContext();
-  const [entryDate, setEntryDate] = React.useState<Date | string>(props.date);
-  const { date } = getDate(entryDate);
-  const [itemTime, setItemTime] = React.useState<string | Date>(props.time);
-  const { time } = getDate(itemTime);
-
-  const [isDatePickerVisible, setDatePickerVisibility] = React.useState(false);
-  const [isTimePickerVisible, setTimePickerVisibility] = React.useState(false);
-  const showDatePicker = () => setDatePickerVisibility(true);
-  const showTimePicker = () => setTimePickerVisibility(true);
-  const hideDatePicker = () => setDatePickerVisibility(false);
-  const hideTimePicker = () => setTimePickerVisibility(false);
-
-  const handleConfirm = (date: Date) => {
-    setFieldValue("itemDate", date);
-    setEntryDate(date);
-    hideDatePicker();
-  };
-
-  const handleTimePickerConfirm = (date: Date) => {
-    setFieldValue("itemTime", date);
-    setItemTime(date);
-    hideTimePicker();
-  };
+const DateComponent = (props: { date: Date | string; time: string | Date }) => {
+  const {
+    handleConfirm,
+    handleTimePickerConfirm,
+    showDatePicker,
+    showTimePicker,
+    isDatePickerVisible,
+    isTimePickerVisible,
+    hideDatePicker,
+    hideTimePicker,
+    date,
+    time,
+  } = useFns(props.date, props.time);
+ 
   return (
     <View style={styles.container}>
       <Pressable

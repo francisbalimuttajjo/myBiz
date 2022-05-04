@@ -11,7 +11,7 @@ import Wrapper from "../components/Wrapper";
 import SelectComponent from "./SelectComponent";
 import { FormProps as Props } from "../../types/types";
 
-export const Form = (props: Props) => {
+ const Form = (props: Props) => {
   const [buyingPrice, setBuyingPrice] = React.useState(
     props.initialValues.buyingPrice
   );

@@ -21,19 +21,20 @@ const currencies = [
 
 const PriceComponent: React.FC<Props> = (props) => {
   const { setFieldValue } = useFormikContext();
-  const [currency, setCurrency] = React.useState<string>();
+  const [currency, setCurrency] = React.useState<string>(props.currency);
+  const onChange = (itemValue: string) => {
+    setFieldValue(`${props.title}Currency`, itemValue);
+    setCurrency(itemValue);
+  };
 
   return (
     <View style={styles.container}>
       <View style={styles.currency_container}>
         <Text style={{ marginBottom: -15 }}>Currency</Text>
         <Picker
-          onValueChange={(itemValue) => {
-            setFieldValue(`${props.title}Currency`, itemValue);
-            setCurrency(itemValue);
-          }}
+          onValueChange={onChange}
           mode={"dropdown"}
-          selectedValue={props.currency}
+          selectedValue={currency}
         >
           {currencies.map((el, index) => (
             <Picker.Item label={el.label} value={el.value} key={index} />
@@ -53,7 +54,6 @@ const PriceComponent: React.FC<Props> = (props) => {
           <TextInput
             keyboardType="numeric"
             onChangeText={(text) => {
-            
               setFieldValue(`${props.title}Price`, text);
               props.setPrice(+text);
             }}

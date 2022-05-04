@@ -28,7 +28,7 @@ export type CartSummaryProps = {
 //categories
 type ItemProps = {
   title: string;
-  _id: string;
+  id: number;
 };
 //date picker props
 export type DatePickerProps = {
@@ -77,7 +77,7 @@ export type InputProps = {
 
 //item
 export type Item = {
-  id: string;
+  id: number;
   image?: string;
   name: string;
   sellingCurrency: string;
@@ -158,7 +158,7 @@ export type StockItemProps = {
   handlePress: (a: string) => void;
 };
 export type NavigationProps = {
-  navigate: (route: string, params?: { id?: string | number }) => void;
+  navigate: (route: string, params?: { id?: number }) => void;
   goBack: () => void;
 };
 
@@ -192,7 +192,6 @@ export type mainStackParams = {
   CreditBook: undefined;
   CashBook: undefined;
   Purchases: undefined;
-  cash: { item: CashItemProps };
   entryDetails: { id: undefined };
   editEntry: { id: undefined };
   CashInEntry: undefined;
@@ -215,12 +214,12 @@ export type mainStackParams = {
 export type InitialState = {
   loading: boolean;
   infoMsg: string;
-  editable: string;
+  editable: number;
   isEditing: boolean;
   initialValues: Item;
   availableStock: Array<Item>;
   store: Array<Item>;
-  categories: Array<{ title: string; value: string; _id: string }>;
+  categories: Array<{ title: string; value: string; id: number }>;
   cart: Array<{ item: Item; qty: number }>;
   displayCategoriesSearchBar: boolean;
   error: string;
@@ -234,11 +233,10 @@ export type CashBookFormProps = {
     type: string;
     itemTime: Date | string;
     itemDate: Date | string;
-    paymentMode:string
+    paymentMode: string;
   };
   categories: Array<{ title: string; value: string; id: number }>;
   editing?: boolean;
-  type: string;
 };
 
 export type PickerComponentProps = {

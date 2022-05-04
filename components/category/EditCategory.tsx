@@ -6,11 +6,9 @@ import Button from "../components/Button";
 import useFns from "./useFns";
 
 import AppFormField from "../form/InputComponent";
-type Props = {
-  item: { title?: string; id?: string };
-};
 
-const Category = (props: Props) => {
+
+const Category = (props: { item: { title?: string; id?: string } }) => {
   const { validationSchema } = useFns();
   const initialValues = { category: props.item.title };
   return (
@@ -28,7 +26,6 @@ const Category = (props: Props) => {
                 name="category"
                 placeholder="Edit Category Name"
                 title="Edit Name"
-                
               />
             </View>
             <TouchableOpacity

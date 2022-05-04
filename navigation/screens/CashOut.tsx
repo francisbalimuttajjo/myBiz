@@ -2,14 +2,13 @@ import { useSelector } from "react-redux";
 import Form from "../../components/CashBook/Form";
 import { RootState } from "../../redux/Store";
 
-const item = {
+const initialValues = {
+  Remark: "",
   Amount: "",
   Category: "",
-  entryDate: new Date(),
-  itemTime: new Date(),
-  Remark: "",
   type: "cash-out",
-  id: 0,
+  itemTime: new Date(),
+  itemDate: new Date(),
   paymentMode: "cash",
 };
 
@@ -17,18 +16,10 @@ const CashOut = () => {
   const { categories } = useSelector((state: RootState) => state.cashBook);
   return (
     <Form
-      type="cash-out"
+     
       editing={false}
       categories={categories}
-      initialValues={{
-        Remark: "",
-        Amount: "",
-        Category: "",
-        type: "cash-out",
-        itemTime: new Date(),
-        itemDate: new Date(),
-        paymentMode:'cash'
-      }}
+      initialValues={initialValues}
     />
   );
 };

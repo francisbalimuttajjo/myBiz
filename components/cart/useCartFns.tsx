@@ -61,7 +61,7 @@ const UseCart = () => {
 
     //ensuring not too much discount is given
     if (discount > sum / 4) {
-      setMessage("The discount is more than 25% of total price");
+      setMessage("The discount is more than 25% of the total price");
       return;
     }
     //ensuring the amount received is enough if it is a cash sale

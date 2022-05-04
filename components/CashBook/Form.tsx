@@ -67,7 +67,11 @@ export const Form = (props: Props) => {
           <TouchableOpacity
             onPress={handleSubmit}
             activeOpacity={0.8}
-            style={styles.btn_container}
+            style={{
+              ...styles.btn_container,
+              backgroundColor:
+                Object.values(errors).length !== 0 ? "#b3b0aa" : "green",
+            }}
           >
             <Text style={styles.btn_text}>
               {!props.editing ? "SAVE" : "UPDATE"}
@@ -79,7 +83,6 @@ export const Form = (props: Props) => {
   );
 };
 export default Form;
-
 
 const styles = StyleSheet.create({
   main_container: { backgroundColor: "#fff", height: "100%" },
@@ -96,7 +99,7 @@ const styles = StyleSheet.create({
     width: "90%",
     alignSelf: "center",
     borderRadius: 7,
-    backgroundColor: "green",
+   
     alignItems: "center",
     justifyContent: "center",
     paddingVertical: "4%",

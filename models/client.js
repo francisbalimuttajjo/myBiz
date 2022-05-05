@@ -37,16 +37,7 @@ module.exports = (sequelize, DataTypes) => {
         validate: {
           isEmail: { args: true, msg: "Please provide a valid email" },
           notEmpty: true,
-          // isUnique: (email, next) => {
-          //   Client.findAll({ where: { email }, attributes: ["id"] })
-          //     .then((list) => {
-          //       if (list.length != 0) next(new Error("Client already exists"));
-          //       next();
-          //     })
-          //     .catch((err) => {
-          //       throw new Error(err.message);
-          //     });
-          //},
+      
         },
 
         allowNull: false,

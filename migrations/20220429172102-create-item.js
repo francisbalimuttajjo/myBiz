@@ -14,6 +14,13 @@ module.exports = {
         allowNull: false,
         unique: true,
       },
+      user_id: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        validate: {
+          notEmpty: { args: true, msg: "item must belong to a user" },
+        },
+      },
 
       buyingPrice: { type: DataTypes.INTEGER, allowNull: false },
       sellingPrice: { type: DataTypes.INTEGER },

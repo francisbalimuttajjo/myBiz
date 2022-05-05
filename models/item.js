@@ -7,6 +7,10 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "item_id",
         as: "sales",
       });
+      this.belongsTo(models.User, {
+        foreignKey: "user_id",
+        as :"items"
+      });
     }
   }
   Item.init(
@@ -16,6 +20,13 @@ module.exports = (sequelize, DataTypes) => {
         autoIncrement: true,
         primaryKey: true,
         type: DataTypes.INTEGER,
+      },
+      user_id: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        validate: {
+          notEmpty: { args: true, msg: "item must belong to a user" },
+        },
       },
 
       name: {

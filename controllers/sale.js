@@ -103,13 +103,14 @@ exports.deleteOneSale = (req, res) => {
     });
 };
 
-//reversing / cancelling sale
+//reversing / cancelling single sale
 exports.reverseSale = async (req, res) => {
   try {
+    //getting the sale
     const sale = await db.Sale.findOne({
       where: { id: req.params.id },
     });
-    //updating stock before deleting
+    //updating stock  before deleting
     await db.Item.update(
       { stock: db.sequelize.literal(`stock + ${sale.quantity}`) },
       { where: { id: sale.item_id } }

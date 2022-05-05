@@ -41,7 +41,7 @@ module.exports = {
         allowNull: true,
         defaultValue: [],
       },
-
+      paymentDate: DataTypes.DATE,
       cashPending: {
         type: DataTypes.INTEGER,
         allowNull: false,

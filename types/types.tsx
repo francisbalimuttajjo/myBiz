@@ -200,6 +200,7 @@ export type mainStackParams = {
   home: undefined;
   Sales: undefined;
   Expenses: undefined;
+  login:undefined
   Expense: undefined;
   Category: undefined;
   editStock: undefined;

@@ -9,6 +9,7 @@ import Expenses from "./screens/Expenses";
 import AddNew from "./screens/NewItem";
 import NewCategory from "./screens/NewCategory";
 import Camera from "./screens/Image";
+import LoginPage from "./screens/Login";
 import NewExpense from "./screens/NewExpense";
 import Cart from "./screens/Cart";
 import Home from "./screens/Home";
@@ -32,16 +33,18 @@ const DetailsScreens = () => {
         <Stack.Group
           screenOptions={{
             headerStyle: { backgroundColor: "transparent" },
-            // headerTintColor: "#fff",
-
             headerTitleStyle: {
               fontWeight: "bold",
             },
           }}
         >
           <Stack.Screen
+            name="login"
+            component={LoginPage}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
             name="home"
-            //component={Home}
             component={BottomTabs}
             options={{ headerShown: false }}
           />
@@ -96,7 +99,7 @@ const DetailsScreens = () => {
             component={Stock}
             options={{ headerShown: false }}
           />
-        
+
           <Stack.Screen
             name="camera"
             component={Camera}

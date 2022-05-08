@@ -3,7 +3,7 @@ import { ActivityIndicator, Pressable, StyleSheet, Text, TouchableOpacity } from
 import {ButtonProps as Props} from '../../types/types'
 
 
-const Supplier: React.FC<Props> = (props) => {
+const Button: React.FC<Props> = (props) => {
   return (
     <TouchableOpacity
       activeOpacity={0.7}
@@ -20,7 +20,7 @@ const Supplier: React.FC<Props> = (props) => {
   );
 };
 
-export default Supplier;
+export default Button;
 
 const styles = StyleSheet.create({
   button: {

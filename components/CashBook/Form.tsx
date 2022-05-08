@@ -1,9 +1,10 @@
 import React from "react";
 import * as Yup from "yup";
+import { Formik, Field } from "formik";
 import { ScrollView, StyleSheet, Text, View } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import Input from "./FloatingInput";
-import { Formik, Field } from "formik";
+
 import CategoriesPicker from "./PickerComponent";
 import EntryTypeBtns from "./EntryTypeBtns";
 import { CashBookFormProps as Props } from "../../types/types";
@@ -98,8 +99,7 @@ const styles = StyleSheet.create({
   btn_container: {
     width: "90%",
     alignSelf: "center",
-    borderRadius: 7,
-   
+    borderRadius: 7,   
     alignItems: "center",
     justifyContent: "center",
     paddingVertical: "4%",

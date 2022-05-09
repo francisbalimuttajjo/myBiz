@@ -2,30 +2,42 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux/Store";
 import { filterCategories } from "../../redux/StockSlice";
-import { Keyboard } from "react-native";
 import * as Yup from "yup";
+import axios from "axios";
 
 const UseFns = () => {
   const dispatch = useDispatch();
-  const [clicked, setClicked] = React.useState(false);
-  const [searchPhrase, setSearchPhrase] = React.useState("");
+  const [searchQuery, setSearchQuery] = React.useState("");
+  const [loading, setLoading] = React.useState<boolean>(false);
+  const [error, setError] = React.useState<string>("");
 
-  const handleChange = (val: string) => {
-    setSearchPhrase(val);
-    dispatch(filterCategories(val));
-  };
-  const handleClicked = () => setClicked(true);
-
-  const clearSearchField = () => {
-    setSearchPhrase("");
-    Keyboard.dismiss();
-    setClicked(false);
-    dispatch(filterCategories(""));
+  const onChangeSearch = (query: string) => {
+    dispatch(filterCategories(query));
+    setSearchQuery(query);
   };
 
-  const { categories, displayCategoriesSearchBar,infoMsg } = useSelector(
+  const { categories, infoMsg } = useSelector(
     (state: RootState) => state.stock
   );
+  const { user } = useSelector((state: RootState) => state.user);
+
+  const handleSubmit = (values: { category: string }) => {
+    console.log(values);
+    setLoading(true);
+    axios
+      .post(`http://192.168.43.96:5000/api/v1/categories`, {
+        title: values.category,
+        user: user.email,
+      })
+      .then((res) => {
+        // if (res.data.status === "success") {
+        setLoading(false);
+      })
+      .catch((err) => {
+        setLoading(false);
+        setError(err.response.data.data);
+      });
+  };
 
   const validationSchema = Yup.object().shape({
     category: Yup.string()
@@ -36,13 +48,12 @@ const UseFns = () => {
   return {
     validationSchema,
     categories,
-    displayCategoriesSearchBar,
-    clearSearchField,
-    handleClicked,
-    handleChange,
-    clicked,
-    searchPhrase,
-    infoMsg
+    searchQuery,
+    onChangeSearch,
+    infoMsg,
+    loading,
+    error,
+    handleSubmit,
   };
 };
 

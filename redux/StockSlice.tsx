@@ -3,7 +3,7 @@ import { get_cart_index, get_stock_Index } from "../utils";
 import axios from "axios";
 import { InitialState, Item } from "../types/types";
 const initialValues: Item = {
-  id: "",
+  id: 0,
   name: "",
   description: "",
   category: "",
@@ -17,39 +17,56 @@ const initialValues: Item = {
   sellingCurrency: "ugx",
   packaging: "",
 };
-const categories: InitialState["categories"] = [
-  { title: "Choose Category  *", value: "", _id: "0" },
-  { title: "food", value: "food", _id: "09" },
-  { title: "groceries", value: "groceries", _id: "80" },
-  { title: "stationery", value: "stationery", _id: "090" },
-];
+// const categories: InitialState["categories"] = [
+//   { title: "Choose Category  ", value: "", id: 0 },
+//   { title: "food", value: "food", id: 1 },
+//   { title: "groceries", value: "groceries", id: 2 },
+//   { title: "stationery", value: "stationery", id: 3 },
+// ];
 
 export const getItems = createAsyncThunk(
   "items/getItems",
-  async (thunkAPI) => {
+  async ({ email }: { email: string }) => {
     try {
-      const response = await axios.get(
-        "http://192.168.43.96:5000/api/v1/items"
+      const response = await axios.post(
+        "http://192.168.43.96:5000/api/v1/items/user",
+        { email }
       );
+
       return response.data;
     } catch (err: any) {
       return err.response.data;
     }
   }
 );
-// const store: Array<Item> = getItems();
-const categoriesStore = categories;
+export const getCategories = createAsyncThunk(
+  "items/getCategories",
+  async ({ user }: { user: string }) => {
+    try {
+      const response = await axios.post(
+        "http://192.168.43.96:5000/api/v1/categories/getAll",
+        { user }
+      );
+
+      return response.data;
+    } catch (err: any) {
+      return err.response.data;
+    }
+  }
+);
+
+// const categoriesStore = categories;
 const initialState: InitialState = {
   availableStock: [],
   loading: false,
   cart: [],
   store: [],
-  initialValues,  
-  displayCategoriesSearchBar: categoriesStore.length === 0 ? false : true,
+  initialValues,
+  categoriesStore: [],
+  categories: [],
   infoMsg: "",
-  categories: categoriesStore,
   isEditing: false,
-  editable: "",
+  editable: -1,
   error: "",
 };
 
@@ -67,8 +84,8 @@ const stockSlice = createSlice({
       })
       .addCase(getItems.fulfilled, (state, action) => {
         state.loading = false;
+        console.log(action.payload);
         if (action.payload.status === "success") {
-         
           state.error = "";
           state.store = action.payload.data;
           state.availableStock = state.store;
@@ -78,7 +95,7 @@ const stockSlice = createSlice({
       });
   },
   reducers: {
-    removeFromCart(state, action: PayloadAction<{ id: string }>) {
+    removeFromCart(state, action: PayloadAction<{ id: number }>) {
       const stock_index = get_stock_Index(
         state.availableStock,
         action.payload.id
@@ -94,7 +111,7 @@ const stockSlice = createSlice({
       state.cart = state.cart.filter((el) => el.item.id !== action.payload.id);
     },
 
-    addItem(state, action: PayloadAction<{ id: string }>) {
+    addItem(state, action: PayloadAction<{ id: number }>) {
       //update available state
       const stock_index = get_stock_Index(
         state.availableStock,
@@ -116,7 +133,7 @@ const stockSlice = createSlice({
       }
     },
 
-    reduceItem(state, action: PayloadAction<{ id: string }>) {
+    reduceItem(state, action: PayloadAction<{ id: number }>) {
       let new_cart = [...state.cart];
       const cart_index = get_cart_index(new_cart, action.payload.id);
 
@@ -140,7 +157,7 @@ const stockSlice = createSlice({
       }
     },
 
-    addToCart(state, action: PayloadAction<{ id: string }>) {
+    addToCart(state, action: PayloadAction<{ id: number }>) {
       //getting the item from stock
       const index = get_stock_Index(state.availableStock, action.payload.id);
       //checking if stock is available
@@ -188,19 +205,22 @@ const stockSlice = createSlice({
     addImage(state, action: PayloadAction<{ image: string }>) {
       state.initialValues.image = action.payload.image;
     },
-    editImage(state, action: PayloadAction<{ id: string; url: string }>) {
+    resetCart(state) {
+      state.cart = [];
+    },
+    editImage(state, action: PayloadAction<{ id: number; url: string }>) {
       const index = get_stock_Index(state.availableStock, action.payload.id);
       state.availableStock[index].image = action.payload.url;
     },
 
-    changeToEditing(state, action: PayloadAction<{ id: string }>) {
+    changeToEditing(state, action: PayloadAction<{ id: number }>) {
       state.isEditing = true;
 
       state.editable = action.payload.id;
     },
     disableEditing(state) {
       state.isEditing = false;
-      state.editable = "";
+      state.editable = -1;
     },
 
     filterStock(state, action: PayloadAction<string>) {
@@ -226,9 +246,9 @@ const stockSlice = createSlice({
     filterCategories(state, action: PayloadAction<string>) {
       state.infoMsg = "";
       if (action.payload === "") {
-        state.categories = categoriesStore;
+        state.categories = state.categoriesStore;
       } else {
-        state.categories = categoriesStore;
+        state.categories = state.categoriesStore;
         const searchResult = state.categories.filter((el) =>
           el.title.includes(action.payload)
         );
@@ -243,6 +263,7 @@ const stockSlice = createSlice({
 
 export const {
   filterStock,
+  resetCart,
   addImage,
   filterCategories,
   changeToEditing,

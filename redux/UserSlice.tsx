@@ -1,24 +1,33 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-const user = {
-  firstName: "bafra",
-  lastName: "francis",
-  email: "f@gmail.com",
-  imageSrc:
-    "https://storage.googleapis.com/download/storage/v1/b/task-tracker-336811.appspot.com/o/%2Fusers%2Fimgs%2Fuser-61d5e487b45306781f0cea46-1642267623054.jpeg?generation=1642267623313359&alt=media",
+type User = {
+  firstName: string;
+  lastName: string;
+  image: string;
+  email: string;
 };
 
 const userSlice = createSlice({
   name: "user",
   initialState: {
-    user,
+    user: { email: "", firstName: "", lastName: "", image: "" },
+    isLoggedIn: false,
   },
   reducers: {
     setMessage(state, action: PayloadAction<string>) {
       //   state.message = action.payload
     },
+    addUser(
+      state,
+      action: PayloadAction<{
+        user: User;
+      }>
+    ) {
+      state.user = action.payload.user;
+      state.isLoggedIn = true;
+    },
   },
 });
 
-// export const { setMessage } = userSlice.actions
+export const { addUser } = userSlice.actions;
 export default userSlice.reducer;

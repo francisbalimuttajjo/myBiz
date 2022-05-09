@@ -28,7 +28,7 @@ export type CartSummaryProps = {
 //categories
 type ItemProps = {
   title: string;
-  _id: string;
+  id: number;
 };
 //date picker props
 export type DatePickerProps = {
@@ -52,12 +52,9 @@ export type WrapperProps = {
 };
 //search
 export type SearchProps = {
-  clicked: boolean;
-  handleChange: (a: string) => void;
-  handleClicked: () => void;
-  searchPhrase: string;
+  searchQuery: string;
+  onChangeSearch: (a: string) => void;
   placeholder: string;
-  clearSearchField: () => void;
   infoMsg?: string;
 };
 //button
@@ -80,7 +77,7 @@ export type InputProps = {
 
 //item
 export type Item = {
-  id: string;
+  id: number;
   image?: string;
   name: string;
   sellingCurrency: string;
@@ -91,7 +88,7 @@ export type Item = {
   stock: number | string;
   category: string;
   supplier: string;
-  packaging?: string;
+  packaging: string;
   isReturnable: boolean;
 };
 
@@ -99,8 +96,8 @@ export type Item = {
 export type FormProps = {
   initialValues: Item;
   btn_title: string;
-  categoryValue: string;
-  loading:boolean
+
+  loading: boolean;
   handleSubmit: (a: FormProps["initialValues"]) => void;
 };
 
@@ -129,7 +126,7 @@ export type SwitchProps = {
 
 //Headeer.tsx/components/home
 export type HeaderProps = {
-  user: { firstName: string; lastName: string; imageSrc?: string };
+  user: { firstName: string; lastName: string; image?: string };
 };
 
 //navigation
@@ -158,23 +155,23 @@ export interface ToolTipProps {
 export type StockItemProps = {
   cartItem?: boolean;
   item: Item;
-  handlePress: (a: string) => void;
+  handlePress: (a: number) => void;
 };
 export type NavigationProps = {
-  navigate: (route: string, params?: { id?: string }) => void;
+  navigate: (route: string, params?: { id?: number }) => void;
   goBack: () => void;
 };
 
 //
 export type CashItemProps = {
   item: {
-    amount: number | string;
-    category: string;
+    Amount: number | string;
+    Category: string;
     entryDate: string | Date;
     itemTime: string | Date;
-    title: string;
+    Remark: string;
     type: string;
-    _id: string;
+    id: number;
     paymentMode: string;
   };
 };
@@ -183,10 +180,11 @@ export type CashItemProps = {
 export type FloatingLabelProps = {
   label: string;
   value: string;
-  error?: string;
-  onChange: (a: string) => void;
-  keyboard?: string;
-  item: CashItemProps["item"];
+  error?: boolean;
+  onChangeText: (a: string) => void;
+  keyboard?: boolean;
+  isAmount?: boolean;
+  type: string;
 };
 
 export type mainStackParams = {
@@ -194,7 +192,6 @@ export type mainStackParams = {
   CreditBook: undefined;
   CashBook: undefined;
   Purchases: undefined;
-  cash: { item: CashItemProps };
   entryDetails: { id: undefined };
   editEntry: { id: undefined };
   CashInEntry: undefined;
@@ -203,6 +200,7 @@ export type mainStackParams = {
   home: undefined;
   Sales: undefined;
   Expenses: undefined;
+  login:undefined
   Expense: undefined;
   Category: undefined;
   editStock: undefined;
@@ -217,13 +215,34 @@ export type mainStackParams = {
 export type InitialState = {
   loading: boolean;
   infoMsg: string;
-  editable: string;
+  editable: number;
   isEditing: boolean;
   initialValues: Item;
   availableStock: Array<Item>;
   store: Array<Item>;
-  categories: Array<{ title: string; value: string; _id: string }>;
+  categories: Array<{ title: string; value: string; id: number }>;
+  categoriesStore: Array<{ title: string; value: string; id: number }>;
   cart: Array<{ item: Item; qty: number }>;
-  displayCategoriesSearchBar: boolean;
+ 
   error: string;
+};
+//
+export type CashBookFormProps = {
+  initialValues: {
+    Amount: string;
+    Remark: string;
+    Category: string;
+    type: string;
+    itemTime: Date | string;
+    itemDate: Date | string;
+    paymentMode: string;
+  };
+  categories: Array<{ title: string; value: string; id: number }>;
+  editing?: boolean;
+};
+
+export type PickerComponentProps = {
+  error?: string;
+  categories: CashBookFormProps["categories"];
+  initialValues: CashBookFormProps["initialValues"];
 };

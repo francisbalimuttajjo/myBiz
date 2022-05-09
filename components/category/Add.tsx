@@ -1,12 +1,13 @@
 import React from "react";
-import { View, StyleSheet } from "react-native";
-import { FlatList } from "react-native-gesture-handler";
+import { View, StyleSheet, Text } from "react-native";
+import { ScrollView } from "react-native-gesture-handler";
 import { Formik, Field } from "formik";
 import Button from "../components/Button";
 import Search from "../components/Search";
 import AppFormField from "../form/InputComponent";
 import CategoryItem from "./Category";
 import useFns from "./useFns";
+import Info from "../components/Info";
 
 const initialValues = {
   category: "",
@@ -16,20 +17,19 @@ const Add = () => {
   const {
     validationSchema,
     categories,
-    displayCategoriesSearchBar,
-    clearSearchField,
-    handleClicked,
-    handleChange,
-    clicked,
-    searchPhrase,
+    searchQuery,
+    onChangeSearch,
     infoMsg,
+    loading,
+    error,
+    handleSubmit,
   } = useFns();
 
   return (
     <Formik
       initialValues={initialValues}
       validationSchema={validationSchema}
-      onSubmit={(values) => console.log(values)}
+      onSubmit={handleSubmit}
     >
       {({ handleSubmit }) => (
         <View>
@@ -42,27 +42,24 @@ const Add = () => {
                 title="New Category"
                 required
               />
+              {error !== "" && <Info error={error} />}
             </View>
-            {displayCategoriesSearchBar && (
+            {/* {displayCategoriesSearchBar && (
               <Search
                 infoMsg={infoMsg}
-                searchPhrase={searchPhrase}
-                clearSearchField={clearSearchField}
-                clicked={clicked}
-                handleChange={handleChange}
-                handleClicked={handleClicked}
+                searchQuery={searchQuery}
+                onChangeSearch={onChangeSearch}
                 placeholder="Search Categories"
               />
-            )}
-            <FlatList
-              style={styles.flatList}
-              data={categories.slice(1)}
-              renderItem={(item) => <CategoryItem item={item.item} />}
-              keyExtractor={(item) => item._id}
-            />
+            )} */}
+            <ScrollView style={styles.list}>
+              {categories.slice(1).map((item) => (
+                <CategoryItem item={item} key={item.id} />
+              ))}
+            </ScrollView>
           </View>
           <View style={styles.btn}>
-            <Button title="save " submit={handleSubmit} loading={false} />
+            <Button title="save" submit={handleSubmit} loading={loading} />
           </View>
         </View>
       )}
@@ -78,7 +75,7 @@ const styles = StyleSheet.create({
     paddingBottom: 60,
   },
   input_container: { margin: 20 },
-  flatList: {
+  list: {
     alignSelf: "center",
     width: "90%",
   },

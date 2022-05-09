@@ -12,17 +12,19 @@ import useFns from "./useDeleteFns";
 const ItemsList = () => {
   const { navigate } = useFns();
   const dispatch = useDispatch();
+  //
   const { availableStock, loading, infoMsg } = useSelector(
     (state: RootState) => state.stock
   );
-
-  const handleEditing = (val: string) => {
+  const { user } = useSelector((state: RootState) => state.user);
+  //
+  const handleEditing = (val: number) => {
     dispatch(changeToEditing({ id: val }));
     navigate("editStock", { id: val });
   };
 
   React.useEffect(() => {
-    dispatch(getItems());
+    dispatch(getItems({ email: user.email }));
   }, [getItems]);
 
   return (
@@ -40,7 +42,7 @@ const ItemsList = () => {
           renderItem={(item) => (
             <StockComponent handlePress={handleEditing} item={item.item} />
           )}
-          keyExtractor={(item) => item.id}
+          keyExtractor={(item) => item.id.toString()}
         />
       )}
     </View>

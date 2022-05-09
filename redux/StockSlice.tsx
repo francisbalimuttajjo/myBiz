@@ -30,7 +30,7 @@ export const getItems = createAsyncThunk(
     try {
       const response = await axios.post(
         "http://192.168.43.96:5000/api/v1/items/user",
-        { email }
+        { user: email }
       );
 
       return response.data;
@@ -103,7 +103,7 @@ const stockSlice = createSlice({
       })
       .addCase(getItems.fulfilled, (state, action) => {
         state.loading = false;
-        console.log(action.payload);
+
         if (action.payload.status === "success") {
           state.error = "";
           state.store = action.payload.data;

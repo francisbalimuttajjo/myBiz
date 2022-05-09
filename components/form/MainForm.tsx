@@ -8,6 +8,7 @@ import AppFormField from "./InputComponent";
 import SwitchComponent from "./Switch";
 import validationSchema from "./ValidationSchema";
 import Wrapper from "../components/Wrapper";
+import Info from "../components/Info";
 import SelectComponent from "./SelectComponent";
 import { FormProps as Props } from "../../types/types";
 
@@ -91,6 +92,7 @@ const Form = (props: Props) => {
               error={errors.supplier}
             />
           </Wrapper>
+          {props.error !=="" && <Info error={props.error} />}
 
           <Button
             title={props.btn_title}

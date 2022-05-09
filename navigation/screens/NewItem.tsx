@@ -3,7 +3,7 @@ import Form from "../../components/form/MainForm";
 import useFns from "../../others/newItemScreenFns";
 
 const NewItem = () => {
-  const { loading, handleSubmit, initialValues } = useFns();
+  const { loading, handleSubmit, initialValues, error } = useFns();
 
   return (
     <Form
@@ -11,6 +11,7 @@ const NewItem = () => {
       btn_title="save Item"
       loading={loading}
       handleSubmit={handleSubmit}
+      error={error}
     />
   );
 };

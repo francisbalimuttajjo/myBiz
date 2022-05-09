@@ -15,13 +15,13 @@ import { getItems } from "../../redux/StockSlice";
 import { useDispatch } from "react-redux";
 
 const Item: React.FC<Props> = (props) => {
-  const { createAlert, confirmDelete } = useFns();
+  const { createAlert, confirmDelete, user } = useFns();
   const dispatch = useDispatch();
 
   if (confirmDelete) {
     axios
       .delete(`http://192.168.43.96:5000/api/v1/items/${props.item.id}`)
-      .then((res) => dispatch(getItems()))
+      .then((res) => dispatch(getItems({ email: user.email })))
       .catch((err) => {
         console.log(err);
       });

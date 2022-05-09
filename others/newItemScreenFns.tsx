@@ -9,7 +9,8 @@ import { FormProps, NavigationProps } from "../types/types";
 const UseFns = () => {
   const { initialValues } = useSelector((state: RootState) => state.stock);
   const { user } = useSelector((state: RootState) => state.user);
-  const [loading, setLoading] = React.useState(false);
+  const [loading, setLoading] = React.useState<boolean>(false);
+  const [error, setError] = React.useState<string>("");
   const { navigate } = useNavigation<NavigationProps>();
   const dispatch = useDispatch();
 
@@ -39,10 +40,11 @@ const UseFns = () => {
       })
       .catch((err) => {
         setLoading(false);
-        console.log(err);
+
+        setError(err.response.data.data);
       });
   };
-  return { loading, handleSubmit, initialValues };
+  return { loading, handleSubmit, initialValues, error };
 };
 
 export default UseFns;

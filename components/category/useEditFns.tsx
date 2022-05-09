@@ -31,6 +31,7 @@ const UseFns = (id: number, title: string) => {
       });
   };
   const handleDelete = () => {
+    console.log("clicke");
     setLoading(true);
     axios
       .delete(`http://192.168.43.96:5000/api/v1/categories/${id}`)
@@ -42,6 +43,7 @@ const UseFns = (id: number, title: string) => {
         }
       })
       .catch((err) => {
+        console.log(err.response.data);
         setLoading(false);
       });
   };

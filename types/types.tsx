@@ -98,6 +98,7 @@ export type FormProps = {
   btn_title: string;
   loading: boolean;
   handleSubmit: (a: FormProps["initialValues"]) => void;
+  error:string
 };
 
 ////priceComponent.tsx/components/form

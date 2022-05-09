@@ -14,6 +14,7 @@ const UseFns = () => {
   const { infoMsg, store, loading } = useSelector(
     (state: RootState) => state.stock
   );
+ 
 
   const displaySearchBar = store.length === 0 ? false : true;
   const handleClicked = () => setClicked(true);
@@ -48,6 +49,7 @@ const UseFns = () => {
     handleChange,
     clearSearchField,
     displaySearchBar,
+    
   };
 };
 

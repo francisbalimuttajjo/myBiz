@@ -96,7 +96,6 @@ export type Item = {
 export type FormProps = {
   initialValues: Item;
   btn_title: string;
-
   loading: boolean;
   handleSubmit: (a: FormProps["initialValues"]) => void;
 };
@@ -200,7 +199,7 @@ export type mainStackParams = {
   home: undefined;
   Sales: undefined;
   Expenses: undefined;
-  login:undefined
+  login: undefined;
   Expense: undefined;
   Category: undefined;
   editStock: undefined;
@@ -223,7 +222,7 @@ export type InitialState = {
   categories: Array<{ title: string; value: string; id: number }>;
   categoriesStore: Array<{ title: string; value: string; id: number }>;
   cart: Array<{ item: Item; qty: number }>;
- 
+
   error: string;
 };
 //
@@ -237,8 +236,13 @@ export type CashBookFormProps = {
     itemDate: Date | string;
     paymentMode: string;
   };
-  categories: Array<{ title: string; value: string; id: number ,user:number}>;
-  categoriesStore: Array<{ title: string; value: string; id: number ,user:number}>;
+  categories: Array<{ title: string; value: string; id: number; user: number }>;
+  categoriesStore: Array<{
+    title: string;
+    value: string;
+    id: number;
+    user: number;
+  }>;
   editing?: boolean;
 };
 

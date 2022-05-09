@@ -9,7 +9,7 @@ import { SelectProps as Props } from "../../types/types";
 const SelectComponent = (props: Props) => {
   const { setFieldValue } = useFormikContext();
   const { categories } = useSelector((state: RootState) => state.stock);
-  const [category, setCategory] = React.useState(categories[0].value);
+  const [category, setCategory] = React.useState(props.categoryValue);
 
   return (
     <View style={styles.mainContainer}>
@@ -25,8 +25,9 @@ const SelectComponent = (props: Props) => {
             setCategory(itemValue);
           }}
           mode={"dropdown"}
-          selectedValue={props.categoryValue}
+          selectedValue={category}
         >
+          <Picker.Item label="select category *" value="" />
           {categories.map((el, index) => (
             <Picker.Item label={el.title} value={el.value} key={index} />
           ))}

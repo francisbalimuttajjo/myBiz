@@ -29,9 +29,9 @@ const Add = () => {
     getCategories,
   } = useFns();
 
-  React.useState(() => {
+  React.useEffect(() => {
     dispatch(getCategories({ user: user.email }));
-  });
+  }, [getCategories]);
 
   return (
     <Formik

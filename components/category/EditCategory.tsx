@@ -3,21 +3,25 @@ import React from "react";
 import { Text, View, StyleSheet, TouchableOpacity } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome5";
 import Button from "../components/Button";
+import Info from "../components/Info";
 import useFns from "./useFns";
-
+import useEditFns from "./useEditFns";
 import AppFormField from "../form/InputComponent";
+
 type Props = {
-  item: { title?: string; id?: string };
+  item: { title: string; id: number };
 };
 
 const Category = (props: Props) => {
   const { validationSchema } = useFns();
-  const initialValues = { category: props.item.title };
+  const { loading, handleSubmit, handleDelete, initialValues, error } =
+    useEditFns(props.item.id, props.item.title);
+
   return (
     <Formik
       initialValues={initialValues}
       validationSchema={validationSchema}
-      onSubmit={(values) => console.log(values)}
+      onSubmit={handleSubmit}
     >
       {({ handleSubmit }) => (
         <View>
@@ -28,20 +32,21 @@ const Category = (props: Props) => {
                 name="category"
                 placeholder="Edit Category Name"
                 title="Edit Name"
-                
               />
             </View>
+            {error !== "" && <Info error={error} />}
             <TouchableOpacity
-              onPress={() => console.log("deleted ")}
+              onPress={handleDelete}
               activeOpacity={0.7}
               style={styles.delete_btn}
+              disabled={loading}
             >
               <Icon name="trash" size={15} color="black" />
               <Text style={styles.delete_text}>Delete Category</Text>
             </TouchableOpacity>
           </View>
           <View style={styles.btn}>
-            <Button title="Update " submit={handleSubmit} loading={false} />
+            <Button title="Update " submit={handleSubmit} loading={loading} />
           </View>
         </View>
       )}

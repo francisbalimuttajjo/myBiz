@@ -6,7 +6,11 @@ import { RootState } from "../../redux/Store";
 import EmptyNotification from "../components/Empty";
 import LoadingComponent from "../components/LoadingComponent";
 import StockComponent from "./StockItem";
-import { changeToEditing, getItems } from "../../redux/StockSlice";
+import {
+  changeToEditing,
+  getCategories,
+  getItems,
+} from "../../redux/StockSlice";
 import useFns from "./useDeleteFns";
 
 const ItemsList = () => {
@@ -25,7 +29,8 @@ const ItemsList = () => {
 
   React.useEffect(() => {
     dispatch(getItems({ email: user.email }));
-  }, [getItems]);
+    dispatch(getCategories({ user: user.email }));
+  }, [getItems, getCategories]);
 
   return (
     <View>

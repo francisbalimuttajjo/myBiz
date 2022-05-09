@@ -1,14 +1,16 @@
-import { useSelector } from "react-redux";
-import Form from "../../components/form/NewStock";
-import { RootState } from "../../redux/Store";
+import React from "react";
+import Form from "../../components/form/MainForm";
+import useFns from "../../others/newItemScreenFns";
 
 const NewItem = () => {
-  const { initialValues } = useSelector((state: RootState) => state.stock);
+  const { loading, handleSubmit, initialValues } = useFns();
+
   return (
     <Form
       initialValues={initialValues}
       btn_title="save Item"
-      categoryValue=""
+      loading={loading}
+      handleSubmit={handleSubmit}
     />
   );
 };

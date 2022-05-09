@@ -1,5 +1,5 @@
 import React from "react";
-import { ActivityIndicator, Pressable, StyleSheet, Text, TouchableOpacity } from "react-native";
+import { ActivityIndicator,  StyleSheet, Text, TouchableOpacity } from "react-native";
 import {ButtonProps as Props} from '../../types/types'
 
 

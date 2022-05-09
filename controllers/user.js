@@ -13,7 +13,7 @@ exports.addOneUser = (req, res) => {
   db.User.findAll({ where: { email } })
     .then((list) => {
       if (list.length != 0)
-        return sendResponse(req, res, 400, "User already exists", "fail");
+        return sendResponse(req, res, 400, "Account already exists", "fail");
 
       //if new client then create one
       db.User.create({
@@ -36,6 +36,7 @@ exports.addOneUser = (req, res) => {
 };
 
 exports.loginUser = async (req, res) => {
+  console.log(req.body);
   try {
     //checking if not empty req body
     const { email, password } = req.body;
@@ -49,7 +50,7 @@ exports.loginUser = async (req, res) => {
       );
     //confirming users existance && that the user is active ie didnt delete or hasnt activated his acc
     const user = await db.User.findOne({
-      where: { email, active: true },
+      where: { email:email.trim(), active: true },
       include: [
         {
           model: db.Item,
@@ -57,7 +58,7 @@ exports.loginUser = async (req, res) => {
         },
       ],
     });
-
+   
     //if not user reject request to login
     if (!user)
       return sendResponse(

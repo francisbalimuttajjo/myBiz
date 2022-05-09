@@ -35,13 +35,7 @@ module.exports = {
         allowNull: false,
         defaultValue: true,
       },
-      // passwordConfirm: {
-      //   type: DataTypes.VIRTUAL,
-      //   // allowNull: false,
-      //   // validate: {
-      //   //   notEmpty: { args: true, msg: "passwordConfirm is required" },
-      //   // },
-      // },
+     
       email: {
         type: DataTypes.STRING,
         allowNull: false,

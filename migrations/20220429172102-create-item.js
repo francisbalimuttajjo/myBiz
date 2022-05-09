@@ -14,11 +14,12 @@ module.exports = {
         allowNull: false,
         unique: true,
       },
-      user_id: {
-        type: DataTypes.INTEGER,
+      user: {
+        type: DataTypes.STRING,
         allowNull: false,
         validate: {
           notEmpty: { args: true, msg: "item must belong to a user" },
+          isEmail: { args: true, msg: "Please provide a valid email" },
         },
       },
 

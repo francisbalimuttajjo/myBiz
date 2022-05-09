@@ -8,8 +8,9 @@ module.exports = (sequelize, DataTypes) => {
         as: "sales",
       });
       this.belongsTo(models.User, {
-        foreignKey: "user_id",
-        as :"items"
+        foreignKey: "user",
+        as: "items",
+        sourceKey: "email",
       });
     }
   }
@@ -21,11 +22,12 @@ module.exports = (sequelize, DataTypes) => {
         primaryKey: true,
         type: DataTypes.INTEGER,
       },
-      user_id: {
-        type: DataTypes.INTEGER,
+      user: {
+        type: DataTypes.STRING,
         allowNull: false,
         validate: {
           notEmpty: { args: true, msg: "item must belong to a user" },
+          isEmail: { args: true, msg: "Please provide a valid email" },
         },
       },
 

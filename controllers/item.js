@@ -1,26 +1,8 @@
 const db = require("../models");
 const { sendResponse } = require("../utils/fns");
+const Handler = require("./Handler");
 
-//adding one time
-exports.addOneItem = (req, res) => {
-  db.Item.create(req.body)
-    .then((item) => sendResponse(req, res, 201, item))
-    .catch((err) => {
-       console.log(err);
-      sendResponse(req, res, 400, err.message.split(":")[1], "fail");
-    });
-};
 
-//getting all items
-exports.getAllItems = (req, res) => {
-  console.log(new Date())
-  db.Item.findAll()
-    .then((items) => sendResponse(req, res, 200, items))
-    .catch((err) => {
-      console.log(err);
-      sendResponse(req, res, 400, err.message.split(":")[1], "fail");
-    });
-};
 
 //getting one item
 exports.findOneItem = (req, res) => {
@@ -67,42 +49,21 @@ exports.updateOneItem = (req, res) => {
       );
     })
     .catch((err) => {
-      console.log(err)
+      console.log(err);
       sendResponse(
         req,
         res,
         500,
         `error occured while updating item with id ${id}`,
         "fail"
-      )
-    }
-    );
-};
-
-//deleting one item
-exports.deleteOneItem = (req, res) => {
-  db.Item.destroy({
-    where: { id: req.params.id },
-  })
-    .then((result) => {
-      if (result === 0) {
-        return sendResponse(
-          req,
-          res,
-          404,
-          ` cannot delete item with id ${req.params.id}`,
-          "fail"
-        );
-      }
-      sendResponse(req, res, 200, "deleted successfull");
-    })
-    .catch((err) => {
-      sendResponse(
-        req,
-        res,
-        500,
-        `Error deleting item with id  ${req.params.id}`,
-        "fail"
       );
     });
 };
+
+//deleting one item
+exports.deleteOneItem = Handler.deleteOne(db.Item);
+//getting all items for a particular user
+exports.getAllItemsForUser = Handler.getAll(db.Item);
+
+//adding one time
+exports.addOneItem = Handler.addOne(db.Item);

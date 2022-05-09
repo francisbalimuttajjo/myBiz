@@ -2,6 +2,10 @@ const db = require("../models");
 const { sendResponse } = require("../utils/fns");
 const Handler = require("./Handler");
 
+//deleting one item
+exports.deleteOneCategory = Handler.deleteOne(db.Category);
+//getting for particular user
+exports.getAllCategoriesForUser = Handler.getAll(db.Category);
 //adding one client
 exports.addOneCategory = Handler.addOne(db.Category, true);
 
@@ -23,13 +27,8 @@ exports.updateOneCategory = async (req, res) => {
       req,
       res,
       500,
-      `error occured while updating item with id ${id}`,
+      `error occured while updating category with id ${id}`,
       "fail"
     );
   }
 };
-
-//deleting one item
-exports.deleteOneCategory = Handler.deleteOne(db.Category);
-//getting for particular user
-exports.getAllCategoriesForUser = Handler.getAll(db.Category);

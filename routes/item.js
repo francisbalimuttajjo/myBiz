@@ -6,7 +6,6 @@ router.route("/items").post(itemController.addOneItem);
 
 router
   .route("/items/:id")
-  .get(itemController.findOneItem)
   .put(itemController.updateOneItem)
   .delete(itemController.deleteOneItem);
 

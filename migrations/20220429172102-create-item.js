@@ -12,7 +12,6 @@ module.exports = {
       name: {
         type: DataTypes.STRING,
         allowNull: false,
-        unique: true,
       },
       user: {
         type: DataTypes.STRING,

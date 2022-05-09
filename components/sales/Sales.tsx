@@ -3,7 +3,7 @@ import { FlatList } from "react-native";
 import { SafeAreaView, SafeAreaProvider } from "react-native-safe-area-context";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../redux/Store";
-import { addToCart } from "../../redux/StockSlice";
+import { addToCart, getItems } from "../../redux/StockSlice";
 import Banner from "../components/Banner";
 import Logo from "../components/Logo";
 import BadgeComponent from "./Badge";
@@ -11,12 +11,17 @@ import StockComponent from "../stock/StockItem";
 
 const Sales = () => {
   const dispatch = useDispatch();
-  const { availableStock} = useSelector(
-    (state: RootState) => state.stock
-  );
-  const handlePress = (val: string) => {
+  const { availableStock } = useSelector((state: RootState) => state.stock);
+  const { user } = useSelector((state: RootState) => state.user);
+
+  const handlePress = (val: number) => {
     dispatch(addToCart({ id: val }));
   };
+
+  React.useEffect(() => {
+    dispatch(getItems({ email: user.email }));
+  }, [getItems]);
+
   return (
     <SafeAreaProvider>
       <SafeAreaView>
@@ -33,7 +38,7 @@ const Sales = () => {
               cartItem
             />
           )}
-          keyExtractor={(item) => item._id}
+          keyExtractor={(item) => item.id.toString()}
         />
       </SafeAreaView>
     </SafeAreaProvider>

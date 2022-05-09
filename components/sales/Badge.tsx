@@ -10,32 +10,24 @@ import { useNavigation } from "@react-navigation/native";
 
 const Badge = () => {
   const { cart } = useSelector((state: RootState) => state.stock);
-  console.log({ cart });
+
   const total = getTotal(cart);
   const { navigate } = useNavigation<NavigationProps>();
+  const { searchQuery, onChangeSearch, infoMsg } = useFns();
+
+  //if cart is not empty navigate to cart page
   const handlePress = () => {
     if (total < 1) return;
     navigate("Cart");
   };
 
-  const {
-    clicked,
-    searchPhrase,
-    handleClicked,
-    infoMsg,
-    handleChange,
-    clearSearchField,
-  } = useFns();
   return (
     <View style={styles.container}>
       <View style={styles.search_container}>
         <Search
-          clicked={clicked}
-          handleChange={handleChange}
-          handleClicked={handleClicked}
-          searchPhrase={searchPhrase}
+          searchQuery={searchQuery}
+          onChangeSearch={onChangeSearch}
           placeholder="Search..."
-          clearSearchField={clearSearchField}
           infoMsg={infoMsg}
         />
       </View>
@@ -59,8 +51,9 @@ export default Badge;
 
 const styles = StyleSheet.create({
   search_container: {
-    width: "80%",
-    marginLeft: -10,
+    width: "85%",
+    alignSelf: "center",
+    marginTop: "4%",
   },
   badge_container: { width: "10%", justifyContent: "center", marginTop: -10 },
   container: {

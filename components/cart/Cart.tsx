@@ -85,7 +85,7 @@ const Cart = () => {
           <Text style={{ ...styles.label, marginTop: 20 }}>Item List</Text>
 
           {cart.map((item) => (
-            <CartItem item={item.item} qty={item.qty} key={item.item._id} />
+            <CartItem item={item.item} qty={item.qty} key={item.item.id} />
           ))}
         </View>
         <CartSummary

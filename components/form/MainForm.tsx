@@ -92,7 +92,7 @@ const Form = (props: Props) => {
               error={errors.supplier}
             />
           </Wrapper>
-          {props.error !=="" && <Info error={props.error} />}
+          {props.error !== "" && <Info error={props.error} />}
 
           <Button
             title={props.btn_title}

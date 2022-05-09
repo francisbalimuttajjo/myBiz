@@ -10,7 +10,8 @@ const EditScreenFns = (_id: number | undefined) => {
   const { availableStock } = useSelector((state: RootState) => state.stock);
   const { user } = useSelector((state: RootState) => state.user);
   const item = availableStock.filter((el) => el.id === _id)[0];
-  const [loading, setLoading] = React.useState(false);
+  const [loading, setLoading] = React.useState<boolean>(false);
+  const [error, setError] = React.useState<string>("");
   const dispatch = useDispatch();
   const { navigate } = useNavigation<NavigationProps>();
 
@@ -75,6 +76,7 @@ const EditScreenFns = (_id: number | undefined) => {
         stock: +values.stock,
         image: item.image,
         packaging,
+        user: user.email,
       })
       .then(() => {
         setLoading(false);
@@ -84,12 +86,14 @@ const EditScreenFns = (_id: number | undefined) => {
       })
       .catch((err) => {
         setLoading(false);
+        setError(err.response.data.data);
       });
   };
   return {
     handleSubmit,
     loading,
     initialValues,
+    error,
   };
 };
 

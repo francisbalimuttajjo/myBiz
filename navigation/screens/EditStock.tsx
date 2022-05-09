@@ -8,7 +8,9 @@ import { mainStackParams } from "../../types/types";
 type Props = NativeStackScreenProps<mainStackParams, "Details">;
 
 const EditStock = ({ route }: Props) => {
-  const { handleSubmit, loading, initialValues } = useFns(route.params.id);
+  const { handleSubmit, loading, initialValues, error } = useFns(
+    route.params.id
+  );
 
   return (
     <SafeAreaProvider>
@@ -18,6 +20,7 @@ const EditStock = ({ route }: Props) => {
           initialValues={initialValues}
           btn_title="Edit"
           loading={loading}
+          error={error}
         />
       </SafeAreaView>
     </SafeAreaProvider>

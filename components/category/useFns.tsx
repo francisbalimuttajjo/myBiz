@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux/Store";
-import { filterCategories } from "../../redux/StockSlice";
+import { filterCategories, getCategories } from "../../redux/StockSlice";
 import * as Yup from "yup";
 import axios from "axios";
 
@@ -16,13 +16,12 @@ const UseFns = () => {
     setSearchQuery(query);
   };
 
-  const { categories, infoMsg } = useSelector(
+  const { categories, infoMsg, categoriesStore } = useSelector(
     (state: RootState) => state.stock
   );
   const { user } = useSelector((state: RootState) => state.user);
 
   const handleSubmit = (values: { category: string }) => {
-    console.log(values);
     setLoading(true);
     axios
       .post(`http://192.168.43.96:5000/api/v1/categories`, {
@@ -30,8 +29,10 @@ const UseFns = () => {
         user: user.email,
       })
       .then((res) => {
-        // if (res.data.status === "success") {
         setLoading(false);
+        if (res.data.status === "success") {
+          dispatch(getCategories({ user: user.email }));
+        }
       })
       .catch((err) => {
         setLoading(false);
@@ -48,12 +49,16 @@ const UseFns = () => {
   return {
     validationSchema,
     categories,
+    categoriesStore,
     searchQuery,
     onChangeSearch,
     infoMsg,
     loading,
     error,
     handleSubmit,
+    dispatch,
+    user,
+    getCategories,
   };
 };
 

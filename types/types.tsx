@@ -237,7 +237,8 @@ export type CashBookFormProps = {
     itemDate: Date | string;
     paymentMode: string;
   };
-  categories: Array<{ title: string; value: string; id: number }>;
+  categories: Array<{ title: string; value: string; id: number ,user:number}>;
+  categoriesStore: Array<{ title: string; value: string; id: number ,user:number}>;
   editing?: boolean;
 };
 

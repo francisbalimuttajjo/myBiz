@@ -17,13 +17,21 @@ const Add = () => {
   const {
     validationSchema,
     categories,
+    categoriesStore,
     searchQuery,
     onChangeSearch,
     infoMsg,
     loading,
     error,
     handleSubmit,
+    dispatch,
+    user,
+    getCategories,
   } = useFns();
+
+  React.useState(() => {
+    dispatch(getCategories({ user: user.email }));
+  });
 
   return (
     <Formik
@@ -44,16 +52,16 @@ const Add = () => {
               />
               {error !== "" && <Info error={error} />}
             </View>
-            {/* {displayCategoriesSearchBar && (
+            {categoriesStore.length > 0 && (
               <Search
                 infoMsg={infoMsg}
                 searchQuery={searchQuery}
                 onChangeSearch={onChangeSearch}
                 placeholder="Search Categories"
               />
-            )} */}
+            )}
             <ScrollView style={styles.list}>
-              {categories.slice(1).map((item) => (
+              {categories.map((item) => (
                 <CategoryItem item={item} key={item.id} />
               ))}
             </ScrollView>

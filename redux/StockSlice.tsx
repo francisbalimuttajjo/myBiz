@@ -75,6 +75,25 @@ const stockSlice = createSlice({
   initialState,
   extraReducers(builder) {
     builder
+      .addCase(getCategories.pending, (state, action) => {
+        state.loading = true;
+      })
+      .addCase(getCategories.rejected, (state, action) => {
+        state.loading = false;
+        state.error = "something went wrong";
+      })
+      .addCase(getCategories.fulfilled, (state, action) => {
+        state.loading = false;
+        console.log(action.payload);
+        if (action.payload.status === "success") {
+          state.error = "";
+          state.categoriesStore = action.payload.data;
+          state.categories = state.categoriesStore;
+        } else {
+          state.error = "";
+        }
+      });
+    builder
       .addCase(getItems.pending, (state, action) => {
         state.loading = true;
       })

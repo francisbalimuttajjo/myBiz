@@ -2,14 +2,19 @@
 const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class Transaction extends Model {
-   
-    
     static associate(models) {
       // define association here
       this.belongsTo(models.User, {
         foreignKey: "user",
         sourceKey: "email",
       });
+    }
+    toJSON() {
+      return {
+        ...this.get(),
+        id: undefined,
+        updatedAt: undefined,
+      };
     }
   }
   Transaction.init(

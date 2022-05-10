@@ -14,12 +14,6 @@ export type BtnProps = {
   changeToCredit: () => void;
 };
 
-//cash
-// export type CashProps = {
-//   handleCash: (val: string) => void;
-//   change: number;
-// };
-
 export type CartSummaryProps = {
   discount: number;
   itemsPrice: number;
@@ -98,7 +92,7 @@ export type FormProps = {
   btn_title: string;
   loading: boolean;
   handleSubmit: (a: FormProps["initialValues"]) => void;
-  error:string
+  error: string;
 };
 
 ////priceComponent.tsx/components/form
@@ -185,12 +179,11 @@ export type FloatingLabelProps = {
   keyboard?: boolean;
   isAmount?: boolean;
   type: string;
-  color?:string
+  color?: string;
 };
 
 export type mainStackParams = {
   Stock: undefined;
-  CreditBook: undefined;
   CashBook: undefined;
   Purchases: undefined;
   entryDetails: { id: undefined };
@@ -200,12 +193,12 @@ export type mainStackParams = {
   Cart: undefined;
   home: undefined;
   Sales: undefined;
-  Expenses: undefined;
   login: undefined;
-  Expense: undefined;
   Category: undefined;
   editStock: undefined;
   camera: undefined;
+  Transactions: undefined;
+  SalesBook: undefined;
   categoriesEdit: { item: { title: undefined; id: undefined } };
   Details: {
     id: undefined;

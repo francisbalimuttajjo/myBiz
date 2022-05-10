@@ -1,11 +1,4 @@
-import { StyleSheet, SafeAreaView, View, Button, Text } from "react-native";
-const TransactionScreen = () => {
-  return (
-   
-    <View>
-      <Text>Transactions Page</Text>
-    </View>
-  );
-};
+import Transactions from "../../components/Transactions/Transactions";
+const TransactionScreen = () => <Transactions />;
 
-export default TransactionScreen
+export default TransactionScreen;

@@ -1,5 +1,5 @@
 import axios from "axios";
-import { addUser } from "../../redux/UserSlice";
+import { addTransactions, addUser } from "../../redux/UserSlice";
 import { useDispatch } from "react-redux";
 import React from "react";
 import * as Yup from "yup";
@@ -10,7 +10,7 @@ const UseFns = () => {
   const [loading, setLoading] = React.useState<boolean>(false);
   const [errorMsg, setErrorMessage] = React.useState<string>("");
 
-  const toggleSecureText =()=> setSecureText(!secureText);
+  const toggleSecureText = () => setSecureText(!secureText);
 
   const handleSubmit = (values: { Email: string; Password: string }) => {
     setLoading(true);
@@ -22,8 +22,11 @@ const UseFns = () => {
       .then((res) => {
         setLoading(false);
         if (res.data.status === "success") {
-          const { firstName, lastName, email, image } = res.data.data;
+          const { firstName, lastName, email, image, transactions } =
+            res.data.data;
+
           dispatch(addUser({ user: { firstName, lastName, email, image } }));
+          dispatch(addTransactions({ transactions }));
         }
       })
       .catch((err) => {

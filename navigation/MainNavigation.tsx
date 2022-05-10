@@ -1,18 +1,15 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import Stock from "./screens/Stock";
-import CreditBook from "./screens/CreditBook";
 import CashBook from "./screens/CashBook";
-import Purchases from "./screens/Purchases";
 import Sales from "./screens/Sales";
-import Expenses from "./screens/Expenses";
 import AddNew from "./screens/NewItem";
+import Transactions from "./screens/Transactions";
 import NewCategory from "./screens/NewCategory";
-import Camera from "./screens/Image";
+import Camera from "./screens/Camera";
 import LoginPage from "./screens/Login";
-import NewExpense from "./screens/NewExpense";
+import SalesList from "./screens/NewExpense";
 import Cart from "./screens/Cart";
-import Home from "./screens/Home";
 import CategoriesEdit from "./screens/EditCategories";
 import EditStock from "./screens/EditStock";
 import CashIn from "./screens/CashIn";
@@ -27,7 +24,7 @@ import Ionicon from "react-native-vector-icons/Ionicons";
 import { useSelector } from "react-redux";
 import { RootState } from "../redux/Store";
 
-const DetailsScreens = () => {
+const Screens = () => {
   const Stack = createStackNavigator<mainStackParams>();
   const { isLoggedIn } = useSelector((state: RootState) => state.user);
 
@@ -147,12 +144,9 @@ const DetailsScreens = () => {
                 component={Sales}
                 options={{ headerShown: false }}
               />
-              <Stack.Screen name="Expense" component={NewExpense} />
-
-              <Stack.Screen name="Purchases" component={Purchases} />
-              <Stack.Screen name="CreditBook" component={CreditBook} />
+              <Stack.Screen name="Transactions" component={Transactions} />
+              <Stack.Screen name="SalesBook" component={SalesList} />
               <Stack.Screen name="CashBook" component={CashBook} />
-              <Stack.Screen name="Expenses" component={Expenses} />
             </>
           )}
         </Stack.Group>
@@ -161,4 +155,4 @@ const DetailsScreens = () => {
   );
 };
 
-export default DetailsScreens;
+export default Screens;

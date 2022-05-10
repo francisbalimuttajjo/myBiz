@@ -13,7 +13,8 @@ const UseCart = () => {
   const { navigate } = useNavigation<NavigationProps>();
 
   const { cart } = useSelector((state: RootState) => state.stock);
-  const { user } = useSelector((state: RootState) => state.user);
+  const { user,transactions } = useSelector((state: RootState) => state.user);
+
 
   const changeToCash = () => setBtn("cash");
   const changeToCredit = () => setBtn("credit");

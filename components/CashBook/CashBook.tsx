@@ -1,10 +1,9 @@
 import React from "react";
 import {
-  Keyboard,
+  
   ScrollView,
   StyleSheet,
-  Text,
-  TouchableOpacity,
+ 
   View,
 } from "react-native";
 import { SafeAreaView, SafeAreaProvider } from "react-native-safe-area-context";

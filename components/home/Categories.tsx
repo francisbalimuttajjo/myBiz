@@ -9,11 +9,7 @@ const categoriesArray = [
   ],
   [
     { icon: "book-outline", title: "CashBook" },
-    { icon: "book-outline", title: "CreditBook" },
-  ],
-  [
-    { icon: "md-folder-open-outline", title: "Expenses" },
-    { icon: "cart-outline", title: "Purchases" },
+    { icon: "book-outline", title: "SalesBook" },
   ],
 ];
 

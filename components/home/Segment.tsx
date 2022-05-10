@@ -42,8 +42,8 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-evenly",
-    marginTop: 24,
-  },
+    marginTop: "20%",
+  }, 
   container: {
     display: "flex",
     justifyContent: "space-evenly",

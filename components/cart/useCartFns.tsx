@@ -44,39 +44,45 @@ const UseCart = () => {
       .label("Customer"),
   });
 
-  const handleSubmit = (values: { CashReceived: string; Discount: string }) => {
+  const handleSubmit = (values: {
+    CashReceived: string;
+    Discount: string;
+    Customer: string;
+  }) => {
     setError("");
-    console.log("vals", values);
 
     if (
-      parseInt(values.CashReceived) - (sum - parseInt(values.Discount)) < 0 ||
-      isNaN(parseInt(values.CashReceived))
+      (parseInt(values.CashReceived) - (sum - parseInt(values.Discount)) < 0 ||
+        isNaN(parseInt(values.CashReceived))) &&
+      btn === "cash"
     ) {
       setError("Cash Received is less");
       return;
     }
-    console.log("submitted");
+    setLoading(true);
+
     // //making api call if all is well
-    // axios
-    //   .post(`http://192.168.43.96:5000/api/v1/transactions`, {
-    //     client_id: 1,
-    //     cashReceived,
-    //     type: "sales",
-    //     discount,
-    //     paymentDate,
-    //     items: getCartItems(cart),
-    //   })
-    //   .then((res) => {
-    //     setLoading(false);
-    //     dispatch(resetCart());
-    //     dispatch(getItems({ email: user.email }));
-    //     navigate("Sales");
-    //   })
-    //   .catch((err) => {
-    //     setLoading(false);
-    //     console.log(err);
-    //     setError(err.response.data.data);
-    //   });
+    axios
+      .post(`http://192.168.43.96:5000/api/v1/transactions`, {
+        client: values.Customer,
+        user: user.email,
+        cashReceived: values.CashReceived,
+        type: "sales",
+        discount: parseInt(values.Discount),
+        paymentDate,
+        items: getCartItems(cart),
+      })
+      .then((res) => {
+        setLoading(false);
+        dispatch(resetCart());
+        dispatch(getItems({ email: user.email }));
+        navigate("Sales");
+      })
+      .catch((err) => {
+        setLoading(false);
+     
+        setError(err.response.data.data);
+      });
   };
 
   return {

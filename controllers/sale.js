@@ -34,9 +34,9 @@ exports.findOneSale = (req, res) => {
 
 //adding one sale
 exports.addOneSale = (req, res) => {
-  const { client_id, item_id, quantity, price } = req.body;
+  const { user, item_id, quantity, price } = req.body;
   db.Sale.create({
-    client_id,
+    user,
     item_id,
     quantity,
     price,

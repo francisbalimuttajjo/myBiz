@@ -9,6 +9,16 @@ module.exports = (sequelize, DataTypes) => {
         as: "items",
         sourceKey: "email",
       });
+      this.hasMany(models.Sale, {
+        foreignKey: "user",
+        as: "sales",
+        sourceKey: "email",
+      });
+        this.hasMany(models.Transaction, {
+          foreignKey: "user",
+          as:"transactions",
+          sourceKey: "email",
+        });
     }
     toJSON() {
       return {

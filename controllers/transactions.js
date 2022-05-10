@@ -3,16 +3,16 @@ const { sendResponse } = require("../utils/fns");
 
 //adding one sale
 exports.addOneTransaction = async (req, res) => {
-  console.log(req.body);
+ 
   try {
-    const { client_id, cashReceived, items, discount, type, paymentDate } =
+    const { user, client, cashReceived, items, discount, type, paymentDate } =
       req.body;
     const itemsIdsArray = [];
     const itemsPricesArray = [];
     //saving items as sales
     await items.map((item) => {
-      db.Sale.create({
-        client_id,
+           db.Sale.create({
+        user,
         item_id: item.item_id,
         quantity: item.quantity,
         price: item.price,
@@ -27,7 +27,8 @@ exports.addOneTransaction = async (req, res) => {
     //creating transaction
     const transaction = await db.Transaction.create({
       type,
-      client_id,
+      user,
+      client,
       cashReceived,
       cashPending,
       paymentDate: cashPending > 0 ? paymentDate : null,
@@ -47,67 +48,9 @@ exports.addOneTransaction = async (req, res) => {
     sendResponse(req, res, 201, transaction);
   } catch (err) {
     console.log({ err });
-    sendResponse(req, res, 400, err.message, "fail");
+    sendResponse(req, res, 400, err, "fail");
   }
 };
-// exports.addOneTransaction = (req, res) => {
-//   const { client_id, cashReceived, items, discount } = req.body;
-//   const itemsIdsArray = [];
-//   const itemsPricesArray = [];
-
-//   //saving items as sales
-//   Promise.all(
-//     items.map((item) => {
-//       db.Sale.create({
-//         client_id,
-//         item_id: item.item_id,
-//         quantity: item.quantity,
-//         price: item.price,
-//         total_price: item.quantity * item.price,
-//       });
-//       itemsIdsArray.push({ item: item.item_id, quantity: item.quantity });
-//       itemsPricesArray.push(item.quantity * item.price);
-//     })
-//   )
-//     .then(() => {
-//       const total = itemsPricesArray.reduce((acc, v) => acc + v, 0);
-//       //if successfull save in transactions
-//       db.Transaction.create({
-//         type: "sales",
-//         client_id,
-//         cashReceived,
-//         cashPending: total - discount - cashReceived,
-//         total,
-//         discount,
-//         items: itemsIdsArray,
-//       })
-//         .then((transaction) => {
-//           //if transactions are saved reduce the stock in database
-
-//           Promise.all(
-//             itemsIdsArray.map((item) => {
-//               db.Item.update(
-//                 { stock: db.sequelize.literal(`stock - ${item.quantity}`) },
-//                 { where: { id: item.item } }
-//               );
-//             })
-//           )
-//             //if reducing is successfull ,send response
-//             .then(() => sendResponse(req, res, 201, transaction))
-//             .catch((err) => {
-//               console.log(err);
-//               sendResponse(req, res, 400, err.message.split(":")[1], "fail");
-//             });
-//         })
-//         .catch((err) => {
-//           console.log("err", err);
-//           sendResponse(req, res, 400, err.message.split(":")[1], "fail");
-//         });
-//     })
-//     .catch((err) => {
-//       sendResponse(req, res, 400, "something went wrong,try again", "fail");
-//     });
-// };
 
 exports.getAllTransactions = (req, res) => {
   db.Transaction.findAll()
@@ -144,59 +87,3 @@ exports.findOneTransaction = (req, res) => {
       );
     });
 };
-
-// //editing one sale
-// exports.updateOneSale = (req, res) => {
-//   const id = req.params.id;
-//   const { client_id, item_id, quantity, price } = req.body;
-//   db.Sale.update(
-//     {
-//       client_id,
-//       item_id,
-//       quantity,
-//       price,
-//       total_price: quantity * price,
-//     },
-//     { where: { id } }
-//   )
-//     .then((num) => {
-//       if (num > 0) return sendResponse(req, res, 200, "update successfull");
-//       sendResponse(
-//         req,
-//         res,
-//         404,
-//         "cant update sale with id" + " " + id,
-//         "fail"
-//       );
-//     })
-//     .catch((err) =>
-//       sendResponse(req, res, 500, "error occured while updating ", "fail")
-//     );
-// };
-// //deleting one sale
-// exports.deleteOneSale = (req, res) => {
-//   db.Sale.destroy({
-//     where: { id: req.params.id },
-//   })
-//     .then((result) => {
-//       if (result === 0) {
-//         return sendResponse(
-//           req,
-//           res,
-//           404,
-//           ` cannot delete sale with id ${req.params.id}`,
-//           "fail"
-//         );
-//       }
-//       sendResponse(req, res, 200, "deleted successfully");
-//     })
-//     .catch((err) => {
-//       sendResponse(
-//         req,
-//         res,
-//         500,
-//         `Error deleting sale with id  ${req.params.id}`,
-//         "fail"
-//       );
-//     });
-// };

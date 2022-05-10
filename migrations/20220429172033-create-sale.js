@@ -8,8 +8,8 @@ module.exports = {
         primaryKey: true,
         type: DataTypes.INTEGER,
       },
-      client_id: {
-        type: DataTypes.INTEGER,
+      user: {
+        type: DataTypes.STRING,
         allowNull: false,
       },
       quantity: {

@@ -50,15 +50,24 @@ exports.loginUser = async (req, res) => {
       );
     //confirming users existance && that the user is active ie didnt delete or hasnt activated his acc
     const user = await db.User.findOne({
-      where: { email:email.trim(), active: true },
+      where: { email: email.trim(), active: true },
       include: [
         {
           model: db.Item,
           as: "items",
         },
+
+        {
+          model: db.Sale,
+          as: "sales",
+        },
+        {
+          model: db.Transaction,
+          as: "transactions",
+        },
       ],
     });
-   
+
     //if not user reject request to login
     if (!user)
       return sendResponse(
@@ -83,31 +92,6 @@ exports.loginUser = async (req, res) => {
   } catch (err) {
     console.log(err);
 
-    sendResponse(req, res, 400, err, "fail");
+    sendResponse(req, res, 400, err.message, "fail");
   }
-
-  //   //checking if already exists
-  //   db.User.findAll({ where: { email } })
-  //     .then((list) => {
-  //       if (list.length === 0)
-  //         return sendResponse(req, res, 400, "User doesnt  exist", "fail");
-  //       console.log("list", list[0].dataValues);
-  //       //if new client then create one
-  //       //   db.User.create({
-  //       //     firstName,
-  //       //     lastName,
-  //       //     email,
-  //       //     password,
-  //       //     passwordConfirm,
-  //       //   })
-  //       //     .then((user) => sendResponse(req, res, 201, 'logged in'))
-  //       // .catch((err) => {
-  //       //   console.log(err);
-  //       //   sendResponse(req, res, 400, err, "fail");
-  //       // });
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //       sendResponse(req, res, 400, err.message, "fail");
-  //     });
 };

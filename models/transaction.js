@@ -2,15 +2,13 @@
 const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class Transaction extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
+   
+    
     static associate(models) {
       // define association here
       this.belongsTo(models.User, {
-        foreignKey: "user_id",
+        foreignKey: "user",
+        sourceKey: "email",
       });
     }
   }
@@ -22,8 +20,16 @@ module.exports = (sequelize, DataTypes) => {
         primaryKey: true,
         type: DataTypes.INTEGER,
       },
-      client_id: {
-        type: DataTypes.INTEGER,
+      user: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          isEmail: { args: true, msg: "Please provide a valid email" },
+          notEmpty: { args: true, msg: "user must be included" },
+        },
+      },
+      client: {
+        type: DataTypes.STRING,
         allowNull: false,
         validate: {
           notEmpty: { args: true, msg: "client is a required field" },

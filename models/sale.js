@@ -4,8 +4,9 @@ module.exports = (sequelize, DataTypes) => {
   class Sale extends Model {
     static associate(models) {
       // define association here
-      this.belongsTo(models.Client, {
-        foreignKey: "client_id",
+      this.belongsTo(models.User, {
+        foreignKey: "user",
+        sourceKey: "email",
       });
       this.belongsTo(models.Item, {
         foreignKey: "item_id",
@@ -20,11 +21,12 @@ module.exports = (sequelize, DataTypes) => {
         primaryKey: true,
         type: DataTypes.INTEGER,
       },
-      client_id: {
+      user: {
         type: DataTypes.INTEGER,
         allowNull: false,
         validate: {
-          notEmpty: { args: true, msg: "sale must belong to a client" },
+          isEmail: { args: true, msg: "Please provide a valid email" },
+          notEmpty: { args: true, msg: "user must be included" },
         },
       },
       quantity: {

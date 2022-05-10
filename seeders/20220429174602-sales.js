@@ -3,7 +3,7 @@ module.exports = {
     return queryInterface.bulkInsert("Sales", [
       {
         item_id: 1,
-        client_id: 1,
+        user: "bamayanja@gmail.com",
         quantity: 2,
         price: 200,
         total_price: 700,
@@ -12,7 +12,7 @@ module.exports = {
       },
       {
         item_id: 1,
-        client_id: 1,
+        user: "bamayanja@gmail.com",
         quantity: 2,
         price: 200,
         total_price: 7900,

@@ -9,11 +9,19 @@ module.exports = {
         type: DataTypes.INTEGER,
       },
 
-      client_id: {
-        type: DataTypes.INTEGER,
+      user: {
+        type: DataTypes.STRING,
         allowNull: false,
         validate: {
-          notEmpty: { args: true, msg: " client is a required field" },
+          isEmail: { args: true, msg: "Please provide a valid email" },
+          notEmpty: { args: true, msg: "user must be included" },
+        },
+      },
+      client: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          notEmpty: { args: true, msg: "client is a required field" },
         },
       },
       discount: {

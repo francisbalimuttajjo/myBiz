@@ -22,6 +22,17 @@ const CartItem = (props: { item: Item; qty: number }) => {
         <View style={styles.btn_container}>
           <View style={{ flexDirection: "row" }}>
             <TouchableOpacity
+              onPress={() => dispatch(addItem({ id: props.item.id }))}
+              activeOpacity={0.8}
+              style={{ ...styles.btn, backgroundColor: "skyblue" }}
+            >
+              <Text style={{ ...styles.btn_text, color: "white" }}>+</Text>
+            </TouchableOpacity>
+            <View style={styles.qty}>
+              <Text>{props.qty}</Text>
+            </View>
+
+            <TouchableOpacity
               onPress={() => dispatch(reduceItem({ id: props.item.id }))}
               activeOpacity={0.8}
               style={{
@@ -37,17 +48,6 @@ const CartItem = (props: { item: Item; qty: number }) => {
               >
                 -
               </Text>
-            </TouchableOpacity>
-
-            <View style={styles.qty}>
-              <Text>{props.qty}</Text>
-            </View>
-            <TouchableOpacity
-              onPress={() => dispatch(addItem({ id: props.item.id }))}
-              activeOpacity={0.8}
-              style={{ ...styles.btn, backgroundColor: "skyblue" }}
-            >
-              <Text style={{ ...styles.btn_text, color: "white" }}>+</Text>
             </TouchableOpacity>
           </View>
 

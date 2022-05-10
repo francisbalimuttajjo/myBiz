@@ -10,7 +10,7 @@ const Details = ({ route, navigation }: Props) => {
   const { cashTransactions } = useSelector(
     (state: RootState) => state.cashBook
   );
-  const item = cashTransactions.filter((el) => el._id === route.params.id);
+  const item = cashTransactions.filter((el) => el.id === route.params.id);
 
   return <EntryDetails item={item[0]} />;
 };

@@ -15,10 +15,10 @@ export type BtnProps = {
 };
 
 //cash
-export type CashProps = {
-  handleCash: (val: string) => void;
-  change: number;
-};
+// export type CashProps = {
+//   handleCash: (val: string) => void;
+//   change: number;
+// };
 
 export type CartSummaryProps = {
   discount: number;
@@ -185,6 +185,7 @@ export type FloatingLabelProps = {
   keyboard?: boolean;
   isAmount?: boolean;
   type: string;
+  color?:string
 };
 
 export type mainStackParams = {

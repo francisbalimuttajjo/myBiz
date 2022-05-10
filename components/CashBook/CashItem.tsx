@@ -11,15 +11,15 @@ const Item: React.FC<CashItemProps> = ({ item }) => {
 
   return (
     <TouchableOpacity
-      onPress={() => navigate("entryDetails", { id: item._id })}
+      onPress={() => navigate("entryDetails", { id: item.id })}
       activeOpacity={0.8}
       style={styles.container}
     >
       <View style={{ width: "80%" }}>
-        <Text style={styles.title}>{item.title}</Text>
+        <Text style={styles.title}>{item.Remark}</Text>
         <View style={styles.sub_container}>
           <View style={styles.category}>
-            <Text style={styles.category_text}>{item.category}</Text>
+            <Text style={styles.category_text}>{item.Category}</Text>
           </View>
           <View style={styles.cash_container}>
             <Text style={styles.mode}>{item.paymentMode}</Text>
@@ -37,7 +37,7 @@ const Item: React.FC<CashItemProps> = ({ item }) => {
             color: item.type === "cash-in" ? "green" : "red",
           }}
         >
-          {item.amount}
+          {item.Amount}
         </Text>
       </View>
     </TouchableOpacity>

@@ -1,30 +1,34 @@
-import { useSelector } from "react-redux";
+import * as Yup from "yup";
 import React from "react";
+import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigation } from "@react-navigation/native";
 import { RootState } from "../../redux/Store";
-import { getTotalSum, getDate } from "../../utils";
+import { NavigationProps } from "../../types/types";
+import { getTotalSum, getDate, getCartItems } from "../../utils";
+import { getItems, resetCart } from "../../redux/StockSlice";
 
 const UseCart = () => {
-  const { cart } = useSelector((state: RootState) => state.stock);
-  const [btn, setBtn] = React.useState<string>("cash");
-  const [message, setMessage] = React.useState<string>("");
-  const [client, setClient] = React.useState<string>("");
-  const [paymentDate, setPaymentDate] = React.useState<Date>(new Date());
-  const [discount, setDiscount] = React.useState<number>(0);
-  const [cashReceived, setCashReceived] = React.useState<number>(0);
-  const [error, setError] = React.useState<boolean>(false);
-  const [visible, setVisible] = React.useState<boolean>(true);
+  const dispatch = useDispatch();
+  const { navigate } = useNavigation<NavigationProps>();
 
+  const { cart } = useSelector((state: RootState) => state.stock);
+  const { user } = useSelector((state: RootState) => state.user);
+
+  const changeToCash = () => setBtn("cash");
+  const changeToCredit = () => setBtn("credit");
+  const [btn, setBtn] = React.useState<string>("cash");
+  const [error, setError] = React.useState<string>("");
+  const [loading, setLoading] = React.useState<boolean>(false);
+  const [paymentDate, setPaymentDate] = React.useState<Date>(new Date());
+
+  let sum = getTotalSum(cart);
   const { date } = getDate(paymentDate);
 
-  const changeToCash = () => {
-    setBtn("cash");
-  };
-  const changeToCredit = () => setBtn("credit");
-
-  const [isDatePickerVisible, setDatePickerVisibility] = React.useState(false);
+  const [isDatePickerVisible, setDatePickerVisibility] =
+    React.useState<boolean>(false);
 
   const showDatePicker = () => setDatePickerVisibility(true);
-
   const hideDatePicker = () => setDatePickerVisibility(false);
 
   const handleConfirm = (date: Date) => {
@@ -32,61 +36,66 @@ const UseCart = () => {
     hideDatePicker();
   };
 
-  const handleClient = (val: string) => {
-    setMessage("");
-    setError(false);
-    setClient(val);
-  };
-  const handleCash = (val: string) => setCashReceived(+val);
+  const initialValues = { Customer: "", Discount: "0", CashReceived: "0" };
+  const validationSchema = Yup.object().shape({
+    Customer: Yup.string()
+      .trim()
+      .required("Customer is required")
+      .label("Customer"),
+  });
 
-  const clearMsg = () => setMessage("");
-  let sum = getTotalSum(cart);
-  const handleDiscount = (val: string) => setDiscount(+val);
+  const handleSubmit = (values: { CashReceived: string; Discount: string }) => {
+    setError("");
+    console.log("vals", values);
 
-  let toBePaid = sum - discount;
-  const change = cashReceived - toBePaid < 0 ? 0 : cashReceived - toBePaid;
-
-  const handleSubmit = () => {
-    setMessage("");
-    if (!client) {
-      setMessage("Customer is missing");
-      return setError(true);
-    }
-    if (discount > sum) {
-      setMessage("discount cant be more than the price");
+    if (
+      parseInt(values.CashReceived) - (sum - parseInt(values.Discount)) < 0 ||
+      isNaN(parseInt(values.CashReceived))
+    ) {
+      setError("Cash Received is less");
       return;
     }
-    if (toBePaid > cashReceived && btn === "cash") {
-      setMessage("Cash received is less than expected");
-      return;
-    }
-
-    //store the data in database
-    //credit sale, and client pays somethin,record that client as a debtor with the balance
     console.log("submitted");
+    // //making api call if all is well
+    // axios
+    //   .post(`http://192.168.43.96:5000/api/v1/transactions`, {
+    //     client_id: 1,
+    //     cashReceived,
+    //     type: "sales",
+    //     discount,
+    //     paymentDate,
+    //     items: getCartItems(cart),
+    //   })
+    //   .then((res) => {
+    //     setLoading(false);
+    //     dispatch(resetCart());
+    //     dispatch(getItems({ email: user.email }));
+    //     navigate("Sales");
+    //   })
+    //   .catch((err) => {
+    //     setLoading(false);
+    //     console.log(err);
+    //     setError(err.response.data.data);
+    //   });
   };
+
   return {
-    date,
-    sum,
-    discount,
-    isDatePickerVisible,
-    cart,
-    toBePaid,
-    btn,
-    hideDatePicker,
-    message,
-    visible,
-    error,
-    handleClient,
-    change,
-    handleSubmit,
-    handleCash,
-    handleDiscount,
-    handleConfirm,
-    showDatePicker,
     changeToCredit,
     changeToCash,
-    clearMsg,
+    btn,
+    cart,
+    loading,
+    setError,
+    error,
+    initialValues,
+    validationSchema,
+    sum,
+    date,
+    handleConfirm,
+    handleSubmit,
+    hideDatePicker,
+    showDatePicker,
+    isDatePickerVisible,
   };
 };
 

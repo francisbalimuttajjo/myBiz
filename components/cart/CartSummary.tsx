@@ -29,7 +29,9 @@ const CartSummary = (props: Props) => {
               <Text style={styles.grand_total}>Grand Total</Text>
             </View>
             <View style={styles.text_container}>
-              <Text style={styles.grand_total}>{props.grandTotal}</Text>
+              <Text style={styles.grand_total}>
+                {props.grandTotal < 0 ? 0 : props.grandTotal}
+              </Text>
             </View>
           </View>
         </View>

@@ -15,43 +15,29 @@ import CashItem from "./CashItem";
 import Btns from "./Btns";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux/Store";
-import { filter } from "../../redux/CashBook";
+import { filterCashItems } from "../../redux/CashBook";
 import { getDifference } from "../../utils";
 
 const CashBook = () => {
-  const { cashTransactions } = useSelector(
+  const { cashTransactions,store } = useSelector(
     (state: RootState) => state.cashBook
   );
-
-   const [clicked, setClicked] = React.useState(false);
-  const [searchPhrase, setSearchPhrase] = React.useState("");
   const dispatch = useDispatch();
-    const handleClicked = () => setClicked(true);
-
-  const handleChange = (val: string) => {
-    setSearchPhrase(val);
-    dispatch(filter(val));
+  const [searchQuery, setSearchQuery] = React.useState<string>("");
+  const onChangeSearch = (query: string) => {
+    dispatch(filterCashItems(query));
+    setSearchQuery(query);
   };
 
-  const clearSearchField = () => {
-    setSearchPhrase("");
-    Keyboard.dismiss();
-    setClicked(false);
-    dispatch(filter(""));
-  };
-  const [income, expenses] = getDifference(cashTransactions);
+  const [income, expenses] = getDifference(store);
   return (
     <SafeAreaProvider>
       <SafeAreaView>
         <View style={styles.search_container}>
           <Search
             placeholder="Search ..."
-            clicked={clicked}
-            handleChange={handleChange}
-            handleClicked={handleClicked}
-            searchPhrase={searchPhrase}
-            clearSearchField={clearSearchField}
-        
+            searchQuery={searchQuery}
+            onChangeSearch={onChangeSearch}
           />
         </View>
         <ScrollView style={{ paddingTop: "20%" }}>
@@ -59,7 +45,7 @@ const CashBook = () => {
           <Horizontal length={cashTransactions.length} />
           <View style={{ paddingBottom: "50%" }}>
             {cashTransactions.map((el) => (
-              <CashItem item={el} key={el._id} />
+              <CashItem item={el} key={el.id} />
             ))}
           </View>
         </ScrollView>

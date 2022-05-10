@@ -8,23 +8,24 @@ import { RootState } from "../../redux/Store";
 import { firebaseConfig } from "../../firebase/firebase";
 import { initializeApp } from "firebase/app";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
-
-type NavigationProps = {
-  navigate: (route: string, params?: { id: string }) => void;
-};
+import { NavigationProps } from "../../types/types";
 
 const UseCamera = () => {
-  const { isEditing } = useSelector((state: RootState) => state.stock);
-  const [hasPermission, setHasPermission] = useState<any>(null);
-  const [type, setType] = useState(Camera.Constants.Type.back);
-  const [camera, setCamera] = useState<any>(null);
-  const [image, setImage] = useState<string>('');
-  const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const navigation = useNavigation<NavigationProps>();
-  const { user } = useSelector((state: RootState) => state.user);
-  const { editable } = useSelector((state: RootState) => state.stock);
+
+  const [camera, setCamera] = useState<any>(null);
+  const [image, setImage] = useState<any>(null);
+  const [loading, setLoading] = useState(false);
   const [isFocused, setIsFocused] = useState(true);
+
+  const [hasPermission, setHasPermission] = useState<any>(null);
+  const [type, setType] = useState(Camera.Constants.Type.back);
+
+  const { user } = useSelector((state: RootState) => state.user);
+  const { editable, isEditing } = useSelector(
+    (state: RootState) => state.stock
+  );
 
   const takePicture = async () => {
     if (camera) {
@@ -70,21 +71,20 @@ const UseCamera = () => {
 
     const convertedImage = await img.blob();
 
-    uploadBytes(reference, convertedImage).then(() =>
+    uploadBytes(reference, convertedImage).then(() => {
+      setLoading(false);
       getDownloadURL(reference).then((url) => {
-        
         if (!isEditing) {
           dispatch(addImage({ image: url }));
           setLoading(false);
           navigation.navigate("New");
-
-        } else {       
+        } else {
           dispatch(editImage({ id: editable, url }));
           navigation.navigate("editStock", { id: editable });
           dispatch(disableEditing());
         }
-      })
-    );
+      });
+    });
   };
   return {
     flipCamera,

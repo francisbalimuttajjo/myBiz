@@ -9,9 +9,8 @@ router
 
 router
   .route("/sales/:id")
-  .get(salesController.findOneSale)
-  .put(salesController.updateOneSale)
-  .delete(salesController.deleteOneSale);
+  
+   .delete(salesController.deleteOneSale);
 
 router.route("/sales/reverse/:id").delete(salesController.reverseSale);
 module.exports = router;

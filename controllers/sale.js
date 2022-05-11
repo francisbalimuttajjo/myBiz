@@ -1,36 +1,9 @@
 const db = require("../models");
+const Handler = require("./Handler");
 const { sendResponse } = require("../utils/fns");
 
-exports.getAllSales = (req, res) => {
-  db.Sale.findAll({ include: [db.Client, db.Item] })
-    .then((sales) => sendResponse(req, res, 200, sales))
-    .catch((err) => sendResponse(req, res, 400, err.message, "fail"));
-};
-
-//getting one sale
-exports.findOneSale = (req, res) => {
-  const id = req.params.id;
-  db.Sale.findOne({
-    where: { id },
-    include: [db.Client, db.Item],
-  })
-    .then((sale) => {
-      if (sale) {
-        sendResponse(req, res, 200, sale);
-      } else {
-        sendResponse(req, res, 404, `Cannot find sale with id ${id}.`, "fail");
-      }
-    })
-    .catch((err) => {
-      sendResponse(
-        req,
-        res,
-        500,
-        `Error retrieving sale with id  ${id}`,
-        "fail"
-      );
-    });
-};
+//getting all sales for a single user
+exports.getAllSales = Handler.getAll(db.Sale);
 
 //adding one sale
 exports.addOneSale = (req, res) => {
@@ -47,34 +20,7 @@ exports.addOneSale = (req, res) => {
       sendResponse(req, res, 400, err.message.split(":")[1], "fail");
     });
 };
-//editing one sale
-exports.updateOneSale = (req, res) => {
-  const id = req.params.id;
-  const { client_id, item_id, quantity, price } = req.body;
-  db.Sale.update(
-    {
-      client_id,
-      item_id,
-      quantity,
-      price,
-      total_price: quantity * price,
-    },
-    { where: { id } }
-  )
-    .then((num) => {
-      if (num > 0) return sendResponse(req, res, 200, "update successfull");
-      sendResponse(
-        req,
-        res,
-        404,
-        "cant update sale with id" + " " + id,
-        "fail"
-      );
-    })
-    .catch((err) =>
-      sendResponse(req, res, 500, "error occured while updating ", "fail")
-    );
-};
+
 //deleting one sale
 exports.deleteOneSale = (req, res) => {
   db.Sale.destroy({

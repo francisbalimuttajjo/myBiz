@@ -1,9 +1,11 @@
 const db = require("../models");
+const Handler = require("./Handler");
 const { sendResponse } = require("../utils/fns");
 
+//getting transactions for a single user
+exports.getAllTransactions = Handler.getAll(db.Transaction);
 //adding one sale
 exports.addOneTransaction = async (req, res) => {
- 
   try {
     const { user, client, cashReceived, items, discount, type, paymentDate } =
       req.body;
@@ -11,7 +13,7 @@ exports.addOneTransaction = async (req, res) => {
     const itemsPricesArray = [];
     //saving items as sales
     await items.map((item) => {
-           db.Sale.create({
+      db.Sale.create({
         user,
         item_id: item.item_id,
         quantity: item.quantity,
@@ -50,40 +52,4 @@ exports.addOneTransaction = async (req, res) => {
     console.log({ err });
     sendResponse(req, res, 400, err, "fail");
   }
-};
-
-exports.getAllTransactions = (req, res) => {
-  db.Transaction.findAll()
-    .then((transactions) => sendResponse(req, res, 200, transactions))
-    .catch((err) => sendResponse(req, res, 400, err.message, "fail"));
-};
-
-//getting one transaction
-exports.findOneTransaction = (req, res) => {
-  const id = req.params.id;
-  db.Transaction.findOne({
-    where: { id },
-  })
-    .then((transaction) => {
-      if (transaction) {
-        sendResponse(req, res, 200, transaction);
-      } else {
-        sendResponse(
-          req,
-          res,
-          404,
-          `Cannot find transaction with id ${id}.`,
-          "fail"
-        );
-      }
-    })
-    .catch((err) => {
-      sendResponse(
-        req,
-        res,
-        500,
-        `Error retrieving transaction with id  ${id}`,
-        "fail"
-      );
-    });
 };

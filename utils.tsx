@@ -60,12 +60,18 @@ const getDate = (val: Date | string) => {
 };
 
 const getCartItems = (arr: InitialState["cart"]) => {
-  let items: { item_id: number; quantity: number; price: number }[] = [];
+  let items: {
+    item_id: number;
+    quantity: number;
+    price: number;
+    item: string;
+  }[] = [];
   arr.map((item) =>
     items.push({
       item_id: +item.item.id,
       quantity: item.qty,
       price: +item.item.sellingPrice,
+      item: item.item.name,
     })
   );
   return items;

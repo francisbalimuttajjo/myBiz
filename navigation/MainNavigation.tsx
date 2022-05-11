@@ -8,7 +8,7 @@ import Transactions from "./screens/Transactions";
 import NewCategory from "./screens/NewCategory";
 import Camera from "./screens/Camera";
 import LoginPage from "./screens/Login";
-import SalesList from "./screens/NewExpense";
+import SalesBook from "./screens/SalesBook";
 import Cart from "./screens/Cart";
 import CategoriesEdit from "./screens/EditCategories";
 import EditStock from "./screens/EditStock";
@@ -145,7 +145,7 @@ const Screens = () => {
                 options={{ headerShown: false }}
               />
               <Stack.Screen name="Transactions" component={Transactions} />
-              <Stack.Screen name="SalesBook" component={SalesList} />
+              <Stack.Screen name="SalesBook" component={SalesBook} />
               <Stack.Screen name="CashBook" component={CashBook} />
             </>
           )}

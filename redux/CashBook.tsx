@@ -1,4 +1,5 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import axios from "axios";
 import { cashTransactions } from "../data";
 import { CashItemProps as Props, CashBookFormProps } from "../types/types";
 
@@ -10,6 +11,21 @@ const categories: Array<{ title: string; value: string; id: number }> = [
   { title: "food", value: "food", id: 4 },
 ];
 
+export const getTransactions = createAsyncThunk(
+  "transactions/getTransactions",
+  async ({ user }: { user: string }) => {
+    try {
+      const response = await axios.post(
+        "http://192.168.43.96:5000/api/v1/transactions/getAll",
+        { user }
+      );
+
+      return response.data;
+    } catch (err: any) {
+      return err.response.data;
+    }
+  }
+);
 const store: Array<Props["item"]> = cashTransactions;
 const stockSlice = createSlice({
   name: "cashbook",
@@ -19,6 +35,7 @@ const stockSlice = createSlice({
     store: cashTransactions,
     categories,
   },
+  
 
   reducers: {
     filterCashItems(state, action: PayloadAction<string>) {

@@ -7,14 +7,14 @@ import { RootState } from "../../redux/Store";
 import { NavigationProps } from "../../types/types";
 import { getTotalSum, getDate, getCartItems } from "../../utils";
 import { getItems, resetCart } from "../../redux/StockSlice";
+import { getTransactions } from "../../redux/UserSlice";
 
 const UseCart = () => {
   const dispatch = useDispatch();
   const { navigate } = useNavigation<NavigationProps>();
 
   const { cart } = useSelector((state: RootState) => state.stock);
-  const { user,transactions } = useSelector((state: RootState) => state.user);
-
+  const { user, transactions } = useSelector((state: RootState) => state.user);
 
   const changeToCash = () => setBtn("cash");
   const changeToCredit = () => setBtn("credit");
@@ -77,11 +77,11 @@ const UseCart = () => {
         setLoading(false);
         dispatch(resetCart());
         dispatch(getItems({ email: user.email }));
+        dispatch(getTransactions({ user: user.email }));
         navigate("Sales");
       })
       .catch((err) => {
         setLoading(false);
-     
         setError(err.response.data.data);
       });
   };

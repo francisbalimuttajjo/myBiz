@@ -2,7 +2,7 @@ module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.bulkInsert("Items", [
       {
-        name: "craksy,dons",
+        name: "craksy,sdons",
         buyingPrice: 80,
         sellingPrice: 100,
         buyingCurrency: "ugx",
@@ -18,7 +18,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        name: "pusksie",
+        name: "pusskssie",
         buyingPrice: 80,
         sellingPrice: 100,
         buyingCurrency: "usd",
@@ -34,7 +34,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        name: "crakydonks",
+        name: "crasksydonks",
         buyingPrice: 80,
         sellingPrice: 100,
         buyingCurrency: "ugx",
@@ -50,7 +50,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        name: "pusike",
+        name: "pussikse",
         buyingPrice: 80,
         sellingPrice: 100,
         buyingCurrency: "usd",

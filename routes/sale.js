@@ -4,13 +4,13 @@ const router = express.Router();
 
 router
   .route("/sales")
-  .get(salesController.getAllSales)
   .post(salesController.addOneSale);
+
+router.route("/sales/getAll").post(salesController.getAllSales);
 
 router
   .route("/sales/:id")
-  
-   .delete(salesController.deleteOneSale);
+  .delete(salesController.deleteOneSale);
 
 router.route("/sales/reverse/:id").delete(salesController.reverseSale);
 module.exports = router;

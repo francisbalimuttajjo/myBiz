@@ -7,9 +7,11 @@ exports.getAllSales = Handler.getAll(db.Sale);
 
 //adding one sale
 exports.addOneSale = (req, res) => {
-  const { user, item_id, quantity, price } = req.body;
+  const { user, item_id, quantity, price, client, item } = req.body;
   db.Sale.create({
+    client,
     user,
+    item,
     item_id,
     quantity,
     price,

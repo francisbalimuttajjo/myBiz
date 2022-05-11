@@ -15,6 +15,8 @@ exports.addOneTransaction = async (req, res) => {
     await items.map((item) => {
       db.Sale.create({
         user,
+        client,
+        item:item.item,
         item_id: item.item_id,
         quantity: item.quantity,
         price: item.price,

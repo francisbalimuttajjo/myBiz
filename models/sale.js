@@ -12,6 +12,15 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "item_id",
       });
     }
+
+    toJSON() {
+      return {
+        ...this.get(),
+        user:undefined,
+        updatedAt: undefined,
+        item_id: undefined,
+      };
+    }
   }
   Sale.init(
     {
@@ -22,7 +31,7 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.INTEGER,
       },
       user: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
         allowNull: false,
         validate: {
           isEmail: { args: true, msg: "Please provide a valid email" },
@@ -52,6 +61,20 @@ module.exports = (sequelize, DataTypes) => {
       },
       item_id: {
         type: DataTypes.INTEGER,
+        allowNull: false,
+        validate: {
+          notEmpty: { args: true, msg: "Sale must belong to an item" },
+        },
+      },
+      client: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          notEmpty: { args: true, msg: "Sale must belong to a client" },
+        },
+      },
+      item: {
+        type: DataTypes.STRING,
         allowNull: false,
         validate: {
           notEmpty: { args: true, msg: "Sale must belong to an item" },

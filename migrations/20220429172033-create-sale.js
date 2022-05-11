@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 module.exports = {
   async up(queryInterface, DataTypes) {
     await queryInterface.createTable("Sales", {
@@ -33,11 +33,24 @@ module.exports = {
           notEmpty: { args: true, msg: "total price must be included" },
         },
       },
-   
-    
+
       item_id: {
         type: DataTypes.INTEGER,
         allowNull: false,
+      },
+      client: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          notEmpty: { args: true, msg: "Sale must belong to a client" },
+        },
+      },
+      item: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          notEmpty: { args: true, msg: "Sale must belong to an item" },
+        },
       },
       createdAt: {
         allowNull: false,
@@ -50,6 +63,6 @@ module.exports = {
     });
   },
   async down(queryInterface, DataTypes) {
-    await queryInterface.dropTable('Sales');
-  }
+    await queryInterface.dropTable("Sales");
+  },
 };

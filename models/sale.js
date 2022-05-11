@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
     toJSON() {
       return {
         ...this.get(),
-        user:undefined,
+        user: undefined,
         updatedAt: undefined,
         item_id: undefined,
       };
@@ -49,7 +49,7 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.INTEGER,
         allowNull: false,
         validate: {
-          notEmpty: { args: true, msg: "qty must be included" },
+          notEmpty: { args: true, msg: "price must be included" },
         },
       },
       total_price: {

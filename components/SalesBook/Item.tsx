@@ -1,4 +1,5 @@
 import React from "react";
+import axios from "axios";
 import {
   Text,
   View,
@@ -6,13 +7,15 @@ import {
   TouchableOpacity,
   StyleSheet,
 } from "react-native";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../redux/Store";
+
 import { getDate } from "../../utils";
-import { Sale } from "../../redux/UserSlice";
+import {  Sale } from "../../redux/UserSlice";
+import useFns from "./useFns";
 
 const Item = (props: { sale: Sale }) => {
   const { date } = getDate(props.sale.createdAt);
+  const { deleteHandler, cancelHandler, loading } = useFns(props.sale.id);
+
   return (
     <View style={styles.main_container}>
       <View style={styles.sub_container}>
@@ -39,10 +42,10 @@ const Item = (props: { sale: Sale }) => {
             <Text>{date}</Text>
           </View>
           <View style={styles.btn_container}>
-            <TouchableOpacity>
+            <TouchableOpacity disabled={loading} onPress={deleteHandler}>
               <Text>Delete</Text>
             </TouchableOpacity>
-            <TouchableOpacity>
+            <TouchableOpacity disabled={loading} onPress={cancelHandler}>
               <Text>Cancel</Text>
             </TouchableOpacity>
           </View>

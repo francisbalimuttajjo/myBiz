@@ -17,12 +17,11 @@ const initialValues: Item = {
   sellingCurrency: "ugx",
   packaging: "",
 };
-// const categories: InitialState["categories"] = [
-//   { title: "Choose Category  ", value: "", id: 0 },
-//   { title: "food", value: "food", id: 1 },
-//   { title: "groceries", value: "groceries", id: 2 },
-//   { title: "stationery", value: "stationery", id: 3 },
-// ];
+const categories: InitialState["categories"] = [
+  { title: "food", value: "food", id: 1 },
+  { title: "groceries", value: "groceries", id: 2 },
+  { title: "stationery", value: "stationery", id: 3 },
+];
 
 export const getItems = createAsyncThunk(
   "items/getItems",
@@ -84,13 +83,17 @@ const stockSlice = createSlice({
       })
       .addCase(getCategories.fulfilled, (state, action) => {
         state.loading = false;
-        
-        if (action.payload.status === "success") {
+
+        if (
+          action.payload.status === "success" &&
+          action.payload.data.length > 0
+        ) {
           state.error = "";
           state.categoriesStore = action.payload.data;
           state.categories = state.categoriesStore;
         } else {
           state.error = "";
+          state.categories = categories;
         }
       });
     builder

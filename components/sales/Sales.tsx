@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../redux/Store";
 import { addToCart, getItems } from "../../redux/StockSlice";
 import Banner from "../components/Banner";
+import EmptyNotification from "../components/Empty";
 import Logo from "../components/Logo";
 import BadgeComponent from "./Badge";
 import StockComponent from "../stock/StockItem";
@@ -27,19 +28,25 @@ const Sales = () => {
       <SafeAreaView>
         <Logo />
         <Banner />
-        <BadgeComponent />
-        <FlatList
-          contentContainerStyle={{ paddingBottom: "80%", marginTop: "5%" }}
-          data={availableStock}
-          renderItem={(item) => (
-            <StockComponent
-              item={item.item}
-              handlePress={handlePress}
-              cartItem
+        {availableStock.length > 0 ? (
+          <>
+            <BadgeComponent />
+            <FlatList
+              contentContainerStyle={{ paddingBottom: "80%", marginTop: "5%" }}
+              data={availableStock}
+              renderItem={(item) => (
+                <StockComponent
+                  item={item.item}
+                  handlePress={handlePress}
+                  cartItem
+                />
+              )}
+              keyExtractor={(item) => item.id.toString()}
             />
-          )}
-          keyExtractor={(item) => item.id.toString()}
-        />
+          </>
+        ) : (
+          <EmptyNotification title="No stock available currently" />
+        )}
       </SafeAreaView>
     </SafeAreaProvider>
   );

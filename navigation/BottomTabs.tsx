@@ -37,18 +37,19 @@ const TabsContainer = () => {
           name={MainRoutes.HomePage}
           component={HomeScreen}
         />
-        <Tab.Screen
-          options={{ headerShown: false }}
-          name="Profile"
-          component={ProfileScreen}
-        />
-        <Tab.Screen
+         <Tab.Screen
           name={MainRoutes.TransactionsPage}
           component={TransactionsScreen}
           options={{
             title: " Transactions",
           }}
         />
+        <Tab.Screen
+          options={{ headerShown: false }}
+          name="Profile"
+          component={ProfileScreen}
+        />
+       
       </Tab.Group>
     </Tab.Navigator>
   );

@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-
 import { initialState, getCashItems } from "./others/cashbook";
 
 const stockSlice = createSlice({

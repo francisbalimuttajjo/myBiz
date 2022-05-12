@@ -23,7 +23,7 @@ const UseFns = () => {
         setLoading(false);
         if (res.data.status === "success") {
           const { firstName, lastName, email, image, transactions } =
-            res.data.data;
+            res.data.data.user;
 
           dispatch(addUser({ user: { firstName, lastName, email, image } }));
           dispatch(addTransactions({ transactions }));

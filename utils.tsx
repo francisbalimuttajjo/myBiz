@@ -1,11 +1,20 @@
 import { CashItemProps, InitialState } from "./types/types";
 
+//props
+type Props = { qty: number; price: number };
+type Cart = Array<{
+  item_id: number;
+  quantity: number;
+  price: number;
+  item: string;
+}>;
+
+//props end
+
 const getTotal = (arr: InitialState["cart"]) => {
   const vals = arr.map((el) => el.qty);
   return vals.reduce((a, b) => a + b, 0);
 };
-
-type Props = { qty: number; price: number };
 
 const getTotalSum = (arr: InitialState["cart"]) => {
   let arr1: Array<Props> = [];
@@ -60,12 +69,7 @@ const getDate = (val: Date | string) => {
 };
 
 const getCartItems = (arr: InitialState["cart"]) => {
-  let items: {
-    item_id: number;
-    quantity: number;
-    price: number;
-    item: string;
-  }[] = [];
+  let items: Cart = [];
   arr.map((item) =>
     items.push({
       item_id: +item.item.id,
@@ -76,6 +80,8 @@ const getCartItems = (arr: InitialState["cart"]) => {
   );
   return items;
 };
+
+
 export {
   getTotal,
   getCartItems,

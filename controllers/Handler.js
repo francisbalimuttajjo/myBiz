@@ -3,8 +3,11 @@ const { sendResponse } = require("../utils/fns");
 exports.deleteOne = (Model) => async (req, res) => {
   try {
     const id = req.params.id;
-    await Model.destroy({ where: { id } });
-    return sendResponse(req, res, 200, "deleted successfull");
+    const doc = await Model.destroy({ where: { id } });
+    if (!doc) {
+      return sendResponse(req, res, 404, "operation unsuccessfull", "fail");
+    }
+    sendResponse(req, res, 200, "deleted successfully");
   } catch (err) {
     sendResponse(
       req,
@@ -23,7 +26,7 @@ exports.getAll = (Model) => async (req, res) => {
     const docs = await Model.findAll({ where: { user } });
     sendResponse(req, res, 200, docs);
   } catch (err) {
-    sendResponse(req, res, 400, err, "fail");
+    sendResponse(req, res, 400, err.message, "fail");
   }
 };
 
@@ -66,6 +69,23 @@ exports.addOne = (Model, category) => async (req, res) => {
       }
     }
   } catch (err) {
-    sendResponse(req, res, 400, err, "fail");
+    sendResponse(req, res, 400, err.message, "fail");
+  }
+};
+
+exports.updateOne = (Model) => async (req, res) => {
+  const id = req.params.id;
+  try {
+    await Model.update(req.body, { where: { id } });
+
+    sendResponse(req, res, 200, "update successfull");
+  } catch (err) {
+    sendResponse(
+      req,
+      res,
+      500,
+      `error occured while updating doc with id ${id}`,
+      "fail"
+    );
   }
 };

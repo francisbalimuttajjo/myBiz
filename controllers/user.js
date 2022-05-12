@@ -21,7 +21,6 @@ exports.addOneUser = (req, res) => {
         lastName,
         email,
         password,
-        passwordConfirm,
       })
         .then((user) => sendResponse(req, res, 201, user))
         .catch((err) => {
@@ -36,7 +35,6 @@ exports.addOneUser = (req, res) => {
 };
 
 exports.loginUser = async (req, res) => {
-  console.log(req.body);
   try {
     //checking if not empty req body
     const { email, password } = req.body;
@@ -90,8 +88,6 @@ exports.loginUser = async (req, res) => {
       );
     sendResponse(req, res, 200, user);
   } catch (err) {
-    console.log(err);
-
     sendResponse(req, res, 400, err.message, "fail");
   }
 };

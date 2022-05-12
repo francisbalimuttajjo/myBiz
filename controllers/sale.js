@@ -5,50 +5,26 @@ const { sendResponse } = require("../utils/fns");
 //getting all sales for a single user
 exports.getAllSales = Handler.getAll(db.Sale);
 
-//adding one sale
-exports.addOneSale = (req, res) => {
-  const { user, item_id, quantity, price, client, item } = req.body;
-  db.Sale.create({
-    client,
-    user,
-    item,
-    item_id,
-    quantity,
-    price,
-    total_price: quantity * price,
-  })
-    .then((sale) => sendResponse(req, res, 201, sale))
-    .catch((err) => {
-      sendResponse(req, res, 400, err.message.split(":")[1], "fail");
-    });
-};
-
 //deleting one sale
-exports.deleteOneSale = (req, res) => {
-  db.Sale.destroy({
-    where: { id: req.params.id },
-  })
-    .then((result) => {
-      if (result === 0) {
-        return sendResponse(
-          req,
-          res,
-          404,
-          ` cannot delete sale with id ${req.params.id}`,
-          "fail"
-        );
-      }
-      sendResponse(req, res, 200, "deleted successfully");
-    })
-    .catch((err) => {
-      sendResponse(
-        req,
-        res,
-        500,
-        `Error deleting sale with id  ${req.params.id}`,
-        "fail"
-      );
+exports.deleteOneSale = Handler.deleteOne(db.Sale);
+
+//adding one sale
+exports.addOneSale = async (req, res) => {
+  try {
+    const { user, item_id, quantity, price, client, item } = req.body;
+    const sale = await db.Sale.create({
+      client,
+      user,
+      item,
+      item_id,
+      quantity,
+      price,
+      total_price: quantity * price,
     });
+    sendResponse(req, res, 201, sale);
+  } catch (err) {
+    sendResponse(req, res, 400, err.message, "fail");
+  }
 };
 
 //reversing / cancelling single sale

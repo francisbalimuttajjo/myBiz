@@ -82,23 +82,7 @@ module.exports = (sequelize, DataTypes) => {
       modelName: "User",
     }
 
-    // Method 3 via the direct method
-    // User.beforeCreate(async (user, options) => {
-    //   const hashedPassword = await hashPassword(user.password);
-    //   user.password = hashedPassword;
-    // })
-    // User.beforeCreate((user, options) => {
-    //   return bcrypt
-    //     .hash(user.password, 10)
-    //     .then((hash) => {
-    //       user.password = hash;
-    //       user.passwordConfirm = undefined;
-    //     })
-    //     .catch((err) => {
-    //       console.log(err);
-    //       throw new Error();
-    //     });
-    // })
+
   );
   User.beforeCreate((user, options) => {
     return bcrypt

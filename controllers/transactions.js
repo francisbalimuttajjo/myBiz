@@ -51,7 +51,7 @@ exports.addOneTransaction = async (req, res) => {
     //send response
     sendResponse(req, res, 201, transaction);
   } catch (err) {
-    console.log({ err });
-    sendResponse(req, res, 400, err, "fail");
+    
+    sendResponse(req, res, 400, err.message, "fail");
   }
 };

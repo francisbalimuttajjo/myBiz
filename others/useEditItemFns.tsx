@@ -2,7 +2,8 @@ import { useNavigation } from "@react-navigation/native";
 import axios from "axios";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getItems, resetCart } from "../redux/StockSlice";
+import {  resetCart } from "../redux/StockSlice";
+import { getItems } from "../redux/others/stock";
 import { RootState } from "../redux/Store";
 import { FormProps, NavigationProps } from "../types/types";
 

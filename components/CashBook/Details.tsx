@@ -1,5 +1,5 @@
-import { useNavigation } from "@react-navigation/native";
 import React from "react";
+import { useNavigation } from "@react-navigation/native";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import Ionicon from "react-native-vector-icons/AntDesign";
 import { CashItemProps as Props, NavigationProps } from "../../types/types";
@@ -74,7 +74,7 @@ const Details = (props: Props) => {
         </View>
         <View style={styles.edit_container}>
           <TouchableOpacity
-            onPress={() => navigate("editEntry", { id: props.item.id })}
+            onPress={() => navigate("editCashEntry", { id: props.item.id })}
             activeOpacity={0.6}
             style={styles.icon_container}
           >

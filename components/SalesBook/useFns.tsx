@@ -18,9 +18,8 @@ const UseFns = (id: number) => {
         setLoading(false);
         dispatch(getSales({ user: user.email }));
       })
-      .catch((err) => {
+      .catch(() => {
         setLoading(false);
-        console.log(err);
       });
   };
   const cancelHandler = () => {
@@ -31,9 +30,8 @@ const UseFns = (id: number) => {
         setLoading(false);
         dispatch(getSales({ user: user.email }));
       })
-      .catch((err) => {
+      .catch(() => {
         setLoading(false);
-        console.log(err);
       });
   };
 

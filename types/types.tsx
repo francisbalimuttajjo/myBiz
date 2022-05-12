@@ -93,6 +93,7 @@ export type FormProps = {
   loading: boolean;
   handleSubmit: (a: FormProps["initialValues"]) => void;
   error: string;
+
 };
 
 ////priceComponent.tsx/components/form
@@ -187,7 +188,7 @@ export type mainStackParams = {
   CashBook: undefined;
   Purchases: undefined;
   entryDetails: { id: undefined };
-  editEntry: { id: undefined };
+  editCashEntry: { id: undefined };
   CashInEntry: undefined;
   CashOutEntry: undefined;
   Cart: undefined;
@@ -221,24 +222,22 @@ export type InitialState = {
   error: string;
 };
 //
+export type CashbookInitialValues = {
+  Amount: string;
+  Remark: string;
+  Category: string;
+  type: string;
+  itemTime: Date | string;
+  itemDate: Date | string;
+  paymentMode: string;
+};
+
 export type CashBookFormProps = {
-  initialValues: {
-    Amount: string;
-    Remark: string;
-    Category: string;
-    type: string;
-    itemTime: Date | string;
-    itemDate: Date | string;
-    paymentMode: string;
-  };
-  categories: Array<{ title: string; value: string; id: number; user: number }>;
-  categoriesStore: Array<{
-    title: string;
-    value: string;
-    id: number;
-    user: number;
-  }>;
+  initialValues: CashbookInitialValues;
+  categories: Array<{ title: string; value: string; id: number }>;
   editing?: boolean;
+  handleSubmit:(a:CashbookInitialValues)=>void
+  loading:boolean
 };
 
 export type PickerComponentProps = {

@@ -1,9 +1,11 @@
+import React from "react";
+import { ActivityIndicator, TouchableOpacity } from "react-native";
+import Ionicon from "react-native-vector-icons/Ionicons";
 import { NavigationContainer } from "@react-navigation/native";
-import { createStackNavigator } from "@react-navigation/stack";
-import Stock from "./screens/Stock";
+import Stock from "./screens/StockList";
 import CashBook from "./screens/CashBook";
 import Sales from "./screens/Sales";
-import AddNew from "./screens/NewItem";
+import AddNew from "./screens/NewStockItem";
 import Transactions from "./screens/Transactions";
 import NewCategory from "./screens/NewCategory";
 import Camera from "./screens/Camera";
@@ -15,18 +17,12 @@ import EditStock from "./screens/EditStock";
 import CashIn from "./screens/CashIn";
 import CashOut from "./screens/CashOut";
 import BottomTabs from "./BottomTabs";
-import EntryDetails from "./screens/EntryDetails";
-import EditEntry from "./screens/EditEntry";
-import { mainStackParams } from "../types/types";
-import React from "react";
-import { TouchableOpacity } from "react-native";
-import Ionicon from "react-native-vector-icons/Ionicons";
-import { useSelector } from "react-redux";
-import { RootState } from "../redux/Store";
+import EntryDetails from "./screens/CashEntryDetails";
+import EditEntry from "./screens/EditCashEntry";
+import useFns from "../others/useFns";
 
 const Screens = () => {
-  const Stack = createStackNavigator<mainStackParams>();
-  const { isLoggedIn } = useSelector((state: RootState) => state.user);
+  const { handleDelete, loading, isLoggedIn, Stack } = useFns();
 
   return (
     <NavigationContainer>
@@ -75,20 +71,32 @@ const Screens = () => {
                 }}
               />
               <Stack.Screen
-                name="editEntry"
+                name="editCashEntry"
                 component={EditEntry}
-                options={({ route }) => {
+                options={({ navigation, route }) => {
                   return {
                     title: " Edit Entry",
                     headerRight: () => (
                       <TouchableOpacity
-                        onPress={() => console.log(route.params.id)}
+                        disabled={loading}
+                        onPress={async () => {
+                          const res = await handleDelete(route.params.id);
+                          if (res) {
+                            navigation.goBack();
+                            navigation.navigate("Home");
+                          }
+                        }}
                         activeOpacity={0.6}
                         style={{
                           paddingHorizontal: "10%",
                         }}
                       >
-                        <Ionicon name="trash-outline" size={20} color="red" />
+                        {!loading && (
+                          <Ionicon name="trash-outline" size={20} color="red" />
+                        )}
+                        {loading && (
+                          <ActivityIndicator size="small" color="skyblue" />
+                        )}
                       </TouchableOpacity>
                     ),
                   };
@@ -122,7 +130,7 @@ const Screens = () => {
                 name="New"
                 component={AddNew}
                 options={{
-                  title: "New Item",
+                  title: "New Stock Item",
                 }}
               />
               <Stack.Screen

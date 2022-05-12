@@ -1,8 +1,8 @@
-import { useNavigation } from "@react-navigation/native";
 import React from "react";
+import { useNavigation } from "@react-navigation/native";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import { NavigationProps, CashItemProps } from "../../types/types";
 import { getDate } from "../../utils";
+import { NavigationProps, CashItemProps } from "../../types/types";
 
 const Item: React.FC<CashItemProps> = ({ item }) => {
   const { navigate } = useNavigation<NavigationProps>();

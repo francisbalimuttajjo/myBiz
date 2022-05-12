@@ -1,106 +1,33 @@
-import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { get_cart_index, get_stock_Index } from "../utils";
-import axios from "axios";
-import { InitialState, Item } from "../types/types";
-const initialValues: Item = {
-  id: 0,
-  name: "",
-  description: "",
-  category: "",
-  isReturnable: false,
-  stock: "0",
-  buyingPrice: "0",
-  sellingPrice: "0",
-  image: "",
-  supplier: "",
-  buyingCurrency: "ugx",
-  sellingCurrency: "ugx",
-  packaging: "",
-};
-const categories: InitialState["categories"] = [
-  { title: "food", value: "food", id: 1 },
-  { title: "groceries", value: "groceries", id: 2 },
-  { title: "stationery", value: "stationery", id: 3 },
-];
-
-export const getItems = createAsyncThunk(
-  "items/getItems",
-  async ({ email }: { email: string }) => {
-    try {
-      const response = await axios.post(
-        "http://192.168.43.96:5000/api/v1/items/user",
-        { user: email }
-      );
-
-      return response.data;
-    } catch (err: any) {
-      return err.response.data;
-    }
-  }
-);
-export const getCategories = createAsyncThunk(
-  "items/getCategories",
-  async ({ user }: { user: string }) => {
-    try {
-      const response = await axios.post(
-        "http://192.168.43.96:5000/api/v1/categories/getAll",
-        { user }
-      );
-
-      return response.data;
-    } catch (err: any) {
-      return err.response.data;
-    }
-  }
-);
-
-// const categoriesStore = categories;
-const initialState: InitialState = {
-  availableStock: [],
-  loading: false,
-  cart: [],
-  store: [],
-  initialValues,
-  categoriesStore: [],
-  categories: [],
-  infoMsg: "",
-  isEditing: false,
-  editable: -1,
-  error: "",
-};
+import { initialState, getCategories, getItems } from "./others/stock";
 
 const stockSlice = createSlice({
   name: "stock",
   initialState,
   extraReducers(builder) {
     builder
-      .addCase(getCategories.pending, (state, action) => {
+      .addCase(getCategories.pending, (state) => {
         state.loading = true;
       })
-      .addCase(getCategories.rejected, (state, action) => {
+      .addCase(getCategories.rejected, (state) => {
         state.loading = false;
         state.error = "something went wrong";
       })
       .addCase(getCategories.fulfilled, (state, action) => {
         state.loading = false;
 
-        if (
-          action.payload.status === "success" &&
-          action.payload.data.length > 0
-        ) {
+        if (action.payload.status === "success") {
           state.error = "";
           state.categoriesStore = action.payload.data;
           state.categories = state.categoriesStore;
-        } else {
-          state.error = "";
-          state.categories = categories;
         }
       });
     builder
-      .addCase(getItems.pending, (state, action) => {
+      .addCase(getItems.pending, (state) => {
         state.loading = true;
       })
-      .addCase(getItems.rejected, (state, action) => {
+      .addCase(getItems.rejected, (state) => {
         state.loading = false;
         state.error = "something went wrong";
       })

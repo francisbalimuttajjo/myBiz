@@ -1,11 +1,10 @@
+import React from "react";
+import Ionicons from "react-native-vector-icons/Ionicons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import HomeScreen from "./screens/Home";
 import ProfileScreen from "./screens/Profile";
 import TransactionsScreen from "./screens/Transactions";
-import { MainRoutes } from "../types/types";
-import Ionicons from "react-native-vector-icons/Ionicons";
-import { TabStackParams } from "../types/types";
-import React from "react";
+import { MainRoutes, TabStackParams } from "../types/types";
 
 const TabsContainer = () => {
   const Tab = createBottomTabNavigator<TabStackParams>();
@@ -37,7 +36,7 @@ const TabsContainer = () => {
           name={MainRoutes.HomePage}
           component={HomeScreen}
         />
-         <Tab.Screen
+        <Tab.Screen
           name={MainRoutes.TransactionsPage}
           component={TransactionsScreen}
           options={{
@@ -49,7 +48,6 @@ const TabsContainer = () => {
           name="Profile"
           component={ProfileScreen}
         />
-       
       </Tab.Group>
     </Tab.Navigator>
   );

@@ -11,7 +11,7 @@ import axios from "axios";
 import Ionicon from "react-native-vector-icons/Ionicons";
 import useFns from "./useDeleteFns";
 import { StockItemProps as Props } from "../../types/types";
-import { getItems } from "../../redux/StockSlice";
+import { getItems } from "../../redux/others/stock";
 import { useDispatch } from "react-redux";
 
 const Item: React.FC<Props> = (props) => {
@@ -21,7 +21,7 @@ const Item: React.FC<Props> = (props) => {
   if (confirmDelete) {
     axios
       .delete(`http://192.168.43.96:5000/api/v1/items/${props.item.id}`)
-      .then((res) => dispatch(getItems({ email: user.email })))
+      .then(() => dispatch(getItems({ email: user.email })))
       .catch((err) => {
         console.log(err);
       });

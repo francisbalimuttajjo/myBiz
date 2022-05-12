@@ -1,12 +1,5 @@
 import React from "react";
-import {
-  
-  ScrollView,
-  StyleSheet,
- 
-  View,
-} from "react-native";
-import { SafeAreaView, SafeAreaProvider } from "react-native-safe-area-context";
+import { ScrollView, StyleSheet, View } from "react-native";
 import Horizontal from "../components/Horizontal";
 import Search from "../components/Search";
 import Balance from "./Balance";
@@ -15,42 +8,55 @@ import Btns from "./Btns";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux/Store";
 import { filterCashItems } from "../../redux/CashBook";
+import { getCashItems } from "../../redux/others/cashbook";
 import { getDifference } from "../../utils";
+import Loading from "../components/LoadingComponent";
 
 const CashBook = () => {
-  const { cashTransactions,store } = useSelector(
-    (state: RootState) => state.cashBook
-  );
   const dispatch = useDispatch();
   const [searchQuery, setSearchQuery] = React.useState<string>("");
+
+  const { cashTransactions, store, loading } = useSelector(
+    (state: RootState) => state.cashBook
+  );
+  const { user } = useSelector((state: RootState) => state.user);
+  const [income, expenses] = getDifference(store);
+
   const onChangeSearch = (query: string) => {
     dispatch(filterCashItems(query));
     setSearchQuery(query);
   };
 
-  const [income, expenses] = getDifference(store);
+  React.useEffect(() => {
+    dispatch(getCashItems({ user: user.email }));
+  }, [getCashItems]);
+
   return (
-    <SafeAreaProvider>
-      <SafeAreaView>
-        <View style={styles.search_container}>
-          <Search
-            placeholder="Search ..."
-            searchQuery={searchQuery}
-            onChangeSearch={onChangeSearch}
-          />
-        </View>
-        <ScrollView style={{ paddingTop: "20%" }}>
-          <Balance amount_in={+income} amount_out={+expenses} />
-          <Horizontal length={cashTransactions.length} />
-          <View style={{ paddingBottom: "50%" }}>
-            {cashTransactions.map((el) => (
-              <CashItem item={el} key={el.id} />
-            ))}
+    <View style={{ height: "100%" }}>
+      {loading ? (
+        <Loading />
+      ) : (
+        <>
+          <View style={styles.search_container}>
+            <Search
+              placeholder="Search ..."
+              searchQuery={searchQuery}
+              onChangeSearch={onChangeSearch}
+            />
           </View>
-        </ScrollView>
-        <Btns />
-      </SafeAreaView>
-    </SafeAreaProvider>
+          <ScrollView style={{ paddingTop: "20%" }}>
+            <Balance amount_in={+income} amount_out={+expenses} />
+            <Horizontal length={cashTransactions.length} />
+            <View style={{ paddingBottom: "50%" }}>
+              {cashTransactions.map((el) => (
+                <CashItem item={el} key={el.id} />
+              ))}
+            </View>
+          </ScrollView>
+          <Btns />
+        </>
+      )}
+    </View>
   );
 };
 

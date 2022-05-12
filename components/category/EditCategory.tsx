@@ -9,7 +9,7 @@ import useEditFns from "./useEditFns";
 import AppFormField from "../form/InputComponent";
 
 type Props = {
-  item: { title: string; id: number };
+  item: { title?: string; id?: number };
 };
 
 const Category = (props: Props) => {

@@ -1,7 +1,7 @@
 import React from "react";
 import { SafeAreaView, SafeAreaProvider } from "react-native-safe-area-context";
 import Form from "../../components/form/MainForm";
-import useFns from "../../others/editScreenFns";
+import useFns from "../../others/useEditItemFns";
 import type { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { mainStackParams } from "../../types/types";
 

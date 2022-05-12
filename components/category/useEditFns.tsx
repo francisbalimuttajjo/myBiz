@@ -5,13 +5,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { getCategories } from "../../redux/StockSlice";
 import { RootState } from "../../redux/Store";
 
-const UseFns = (id: number, title: string) => {
+const UseFns = (id: number | undefined, title: string | undefined) => {
+  const dispatch = useDispatch();
   const navigation = useNavigation();
+  const [error, setError] = React.useState<string>("");
+
   const { user } = useSelector((state: RootState) => state.user);
   const [loading, setLoading] = React.useState<boolean>(false);
-  const [error, setError] = React.useState<string>("");
+
   const initialValues = { category: title };
-  const dispatch = useDispatch();
+
   const handleSubmit = (values: { category?: string }) => {
     setLoading(true);
     axios
@@ -41,8 +44,8 @@ const UseFns = (id: number, title: string) => {
           navigation.goBack();
         }
       })
-      .catch((err) => {
-        console.log(err.response.data);
+      .catch(() => {
+      
         setLoading(false);
       });
   };

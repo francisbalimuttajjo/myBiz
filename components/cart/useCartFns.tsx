@@ -6,7 +6,8 @@ import { useNavigation } from "@react-navigation/native";
 import { RootState } from "../../redux/Store";
 import { NavigationProps } from "../../types/types";
 import { getTotalSum, getDate, getCartItems } from "../../utils";
-import { getItems, resetCart } from "../../redux/StockSlice";
+import { resetCart } from "../../redux/StockSlice";
+import { getItems } from "../../redux/others/stock";
 import { getTransactions } from "../../redux/UserSlice";
 
 const UseCart = () => {
@@ -14,7 +15,7 @@ const UseCart = () => {
   const { navigate } = useNavigation<NavigationProps>();
 
   const { cart } = useSelector((state: RootState) => state.stock);
-  const { user, transactions } = useSelector((state: RootState) => state.user);
+  const { user } = useSelector((state: RootState) => state.user);
 
   const changeToCash = () => setBtn("cash");
   const changeToCredit = () => setBtn("credit");
@@ -73,7 +74,7 @@ const UseCart = () => {
         paymentDate,
         items: getCartItems(cart),
       })
-      .then((res) => {
+      .then(() => {
         setLoading(false);
         dispatch(resetCart());
         dispatch(getItems({ email: user.email }));
@@ -81,8 +82,9 @@ const UseCart = () => {
         navigate("Sales");
       })
       .catch((err) => {
+        console.log("err", err);
         setLoading(false);
-        setError(err.response.data.data);
+        setError(err.response.data);
       });
   };
 

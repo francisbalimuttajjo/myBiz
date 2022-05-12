@@ -1,7 +1,13 @@
 import React from "react";
 import * as Yup from "yup";
 import { Formik, Field } from "formik";
-import { ScrollView, StyleSheet, Text, View } from "react-native";
+import {
+  ActivityIndicator,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import Input from "./FloatingInput";
 
@@ -12,10 +18,7 @@ import DateComponent from "./DateComponent";
 import PaymentMode from "./PaymentMode";
 
 export const Form = (props: Props) => {
-  const handleSubmit = (values: Props["initialValues"]) => {
-    console.log(values);
-  };
-
+  
   const validationSchema = Yup.object().shape({
     Amount: Yup.number().required().min(1, "Amount").label("Amount"),
     Remark: Yup.string().trim().required("Remark is required").label("Remark"),
@@ -30,7 +33,7 @@ export const Form = (props: Props) => {
     <Formik
       initialValues={props.initialValues}
       validationSchema={validationSchema}
-      onSubmit={handleSubmit}
+      onSubmit={props.handleSubmit}
     >
       {({ handleSubmit, errors }) => (
         <View style={styles.main_container}>
@@ -68,12 +71,14 @@ export const Form = (props: Props) => {
           <TouchableOpacity
             onPress={handleSubmit}
             activeOpacity={0.8}
+            disabled={props.loading}
             style={{
               ...styles.btn_container,
               backgroundColor:
                 Object.values(errors).length !== 0 ? "#b3b0aa" : "green",
             }}
           >
+            {props.loading && <ActivityIndicator size="small" color="white" />}
             <Text style={styles.btn_text}>
               {!props.editing ? "SAVE" : "UPDATE"}
             </Text>
@@ -99,10 +104,11 @@ const styles = StyleSheet.create({
   btn_container: {
     width: "90%",
     alignSelf: "center",
-    borderRadius: 7,   
+    borderRadius: 7,
     alignItems: "center",
     justifyContent: "center",
     paddingVertical: "4%",
     marginVertical: "5%",
+    flexDirection:"row"
   },
 });

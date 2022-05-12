@@ -47,36 +47,7 @@ const FloatingLabel: React.FC<Props & FieldProps> = (props) => {
   );
 };
 export default FloatingLabel;
-// import { StyleSheet } from "react-native";
-// import { TextInput } from "react-native-paper";
-// import { FloatingLabelProps as Props } from "../../types/types";
 
-// const Input: React.FC<Props> = (props) => {
-//   return (
-//     <TextInput
-//       label={props.label}
-//       mode="outlined"
-//       value={props.value}
-//       onChangeText={props.onChangeText}
-//       outlineColor="#bdbdbd"
-//       activeOutlineColor="green"
-//       keyboardType={props.keyboard ? "numeric" : "default"}
-//       theme={{
-//         colors: {
-//           text: props.isAmount
-//             ? props.item.type === "cash-out"
-//               ? "red"
-//               : "green"
-//             : "black",
-//         },
-//       }}
-//       error={props.error}
-//       style={styles.input}
-//       autoComplete
-//     />
-//   );
-// };
-// export default Input;
 
 const styles = StyleSheet.create({
   input: {

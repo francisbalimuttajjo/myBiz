@@ -1,25 +1,17 @@
-import { useSelector } from "react-redux";
+import React from "react";
 import Form from "../../components/CashBook/Form";
-import { RootState } from "../../redux/Store";
-
-const initialValues = {
-  Remark: "",
-  Amount: "",
-  Category: "",
-  type: "cash-out",
-  itemTime: new Date(),
-  itemDate: new Date(),
-  paymentMode: "cash",
-};
+import useFns from "../../others/useCashOutFns";
 
 const CashOut = () => {
-  const { categories } = useSelector((state: RootState) => state.cashBook);
+  const { categories, initialValues, handleSubmit, loading } = useFns();
+
   return (
     <Form
-     
+      handleSubmit={handleSubmit}
       editing={false}
       categories={categories}
       initialValues={initialValues}
+      loading={loading}
     />
   );
 };

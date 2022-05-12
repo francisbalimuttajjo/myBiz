@@ -6,11 +6,8 @@ import { RootState } from "../../redux/Store";
 import EmptyNotification from "../components/Empty";
 import LoadingComponent from "../components/LoadingComponent";
 import StockComponent from "./StockItem";
-import {
-  changeToEditing,
-  getCategories,
-  getItems,
-} from "../../redux/StockSlice";
+import { getCategories, getItems } from "../../redux/others/stock";
+import { changeToEditing } from "../../redux/StockSlice";
 import useFns from "./useDeleteFns";
 
 const ItemsList = () => {

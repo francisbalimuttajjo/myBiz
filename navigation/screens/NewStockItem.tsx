@@ -1,6 +1,6 @@
 import React from "react";
 import Form from "../../components/form/MainForm";
-import useFns from "../../others/newItemScreenFns";
+import useFns from "../../others/useNewItemFns"
 
 const NewItem = () => {
   const { loading, handleSubmit, initialValues, error } = useFns();

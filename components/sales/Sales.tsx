@@ -3,9 +3,9 @@ import { FlatList } from "react-native";
 import { SafeAreaView, SafeAreaProvider } from "react-native-safe-area-context";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../redux/Store";
-import { addToCart, getItems } from "../../redux/StockSlice";
+import { addToCart } from "../../redux/StockSlice";
+import {  getItems } from "../../redux/others/stock";
 import Banner from "../components/Banner";
-import EmptyNotification from "../components/Empty";
 import Logo from "../components/Logo";
 import BadgeComponent from "./Badge";
 import StockComponent from "../stock/StockItem";
@@ -28,25 +28,20 @@ const Sales = () => {
       <SafeAreaView>
         <Logo />
         <Banner />
-        {availableStock.length > 0 ? (
-          <>
-            <BadgeComponent />
-            <FlatList
-              contentContainerStyle={{ paddingBottom: "80%", marginTop: "5%" }}
-              data={availableStock}
-              renderItem={(item) => (
-                <StockComponent
-                  item={item.item}
-                  handlePress={handlePress}
-                  cartItem
-                />
-              )}
-              keyExtractor={(item) => item.id.toString()}
+        <BadgeComponent />
+
+        <FlatList
+          contentContainerStyle={{ paddingBottom: "80%", marginTop: "5%" }}
+          data={availableStock}
+          renderItem={(item) => (
+            <StockComponent
+              item={item.item}
+              handlePress={handlePress}
+              cartItem
             />
-          </>
-        ) : (
-          <EmptyNotification title="No stock available currently" />
-        )}
+          )}
+          keyExtractor={(item) => item.id.toString()}
+        />
       </SafeAreaView>
     </SafeAreaProvider>
   );

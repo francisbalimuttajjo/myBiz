@@ -9,14 +9,14 @@ const Header: React.FC<Props> = (props) => {
     <View>
       <Logo />
       <View style={styles.container}>
-        {!props.user.imageSrc && (
+        {!props.user.image && (
           <Ionicon name="ios-person-circle-outline" size={40} color="white" />
         )}
-        {props.user.imageSrc && (
+        {props.user.image && (
           <Image
             style={styles.image}
             source={{
-              uri: props.user.imageSrc,
+              uri: props.user.image,
             }}
           />
         )}

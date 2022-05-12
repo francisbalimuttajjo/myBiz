@@ -3,7 +3,7 @@ import { ScrollView } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux/Store";
 import SaleItem from "./Item";
-import { getSales, Sale } from "../../redux/UserSlice";
+import { getSales } from "../../redux/UserSlice";
 import Empty from "../components/Empty";
 import Loading from "../components/LoadingComponent";
 

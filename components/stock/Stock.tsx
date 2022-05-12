@@ -10,16 +10,13 @@ import Search from "../components/Search";
 
 const Stock = () => {
   const {
+    searchQuery,
+    onChangeSearch,
     visibleState,
     navigation,
     displayToolKit,
     hideToolKit,
-    clicked,
-    searchPhrase,
-    handleClicked,
-    infoMsg,
-    handleChange,
-    clearSearchField,
+    infoMsg, 
     displaySearchBar,
     loading,
   } = useFns();
@@ -45,12 +42,9 @@ const Stock = () => {
         {!loading && displaySearchBar && (
           <Search
             infoMsg={infoMsg}
-            clearSearchField={clearSearchField}
-            searchPhrase={searchPhrase}
-            handleChange={handleChange}
+            searchQuery={searchQuery}
+            onChangeSearch={onChangeSearch}
             placeholder="Search by Category or Name"
-            clicked={clicked}
-            handleClicked={handleClicked}
           />
         )}
       </View>

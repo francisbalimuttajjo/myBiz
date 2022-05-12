@@ -2,7 +2,7 @@ import { useNavigation } from "@react-navigation/native";
 import axios from "axios";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getItems } from "../redux/StockSlice";
+import { getItems } from "../redux/others/stock";
 import { RootState } from "../redux/Store";
 import { FormProps, NavigationProps } from "../types/types";
 
@@ -33,7 +33,7 @@ const UseFns = () => {
         isReturnable: values.isReturnable,
         user: user.email,
       })
-      .then((res) => {
+      .then(() => {
         setLoading(false);
         dispatch(getItems({ email: user.email }));
         navigate("Stock");

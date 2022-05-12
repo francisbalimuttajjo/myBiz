@@ -52,8 +52,7 @@ const PriceComponent: React.FC<Props> = (props) => {
         >
           <TextInput
             keyboardType="numeric"
-            onChangeText={(text) => {
-              console.log({ text });
+            onChangeText={(text) => {             
               setFieldValue(`${props.title}Price`, text);
               props.setPrice(+text);
             }}

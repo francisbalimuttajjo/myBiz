@@ -1,6 +1,5 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
-// import * as Yup from "yup";
 import { Formik, Field } from "formik";
 import Input from "./Input";
 import Button from "./Button";

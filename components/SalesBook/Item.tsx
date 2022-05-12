@@ -1,15 +1,8 @@
 import React from "react";
-import axios from "axios";
-import {
-  Text,
-  View,
-  ScrollView,
-  TouchableOpacity,
-  StyleSheet,
-} from "react-native";
+import { Text, View, TouchableOpacity, StyleSheet } from "react-native";
 
 import { getDate } from "../../utils";
-import {  Sale } from "../../redux/UserSlice";
+import { Sale } from "../../redux/UserSlice";
 import useFns from "./useFns";
 
 const Item = (props: { sale: Sale }) => {

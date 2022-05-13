@@ -1,7 +1,7 @@
 import axios from "axios";
-import { addTransactions, addUser } from "../../redux/UserSlice";
+import { addToken, addTransactions, addUser } from "../../redux/UserSlice";
 import { useDispatch } from "react-redux";
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import React from "react";
 import * as Yup from "yup";
 
@@ -23,15 +23,14 @@ const UseFns = () => {
       .then((res) => {
         setLoading(false);
         if (res.data.status === "success") {
-          const { firstName, lastName, email, image, transactions} =
+          const { firstName, lastName, email, image, transactions } =
             res.data.data.user;
 
           dispatch(addUser({ user: { firstName, lastName, email, image } }));
           dispatch(addTransactions({ transactions }));
-         // AsyncStorage.setItem('token',  res.data.data.token).then(() => {
-          AsyncStorage.setItem('token',  res.data.data.token).then(() => {
-            console.log('stored')
-          })
+          AsyncStorage.setItem("token", res.data.data.token).then(() => {
+            dispatch(addToken({ token: res.data.data.token }));
+          });
         }
       })
       .catch((err) => {

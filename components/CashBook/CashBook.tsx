@@ -20,6 +20,7 @@ const CashBook = () => {
     (state: RootState) => state.cashBook
   );
   const { user } = useSelector((state: RootState) => state.user);
+  
   const [income, expenses] = getDifference(store);
 
   const onChangeSearch = (query: string) => {

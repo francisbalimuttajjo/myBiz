@@ -18,16 +18,16 @@ const initialValues: Item = {
   packaging: "",
 };
 
-
 export const getItems = createAsyncThunk(
   "items/getItems",
   async ({ email }: { email: string }) => {
     try {
       const response = await axios.post(
         "http://192.168.43.96:5000/api/v1/items/user",
-        { user: email }
+        { user: email },
+        { headers: { "Content-Type": "application/json", token: "bafra" } }
       );
-
+     
       return response.data;
     } catch (err: any) {
       return err.response.data;
@@ -65,4 +65,4 @@ const initialState: InitialState = {
   error: "",
 };
 
-export {initialState}
+export { initialState };

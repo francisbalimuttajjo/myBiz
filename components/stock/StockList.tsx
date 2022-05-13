@@ -17,7 +17,8 @@ const ItemsList = () => {
   const { availableStock, loading, infoMsg } = useSelector(
     (state: RootState) => state.stock
   );
-  const { user } = useSelector((state: RootState) => state.user);
+  const { user, token } = useSelector((state: RootState) => state.user);
+
   //
   const handleEditing = (val: number) => {
     dispatch(changeToEditing({ id: val }));
@@ -25,6 +26,7 @@ const ItemsList = () => {
   };
 
   React.useEffect(() => {
+    console.log(user.email);
     dispatch(getItems({ email: user.email }));
     dispatch(getCategories({ user: user.email }));
   }, [getItems, getCategories]);

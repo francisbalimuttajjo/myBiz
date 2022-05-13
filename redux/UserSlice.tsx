@@ -29,6 +29,7 @@ type InitialState = {
   isLoggedIn: boolean;
   loading: boolean;
   error: string;
+  token: string | null;
 };
 
 const initialState: InitialState = {
@@ -38,6 +39,7 @@ const initialState: InitialState = {
   isLoggedIn: false,
   loading: false,
   error: "",
+  token: "",
 };
 
 export const getTransactions = createAsyncThunk(
@@ -76,10 +78,10 @@ const userSlice = createSlice({
   initialState: initialState,
   extraReducers(builder) {
     builder
-      .addCase(getTransactions.pending, (state, action) => {
+      .addCase(getTransactions.pending, (state) => {
         state.loading = true;
       })
-      .addCase(getTransactions.rejected, (state, action) => {
+      .addCase(getTransactions.rejected, (state) => {
         state.loading = false;
         state.error = "something went wrong";
       })
@@ -91,10 +93,10 @@ const userSlice = createSlice({
         }
       });
     builder
-      .addCase(getSales.pending, (state, action) => {
+      .addCase(getSales.pending, (state) => {
         state.loading = true;
       })
-      .addCase(getSales.rejected, (state, action) => {
+      .addCase(getSales.rejected, (state) => {
         state.loading = false;
         state.error = "something went wrong";
       })
@@ -115,7 +117,6 @@ const userSlice = createSlice({
     ) {
       state.user = action.payload.user;
       state.isLoggedIn = true;
-      console.log("gg", state.isLoggedIn);
     },
     addTransactions(
       state,
@@ -125,8 +126,16 @@ const userSlice = createSlice({
     ) {
       state.transactions = action.payload.transactions;
     },
+    addToken(
+      state,
+      action: PayloadAction<{
+        token: string | null;
+      }>
+    ) {
+      state.token = action.payload.token;
+    },
   },
 });
 
-export const { addUser, addTransactions } = userSlice.actions;
+export const { addUser, addTransactions, addToken } = userSlice.actions;
 export default userSlice.reducer;

@@ -3,7 +3,8 @@ import * as Yup from "yup";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux/Store";
-import { filterCategories, getCategories } from "../../redux/StockSlice";
+import { filterCategories } from "../../redux/StockSlice"
+import { getCategories } from "../../redux/others/stock"
 
 const UseFns = () => {
   const dispatch = useDispatch();

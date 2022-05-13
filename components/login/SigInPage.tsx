@@ -17,13 +17,16 @@ export const Form = () => {
     toggleSecureText,
     handleSubmit,
   } = useFns();
+
+
+  
   return (
     <Formik
       initialValues={initialValues}
       validationSchema={validationSchema}
       onSubmit={handleSubmit}
     >
-      {({ handleSubmit, errors, values }) => (
+      {({ handleSubmit, errors }) => (
         <View>
           <View style={styles.container}>
             {errorMsg !== "" && <Info error={errorMsg} />}

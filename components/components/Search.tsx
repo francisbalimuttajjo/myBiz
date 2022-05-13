@@ -2,6 +2,7 @@ import React from "react";
 import { StyleSheet,  View, Text } from "react-native";
 import { SearchProps as Props } from "../../types/types";
 import { Searchbar } from "react-native-paper";
+
 const SearchBar: React.FC<Props> = (props) => {
   
   return (

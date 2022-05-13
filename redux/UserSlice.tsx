@@ -12,7 +12,7 @@ export type Transaction = {
   cashPending: number;
   createdAt: string;
 };
- export type Sale = {
+export type Sale = {
   id: number;
   price: number;
   quantity: number;
@@ -115,11 +115,12 @@ const userSlice = createSlice({
     ) {
       state.user = action.payload.user;
       state.isLoggedIn = true;
+      console.log("gg", state.isLoggedIn);
     },
     addTransactions(
       state,
       action: PayloadAction<{
-        transactions: InitialState["transactions"]; 
+        transactions: InitialState["transactions"];
       }>
     ) {
       state.transactions = action.payload.transactions;

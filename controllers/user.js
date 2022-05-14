@@ -2,6 +2,7 @@ const bcrypt = require("bcrypt");
 const db = require("../models");
 const jwt = require("jsonwebtoken");
 const { sendResponse, signToken } = require("../utils/fns");
+
 //adding one client
 exports.addOneUser = (req, res) => {
   const { firstName, email, lastName, password, passwordConfirm } = req.body;
@@ -35,7 +36,7 @@ exports.addOneUser = (req, res) => {
 };
 
 exports.loginUser = async (req, res) => {
-   console.log("uu", req.body);
+
   try {
     //checking if not empty req body
     const { email, password } = req.body;
@@ -89,9 +90,8 @@ exports.loginUser = async (req, res) => {
       );
     //sign token and send it with user
     const token = await signToken(user.id);
-   
-    sendResponse(req, res, 200, { user, token });
 
+    sendResponse(req, res, 200, { user, token });
   } catch (err) {
     console.log(err);
     sendResponse(req, res, 400, err.message, "fail");

@@ -136,8 +136,11 @@ const userSlice = createSlice({
     ) {
       state.token = action.payload.token;
     },
+    logout(state) {
+      state.isLoggedIn = false;
+    },
   },
 });
 
-export const { addUser, addTransactions, addToken } = userSlice.actions;
+export const { addUser, addTransactions, addToken, logout } = userSlice.actions;
 export default userSlice.reducer;

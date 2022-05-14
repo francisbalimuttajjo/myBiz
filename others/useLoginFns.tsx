@@ -15,13 +15,14 @@ const UseFns = () => {
       const result = await axios.post(
         `http://192.168.43.96:5000/api/v1/users/auth/${token}`
       );
+
       if (result.data.status === "success") {
         const { firstName, lastName, email, image, transactions } =
           result.data.data;
 
         dispatch(addUser({ user: { firstName, lastName, email, image } }));
         dispatch(addTransactions({ transactions }));
-          dispatch(addToken({ token }));
+        dispatch(addToken({ token }));
       }
       setIsAuthenticating(false);
     } catch (er) {

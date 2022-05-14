@@ -22,6 +22,7 @@ const UseFns = () => {
       })
       .then((res) => {
         setLoading(false);
+
         if (res.data.status === "success") {
           const { firstName, lastName, email, image, transactions } =
             res.data.data.user;

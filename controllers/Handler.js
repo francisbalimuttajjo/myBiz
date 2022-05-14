@@ -1,6 +1,7 @@
 const { sendResponse } = require("../utils/fns");
 
 exports.deleteOne = (Model) => async (req, res) => {
+
   try {
     const id = req.params.id;
     const doc = await Model.destroy({ where: { id } });
@@ -22,9 +23,11 @@ exports.deleteOne = (Model) => async (req, res) => {
 //getting all items for a particular user
 exports.getAll = (Model) => async (req, res) => {
   const { user } = req.body;
+
   try {
     const docs = await Model.findAll({ where: { user } });
-    sendResponse(req, res, 200, docs);
+
+    return sendResponse(req, res, 200, docs);
   } catch (err) {
     sendResponse(req, res, 400, err.message, "fail");
   }

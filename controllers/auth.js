@@ -5,9 +5,11 @@ const { sendResponse } = require("../utils/fns");
 exports.auth = async (req, res) => {
   try {
     const { token } = req.params;
+    console.log(token);
 
     //verifying token
     const decoded_token = await jwt.verify(token, process.env.JWT_SECRET);
+    console.log(decoded_token);
 
     //checking if user still exists
     const user = await db.User.findOne({
@@ -34,14 +36,11 @@ exports.auth = async (req, res) => {
 
 //getting all items for a particular user
 exports.isAuthenticated = async (req, res, next) => {
-  console.log("hdhd");
-  // const { user } = req.body;
-  console.log(req.headers.token);
-
   try {
-    // const { token } = req.params;
-    //verifying token
     const { token } = req.headers;
+    if (!token) {
+      return sendResponse(req, res, 400, "no token was provided", "fail");
+    }
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
     //checking if user still exists
@@ -53,11 +52,9 @@ exports.isAuthenticated = async (req, res, next) => {
     });
 
     if (!user) {
-      //   return sendResponse(req, res, 200, user);
       sendResponse(req, res, 400, "no user with the id", "fail");
+      return;
     }
-    req.user = user.email;
-    console.log("user csdfghjkatch", user.email);
 
     next();
   } catch (err) {

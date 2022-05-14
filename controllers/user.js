@@ -35,7 +35,7 @@ exports.addOneUser = (req, res) => {
 };
 
 exports.loginUser = async (req, res) => {
-  console.log("uu", req.body);
+   console.log("uu", req.body);
   try {
     //checking if not empty req body
     const { email, password } = req.body;
@@ -89,10 +89,9 @@ exports.loginUser = async (req, res) => {
       );
     //sign token and send it with user
     const token = await signToken(user.id);
-    // console.log(token);
-    const verify = await jwt.verify(token, process.env.JWT_SECRET);
-    console.log("verify", verify);
+   
     sendResponse(req, res, 200, { user, token });
+
   } catch (err) {
     console.log(err);
     sendResponse(req, res, 400, err.message, "fail");

@@ -43,11 +43,7 @@ const TabsContainer = () => {
             title: " Transactions",
           }}
         />
-        <Tab.Screen
-          options={{ headerShown: false }}
-          name="Profile"
-          component={ProfileScreen}
-        />
+        <Tab.Screen name={MainRoutes.ProfilePage} component={ProfileScreen} />
       </Tab.Group>
     </Tab.Navigator>
   );

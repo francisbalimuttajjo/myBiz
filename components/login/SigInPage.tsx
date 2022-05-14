@@ -18,8 +18,6 @@ export const Form = () => {
     handleSubmit,
   } = useFns();
 
-
-  
   return (
     <Formik
       initialValues={initialValues}
@@ -42,7 +40,12 @@ export const Form = () => {
               label="Password"
               error={errors.Password}
               secureTextEntry={secureText}
-              right={<TextInput.Icon name="eye" onPress={toggleSecureText} />}
+              right={
+                <TextInput.Icon
+                  name={!secureText ? "eye-off" : "eye"}
+                  onPress={toggleSecureText}
+                />
+              }
             />
             <View style={styles.sub_container}>
               <Text style={{ color: "skyblue" }}>Forgot Password ?</Text>

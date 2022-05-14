@@ -10,9 +10,9 @@ import TransactionItem from "./Item";
 const Transactions = () => {
   const dispatch = useDispatch();
   const { transactions, loading, user, token } = useSelector(
-    (state: RootState) => state.user
+    (state: RootState) => state.user 
   );
-  
+
   React.useEffect(() => {
     dispatch(getTransactions({ user: user.email, token }));
   }, [getTransactions]);
@@ -26,7 +26,7 @@ const Transactions = () => {
           <TransactionItem item={el} key={index} />
         ))
       ) : (
-        <Empty title="Yoy dont have any transactions currently, click Home and add " />
+        <Empty title="You dont have any transactions currently, click Home and add " />
       )}
     </ScrollView>
   );

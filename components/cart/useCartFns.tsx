@@ -15,7 +15,7 @@ const UseCart = () => {
   const { navigate } = useNavigation<NavigationProps>();
 
   const { cart } = useSelector((state: RootState) => state.stock);
-  const { user } = useSelector((state: RootState) => state.user);
+  const { user, token } = useSelector((state: RootState) => state.user);
 
   const changeToCash = () => setBtn("cash");
   const changeToCredit = () => setBtn("credit");
@@ -65,24 +65,27 @@ const UseCart = () => {
 
     // //making api call if all is well
     axios
-      .post(`http://192.168.43.96:5000/api/v1/transactions`, {
-        client: values.Customer,
-        user: user.email,
-        cashReceived: values.CashReceived,
-        type: "sales",
-        discount: parseInt(values.Discount),
-        paymentDate,
-        items: getCartItems(cart),
-      })
+      .post(
+        `http://192.168.43.96:5000/api/v1/transactions`,
+        {
+          client: values.Customer,
+          user: user.email,
+          cashReceived: values.CashReceived,
+          type: "sales",
+          discount: parseInt(values.Discount),
+          paymentDate,
+          items: getCartItems(cart),
+        },
+        { headers: { "Content-Type": "application/json", token } }
+      )
       .then(() => {
         setLoading(false);
         dispatch(resetCart());
-        dispatch(getItems({ email: user.email }));
-        dispatch(getTransactions({ user: user.email }));
+        dispatch(getItems({ email: user.email, token }));
+        dispatch(getTransactions({ user: user.email, token }));
         navigate("Sales");
       })
       .catch((err) => {
-        console.log("err", err);
         setLoading(false);
         setError(err.response.data);
       });

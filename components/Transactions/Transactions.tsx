@@ -9,12 +9,12 @@ import TransactionItem from "./Item";
 
 const Transactions = () => {
   const dispatch = useDispatch();
-  const { transactions, loading, user } = useSelector(
+  const { transactions, loading, user, token } = useSelector(
     (state: RootState) => state.user
   );
-
+  
   React.useEffect(() => {
-    dispatch(getTransactions({ user: user.email }));
+    dispatch(getTransactions({ user: user.email, token }));
   }, [getTransactions]);
 
   return (

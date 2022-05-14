@@ -44,11 +44,12 @@ const initialState: InitialState = {
 
 export const getTransactions = createAsyncThunk(
   "transactions/getTransactions",
-  async ({ user }: { user: string }) => {
+  async ({ user, token }: { user: string; token: string }) => {
     try {
       const response = await axios.post(
         "http://192.168.43.96:5000/api/v1/transactions/getAll",
-        { user }
+        { user },
+        { headers: { "Content-Type": "application/json", token } }
       );
 
       return response.data;

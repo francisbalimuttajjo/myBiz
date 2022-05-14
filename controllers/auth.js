@@ -2,14 +2,13 @@ const jwt = require("jsonwebtoken");
 const db = require("../models");
 const { sendResponse } = require("../utils/fns");
 
+//authentication on app start up
 exports.auth = async (req, res) => {
   try {
     const { token } = req.params;
-    console.log(token);
 
     //verifying token
     const decoded_token = await jwt.verify(token, process.env.JWT_SECRET);
-    console.log(decoded_token);
 
     //checking if user still exists
     const user = await db.User.findOne({
@@ -34,7 +33,7 @@ exports.auth = async (req, res) => {
   }
 };
 
-//getting all items for a particular user
+//authentication middleware
 exports.isAuthenticated = async (req, res, next) => {
   try {
     const { token } = req.headers;

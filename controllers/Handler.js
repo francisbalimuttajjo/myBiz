@@ -1,7 +1,6 @@
 const { sendResponse } = require("../utils/fns");
 
 exports.deleteOne = (Model) => async (req, res) => {
-
   try {
     const id = req.params.id;
     const doc = await Model.destroy({ where: { id } });

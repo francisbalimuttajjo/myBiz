@@ -8,7 +8,7 @@ import { NavigationProps } from "../../types/types";
 const UseFns = () => {
   const { navigate } = useNavigation<NavigationProps>();
   const [confirmDelete, setConfirmDelete] = React.useState(false);
-  const { user } = useSelector((state: RootState) => state.user);
+  const { user,token } = useSelector((state: RootState) => state.user);
 
   const createAlert = () =>
     Alert.alert("Delete", "Are you Sure? This action is irreversible", [
@@ -20,7 +20,7 @@ const UseFns = () => {
       { text: "Confirm", onPress: () => setConfirmDelete(true) },
     ]);
 
-  return { navigate, createAlert, confirmDelete, user };
+  return { navigate, createAlert, confirmDelete, user,token };
 };
 
 export default UseFns;

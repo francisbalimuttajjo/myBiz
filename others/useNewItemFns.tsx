@@ -8,7 +8,7 @@ import { FormProps, NavigationProps } from "../types/types";
 
 const UseFns = () => {
   const { initialValues } = useSelector((state: RootState) => state.stock);
-  const { user } = useSelector((state: RootState) => state.user);
+  const { user, token } = useSelector((state: RootState) => state.user);
   const [loading, setLoading] = React.useState<boolean>(false);
   const [error, setError] = React.useState<string>("");
   const { navigate } = useNavigation<NavigationProps>();
@@ -18,24 +18,28 @@ const UseFns = () => {
     setLoading(true);
 
     axios
-      .post(`http://192.168.43.96:5000/api/v1/items`, {
-        name: values.name,
-        buyingPrice: values.buyingPrice,
-        sellingPrice: +values.sellingPrice,
-        buyingCurrency: values.buyingCurrency,
-        packaging: values.packaging,
-        category: values.category,
-        image: initialValues.image,
-        description: values.description,
-        sellingCurrency: values.sellingCurrency,
-        stock: +values.stock,
-        supplier: values.supplier,
-        isReturnable: values.isReturnable,
-        user: user.email,
-      })
+      .post(
+        `http://192.168.43.96:5000/api/v1/items`,
+        {
+          name: values.name,
+          buyingPrice: values.buyingPrice,
+          sellingPrice: +values.sellingPrice,
+          buyingCurrency: values.buyingCurrency,
+          packaging: values.packaging,
+          category: values.category,
+          image: initialValues.image,
+          description: values.description,
+          sellingCurrency: values.sellingCurrency,
+          stock: +values.stock,
+          supplier: values.supplier,
+          isReturnable: values.isReturnable,
+          user: user.email,
+        },
+        { headers: { "Content-Type": "application/json", token } }
+      )
       .then(() => {
         setLoading(false);
-        dispatch(getItems({ email: user.email }));
+        dispatch(getItems({ email: user.email, token }));
         navigate("Stock");
       })
       .catch((err) => {

@@ -29,7 +29,7 @@ type InitialState = {
   isLoggedIn: boolean;
   loading: boolean;
   error: string;
-  token: string | null;
+  token: string;
 };
 
 const initialState: InitialState = {
@@ -129,7 +129,7 @@ const userSlice = createSlice({
     addToken(
       state,
       action: PayloadAction<{
-        token: string | null;
+        token: any;
       }>
     ) {
       state.token = action.payload.token;

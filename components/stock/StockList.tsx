@@ -27,7 +27,7 @@ const ItemsList = () => {
 
   React.useEffect(() => {
     console.log(user.email);
-    dispatch(getItems({ email: user.email }));
+    dispatch(getItems({ email: user.email,token }));
     dispatch(getCategories({ user: user.email }));
   }, [getItems, getCategories]);
 

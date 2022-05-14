@@ -15,13 +15,17 @@ import { getItems } from "../../redux/others/stock";
 import { useDispatch } from "react-redux";
 
 const Item: React.FC<Props> = (props) => {
-  const { createAlert, confirmDelete, user } = useFns();
+  const { createAlert, confirmDelete, user, token } = useFns();
   const dispatch = useDispatch();
 
   if (confirmDelete) {
     axios
-      .delete(`http://192.168.43.96:5000/api/v1/items/${props.item.id}`)
-      .then(() => dispatch(getItems({ email: user.email })))
+      .delete(
+        `http://192.168.43.96:5000/api/v1/items/${props.item.id}`,
+
+        { headers: { "Content-Type": "application/json", token } }
+      )
+      .then(() => dispatch(getItems({ email: user.email, token })))
       .catch((err) => {
         console.log(err);
       });

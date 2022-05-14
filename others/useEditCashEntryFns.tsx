@@ -19,7 +19,7 @@ const UseFns = (id?: number) => {
   );
   const item = cashTransactions.filter((el) => el.id === id)[0];
 
-  const { user } = useSelector((state: RootState) => state.user);
+  const { user, token } = useSelector((state: RootState) => state.user);
 
   const initialValues = {
     Amount: item.Amount.toString(),
@@ -34,22 +34,26 @@ const UseFns = (id?: number) => {
   const handleSubmit = (values: FormProps["initialValues"]) => {
     setLoading(true);
     axios
-      .put(`http://192.168.43.96:5000/api/v1/cashItem/${id}`, {
-        paymentMode: values.paymentMode,
-        entryDate: values.itemDate,
-        itemTime: values.itemTime,
-        Amount: +values.Amount,
-        Category: values.Category,
-        Remark: values.Remark,
-        type: values.type,
-        user: user.email,
-      })
-      .then((res) => {
+      .put(
+        `http://192.168.43.96:5000/api/v1/cashItem/${id}`,
+        {
+          paymentMode: values.paymentMode,
+          entryDate: values.itemDate,
+          itemTime: values.itemTime,
+          Amount: +values.Amount,
+          Category: values.Category,
+          Remark: values.Remark,
+          type: values.type,
+          user: user.email,
+        },
+        { headers: { "Content-Type": "application/json", token } }
+      )
+      .then(() => {
         setLoading(false);
-        dispatch(getCashItems({ user: user.email }));
+        dispatch(getCashItems({ user: user.email, token }));
         navigate("CashBook");
       })
-      .catch((err) => {
+      .catch(() => {
         setLoading(false);
       });
   };

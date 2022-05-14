@@ -7,14 +7,15 @@ import { mainStackParams } from "../types/types";
 
 const UseFns = () => {
   const Stack = createStackNavigator<mainStackParams>();
-  const { isLoggedIn } = useSelector((state: RootState) => state.user);
+  const { isLoggedIn, token } = useSelector((state: RootState) => state.user);
   const [loading, setLoading] = React.useState<boolean>(false);
 
   const handleDelete = async (id: number | undefined) => {
     try {
       setLoading(true);
       const res = await axios.delete(
-        `http://192.168.43.96:5000/api/v1/cashItem/${id}`
+        `http://192.168.43.96:5000/api/v1/cashItem/${id}`,
+        { headers: { "Content-Type": "application/json", token } }
       );
       if (res.data.status === "success") {
         setLoading(false);

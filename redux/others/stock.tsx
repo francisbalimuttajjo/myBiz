@@ -36,11 +36,12 @@ export const getItems = createAsyncThunk(
 );
 export const getCategories = createAsyncThunk(
   "items/getCategories",
-  async ({ user }: { user: string }) => {
+  async ({ user, token }: { user: string; token: string }) => {
     try {
       const response = await axios.post(
         "http://192.168.43.96:5000/api/v1/categories/getAll",
-        { user }
+        { user },
+        { headers: { "Content-Type": "application/json", token } }
       );
 
       return response.data;

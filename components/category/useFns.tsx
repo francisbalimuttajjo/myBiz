@@ -3,8 +3,8 @@ import * as Yup from "yup";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux/Store";
-import { filterCategories } from "../../redux/StockSlice"
-import { getCategories } from "../../redux/others/stock"
+import { filterCategories } from "../../redux/StockSlice";
+import { getCategories } from "../../redux/others/stock";
 
 const UseFns = () => {
   const dispatch = useDispatch();
@@ -20,19 +20,23 @@ const UseFns = () => {
   const { categories, infoMsg, categoriesStore } = useSelector(
     (state: RootState) => state.stock
   );
-  const { user } = useSelector((state: RootState) => state.user);
+  const { user, token } = useSelector((state: RootState) => state.user);
 
   const handleSubmit = (values: { category: string }) => {
     setLoading(true);
     axios
-      .post(`http://192.168.43.96:5000/api/v1/categories`, {
-        title: values.category,
-        user: user.email,
-      })
+      .post(
+        `http://192.168.43.96:5000/api/v1/categories`,
+        {
+          title: values.category,
+          user: user.email,
+        },
+        { headers: { "Content-Type": "application/json", token } }
+      )
       .then((res) => {
         setLoading(false);
         if (res.data.status === "success") {
-          dispatch(getCategories({ user: user.email }));
+          dispatch(getCategories({ user: user.email, token }));
         }
       })
       .catch((err) => {
@@ -60,6 +64,7 @@ const UseFns = () => {
     dispatch,
     user,
     getCategories,
+    token,
   };
 };
 

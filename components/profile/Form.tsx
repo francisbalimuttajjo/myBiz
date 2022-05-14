@@ -6,26 +6,14 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import * as Yup from "yup";
 import { Formik, Field } from "formik";
 import Input from "../CashBook/FloatingInput";
+import Info from "../components/Info";
+import useFns from "./useFns";
 
 const Form = () => {
-  const [loading, setLoading] = React.useState(false);
-  const initialValues = { currentPassword: "", newPassword: "" };
-  const handleSubmit = (vals: any) => {
-    console.log(vals);
-  };
-  const validationSchema = Yup.object().shape({
-    currentPassword: Yup.string()
-      .trim()
-      .required("Field is required")
-      .label("currentPassword"),
-    newPassword: Yup.string()
-      .trim()
-      .required("Field is required")
-      .label("newPassword"),
-  });
+  const { loading, error, initialValues, validationSchema, handleSubmit } =
+    useFns();
 
   return (
     <Formik
@@ -36,12 +24,14 @@ const Form = () => {
       {({ handleSubmit }) => (
         <View style={styles.main_container}>
           <Text style={styles.main_text}>Change Password</Text>
+
           <Field
             component={Input}
             name="currentPassword"
             label="Current Password"
           />
           <Field component={Input} name="newPassword" label="New Password" />
+          {error !== "" && <Info error={error} />}
           <TouchableOpacity
             activeOpacity={0.7}
             disabled={loading}

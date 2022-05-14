@@ -8,15 +8,17 @@ const UseFns = (id: number) => {
   const dispatch = useDispatch();
 
   const [loading, setLoading] = React.useState(false);
-  const { user } = useSelector((state: RootState) => state.user);
+  const { user, token } = useSelector((state: RootState) => state.user);
 
   const deleteHandler = () => {
     setLoading(true);
     axios
-      .delete(`http://192.168.43.96:5000/api/v1/sales/${id}`)
+      .delete(`http://192.168.43.96:5000/api/v1/sales/${id}`, {
+        headers: { "Content-Type": "application/json", token },
+      })
       .then(() => {
         setLoading(false);
-        dispatch(getSales({ user: user.email }));
+        dispatch(getSales({ user: user.email, token }));
       })
       .catch(() => {
         setLoading(false);
@@ -25,10 +27,12 @@ const UseFns = (id: number) => {
   const cancelHandler = () => {
     setLoading(true);
     axios
-      .delete(`http://192.168.43.96:5000/api/v1/sales/reverse/${id}`)
+      .delete(`http://192.168.43.96:5000/api/v1/sales/reverse/${id}`, {
+        headers: { "Content-Type": "application/json", token },
+      })
       .then(() => {
         setLoading(false);
-        dispatch(getSales({ user: user.email }));
+        dispatch(getSales({ user: user.email, token }));
       })
       .catch(() => {
         setLoading(false);

@@ -60,11 +60,12 @@ export const getTransactions = createAsyncThunk(
 
 export const getSales = createAsyncThunk(
   "sales/getSales",
-  async ({ user }: { user: string }) => {
+  async ({ user, token }: { user: string; token: string }) => {
     try {
       const response = await axios.post(
         "http://192.168.43.96:5000/api/v1/sales/getAll",
-        { user }
+        { user },
+        { headers: { "Content-Type": "application/json", token } }
       );
 
       return response.data;

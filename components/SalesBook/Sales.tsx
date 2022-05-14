@@ -9,12 +9,12 @@ import Loading from "../components/LoadingComponent";
 
 const Sales = () => {
   const dispatch = useDispatch();
-  const { sales, loading, user } = useSelector(
+  const { sales, loading, user, token } = useSelector(
     (state: RootState) => state.user
   );
 
   React.useEffect(() => {
-    dispatch(getSales({ user: user.email }));
+    dispatch(getSales({ user: user.email, token }));
   }, [getSales]);
 
   return (

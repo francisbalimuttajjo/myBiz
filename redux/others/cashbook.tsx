@@ -1,7 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-
 const categories: Array<{ title: string; value: string; id: number }> = [
   { title: "Choose Category  ", value: "", id: 0 },
   { title: "labour", value: "labour", id: 1 },
@@ -12,11 +11,12 @@ const categories: Array<{ title: string; value: string; id: number }> = [
 
 export const getCashItems = createAsyncThunk(
   "items/getCashItems",
-  async ({ user }: { user: string }) => {
+  async ({ user, token }: { user: string; token: string }) => {
     try {
       const response = await axios.post(
         "http://192.168.43.96:5000/api/v1/cashItem/getAll",
-        { user }
+        { user },
+        { headers: { "Content-Type": "application/json", token } }
       );
 
       return response.data;
@@ -53,4 +53,4 @@ const initialState: InitialState = {
   error: "",
 };
 
-export {initialState}
+export { initialState };

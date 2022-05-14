@@ -19,8 +19,8 @@ const CashBook = () => {
   const { cashTransactions, store, loading } = useSelector(
     (state: RootState) => state.cashBook
   );
-  const { user } = useSelector((state: RootState) => state.user);
-  
+  const { user, token } = useSelector((state: RootState) => state.user);
+
   const [income, expenses] = getDifference(store);
 
   const onChangeSearch = (query: string) => {
@@ -29,7 +29,7 @@ const CashBook = () => {
   };
 
   React.useEffect(() => {
-    dispatch(getCashItems({ user: user.email }));
+    dispatch(getCashItems({ user: user.email, token }));
   }, [getCashItems]);
 
   return (

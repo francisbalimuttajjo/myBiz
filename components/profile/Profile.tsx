@@ -1,5 +1,5 @@
 import React from "react";
-import { Text, View, TouchableOpacity, ScrollView } from "react-native";
+import { View, ScrollView } from "react-native";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/Store";
 import Image from "./Image";
@@ -18,11 +18,7 @@ const Stock = () => {
           //image=""
           name={`${user.firstName}  ${user.lastName}`}
         />
-        {/* <Image
-          source={{
-            uri: user.image,
-          }}
-        /> */}
+
         <Email email={user.email} />
         <Form />
       </ScrollView>

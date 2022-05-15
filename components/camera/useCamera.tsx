@@ -88,7 +88,7 @@ const UseCamera = () => {
               if (res.data.status === "success") {
                 setLoading(false);
                 dispatch(editProfileImage({ image: url }));
-                navigation.navigate("Home");
+                navigation.navigate("Profile");
               }
             })
             .catch((err) => {

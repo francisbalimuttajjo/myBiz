@@ -23,6 +23,7 @@ exports.auth = async (req, res) => {
         },
       ],
     });
+    console.log(user)
 
     if (user) {
       return sendResponse(req, res, 200, user);

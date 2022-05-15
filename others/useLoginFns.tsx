@@ -17,10 +17,12 @@ const UseFns = () => {
       );
 
       if (result.data.status === "success") {
-        const { firstName, lastName, email, image, transactions } =
+        const { firstName, lastName, email, photo, transactions } =
           result.data.data;
 
-        dispatch(addUser({ user: { firstName, lastName, email, image } }));
+        dispatch(
+          addUser({ user: { firstName, lastName, email, image: photo } })
+        );
         dispatch(addTransactions({ transactions }));
         dispatch(addToken({ token }));
       }

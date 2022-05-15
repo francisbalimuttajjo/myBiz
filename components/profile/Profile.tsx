@@ -9,10 +9,20 @@ import Form from "./Form";
 
 const Stock = () => {
   const { user } = useSelector((state: RootState) => state.user);
+
   return (
     <View>
       <ScrollView style={{ paddingBottom: "25%", height: "100%" }}>
-        <Image name={`${user.firstName}  ${user.lastName}`} />
+        <Image
+          image={user.image}
+          //image=""
+          name={`${user.firstName}  ${user.lastName}`}
+        />
+        {/* <Image
+          source={{
+            uri: user.image,
+          }}
+        /> */}
         <Email email={user.email} />
         <Form />
       </ScrollView>

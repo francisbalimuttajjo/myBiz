@@ -27,6 +27,7 @@ type InitialState = {
   transactions: Array<Transaction>;
   sales: Array<Sale>;
   isLoggedIn: boolean;
+  editingProfilePic: boolean;
   loading: boolean;
   error: string;
   token: string;
@@ -38,6 +39,7 @@ const initialState: InitialState = {
   sales: [],
   isLoggedIn: false,
   loading: false,
+  editingProfilePic: true,
   error: "",
   token: "",
 };
@@ -136,11 +138,33 @@ const userSlice = createSlice({
     ) {
       state.token = action.payload.token;
     },
+    editProfileImage(
+      state,
+      action: PayloadAction<{
+        image: string;
+      }>
+    ) {
+      state.user.image = action.payload.image;
+    },
+    changeToEditingProfileImage(state) {
+      state.editingProfilePic = true;
+    },
+    disableEditingProfileImage(state) {
+      state.editingProfilePic = false;
+    },
     logout(state) {
       state.isLoggedIn = false;
     },
   },
 });
 
-export const { addUser, addTransactions, addToken, logout } = userSlice.actions;
+export const {
+  addUser,
+  addTransactions,
+  addToken,
+  logout,
+  editProfileImage,
+  changeToEditingProfileImage,
+  disableEditingProfileImage,
+} = userSlice.actions;
 export default userSlice.reducer;

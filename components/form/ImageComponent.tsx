@@ -3,13 +3,22 @@ import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 import Ionicon from "react-native-vector-icons/Ionicons";
 import { useNavigation } from "@react-navigation/native";
 import { NavigationProps } from "../../types/types";
+import { useDispatch } from "react-redux";
+import { disableEditingProfileImage } from "../../redux/UserSlice";
 
 const ImageComponent: React.FC<{ image: string | undefined }> = ({ image }) => {
   const navigation = useNavigation<NavigationProps>();
+  const dispatch = useDispatch();
+
+  const handlePress = () => {
+    dispatch(disableEditingProfileImage());
+    navigation.navigate("camera");
+  };
+
   return (
     <View>
       <View style={styles.container}>
-        <Pressable onPress={() => navigation.navigate("camera")}>
+        <Pressable onPress={handlePress}>
           {image ? (
             <Image
               style={styles.image}

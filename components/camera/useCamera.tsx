@@ -1,4 +1,5 @@
 import { useState } from "react";
+import axios from "axios";
 import { Camera } from "expo-camera";
 import * as ImagePicker from "expo-image-picker";
 import { useNavigation } from "@react-navigation/native";
@@ -9,6 +10,7 @@ import { firebaseConfig } from "../../firebase/firebase";
 import { initializeApp } from "firebase/app";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { NavigationProps } from "../../types/types";
+import { editProfileImage } from "../../redux/UserSlice";
 
 const UseCamera = () => {
   const dispatch = useDispatch();
@@ -22,7 +24,9 @@ const UseCamera = () => {
   const [hasPermission, setHasPermission] = useState<any>(null);
   const [type, setType] = useState(Camera.Constants.Type.back);
 
-  const { user } = useSelector((state: RootState) => state.user);
+  const { user, token, editingProfilePic } = useSelector(
+    (state: RootState) => state.user
+  );
   const { editable, isEditing } = useSelector(
     (state: RootState) => state.stock
   );
@@ -72,16 +76,32 @@ const UseCamera = () => {
     const convertedImage = await img.blob();
 
     uploadBytes(reference, convertedImage).then(() => {
-      setLoading(false);
       getDownloadURL(reference).then((url) => {
-        if (!isEditing) {
-          dispatch(addImage({ image: url }));
-          setLoading(false);
-          navigation.navigate("New");
-        } else {
+        if (editingProfilePic) {
+          axios
+            .patch(
+              "http://192.168.43.96:5000/api/v1/users/profile",
+              { image: url, email: user.email },
+              { headers: { "Content-Type": "application/json", token } }
+            )
+            .then((res) => {
+              if (res.data.status === "success") {
+                setLoading(false);
+                dispatch(editProfileImage({ image: url }));
+                navigation.navigate("Home");
+              }
+            })
+            .catch((err) => {
+              setLoading(false);
+            });
+        } else if (isEditing) {
           dispatch(editImage({ id: editable, url }));
           navigation.navigate("editStock", { id: editable });
           dispatch(disableEditing());
+        } else {
+          dispatch(addImage({ image: url }));
+          setLoading(false);
+          navigation.navigate("New");
         }
       });
     });

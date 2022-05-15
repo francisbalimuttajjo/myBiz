@@ -3,6 +3,22 @@ const db = require("../models");
 const jwt = require("jsonwebtoken");
 const { sendResponse, signToken } = require("../utils/fns");
 
+// //updating profile pic
+exports.updateProfile = async (req, res) => {
+  try {
+    const { image, email } = req.body;
+    if (!image) {
+      return sendResponse(req, res, 400, "Please provide  an image", "fail");
+    }
+
+     await db.User.update({ photo: image }, { where: { email } });
+
+    sendResponse(req, res, 200, 'operation successfull');
+  } catch (err) {
+    sendResponse(req, res, 400, err.message, "fail");
+  }
+};
+
 // //updating password
 exports.updatePassword = async (req, res) => {
   try {
@@ -39,7 +55,7 @@ exports.updatePassword = async (req, res) => {
       { password: hashedPassword },
       { where: { email } }
     );
-    console.log(result);
+
     sendResponse(req, res, 200, result);
   } catch (err) {
     sendResponse(req, res, 400, err.message, "fail");

@@ -1,16 +1,22 @@
 import React from "react";
-import { StyleSheet, Text, View, Image } from "react-native";
+import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
 import Ionicon from "react-native-vector-icons/Ionicons";
 import Logo from "../components/Logo";
-import { HeaderProps as Props } from "../../types/types";
+import { HeaderProps as Props, NavigationProps } from "../../types/types";
+import { useNavigation } from "@react-navigation/native";
 
 const Header: React.FC<Props> = (props) => {
+  const { navigate } = useNavigation<NavigationProps>();
+  const handleNavigation = () => navigate("Profile");
+
   return (
     <View>
       <Logo />
       <View style={styles.container}>
         {!props.user.image && (
-          <Ionicon name="ios-person-circle-outline" size={40} color="white" />
+          <TouchableOpacity onPress={handleNavigation}>
+            <Ionicon name="ios-person-circle-outline" size={40} color="white" />
+          </TouchableOpacity>
         )}
         {props.user.image && (
           <Image

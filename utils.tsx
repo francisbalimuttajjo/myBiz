@@ -1,4 +1,4 @@
-import { CashItemProps, InitialState } from "./types/types";
+import { CashItemProps, InitialState, Item } from "./types/types";
 
 //props
 type Props = { qty: number; price: number };
@@ -68,19 +68,27 @@ const getDate = (val: Date | string) => {
   };
 };
 
-const getCartItems = (arr: InitialState["cart"]) => {
-  let items: Cart = [];
+const getCartItems = (
+  arr: Array<{ item: Item; qty: number }>,
+  user: string
+) => {
+  let items: Array<{
+    item_id: number;
+    user: string;
+    quantity: number;
+    price: number;
+  }> = [];
+
   arr.map((item) =>
     items.push({
       item_id: +item.item.id,
+      user,
       quantity: item.qty,
       price: +item.item.sellingPrice,
-      item: item.item.name,
     })
   );
   return items;
 };
-
 
 export {
   getTotal,

@@ -8,26 +8,28 @@ import useFns from "./useFns";
 const Item = (props: { sale: Sale }) => {
   const { date } = getDate(props.sale.createdAt);
   const { deleteHandler, cancelHandler, loading } = useFns(props.sale.id);
-
+  
   return (
     <View style={styles.main_container}>
       <View style={styles.sub_container}>
         <View style={styles.item_container}>
           <View style={{ width: "80%" }}>
-            <Text style={styles.item_name}>{props.sale.item}</Text>
+            <Text style={styles.item_name}>{props.sale.item.name}</Text>
             <Text style={styles.capitalize}>Customer: {props.sale.client}</Text>
             <View style={styles.details_container}>
               <Text style={styles.capitalize}>
                 Items: {props.sale.quantity} &nbsp;
               </Text>
               <Text style={styles.capitalize}>
-                {props.sale.item}@{props.sale.price}
+                {props.sale.item.name}@{props.sale.price}
               </Text>
             </View>
           </View>
 
           <View style={styles.price_container}>
-            <Text style={styles.total}>{props.sale.total_price}</Text>
+            <Text style={styles.total}>
+              {props.sale.price * props.sale.quantity}
+            </Text>
           </View>
         </View>
         <View style={styles.date_container}>

@@ -7,8 +7,7 @@ import { RootState } from "../../redux/Store";
 import { NavigationProps } from "../../types/types";
 import { getTotalSum, getDate, getCartItems } from "../../utils";
 import { resetCart } from "../../redux/StockSlice";
-import { getItems } from "../../redux/others/stock";
-import { getTransactions } from "../../redux/UserSlice";
+import { getCategories } from "../../redux/others/stock";
 
 const UseCart = () => {
   const dispatch = useDispatch();
@@ -62,6 +61,14 @@ const UseCart = () => {
       return;
     }
     setLoading(true);
+    const stockItems = getCartItems(cart, user.email);
+
+    ///getting overall prices
+    const getTotalPrice = () => {
+      let arr: Array<number> = [];
+      stockItems.map((el) => arr.push(el.price * el.quantity));
+      return arr.reduce((a, b) => a + b, 0);
+    };
 
     // //making api call if all is well
     axios
@@ -74,20 +81,22 @@ const UseCart = () => {
           type: "sales",
           discount: parseInt(values.Discount),
           paymentDate,
-          items: getCartItems(cart),
+          stockItems,
+          cashPending:
+            getTotalPrice() -
+            (parseInt(values.Discount) + parseInt(values.CashReceived)),
         },
         { headers: { "Content-Type": "application/json", token } }
       )
       .then(() => {
         setLoading(false);
         dispatch(resetCart());
-        dispatch(getItems({ email: user.email, token }));
-        dispatch(getTransactions({ user: user.email, token }));
+        dispatch(getCategories({ user: user.email, token }));
         navigate("Sales");
       })
-      .catch((err) => {
+      .catch(() => {
         setLoading(false);
-        setError(err.response.data);
+        setError("something went wrong try again");
       });
   };
 

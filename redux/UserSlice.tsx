@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import axios from "axios";
+import { Item } from "../types/types";
 
 export type Transaction = {
   items: Array<{ item: number; quantity: number }>;
@@ -18,7 +19,7 @@ export type Sale = {
   quantity: number;
   total_price: number;
   client: string;
-  item: string;
+  item: Item;
   createdAt: string;
 };
 
@@ -73,7 +74,8 @@ export const getSales = createAsyncThunk(
 
       return response.data;
     } catch (err: any) {
-      return err.response.data;
+      console.log(err);
+      return err.response.data.data;
     }
   }
 );

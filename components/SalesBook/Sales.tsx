@@ -13,6 +13,7 @@ const Sales = () => {
     (state: RootState) => state.user
   );
 
+  
   React.useEffect(() => {
     dispatch(getSales({ user: user.email, token }));
   }, [getSales]);

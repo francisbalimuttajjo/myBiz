@@ -4,7 +4,7 @@ import { SafeAreaView, SafeAreaProvider } from "react-native-safe-area-context";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../redux/Store";
 import { addToCart } from "../../redux/StockSlice";
-import { getItems } from "../../redux/others/stock";
+import { getCategories } from "../../redux/others/stock";
 import Banner from "../components/Banner";
 import Logo from "../components/Logo";
 import BadgeComponent from "./Badge";
@@ -20,8 +20,8 @@ const Sales = () => {
   };
 
   React.useEffect(() => {
-    dispatch(getItems({ email: user.email, token }));
-  }, [getItems]);
+    dispatch(getCategories({ user: user.email, token }));
+  }, [getCategories]);
 
   return (
     <SafeAreaProvider>

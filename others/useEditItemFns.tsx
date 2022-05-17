@@ -2,8 +2,8 @@ import { useNavigation } from "@react-navigation/native";
 import axios from "axios";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { getCategories } from "../redux/others/stock";
 import { resetCart } from "../redux/StockSlice";
-// import { getItems } from "../redux/others/stock";
 import { RootState } from "../redux/Store";
 import { FormProps, NavigationProps } from "../types/types";
 
@@ -50,8 +50,7 @@ const EditScreenFns = (_id: number | undefined) => {
     id,
   };
 
-  const getIndex = (val: string) =>
-    categories.findIndex((el) => el.title === val);
+  const index = (val: string) => categories.findIndex((el) => el.title === val);
 
   const handleSubmit = (values: FormProps["initialValues"]) => {
     setLoading(true);
@@ -75,7 +74,7 @@ const EditScreenFns = (_id: number | undefined) => {
           buyingCurrency,
           buyingPrice,
           category,
-          productCategory_id: getIndex(category),
+          productCategory_id: categories[index(values.category)].id,
           description,
           isReturnable,
           name,
@@ -89,9 +88,9 @@ const EditScreenFns = (_id: number | undefined) => {
         },
         { headers: { "Content-Type": "application/json", token } }
       )
-      .then(() => {
+      .then((res) => {
         setLoading(false);
-        // dispatch(getItems({ email: user.email, token }));
+        dispatch(getCategories({ user: user.email, token }));
         navigate("Stock");
         dispatch(resetCart());
       })

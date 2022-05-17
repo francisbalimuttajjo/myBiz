@@ -23,6 +23,7 @@ const UseFns = () => {
   const index = (val: string) => categories.findIndex((el) => el.title === val);
 
   const handleSubmit = (values: FormProps["initialValues"]) => {
+    console.log(categories[index(values.category)].id);
     setLoading(true);
 
     axios

@@ -26,9 +26,9 @@ const stockSlice = createSlice({
 
           const stockItems = action.payload.data.map(
             (el: { stockItems: Array<Item> }) => el.stockItems
-          )[0];
+          );
 
-          state.store = stockItems;
+          state.store = stockItems.flat();
           state.availableStock = state.store;
         }
       });

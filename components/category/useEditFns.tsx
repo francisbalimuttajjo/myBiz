@@ -19,9 +19,10 @@ const UseFns = (id: number | undefined, title: string | undefined) => {
     setLoading(true);
     axios
       .patch(
-        `http://192.168.43.96:5000/api/v1/categories/${id}`,
+        `http://192.168.43.96:5000/api/v1/productCategories/${id}`,
         {
           title: values.category,
+          user: user.email,
         },
         { headers: { "Content-Type": "application/json", token } }
       )

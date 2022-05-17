@@ -11,8 +11,8 @@ import axios from "axios";
 import Ionicon from "react-native-vector-icons/Ionicons";
 import useFns from "./useDeleteFns";
 import { StockItemProps as Props } from "../../types/types";
-import { getItems } from "../../redux/others/stock";
 import { useDispatch } from "react-redux";
+import { getCategories } from "../../redux/others/stock";
 
 const Item: React.FC<Props> = (props) => {
   const { createAlert, confirmDelete, user, token } = useFns();
@@ -25,7 +25,7 @@ const Item: React.FC<Props> = (props) => {
 
         { headers: { "Content-Type": "application/json", token } }
       )
-      .then(() => dispatch(getItems({ email: user.email, token })))
+      .then(() => dispatch(getCategories({ user: user.email, token })))
       .catch((err) => {
         console.log(err);
       });
@@ -74,10 +74,20 @@ const Item: React.FC<Props> = (props) => {
             <View style={styles.details}>
               <Text style={styles.align}>{props.item.sellingCurrency}</Text>
               <Text style={styles.price}>{props.item.sellingPrice}&nbsp;</Text>
-              <Text style={styles.align}>&#64;</Text>
+              {props.item.packaging !== "" && (
+                <>
+                  <Text style={styles.align}>&#64;</Text>
+                  <Text
+                    style={{ ...styles.align, textTransform: "capitalize" }}
+                  >
+                    {props.item.packaging}
+                  </Text>
+                </>
+              )}
+              {/* <Text style={styles.align}>&#64;</Text>
               <Text style={{ ...styles.align, textTransform: "capitalize" }}>
                 {props.item.packaging}
-              </Text>
+              </Text> */}
             </View>
           </View>
         </View>

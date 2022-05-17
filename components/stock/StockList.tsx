@@ -27,10 +27,7 @@ const ItemsList = () => {
 
   React.useEffect(() => {
     dispatch(getCategories({ user: user.email, token }));
-  }, [
-    //getItems,
-    getCategories,
-  ]);
+  }, [getCategories]);
 
   return (
     <View>

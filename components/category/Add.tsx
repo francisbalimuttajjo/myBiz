@@ -27,14 +27,13 @@ const Add = () => {
     dispatch,
     user,
     token,
-    
+
     getCategories,
   } = useFns();
 
   React.useEffect(() => {
     dispatch(getCategories({ user: user.email, token }));
   }, [getCategories]);
-
 
   return (
     <Formik

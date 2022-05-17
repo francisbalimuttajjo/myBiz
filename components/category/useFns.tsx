@@ -26,7 +26,7 @@ const UseFns = () => {
     setLoading(true);
     axios
       .post(
-        `http://192.168.43.96:5000/api/v1/categories`,
+        `http://192.168.43.96:5000/api/v1/productCategories`,
         {
           title: values.category,
           user: user.email,

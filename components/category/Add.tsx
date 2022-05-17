@@ -27,7 +27,6 @@ const Add = () => {
     dispatch,
     user,
     token,
-
     getCategories,
   } = useFns();
 

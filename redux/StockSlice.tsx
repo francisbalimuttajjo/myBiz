@@ -23,7 +23,7 @@ const stockSlice = createSlice({
 
           state.categoriesStore = action.payload.data;
           state.categories = state.categoriesStore;
-
+          console.log(state.categories);
           const stockItems = action.payload.data.map(
             (el: { stockItems: Array<Item> }) => el.stockItems
           );

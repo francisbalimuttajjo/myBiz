@@ -41,7 +41,7 @@ const UseFns = (id: number | undefined, title: string | undefined) => {
   const handleDelete = () => {
     setLoading(true);
     axios
-      .delete(`http://192.168.43.96:5000/api/v1/categories/${id}`, {
+      .delete(`http://192.168.43.96:5000/api/v1/productCategories/${id}`, {
         headers: { "Content-Type": "application/json", token },
       })
       .then((res) => {
@@ -51,7 +51,7 @@ const UseFns = (id: number | undefined, title: string | undefined) => {
           navigation.goBack();
         }
       })
-      .catch(() => {
+      .catch((err) => {
         setLoading(false);
       });
   };

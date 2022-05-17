@@ -88,7 +88,7 @@ const EditScreenFns = (_id: number | undefined) => {
         },
         { headers: { "Content-Type": "application/json", token } }
       )
-      .then((res) => {
+      .then(() => {
         setLoading(false);
         dispatch(getCategories({ user: user.email, token }));
         navigate("Stock");

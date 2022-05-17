@@ -8,7 +8,7 @@ import useFns from "./useFns";
 const Item = (props: { sale: Sale }) => {
   const { date } = getDate(props.sale.createdAt);
   const { deleteHandler, cancelHandler, loading } = useFns(props.sale.id);
-  
+
   return (
     <View style={styles.main_container}>
       <View style={styles.sub_container}>
@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
   main_container: {
     backgroundColor: "#fff",
     height: 100,
-    marginTop: 10,
+    paddingTop: 10,
     borderColor: "#e0e1e2",
     borderBottomWidth: 0.5,
   },

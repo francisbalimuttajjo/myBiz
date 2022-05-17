@@ -1,5 +1,5 @@
 import React from "react";
-import { ScrollView } from "react-native";
+import { FlatList, RefreshControl } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux/Store";
 import { getTransactions } from "../../redux/UserSlice";
@@ -10,25 +10,39 @@ import TransactionItem from "./Item";
 const Transactions = () => {
   const dispatch = useDispatch();
   const { transactions, loading, user, token } = useSelector(
-    (state: RootState) => state.user 
+    (state: RootState) => state.user
   );
 
   React.useEffect(() => {
     dispatch(getTransactions({ user: user.email, token }));
   }, [getTransactions]);
 
+  if (loading) {
+    return <LoadingComponent />;
+  }
+  if (transactions.length > 0) {
+    return (
+      <FlatList
+        contentContainerStyle={{
+          paddingBottom: "40%",
+          marginTop: "5%",
+        }}
+        refreshControl={
+          <RefreshControl
+            refreshing={loading}
+            onRefresh={() =>
+              dispatch(getTransactions({ user: user.email, token }))
+            }
+          />
+        }
+        data={transactions}
+        renderItem={(item) => <TransactionItem item={item.item} />}
+        keyExtractor={(item) => item.id.toString()}
+      />
+    );
+  }
   return (
-    <ScrollView style={{ backgroundColor: "#fff" }}>
-      {loading ? (
-        <LoadingComponent />
-      ) : transactions.length > 0 ? (
-        transactions.map((el, index) => (
-          <TransactionItem item={el} key={index} />
-        ))
-      ) : (
-        <Empty title="You dont have any transactions currently, click Home and add " />
-      )}
-    </ScrollView>
+    <Empty title="You dont have any transactions currently, click Home and add " />
   );
 };
 

@@ -8,6 +8,7 @@ import { NavigationProps } from "../../types/types";
 import { getTotalSum, getDate, getCartItems } from "../../utils";
 import { resetCart } from "../../redux/StockSlice";
 import { getCategories } from "../../redux/others/stock";
+import { getTransactions } from "../../redux/UserSlice";
 
 const UseCart = () => {
   const dispatch = useDispatch();
@@ -92,6 +93,7 @@ const UseCart = () => {
         setLoading(false);
         dispatch(resetCart());
         dispatch(getCategories({ user: user.email, token }));
+        dispatch(getTransactions({ user: user.email, token }));
         navigate("Sales");
       })
       .catch(() => {

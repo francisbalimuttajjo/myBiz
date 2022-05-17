@@ -12,6 +12,7 @@ export type Transaction = {
   cashReceived: number;
   cashPending: number;
   createdAt: string;
+  id: number;
 };
 export type Sale = {
   id: number;
@@ -124,14 +125,7 @@ const userSlice = createSlice({
       state.user = action.payload.user;
       state.isLoggedIn = true;
     },
-    addTransactions(
-      state,
-      action: PayloadAction<{
-        transactions: InitialState["transactions"];
-      }>
-    ) {
-      state.transactions = action.payload.transactions;
-    },
+ 
     addToken(
       state,
       action: PayloadAction<{
@@ -162,7 +156,7 @@ const userSlice = createSlice({
 
 export const {
   addUser,
-  addTransactions,
+ 
   addToken,
   logout,
   editProfileImage,

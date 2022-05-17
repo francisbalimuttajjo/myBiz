@@ -41,6 +41,7 @@ const UseFns = () => {
         { headers: { "Content-Type": "application/json", token } }
       )
       .then(() => {
+
         setLoading(false);
         dispatch(getCashItems({ user: user.email, token }));
         navigate("CashBook");

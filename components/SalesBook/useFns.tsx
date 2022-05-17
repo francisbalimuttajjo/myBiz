@@ -2,7 +2,7 @@ import axios from "axios";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux/Store";
-import { getSales } from "../../redux/UserSlice";
+import { getSales, getTransactions } from "../../redux/UserSlice";
 
 const UseFns = (id: number) => {
   const dispatch = useDispatch();
@@ -19,6 +19,7 @@ const UseFns = (id: number) => {
       .then(() => {
         setLoading(false);
         dispatch(getSales({ user: user.email, token }));
+        dispatch(getTransactions({ user: user.email, token }));
       })
       .catch(() => {
         setLoading(false);
@@ -33,6 +34,7 @@ const UseFns = (id: number) => {
       .then(() => {
         setLoading(false);
         dispatch(getSales({ user: user.email, token }));
+        dispatch(getTransactions({ user: user.email, token }));
       })
       .catch(() => {
         setLoading(false);

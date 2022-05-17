@@ -1,5 +1,5 @@
 import React from "react";
-import { ScrollView } from "react-native";
+import { FlatList, RefreshControl } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux/Store";
 import SaleItem from "./Item";
@@ -13,22 +13,34 @@ const Sales = () => {
     (state: RootState) => state.user
   );
 
-  
   React.useEffect(() => {
     dispatch(getSales({ user: user.email, token }));
   }, [getSales]);
 
-  return (
-    <ScrollView style={{ paddingBottom: "25%", backgroundColor: "#fff" }}>
-      {loading ? (
-        <Loading />
-      ) : sales.length > 0 ? (
-        sales.map((sale, index) => <SaleItem sale={sale} key={index} />)
-      ) : (
-        <Empty title="Currently no sales available" />
-      )}
-    </ScrollView>
-  );
+  if (loading) {
+    return <Loading />;
+  }
+  if (sales.length > 0) {
+    return (
+      <FlatList
+        contentContainerStyle={{
+          paddingBottom: "40%",
+          minHeight: "100%",
+          backgroundColor: "#fff",
+        }}
+        refreshControl={
+          <RefreshControl
+            refreshing={loading}
+            onRefresh={() => dispatch(getSales({ user: user.email, token }))}
+          />
+        }
+        data={sales}
+        renderItem={(item) => <SaleItem sale={item.item} />}
+        keyExtractor={(item) => item.id.toString()}
+      />
+    );
+  }
+  return <Empty title="Currently no sales available " />;
 };
 
 export default Sales;

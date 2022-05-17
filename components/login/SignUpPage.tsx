@@ -2,7 +2,7 @@ import React from "react";
 import { ScrollView, View } from "react-native";
 import * as Yup from "yup";
 import { Formik, Field } from "formik";
-import Input from "./Input";
+import Input from "../CashBook/FloatingInput";
 import Button from "./Button";
 import { TextInput } from "react-native-paper";
 type Props = {
@@ -65,7 +65,6 @@ export const Form = () => {
           <ScrollView
             style={{
               width: "100%",
-              //   marginTop: 20,
               height: "60%",
             }}
           >

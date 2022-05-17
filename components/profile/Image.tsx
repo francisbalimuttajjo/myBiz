@@ -30,7 +30,7 @@ const ImageComponent = (props: { name: string; image: string }) => {
               source={{ uri: props.image }}
               borderRadius={70}
               resizeMode="cover"
-              style={{ width: 140, height: 140, borderRadius: 70 }}
+              style={styles.background_image}
             ></ImageBackground>
             <TouchableOpacity
               onPress={handlePress}
@@ -94,6 +94,7 @@ const styles = StyleSheet.create({
   },
   image_btn: { right: -25, bottom: 20, position: "absolute" },
   icon_btn: { marginRight: -40, marginTop: 40 },
+  background_image: { width: 140, height: 140, borderRadius: 70 },
   name_container: {
     width: "100%",
     alignItems: "center",

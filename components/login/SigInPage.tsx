@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { Formik, Field } from "formik";
-import Input from "./Input";
+import Input from "../CashBook/FloatingInput";
 import Button from "./Button";
 import useFns from "./useSignInFns";
 import { TextInput } from "react-native-paper";
@@ -33,6 +33,7 @@ export const Form = () => {
               name="Email"
               label="Email"
               error={errors.Email}
+              
             />
             <Field
               component={Input}
@@ -62,9 +63,10 @@ export default Form;
 
 const styles = StyleSheet.create({
   container: {
-    width: "100%",
+    width: "90%",
     marginTop: 30,
     height: "60%",
+    alignSelf:'center'
   },
   sub_container: { alignItems: "flex-end", width: "90%", marginTop: 5 },
 });

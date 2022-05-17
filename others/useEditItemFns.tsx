@@ -3,12 +3,14 @@ import axios from "axios";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { resetCart } from "../redux/StockSlice";
-import { getItems } from "../redux/others/stock";
+// import { getItems } from "../redux/others/stock";
 import { RootState } from "../redux/Store";
 import { FormProps, NavigationProps } from "../types/types";
 
 const EditScreenFns = (_id: number | undefined) => {
-  const { availableStock } = useSelector((state: RootState) => state.stock);
+  const { availableStock, categories } = useSelector(
+    (state: RootState) => state.stock
+  );
   const { user, token } = useSelector((state: RootState) => state.user);
   const item = availableStock.filter((el) => el.id === _id)[0];
   const [loading, setLoading] = React.useState<boolean>(false);
@@ -48,6 +50,9 @@ const EditScreenFns = (_id: number | undefined) => {
     id,
   };
 
+  const getIndex = (val: string) =>
+    categories.findIndex((el) => el.title === val);
+
   const handleSubmit = (values: FormProps["initialValues"]) => {
     setLoading(true);
     const {
@@ -65,11 +70,12 @@ const EditScreenFns = (_id: number | undefined) => {
 
     axios
       .put(
-        `http://192.168.43.96:5000/api/v1/items/${id}`,
+        `http://192.168.43.96:5000/api/v1/stockItems/${id}`,
         {
           buyingCurrency,
           buyingPrice,
           category,
+          productCategory_id: getIndex(category),
           description,
           isReturnable,
           name,
@@ -85,7 +91,7 @@ const EditScreenFns = (_id: number | undefined) => {
       )
       .then(() => {
         setLoading(false);
-        dispatch(getItems({ email: user.email, token }));
+        // dispatch(getItems({ email: user.email, token }));
         navigate("Stock");
         dispatch(resetCart());
       })

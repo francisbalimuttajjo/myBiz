@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { get_cart_index, get_stock_Index } from "../utils";
-import { initialState, getCategories, getItems } from "./others/stock";
+import { Item } from "../types/types";
+import { initialState, getCategories } from "./others/stock";
 
 const stockSlice = createSlice({
   name: "stock",
@@ -19,27 +20,16 @@ const stockSlice = createSlice({
 
         if (action.payload.status === "success") {
           state.error = "";
+
           state.categoriesStore = action.payload.data;
           state.categories = state.categoriesStore;
-        }
-      });
-    builder
-      .addCase(getItems.pending, (state) => {
-        state.loading = true;
-      })
-      .addCase(getItems.rejected, (state) => {
-        state.loading = false;
-        state.error = "something went wrong";
-      })
-      .addCase(getItems.fulfilled, (state, action) => {
-        state.loading = false;
 
-        if (action.payload.status === "success") {
-          state.error = "";
-          state.store = action.payload.data;
+          const stockItems = action.payload.data.map(
+            (el: { stockItems: Array<Item> }) => el.stockItems
+          )[0];
+
+          state.store = stockItems;
           state.availableStock = state.store;
-        } else {
-          state.error = "";
         }
       });
   },
@@ -147,7 +137,6 @@ const stockSlice = createSlice({
           }
         }
       } else {
-        console.log("stock is empty");
         return;
       }
     },

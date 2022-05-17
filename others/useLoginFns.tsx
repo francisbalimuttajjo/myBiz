@@ -17,13 +17,13 @@ const UseFns = () => {
       );
 
       if (result.data.status === "success") {
-        const { firstName, lastName, email, photo, transactions } =
+        const { firstName, lastName, email, photo } =
           result.data.data;
 
         dispatch(
           addUser({ user: { firstName, lastName, email, image: photo } })
         );
-        dispatch(addTransactions({ transactions }));
+        // dispatch(addTransactions({ transactions }));
         dispatch(addToken({ token }));
       }
       setIsAuthenticating(false);

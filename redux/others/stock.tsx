@@ -18,28 +18,13 @@ const initialValues: Item = {
   packaging: "",
 };
 
-export const getItems = createAsyncThunk(
-  "items/getItems",
-  async ({ email, token }: { email: string; token: string }) => {
-    try {
-      const response = await axios.post(
-        "http://192.168.43.96:5000/api/v1/items/user",
-        { user: email },
-        { headers: { "Content-Type": "application/json", token } }
-      );
 
-      return response.data;
-    } catch (err: any) {
-      return err.response.data;
-    }
-  }
-);
 export const getCategories = createAsyncThunk(
   "items/getCategories",
   async ({ user, token }: { user: string; token: string }) => {
     try {
       const response = await axios.post(
-        "http://192.168.43.96:5000/api/v1/categories/getAll",
+        "http://192.168.43.96:5000/api/v1/productCategories/getAll",
         { user },
         { headers: { "Content-Type": "application/json", token } }
       );
@@ -51,7 +36,7 @@ export const getCategories = createAsyncThunk(
   }
 );
 
-// const categoriesStore = categories;
+
 const initialState: InitialState = {
   availableStock: [],
   loading: false,

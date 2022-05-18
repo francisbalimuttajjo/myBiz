@@ -48,9 +48,7 @@ export const Form = () => {
                 />
               }
             />
-            <View style={styles.sub_container}>
-              <Text style={{ color: "skyblue" }}>Forgot Password ?</Text>
-            </View>
+         
           </View>
 
           <Button loading={loading} disabled={loading} submit={handleSubmit} />
@@ -68,5 +66,5 @@ const styles = StyleSheet.create({
     height: "60%",
     alignSelf:'center'
   },
-  sub_container: { alignItems: "flex-end", width: "90%", marginTop: 5 },
+ 
 });

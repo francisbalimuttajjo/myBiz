@@ -31,7 +31,7 @@ const Button = (props: Props) => {
 };
 export default Button;
 const styles = StyleSheet.create({
-  container: { width: "100%", paddingVertical: 10 },
+  container: { width: "100%" },
   btn: {
     width: "90%",
     alignSelf: "center",

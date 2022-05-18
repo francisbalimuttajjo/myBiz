@@ -1,59 +1,27 @@
 import React from "react";
-import { ScrollView, View } from "react-native";
-import * as Yup from "yup";
+import { View } from "react-native";
 import { Formik, Field } from "formik";
 import Input from "../CashBook/FloatingInput";
 import Button from "./Button";
 import { TextInput } from "react-native-paper";
-type Props = {
-  Email: string;
-  Password: string;
-  FirstName: string;
-  LastName: string;
-  PasswordConfirm: string;
-};
-export const Form = () => {
-  const handleSubmit = (values: Props) => {
-    console.log("values", values);
-  };
-  const [secureText, setSecureText] = React.useState<boolean>(true);
-  const [secureTextConfirm, setSecureTextConfirm] =
-    React.useState<boolean>(true);
-  const [loading, setLoading] = React.useState<boolean>(false);
+import { ScrollView } from "react-native-gesture-handler";
+import Info, { InfoSuccess } from "../components/Info";
+import useFns from "./useSignUpFns";
 
-  const validationSchema = Yup.object().shape({
-    Email: Yup.string()
-      .trim()
-      .email("invalid Email")
-      .required("Email is required")
-      .label("Email"),
+const Form = () => {
+  const {
+    initialValues,
+    validationSchema,
+    secureTextConfirm,
+    setSecureTextConfirm,
+    secureText,
+    setSecureText,
+    loading,
+    error,
+    handleSubmit,
+    msg,
+  } = useFns();
 
-    Password: Yup.string()
-      .trim()
-      .required("Password is required")
-      .label("Password"),
-    PasswordConfirm: Yup.string()
-      .trim()
-      .oneOf([Yup.ref("Password"), ""], "Passwords don't match")
-      .required("Password is required")
-      .label("PasswordConfirm"),
-
-    FirstName: Yup.string()
-      .trim()
-      .required("FirstName is required")
-      .label("FirstName"),
-    LastName: Yup.string()
-      .trim()
-      .required("LastName is required")
-      .label("LirstName"),
-  });
-  const initialValues = {
-    Email: "",
-    Password: "",
-    FirstName: "",
-    LastName: "",
-    PasswordConfirm: "",
-  };
   return (
     <Formik
       initialValues={initialValues}
@@ -64,22 +32,39 @@ export const Form = () => {
         <View>
           <ScrollView
             style={{
-              width: "100%",
-              height: "60%",
+              width: "90%",
+              height: "50%",
+              alignSelf: "center",
             }}
           >
-            <Field
-              component={Input}
-              name="FirstName"
-              label="FirstName"
-              error={errors.FirstName}
-            />
-            <Field
-              component={Input}
-              name="LastName"
-              label="LastName"
-              error={errors.LastName}
-            />
+            {error !== "" && <Info error={error} />}
+            {msg !== "" && <InfoSuccess msg={msg} />}
+
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "space-around",
+                width: "100%",
+              }}
+            >
+              <View style={{ width: "48%" }}>
+                <Field
+                  component={Input}
+                  name="FirstName"
+                  label="FirstName"
+                  error={errors.FirstName}
+                />
+              </View>
+              <View style={{ width: "48%" }}>
+                <Field
+                  component={Input}
+                  name="LastName"
+                  label="LastName"
+                  error={errors.LastName}
+                />
+              </View>
+            </View>
+
             <Field
               component={Input}
               name="Email"
@@ -95,7 +80,7 @@ export const Form = () => {
               secureTextEntry={secureText}
               right={
                 <TextInput.Icon
-                  name="eye"
+                  name={!secureText ? "eye-off" : "eye"}
                   onPress={() => setSecureText(!secureText)}
                 />
               }
@@ -108,7 +93,7 @@ export const Form = () => {
               secureTextEntry={secureTextConfirm}
               right={
                 <TextInput.Icon
-                  name="eye"
+                  name={!secureTextConfirm ? "eye-off" : "eye"}
                   onPress={() => setSecureTextConfirm(!secureTextConfirm)}
                 />
               }

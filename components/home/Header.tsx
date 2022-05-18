@@ -19,12 +19,14 @@ const Header: React.FC<Props> = (props) => {
           </TouchableOpacity>
         )}
         {props.user.image !== "" && (
-          <Image
-            style={styles.image}
-            source={{
-              uri: props.user.image,
-            }}
-          />
+          <TouchableOpacity onPress={handleNavigation}>
+            <Image
+              style={styles.image}
+              source={{
+                uri: props.user.image,
+              }}
+            />
+          </TouchableOpacity>
         )}
 
         <Text style={styles.greetings_text}> Hi, {props.user.firstName}</Text>

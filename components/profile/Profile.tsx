@@ -15,7 +15,6 @@ const Stock = () => {
       <ScrollView style={{ paddingBottom: "25%", height: "100%" }}>
         <Image
           image={user.image}
-          //image=""
           name={`${user.firstName}  ${user.lastName}`}
         />
 

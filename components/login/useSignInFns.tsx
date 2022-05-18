@@ -1,5 +1,5 @@
 import axios from "axios";
-import { addToken,  addUser } from "../../redux/UserSlice";
+import { addToken, addUser } from "../../redux/UserSlice";
 import { useDispatch } from "react-redux";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import React from "react";
@@ -16,28 +16,29 @@ const UseFns = () => {
   const handleSubmit = (values: { Email: string; Password: string }) => {
     setLoading(true);
     axios
-      .post(`http://192.168.43.96:5000/api/v1/users/login`, {
-        email: values.Email,
-        password: values.Password,
-      })
+      .post(
+        `https://team-francisbalimuttajjo-backendmybiz-5695-master-olxjr2ly7a-wm.a.run.app/api/v1/users/login`,
+        {
+          email: values.Email,
+          password: values.Password,
+        }
+      )
       .then((res) => {
         setLoading(false);
 
         if (res.data.status === "success") {
-          const { firstName, lastName, email, photo } =
-            res.data.data.user;
+          const { firstName, lastName, email, photo } = res.data.data.user;
 
           dispatch(
             addUser({ user: { firstName, lastName, email, image: photo } })
           );
-          
+
           AsyncStorage.setItem("token", res.data.data.token).then(() => {
             dispatch(addToken({ token: res.data.data.token }));
           });
         }
       })
       .catch((err) => {
-       
         setLoading(false);
         setErrorMessage(err.response.data.data);
       });

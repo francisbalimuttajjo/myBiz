@@ -19,7 +19,7 @@ const UseFns = (id: number | undefined, title: string | undefined) => {
     setLoading(true);
     axios
       .patch(
-        `http://192.168.43.96:5000/api/v1/productCategories/${id}`,
+        `https://team-francisbalimuttajjo-backendmybiz-5695-master-olxjr2ly7a-wm.a.run.app/api/v1/productCategories/${id}`,
         {
           title: values.category,
           user: user.email,
@@ -41,9 +41,12 @@ const UseFns = (id: number | undefined, title: string | undefined) => {
   const handleDelete = () => {
     setLoading(true);
     axios
-      .delete(`http://192.168.43.96:5000/api/v1/productCategories/${id}`, {
-        headers: { "Content-Type": "application/json", token },
-      })
+      .delete(
+        `https://team-francisbalimuttajjo-backendmybiz-5695-master-olxjr2ly7a-wm.a.run.app/api/v1/productCategories/${id}`,
+        {
+          headers: { "Content-Type": "application/json", token },
+        }
+      )
       .then((res) => {
         setLoading(false);
         if (res.data.status === "success") {

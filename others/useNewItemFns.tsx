@@ -2,10 +2,7 @@ import { useNavigation } from "@react-navigation/native";
 import axios from "axios";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  getCategories,
-  //getItems
-} from "../redux/others/stock";
+import { getCategories } from "../redux/others/stock";
 import { RootState } from "../redux/Store";
 import { FormProps, NavigationProps } from "../types/types";
 
@@ -28,7 +25,7 @@ const UseFns = () => {
 
     axios
       .post(
-        `http://192.168.43.96:5000/api/v1/stockItems`,
+        `https://team-francisbalimuttajjo-backendmybiz-5695-master-olxjr2ly7a-wm.a.run.app/api/v1/stockItems`,
         {
           name: values.name,
           buyingPrice: values.buyingPrice,

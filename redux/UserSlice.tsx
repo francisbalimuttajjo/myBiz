@@ -1,57 +1,14 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import axios from "axios";
 import { Item } from "../types/types";
-
-export type Transaction = {
-  items: Array<{ item: number; quantity: number }>;
-  user: string;
-  client: string;
-  type: string;
-  paymentDate: string | null;
-  discount: number;
-  cashReceived: number;
-  cashPending: number;
-  createdAt: string;
-  id: number;
-};
-export type Sale = {
-  id: number;
-  price: number;
-  quantity: number;
-  total_price: number;
-  client: string;
-  item: Item;
-  createdAt: string;
-};
-
-type InitialState = {
-  user: { firstName: string; lastName: string; image: string; email: string };
-  transactions: Array<Transaction>;
-  sales: Array<Sale>;
-  isLoggedIn: boolean;
-  editingProfilePic: boolean;
-  loading: boolean;
-  error: string;
-  token: string;
-};
-
-const initialState: InitialState = {
-  user: { email: "", firstName: "", lastName: "", image: "" },
-  transactions: [],
-  sales: [],
-  isLoggedIn: false,
-  loading: false,
-  editingProfilePic: true,
-  error: "",
-  token: "",
-};
+import { InitialState, initialState } from "./others/user";
 
 export const getTransactions = createAsyncThunk(
   "transactions/getTransactions",
   async ({ user, token }: { user: string; token: string }) => {
     try {
       const response = await axios.post(
-        "http://192.168.43.96:5000/api/v1/transactions/getAll",
+        "https://team-francisbalimuttajjo-backendmybiz-5695-master-olxjr2ly7a-wm.a.run.app/api/v1/transactions/getAll",
         { user },
         { headers: { "Content-Type": "application/json", token } }
       );
@@ -68,14 +25,13 @@ export const getSales = createAsyncThunk(
   async ({ user, token }: { user: string; token: string }) => {
     try {
       const response = await axios.post(
-        "http://192.168.43.96:5000/api/v1/sales/getAll",
+        "https://team-francisbalimuttajjo-backendmybiz-5695-master-olxjr2ly7a-wm.a.run.app/api/v1/sales/getAll",
         { user },
         { headers: { "Content-Type": "application/json", token } }
       );
 
       return response.data;
     } catch (err: any) {
-      console.log(err);
       return err.response.data.data;
     }
   }
@@ -125,7 +81,7 @@ const userSlice = createSlice({
       state.user = action.payload.user;
       state.isLoggedIn = true;
     },
- 
+
     addToken(
       state,
       action: PayloadAction<{
@@ -156,7 +112,7 @@ const userSlice = createSlice({
 
 export const {
   addUser,
- 
+
   addToken,
   logout,
   editProfileImage,

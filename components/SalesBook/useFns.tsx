@@ -13,9 +13,12 @@ const UseFns = (id: number) => {
   const deleteHandler = () => {
     setLoading(true);
     axios
-      .delete(`http://192.168.43.96:5000/api/v1/sales/${id}`, {
-        headers: { "Content-Type": "application/json", token },
-      })
+      .delete(
+        `https://team-francisbalimuttajjo-backendmybiz-5695-master-olxjr2ly7a-wm.a.run.app/api/v1/sales/${id}`,
+        {
+          headers: { "Content-Type": "application/json", token },
+        }
+      )
       .then(() => {
         setLoading(false);
         dispatch(getSales({ user: user.email, token }));
@@ -28,9 +31,12 @@ const UseFns = (id: number) => {
   const cancelHandler = () => {
     setLoading(true);
     axios
-      .delete(`http://192.168.43.96:5000/api/v1/sales/reverse/${id}`, {
-        headers: { "Content-Type": "application/json", token },
-      })
+      .delete(
+        `https://team-francisbalimuttajjo-backendmybiz-5695-master-olxjr2ly7a-wm.a.run.app/api/v1/sales/reverse/${id}`,
+        {
+          headers: { "Content-Type": "application/json", token },
+        }
+      )
       .then(() => {
         setLoading(false);
         dispatch(getSales({ user: user.email, token }));

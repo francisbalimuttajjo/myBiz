@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
-import { Transaction } from "../../redux/UserSlice";
+import { Transaction } from "../../redux/others/user";
 import { getDate } from "../../utils";
 
 type Props = { item: Transaction };

@@ -13,12 +13,12 @@ const Header: React.FC<Props> = (props) => {
     <View>
       <Logo />
       <View style={styles.container}>
-        {!props.user.image && (
+        {props.user.image === "" && (
           <TouchableOpacity onPress={handleNavigation}>
             <Ionicon name="ios-person-circle-outline" size={40} color="white" />
           </TouchableOpacity>
         )}
-        {props.user.image && (
+        {props.user.image !== "" && (
           <Image
             style={styles.image}
             source={{

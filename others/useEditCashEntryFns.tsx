@@ -35,7 +35,7 @@ const UseFns = (id?: number) => {
     setLoading(true);
     axios
       .put(
-        `http://192.168.43.96:5000/api/v1/cashItem/${id}`,
+        `https://team-francisbalimuttajjo-backendmybiz-5695-master-olxjr2ly7a-wm.a.run.app/api/v1/cashItem/${id}`,
         {
           paymentMode: values.paymentMode,
           entryDate: values.itemDate,

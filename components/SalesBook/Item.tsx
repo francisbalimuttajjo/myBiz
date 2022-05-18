@@ -2,7 +2,7 @@ import React from "react";
 import { Text, View, TouchableOpacity, StyleSheet } from "react-native";
 
 import { getDate } from "../../utils";
-import { Sale } from "../../redux/UserSlice";
+import { Sale } from "../../redux/others/user";
 import useFns from "./useFns";
 
 const Item = (props: { sale: Sale }) => {

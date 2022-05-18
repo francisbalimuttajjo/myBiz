@@ -80,7 +80,7 @@ const UseCamera = () => {
         if (editingProfilePic) {
           axios
             .patch(
-              "http://192.168.43.96:5000/api/v1/users/profile",
+              "https://team-francisbalimuttajjo-backendmybiz-5695-master-olxjr2ly7a-wm.a.run.app/api/v1/users/profile",
               { image: url, email: user.email },
               { headers: { "Content-Type": "application/json", token } }
             )

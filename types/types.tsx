@@ -93,7 +93,6 @@ export type FormProps = {
   loading: boolean;
   handleSubmit: (a: FormProps["initialValues"]) => void;
   error: string;
-
 };
 
 ////priceComponent.tsx/components/form
@@ -138,6 +137,8 @@ export type SegmentProps = {
   second_icon: string;
   first_title: string;
   second_title: string;
+  first_name: string;
+  second_name: string;
 };
 
 //tool tip
@@ -236,8 +237,8 @@ export type CashBookFormProps = {
   initialValues: CashbookInitialValues;
   categories: Array<{ title: string; value: string; id: number }>;
   editing?: boolean;
-  handleSubmit:(a:CashbookInitialValues)=>void
-  loading:boolean
+  handleSubmit: (a: CashbookInitialValues) => void;
+  loading: boolean;
 };
 
 export type PickerComponentProps = {

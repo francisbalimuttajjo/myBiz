@@ -2,14 +2,16 @@ import React from "react";
 import Segment from "./Segment";
 import { FlatList, View } from "react-native";
 
-const categoriesArray = [
+const categoriesArray: Array<
+  Array<{ icon: string; title: string; name: string }>
+> = [
   [
-    { icon: "archive-outline", title: "Stock" },
-    { icon: "wallet-outline", title: "Sales" },
+    { icon: "archive-outline", title: "Stock", name: "Inventory" },
+    { icon: "wallet-outline", title: "Sales", name: "Point Of Sale" },
   ],
   [
-    { icon: "book-outline", title: "CashBook" },
-    { icon: "book-outline", title: "SalesBook" },
+    { icon: "book-outline", title: "CashBook", name: "Cash Book" },
+    { icon: "book-outline", title: "SalesBook", name: "Sales" },
   ],
 ];
 
@@ -25,6 +27,8 @@ const Categories = () => {
             second_icon={item[1].icon}
             first_title={item[0].title}
             second_title={item[1].title}
+            first_name={item[0].name}
+            second_name={item[1].name}
           />
         )}
         keyExtractor={(item) => item[0].title}

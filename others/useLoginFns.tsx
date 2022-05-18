@@ -2,7 +2,7 @@ import React from "react";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { addToken, addTransactions, addUser } from "../redux/UserSlice";
+import { addToken, addUser } from "../redux/UserSlice";
 
 const UseFns = () => {
   const dispatch = useDispatch();
@@ -13,17 +13,16 @@ const UseFns = () => {
       const token = await AsyncStorage.getItem("token");
 
       const result = await axios.post(
-        `http://192.168.43.96:5000/api/v1/users/auth/${token}`
+        `https://team-francisbalimuttajjo-backendmybiz-5695-master-olxjr2ly7a-wm.a.run.app/api/v1/users/auth/${token}`
       );
 
       if (result.data.status === "success") {
-        const { firstName, lastName, email, photo } =
-          result.data.data;
+        const { firstName, lastName, email, photo } = result.data.data;
 
         dispatch(
           addUser({ user: { firstName, lastName, email, image: photo } })
         );
-        // dispatch(addTransactions({ transactions }));
+
         dispatch(addToken({ token }));
       }
       setIsAuthenticating(false);

@@ -18,7 +18,7 @@ const Segment: React.FC<Props> = (props) => {
             <Ionicon name={props.first_icon} size={50} color="white" />
           </View>
           <View style={styles.borderLine}></View>
-          <Text>{props.first_title}</Text>
+          <Text>{props.first_name}</Text>
         </View>
       </TouchableOpacity>
       <TouchableOpacity
@@ -30,7 +30,7 @@ const Segment: React.FC<Props> = (props) => {
             <Ionicon name={props.second_icon} size={50} color="white" />
           </View>
           <View style={styles.borderLine}></View>
-          <Text>{props.second_title}</Text>
+          <Text>{props.second_name}</Text>
         </View>
       </TouchableOpacity>
     </View>

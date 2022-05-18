@@ -1,11 +1,10 @@
-import { FieldProps, FormikTouched } from "formik";
+import { FieldProps } from "formik";
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { TextInput } from "react-native-paper";
 type Props = {
   label: string;
   error?: boolean;
-  //error:boolean | "" | FormikTouched<any> | FormikTouched<any>[] | undefined
 };
 
 const Input: React.FC<Props & FieldProps> = (props) => {

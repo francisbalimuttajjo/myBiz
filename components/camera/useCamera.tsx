@@ -11,6 +11,7 @@ import { initializeApp } from "firebase/app";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { NavigationProps } from "../../types/types";
 import { editProfileImage } from "../../redux/UserSlice";
+import { url as httpUrl } from "../../utils";
 
 const UseCamera = () => {
   const dispatch = useDispatch();
@@ -80,7 +81,7 @@ const UseCamera = () => {
         if (editingProfilePic) {
           axios
             .patch(
-              "https://team-francisbalimuttajjo-backendmybiz-5695-master-olxjr2ly7a-wm.a.run.app/api/v1/users/profile",
+              `${httpUrl}/api/v1/users/profile`,
               { image: url, email: user.email },
               { headers: { "Content-Type": "application/json", token } }
             )

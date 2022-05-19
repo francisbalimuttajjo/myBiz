@@ -7,6 +7,7 @@ import { logout } from "../../redux/UserSlice";
 
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux/Store";
+import { url } from "../../utils";
 
 const Usefns = () => {
   const dispatch = useDispatch();
@@ -26,7 +27,7 @@ const Usefns = () => {
 
     try {
       const res = await axios.post(
-        "https://team-francisbalimuttajjo-backendmybiz-5695-master-olxjr2ly7a-wm.a.run.app/api/v1/users/updatePassword",
+        `${url}/api/v1/users/updatePassword`,
         {
           currentPassword,
           newPassword,

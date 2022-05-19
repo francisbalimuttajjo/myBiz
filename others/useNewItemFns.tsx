@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getCategories } from "../redux/others/stock";
 import { RootState } from "../redux/Store";
 import { FormProps, NavigationProps } from "../types/types";
+import { url } from "../utils";
 
 const UseFns = () => {
   const { initialValues, categories } = useSelector(
@@ -20,12 +21,11 @@ const UseFns = () => {
   const index = (val: string) => categories.findIndex((el) => el.title === val);
 
   const handleSubmit = (values: FormProps["initialValues"]) => {
-    console.log(categories[index(values.category)].id);
     setLoading(true);
 
     axios
       .post(
-        `https://team-francisbalimuttajjo-backendmybiz-5695-master-olxjr2ly7a-wm.a.run.app/api/v1/stockItems`,
+        `${url}/api/v1/stockItems`,
         {
           name: values.name,
           buyingPrice: values.buyingPrice,

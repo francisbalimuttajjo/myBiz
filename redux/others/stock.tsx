@@ -1,6 +1,7 @@
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { InitialState, Item } from "../../types/types";
+import { url } from "../../utils";
 
 const initialValues: Item = {
   id: 0,
@@ -23,7 +24,7 @@ export const getCategories = createAsyncThunk(
   async ({ user, token }: { user: string; token: string }) => {
     try {
       const response = await axios.post(
-        "https://team-francisbalimuttajjo-backendmybiz-5695-master-olxjr2ly7a-wm.a.run.app/api/v1/productCategories/getAll",
+        `${url}/api/v1/productCategories/getAll`,
         { user },
         { headers: { "Content-Type": "application/json", token } }
       );

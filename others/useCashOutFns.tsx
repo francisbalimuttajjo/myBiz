@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getCashItems } from "../redux/others/cashbook";
 import { RootState } from "../redux/Store";
 import { CashBookFormProps as Props, NavigationProps } from "../types/types";
+import { url } from "../utils";
 
 const initialValues = {
   Remark: "",
@@ -27,7 +28,7 @@ const UseFns = () => {
     setLoading(true);
     axios
       .post(
-        "https://team-francisbalimuttajjo-backendmybiz-5695-master-olxjr2ly7a-wm.a.run.app/api/v1/cashItem",
+        `${url}/api/v1/cashItem`,
         {
           paymentMode: values.paymentMode,
           entryDate: values.itemDate,

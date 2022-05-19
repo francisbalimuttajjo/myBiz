@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import axios from "axios";
-import { Item } from "../types/types";
+import { url } from "../utils";
 import { InitialState, initialState } from "./others/user";
 
 export const getTransactions = createAsyncThunk(
@@ -8,7 +8,7 @@ export const getTransactions = createAsyncThunk(
   async ({ user, token }: { user: string; token: string }) => {
     try {
       const response = await axios.post(
-        "https://team-francisbalimuttajjo-backendmybiz-5695-master-olxjr2ly7a-wm.a.run.app/api/v1/transactions/getAll",
+        `${url}/api/v1/transactions/getAll`,
         { user },
         { headers: { "Content-Type": "application/json", token } }
       );
@@ -25,7 +25,7 @@ export const getSales = createAsyncThunk(
   async ({ user, token }: { user: string; token: string }) => {
     try {
       const response = await axios.post(
-        "https://team-francisbalimuttajjo-backendmybiz-5695-master-olxjr2ly7a-wm.a.run.app/api/v1/sales/getAll",
+        `${url}/api/v1/sales/getAll`,
         { user },
         { headers: { "Content-Type": "application/json", token } }
       );

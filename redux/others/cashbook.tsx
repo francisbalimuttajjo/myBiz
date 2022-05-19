@@ -1,5 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { url } from "../../utils";
 
 const categories: Array<{ title: string; value: string; id: number }> = [
   { title: "Choose Category  ", value: "", id: 0 },
@@ -14,7 +15,7 @@ export const getCashItems = createAsyncThunk(
   async ({ user, token }: { user: string; token: string }) => {
     try {
       const response = await axios.post(
-        "https://team-francisbalimuttajjo-backendmybiz-5695-master-olxjr2ly7a-wm.a.run.app/api/v1/cashItem/getAll",
+        `${url}/api/v1/cashItem/getAll`,
         { user },
         { headers: { "Content-Type": "application/json", token } }
       );

@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import React from "react";
 import * as Yup from "yup";
+import { url } from "../../utils";
 
 const UseFns = () => {
   const dispatch = useDispatch();
@@ -17,7 +18,7 @@ const UseFns = () => {
     setLoading(true);
     axios
       .post(
-        `https://team-francisbalimuttajjo-backendmybiz-5695-master-olxjr2ly7a-wm.a.run.app/api/v1/users/login`,
+        `${url}/api/v1/users/login`,
         {
           email: values.Email,
           password: values.Password,

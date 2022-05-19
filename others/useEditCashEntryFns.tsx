@@ -8,6 +8,7 @@ import {
   CashBookFormProps as FormProps,
   NavigationProps,
 } from "../types/types";
+import { url } from "../utils";
 
 const UseFns = (id?: number) => {
   const dispatch = useDispatch();
@@ -35,7 +36,7 @@ const UseFns = (id?: number) => {
     setLoading(true);
     axios
       .put(
-        `https://team-francisbalimuttajjo-backendmybiz-5695-master-olxjr2ly7a-wm.a.run.app/api/v1/cashItem/${id}`,
+        `${url}/api/v1/cashItem/${id}`,
         {
           paymentMode: values.paymentMode,
           entryDate: values.itemDate,

@@ -13,6 +13,7 @@ import useFns from "./useDeleteFns";
 import { StockItemProps as Props } from "../../types/types";
 import { useDispatch } from "react-redux";
 import { getCategories } from "../../redux/others/stock";
+import { url } from "../../utils";
 
 const Item: React.FC<Props> = (props) => {
   const { createAlert, confirmDelete, user, token } = useFns();
@@ -20,11 +21,9 @@ const Item: React.FC<Props> = (props) => {
 
   if (confirmDelete) {
     axios
-      .delete(
-        `https://team-francisbalimuttajjo-backendmybiz-5695-master-olxjr2ly7a-wm.a.run.app/api/v1/stockItems/${props.item.id}`,
-
-        { headers: { "Content-Type": "application/json", token } }
-      )
+      .delete(`${url}/api/v1/stockItems/${props.item.id}`, {
+        headers: { "Content-Type": "application/json", token },
+      })
       .then(() => dispatch(getCategories({ user: user.email, token })))
       .catch((err) => {
         console.log(err);
@@ -84,10 +83,6 @@ const Item: React.FC<Props> = (props) => {
                   </Text>
                 </>
               )}
-              {/* <Text style={styles.align}>&#64;</Text>
-              <Text style={{ ...styles.align, textTransform: "capitalize" }}>
-                {props.item.packaging}
-              </Text> */}
             </View>
           </View>
         </View>

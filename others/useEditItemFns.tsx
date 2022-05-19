@@ -6,6 +6,7 @@ import { getCategories } from "../redux/others/stock";
 import { resetCart } from "../redux/StockSlice";
 import { RootState } from "../redux/Store";
 import { FormProps, NavigationProps } from "../types/types";
+import { url } from "../utils";
 
 const EditScreenFns = (_id: number | undefined) => {
   const { availableStock, categories } = useSelector(
@@ -69,7 +70,7 @@ const EditScreenFns = (_id: number | undefined) => {
 
     axios
       .put(
-        `https://team-francisbalimuttajjo-backendmybiz-5695-master-olxjr2ly7a-wm.a.run.app/api/v1/stockItems/${id}`,
+        `${url}/api/v1/stockItems/${id}`,
         {
           buyingCurrency,
           buyingPrice,

@@ -4,6 +4,7 @@ import { useNavigation } from "@react-navigation/native";
 import { useDispatch, useSelector } from "react-redux";
 import { getCategories } from "../../redux/others/stock";
 import { RootState } from "../../redux/Store";
+import { url } from "../../utils";
 
 const UseFns = (id: number | undefined, title: string | undefined) => {
   const dispatch = useDispatch();
@@ -19,7 +20,7 @@ const UseFns = (id: number | undefined, title: string | undefined) => {
     setLoading(true);
     axios
       .patch(
-        `https://team-francisbalimuttajjo-backendmybiz-5695-master-olxjr2ly7a-wm.a.run.app/api/v1/productCategories/${id}`,
+        `${url}/api/v1/productCategories/${id}`,
         {
           title: values.category,
           user: user.email,
@@ -42,7 +43,8 @@ const UseFns = (id: number | undefined, title: string | undefined) => {
     setLoading(true);
     axios
       .delete(
-        `https://team-francisbalimuttajjo-backendmybiz-5695-master-olxjr2ly7a-wm.a.run.app/api/v1/productCategories/${id}`,
+        `${url}/api/v1/productCategories/${id}`,
+        //`http://192.168.43.96:5000/api/v1/productCategories/${id}`,
         {
           headers: { "Content-Type": "application/json", token },
         }

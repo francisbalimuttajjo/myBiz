@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
 import { RootState } from "../../redux/Store";
 import { NavigationProps } from "../../types/types";
-import { getTotalSum, getDate, getCartItems } from "../../utils";
+import { getTotalSum, getDate, getCartItems, url } from "../../utils";
 import { resetCart } from "../../redux/StockSlice";
 import { getCategories } from "../../redux/others/stock";
 import { getTransactions } from "../../redux/UserSlice";
@@ -74,7 +74,7 @@ const UseCart = () => {
     // //making api call if all is well
     axios
       .post(
-        `https://team-francisbalimuttajjo-backendmybiz-5695-master-olxjr2ly7a-wm.a.run.app/api/v1/transactions`,
+        `${url}/api/v1/transactions`,
         {
           client: values.Customer,
           user: user.email,

@@ -2,12 +2,6 @@ import { CashItemProps, InitialState, Item } from "./types/types";
 
 //props
 type Props = { qty: number; price: number };
-type Cart = Array<{
-  item_id: number;
-  quantity: number;
-  price: number;
-  item: string;
-}>;
 
 //props end
 
@@ -89,7 +83,8 @@ const getCartItems = (
   );
   return items;
 };
-
+const url =
+  "https://team-francisbalimuttajjo-backendmybiz-5695-master-olxjr2ly7a-wm.a.run.app";
 export {
   getTotal,
   getCartItems,
@@ -97,5 +92,6 @@ export {
   get_cart_index,
   get_stock_Index,
   getDifference,
+  url,
   getDate,
 };

@@ -1,6 +1,7 @@
 import React from "react";
 import * as Yup from "yup";
 import axios from "axios";
+import { url } from "../../utils";
 
 type Props = {
   Email: string;
@@ -22,8 +23,8 @@ const UseFns = () => {
 
     axios
       .post(
-        //`https://team-francisbalimuttajjo-backendmybiz-5695-master-olxjr2ly7a-wm.a.run.app/api/v1/users/register`,
-        "http://192.168.43.96:5000/api/v1/users/register",
+        `${url}/api/v1/users/register`,
+        //"http://192.168.43.96:5000/api/v1/users/register",
         {
           email: values.Email,
           firstName: values.FirstName,

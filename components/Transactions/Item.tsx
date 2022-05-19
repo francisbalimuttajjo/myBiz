@@ -1,13 +1,47 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import axios from "axios";
+import {
+  ActivityIndicator,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
+import Ionicon from "react-native-vector-icons/Ionicons";
+import { useDispatch, useSelector } from "react-redux";
 import { Transaction } from "../../redux/others/user";
-import { getDate } from "../../utils";
+import { RootState } from "../../redux/Store";
+import { getDate, url } from "../../utils";
+import { getTransactions } from "../../redux/UserSlice";
 
 type Props = { item: Transaction };
 
 const Item = (props: Props) => {
+  const dispatch = useDispatch();
   const { date } = getDate(props.item.createdAt);
+  const [loading, setLoading] = React.useState<boolean>(false);
   const total = props.item.cashReceived + props.item.cashPending;
+
+  const { token, user } = useSelector((state: RootState) => state.user);
+
+  const handleDelete = () => {
+    setLoading(true);
+
+    axios
+      .delete(
+        `${url}/api/v1/transactions/${props.item.id}`,
+
+        { headers: { "Content-Type": "application/json", token } }
+      )
+      .then(() => {
+        setLoading(false);
+        dispatch(getTransactions({ user: user.email, token }));
+      })
+      .catch((err) => {
+        setLoading(false);
+      });
+  };
+
   return (
     <View style={{ backgroundColor: "#fff" }}>
       <View style={styles.container}>
@@ -26,6 +60,19 @@ const Item = (props: Props) => {
           <View style={styles.cash_container}>
             <Text style={styles.mode}>{props.item.type}</Text>
           </View>
+          <View style={styles.icon_container}>
+            <TouchableOpacity
+              disabled={loading}
+              activeOpacity={0.7}
+              onPress={handleDelete}
+            >
+              {loading && <ActivityIndicator size="small" color="skyblue" />}
+              {!loading && (
+                <Ionicon name="trash-outline" size={20} color="#e1e5eb" />
+              )}
+            </TouchableOpacity>
+          </View>
+
           <View style={styles.balance_container}>
             <Text> Balance:</Text>
             <Text>
@@ -55,6 +102,11 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     alignItems: "center",
     width: 60,
+  },
+  icon_container: {
+    justifyContent: "center",
+    alignItems: "center",
+    width: "50%",
   },
   client_text: { marginTop: 10, textTransform: "capitalize" },
   date_text: { fontWeight: "bold", opacity: 0.6 },

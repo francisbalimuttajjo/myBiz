@@ -6,6 +6,7 @@ const Logo = () => {
     <View style={styles.container}>
       <Image
         source={require("../../assets/logo/logo.png")}
+        //source={require("../../assets/logo.png")}
         borderRadius={70}
         resizeMode="cover"
         style={styles.image}

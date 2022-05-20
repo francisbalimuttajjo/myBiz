@@ -6,7 +6,7 @@ const Logo = () => {
     <View style={styles.container}>
       <Ionicon name="cash-outline" size={40} color="skyblue" />
       <Text style={styles.text1}> My</Text>
-      <Text style={{ ...styles.text1, color: "skyblue" }}>Bizz</Text>
+      <Text style={{ ...styles.text1, color: "skyblue" }}>Biz</Text>
     </View>
   );
 };

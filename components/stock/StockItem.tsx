@@ -26,7 +26,7 @@ const Item: React.FC<Props> = (props) => {
       })
       .then(() => dispatch(getCategories({ user: user.email, token })))
       .catch((err) => {
-        console.log(err);
+        console.log(err.response.data);
       });
   }
 

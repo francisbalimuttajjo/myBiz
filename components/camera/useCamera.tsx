@@ -100,6 +100,7 @@ const UseCamera = () => {
           navigation.navigate("editStock", { id: editable });
           dispatch(disableEditing());
         } else {
+          dispatch(disableEditing());
           dispatch(addImage({ image: url }));
           setLoading(false);
           navigation.navigate("New");

@@ -5,7 +5,8 @@ import Input from "../CashBook/FloatingInput";
 import Button from "./Button";
 import { TextInput } from "react-native-paper";
 import { ScrollView } from "react-native-gesture-handler";
-import Info, { InfoSuccess } from "../components/Info";
+import Info from "../components/Info";
+import Snack from "../components/Snackbar";
 import useFns from "./useSignUpFns";
 
 const Form = () => {
@@ -38,7 +39,7 @@ const Form = () => {
             }}
           >
             {error !== "" && <Info error={error} />}
-            {msg !== "" && <InfoSuccess msg={msg} />}
+            {/* {msg !== "" && <Snack message={msg} />} */}
 
             <View
               style={{
@@ -99,6 +100,7 @@ const Form = () => {
               }
             />
           </ScrollView>
+          {msg !== "" && <Snack message={msg} />}
 
           <Button loading={loading} disabled={loading} submit={handleSubmit} />
         </View>

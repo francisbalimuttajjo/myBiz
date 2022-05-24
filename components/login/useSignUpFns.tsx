@@ -24,7 +24,7 @@ const UseFns = () => {
     axios
       .post(
         `${url}/api/v1/users/register`,
-        //"http://192.168.43.96:5000/api/v1/users/register",
+
         {
           email: values.Email,
           firstName: values.FirstName,

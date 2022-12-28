@@ -84,8 +84,9 @@ const getCartItems = (
   return items;
 };
 const url =
-  //"http://192.168.43.96:5000"
-  "https://team-francisbalimuttajjo-backendmybiz-5695-master-olxjr2ly7a-wm.a.run.app";
+  //"http://192.168.43.185:5000"
+  // "https://team-francisbalimuttajjo-backendmybiz-5695-master-olxjr2ly7a-wm.a.run.app";
+  "https://mybiz.onrender.com";
 export {
   getTotal,
   getCartItems,

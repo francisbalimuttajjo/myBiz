@@ -1,34 +1,31 @@
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
-// import Tooltip from 'react-native-walkthrough-tooltip';
-// import Ionicon from 'react-native-vector-icons/Ionicons';
-// import AddItemsComponent from './AddItems';
-// import {TouchableOpacity} from 'react-native-gesture-handler';
+import Tooltip from 'react-native-walkthrough-tooltip';
+import Ionicon from 'react-native-vector-icons/Ionicons';
+import AddItemsComponent from './AddItems';
+import {TouchableOpacity} from 'react-native-gesture-handler';
 import {ToolTipProps as Props} from '../../types/types';
 
 const TooltipComponent: React.FC<Props> = props => {
   return (
     <View style={styles.container}>
-      <Text>Tooltip Component</Text>
-      {/* <Tooltip
-        tooltipStyle={{ marginTop: -30 }}
-        contentStyle={{ width: 200, minHeight: 80 }}
+      <Tooltip
+        tooltipStyle={{marginTop: -10}}
+        contentStyle={{width: 200, minHeight: 80}}
         showChildInTooltip={false}
-        arrowSize={{ width: 16, height: 24 }}
+        arrowSize={{width: 16, height: 24}}
         isVisible={props.visible}
         content={<AddItemsComponent hideToolKit={props.closeToolTip} />}
         placement="bottom"
-        onClose={props.closeToolTip}
-      >
+        onClose={props.closeToolTip}>
         <TouchableOpacity
           activeOpacity={0.7}
           style={[styles.text_container, styles.container]}
-          onPressIn={props.openToolTip}
-        >
+          onPressIn={props.openToolTip}>
           <Ionicon name="md-add-circle-outline" color="skyblue" size={20} />
           <Text style={styles.text}> Add Item/Category</Text>
         </TouchableOpacity>
-      </Tooltip> */}
+      </Tooltip>
     </View>
   );
 };

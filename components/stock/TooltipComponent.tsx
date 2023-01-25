@@ -10,10 +10,10 @@ const TooltipComponent: React.FC<Props> = props => {
   return (
     <View style={styles.container}>
       <Tooltip
-        tooltipStyle={{marginTop: -10}}
+        //tooltipStyle={{marginTop: 0}}
         contentStyle={{width: 200, minHeight: 80}}
         showChildInTooltip={false}
-        arrowSize={{width: 16, height: 24}}
+        arrowSize={{width: 16, height: 16}}
         isVisible={props.visible}
         content={<AddItemsComponent hideToolKit={props.closeToolTip} />}
         placement="bottom"
